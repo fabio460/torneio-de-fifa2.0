@@ -6,13 +6,28 @@ import SearchIcon from '@mui/icons-material/Search';
 import { jogadoresType } from '../../types';
 import {listaDeJogadores} from "../../listaDeJogadoresCompleta"
 import {useDispatch, useSelector} from 'react-redux'
+import { listaJogadoresPorTorneioApi } from '../../api/jogadoresApi';
 export default function CampoDeBusca() {
   const [lista, setLista] = useState<jogadoresType[]>([])
   var listaReducer:jogadoresType[] = useSelector((state:any)=>state.campoDeBuscaReducer.lista) 
   let tamanhoDaLista = listaReducer?.length
+  const idDoTorneio = localStorage.getItem('idDoTorneio') || ''
+  const [Filtrada, setFiltrada] = useState<jogadoresType[]>([])
+  const [Verify, setVerify] = useState(false)
   const dispatch = useDispatch()
-  const getLista = (event:any)=>{
-    let l:jogadoresType[] = listaDeJogadores.filter((item:jogadoresType, key:number)=>{
+  let listaFiltrada = useSelector((state:any)=>state.campoDeBuscaReducer.lista)
+
+  const getLista = async(event:any)=>{
+    const torneio = await listaJogadoresPorTorneioApi(idDoTorneio)
+    const nomeDosJog =await torneio.map((e:jogadoresType)=>{
+      return e.nome
+    })
+    let listaFiltrada = listaDeJogadores.filter((l:jogadoresType, key)=>{
+      if (!nomeDosJog.includes(l.nome)) {
+         return l
+      }
+    })
+    let l:jogadoresType[] = listaFiltrada.filter((item:jogadoresType, key:number)=>{
         if (item.nome.toLowerCase().includes(event.target.value.toLowerCase().trim())) {
           return item
         }

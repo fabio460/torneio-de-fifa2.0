@@ -17,35 +17,38 @@ export default function Jogadores() {
   var lista:jogadoresType[] = useSelector((state:any)=>state.campoDeBuscaReducer.lista) 
   let tamanhoDaLista = lista?.length
   const [listaFiltrada, setListaFiltrada] = useState<jogadoresType[]>([])
+  const [Verify, setVerify] = useState(false)
   const idDoTorneio = localStorage.getItem('idDoTorneio') || ''
   useEffect(() => {
     if (itensPorPagina > tamanhoDaLista) {
       setPagina(1)
     }
   }, [lista, itensPorPagina, tamanhoDaLista])
-  const getJogadoresDoTorneio = async(list:any)=>{
-    const torneio = await listaJogadoresPorTorneioApi(idDoTorneio)
-    const nomeDosJog = torneio.map((e:jogadoresType)=>{
+
+
+  const getJogadoresDoTorneio = async()=>{
+   const torneio = await listaJogadoresPorTorneioApi(idDoTorneio)
+    const nomeDosJog =await torneio.map((e:jogadoresType)=>{
       return e.nome
     })
-     var listaAux:any = []
-    list.map((l:jogadoresType)=>{
-      return nomeDosJog.map((n:string, key:number)=>{
-        if ((l.nome.split(' ')[0]+l.nome.split(' ')[1]) === n) {
-          listaAux.push(l)   
-        }
-      })
+    let listaFiltrada = listaDeJogadores.filter((l:jogadoresType, key)=>{
+      if (!nomeDosJog.includes(l.nome)) {
+         return l
+      }
     })
-    
-    setListaFiltrada(listaAux)
+    setListaFiltrada(listaFiltrada)
   }
-  getJogadoresDoTorneio(listaDeJogadores)
+  getJogadoresDoTorneio()
   useEffect(()=>{
     dispatch({
       type:'busca',
-      payload:{lista:listaDeJogadores}
+      payload:{lista:listaFiltrada}
     })
-  },[])
+    while (listaFiltrada.length === 0) {
+      setVerify(!Verify)
+      break;
+    }
+  },[Verify])
   
   return (
     <div className='jogadoresContainer'>
