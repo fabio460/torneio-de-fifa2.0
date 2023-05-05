@@ -1,0 +1,1 @@
+export const linkLocal = "https://gerencia-torneio-fifa-backend.vercel.app/"

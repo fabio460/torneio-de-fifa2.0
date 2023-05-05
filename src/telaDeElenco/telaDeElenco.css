@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+}
+.campinho{
+    padding:30px;
+    margin-top: 70px;
+}
+.carta{
+    width: 50px;
+    height: 80px;
+    cursor: grabbing;
+}
+.cartaContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.containerDeEscalacao{
+    width: 35%;
+    background-image: url('https://app.globoesporte.globo.com/templates/listerine-cartola/images/campinho-sem-borda.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    height: 100%;
+    padding: 30px;
+}
+.modalAtualizarBody{
+    padding: 3%;
+}
+.campinhoBody{
+    display: flex;
+}
+.atacantesContainer{
+    display: flex;
+    justify-content: center;
+}
+.atacantes{
+    display: flex;
+ justify-content: center;
+}
+.meiasContainer{
+    display: flex;
+    justify-content: center;
+}
+.meias{
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 200px;
+}
+.pontas{
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+.volantes{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.laterais{
+    display: flex;
+    justify-content: space-between;
+}
+.zaga{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+.goleiro{
+    display: flex;
+   justify-content: center;
+    
+}
+
+.reservas{
+    display: flex;
+    height: 160px;
+    flex-wrap: wrap;
+}
+.reservasContainer{
+    height: 120px;
+}
+.cartaNome{
+    text-align: center;
+    color: blue;
+    text-shadow: 1px 1px 0.5px white;
+}
+.tabelaDeJogadoresBtnContainer{
+    display: flex;
+    justify-content: flex-end;
+    height: 35px;
+    margin-bottom: 10px;
+}
+.tabelaDeJogadoresBtnGrupo{
+    display: flex;
+}
+@media (max-width:700px) {
+    .campinho{
+        padding: 0px;
+        
+        
+    }
+    .campinhoBody{
+        display: flex;
+        flex-direction: column;
+        border: none;
+    }
+    .carta{
+        width: 60px;
+        height: 90px;
+    }
+    .btnHandleCarta{
+        background-color: red;
+        height: 40px;
+        z-index: 6;
+    }
+    .containerDeEscalacao{
+        width: 100vw;
+        margin: 0;
+    }
+    .meiasContainer{
+        margin: auto;
+    }
+    .meias{
+        gap: 60px;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

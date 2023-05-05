@@ -1,0 +1,6 @@
+.itemMenu{
+    cursor: pointer;
+}
+.itemMenu:hover{
+    color: red;
+}
