@@ -3,7 +3,7 @@ import { jogadoresType, usuarioLogadoType } from "./types"
 
 export const idDoUsuarioLogado = localStorage.getItem('idDoUsuarioLogado') || ''
 
-export const usuarioLogado = localStorage.getItem('usuarioLogado') !== "undefined" && JSON.parse(localStorage.getItem('usuarioLogado') || '')
+export const usuarioLogado = localStorage.getItem('usuarioLogado') !== "undefined" && JSON?.parse(localStorage.getItem('usuarioLogado') || '')
 
 export const usuario = async () => {
     return await getUsuarioPorIdApi(idDoUsuarioLogado)
