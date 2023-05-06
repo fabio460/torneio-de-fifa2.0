@@ -5,10 +5,36 @@
     padding:30px;
     margin-top: 70px;
 }
-.carta{
+.cartaImg{
     width: 50px;
     height: 80px;
     cursor: grabbing;
+}
+.carta{
+    display: flex;
+}
+.cartaBody{
+    display: flex;
+    flex-direction: column;
+}
+.imgPais{
+   width: 20px;
+}
+.imgTime{
+  width: 20px;
+}
+.posicao{
+  font-size: 9px;
+}
+.overall{
+
+}
+.cartaNome{
+    font-size: 10px;
+    width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .cartaContainer{
     display: flex;
@@ -107,18 +133,15 @@
         flex-direction: column;
         border: none;
     }
-    .carta{
-        width: 60px;
-        height: 90px;
-    }
     .btnHandleCarta{
         background-color: red;
         height: 40px;
         z-index: 6;
     }
     .containerDeEscalacao{
-        width: 100vw;
-        margin: 0;
+        width: 80%;
+        min-height: 70vh;
+        margin: auto;
     }
     .meiasContainer{
         margin: auto;
@@ -128,6 +151,16 @@
         width: 80%;
         display: flex;
         justify-content: center;
+    }
+    .cartaNome{
+        font-size: 10px;
+        max-width: 70px;
+        word-wrap: break-word;
+        color: black;
+    }
+    .cartaImg{
+        width: 30px;
+        height: 50px;
     }
 }
 
