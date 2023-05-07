@@ -46,20 +46,23 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          Compra de jogadores
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-             {jogador.nome}
+            Deseja comprar o jogador {jogador.nome}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          
           {
-            carregando ? <CarregandoBtn />:
-            <Button onClick={comprar} variant='contained'>Confirmar</Button>
+            carregando ?
+            <Button onClick={comprar} color='success' variant='contained' fullWidth>
+              <CarregandoBtn/>
+            </Button>
+            :
+            <Button onClick={comprar} color='success' variant='contained' fullWidth>Confirmar</Button>
           }
-          <Button variant='outlined' onClick={handleClose} autoFocus>
+          <Button color='error' variant='outlined' onClick={handleClose} fullWidth autoFocus>
             Cencelar
           </Button>
         </DialogActions>

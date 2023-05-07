@@ -1,0 +1,33 @@
+.compraDeJogadoresHeader{
+    padding: 0px 15px;
+}
+.compraDeJogadoresTitulo{
+   text-align: center;
+}
+.compraDeJogadoresBodyLeft{
+    display: flex;
+}
+.compraDeJogadoresItens{
+    margin-right: 10px;
+    cursor: pointer;
+}
+.compraDeJogadoresItens:hover{
+    color: darkgray;
+}
+.compraDeJogadoresBody{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width:800px) {
+   .compraDeJogadoresBody{
+     flex-direction: column;
+   }
+   .compraDeJogadoresHeader{
+    padding: 0px 5px;
+    margin-bottom: 20px;
+   }
+   .compraDeJogadoresBodyLeft{
+    margin-bottom: 10px;
+   }
+}

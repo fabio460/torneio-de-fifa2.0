@@ -14,7 +14,7 @@ export default function App() {
               <Route path='/' element={<RotaPrivada><TelaPrincipal/></RotaPrivada>}></Route>
               <Route path='/login' element={<Login/>}></Route>
               <Route path='/elenco' element={<RotaPrivada><TelaDeElenco/></RotaPrivada>}></Route>
-              <Route path='/compraDeJogadores' element={<RotaPrivada><TelaCompraDeJogadores/></RotaPrivada>}></Route>
+              <Route path='/compraDeJogadores' element={<RotaPrivada><TelaCompraDeJogadores /></RotaPrivada>}></Route>
               <Route path='/cadastro' element={<Cadastro/>}></Route>
           </Routes>
         </BrowserRouter>  

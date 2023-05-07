@@ -1,6 +1,6 @@
 import React from 'react'
-import { jogadoresType } from '../../../types'
-import { getPosicaoPrincipal, traduzirPosicao } from '../../../telaCompraDeJogadores/Jogadores/metodosUteis'
+import { jogadoresType } from '../types'
+import { getPosicaoPrincipal, traduzirPosicao } from '../telaCompraDeJogadores/Jogadores/metodosUteis'
 export default function Carta({elem}:{elem:jogadoresType}) {
   const handleJogador = (e:any)=>{
     

@@ -3,6 +3,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 export default function Carregando() {
   return (
-      <CircularProgress/>
+      <div className='carregando'>
+        <CircularProgress/>
+      </div>
   )
 }

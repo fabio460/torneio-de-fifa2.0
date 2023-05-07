@@ -1,6 +1,6 @@
 import React from 'react'
 import Draggable from 'react-draggable'
-import Carta from './carta'
+import Carta from '../../carta'
 
 export default 	function Pontas({handlePosition, jogadores}) {
   return (<div className='pontas'>

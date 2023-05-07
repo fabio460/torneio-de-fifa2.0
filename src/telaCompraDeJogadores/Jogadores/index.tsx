@@ -52,8 +52,6 @@ export default function Jogadores() {
   
   return (
     <div className='jogadoresContainer'>
-
-      <CampoDeBusca/>
       <Lista intervalo={intervalo}/>
       <Paginacao 
         setPagina={setPagina} 

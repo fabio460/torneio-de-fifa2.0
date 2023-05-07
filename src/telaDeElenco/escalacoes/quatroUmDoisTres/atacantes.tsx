@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Draggable from 'react-draggable'
-import Carta from './carta'
+import Carta from '../../carta'
 import { jogadoresType, posicaoNoCampinhoType } from '../../../types'
 import { getPosicoesPorIdApi, listarPosicoesApi } from '../../../api/posicoes'
 import { IconButton, ListItemIcon } from '@mui/material'

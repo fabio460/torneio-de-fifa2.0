@@ -66,7 +66,7 @@ export default function CampoDeBusca() {
     }
   }
   return (
-    <div className='jogadoresCampoDeBusca'>
+    <div className='CampoDeBusca'>
       <div>
         <Paper
           sx={paperStyle}
@@ -83,7 +83,7 @@ export default function CampoDeBusca() {
           </IconButton>
 
         </Paper>
-        <div className="jogadoresCampoDeBuscaQuantidadeDeJog">{tamanhoDaLista} jogador{tamanhoDaLista === 1 ? "":"es"} encontrado{tamanhoDaLista === 1 ? "":"s"}</div>
+        <div className="">{tamanhoDaLista} jogador{tamanhoDaLista === 1 ? "":"es"} encontrado{tamanhoDaLista === 1 ? "":"s"}</div>
       </div>
     </div>
   );

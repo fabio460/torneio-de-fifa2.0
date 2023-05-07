@@ -2,12 +2,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
+    padding:3%;
 }
 
 .jogadorCard{
     padding: 20px;
-    height: 150px;
-    border: solid black 1px;
+    background-color: white;
     border-radius: 5px;
     display: flex;
 }
@@ -36,11 +36,7 @@
     height: 30px;
     border-radius: 15px;
 }
-.jogadoresCampoDeBusca{
-    display: flex;
-    justify-content: flex-end;
-    margin: 20px 0px;
-}
+
 .jogadoresCampoDeBuscaQuantidadeDeJog{
     color: gray;
     margin-top: 5px;
