@@ -7,7 +7,6 @@
 }
 .cartaImg{
     width: 50px;
-    height: 80px;
     cursor: grabbing;
 }
 .carta{
@@ -19,6 +18,7 @@
 }
 .imgPais{
    width: 20px;
+   margin: 3px 0;
 }
 .imgTime{
   width: 20px;
@@ -122,11 +122,18 @@
 .tabelaDeJogadoresBtnGrupo{
     display: flex;
 }
+.TabsMobile{
+    display: none;
+}
 @media (max-width:700px) {
+    .TabsDesctop{
+        display: none;
+    }
+    .TabsMobile{
+        display: block;
+    }
     .campinho{
         padding: 0px;
-        
-        
     }
     .campinhoBody{
         display: flex;
@@ -160,7 +167,28 @@
     }
     .cartaImg{
         width: 30px;
-        height: 50px;
+    
+    }
+    .imgPais{
+        width: 15px;
+        margin: 3px 0;
+     }
+     .imgTime{
+       width: 15px;
+     }
+     .posicao{
+       font-size: 7px;
+     }
+     .overall{
+        font-size: 12px;
+     }
+     .MuiBox-root .css-19kzrtu{
+        padding: 0px;
+        margin: 0px;
+     }
+    .dadosDoUsuario{
+       display: flex;
+       flex-direction: column;
     }
 }
 

@@ -14,6 +14,7 @@ import Reservas from './escalacoes/quatroUmDoisTres/reservas';
 import { participantesType } from '../types';
 import TabelaDeJogadores from './tabelaDeJogadores';
 import { listarParticipantesApi } from '../api/participantesApi';
+import { formatoMonetario } from '../metodosUteis';
 
 
 interface TabPanelProps {
@@ -62,33 +63,65 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
     setValue(index);
   };
 
-
+  
   
   return (
-    <Box sx={{ bgcolor: 'white', width: "100%" }}>
+    <Box sx={{ bgcolor: 'white', width: "100%"}}>
       <div>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          textColor="inherit"
-          variant="standard"
-          aria-label="full width tabs example"
-        >
-          <Tab label="Lista" {...a11yProps(0)} />
-          <Tab label="Campinho" {...a11yProps(1)} />
-          <Tab label="Time" {...a11yProps(2)} />
-        </Tabs>
+        <div className='TabsDesctop'>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            textColor="inherit"
+            variant= "scrollable"
+            aria-label="full width tabs example"
+          >
+            <Tab label="Lista" {...a11yProps(0)} />
+            <Tab label="Campinho" {...a11yProps(1)} />
+            <Tab label="Time" {...a11yProps(2)} />
+          </Tabs>
+        </div>
+        <div className='TabsMobile'>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            textColor="inherit"
+            variant= "fullWidth"
+            aria-label="full width tabs example"
+          >
+            <Tab label="Lista" {...a11yProps(0)} />
+            <Tab label="Campinho" {...a11yProps(1)} />
+            <Tab label="Time" {...a11yProps(2)} />
+          </Tabs>
+        </div>
       </div>
       <TabPanel value={value} index={0}>
         <TabelaDeJogadores jogadores={elenco?.jogadores} elenco={elenco}/>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel  value={value} index={1}>
         <QuatroUmDoisTres handlePosition={handlePosition} jogadores={elenco?.jogadores}/>
-        <div className='reservarContainer'><Reservas handlePosition={handlePosition} jogadores={elenco?.jogadores}/></div>
+        <div className='reservarContainer'>
+          <h3>Reservas</h3>
+          <Reservas handlePosition={handlePosition} jogadores={elenco?.jogadores}/>
+        </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <div className='dadosDoUsuario'>
+          <div>
+            Usuário {elenco?.nome}
+          </div>
+          <div>
+            Saldo {formatoMonetario(elenco?.saldo)}
+          </div>
+          <div>
+            Time{elenco?.time}
+          </div>
+          <div>
+            {elenco?.jogadores.length} jogadores
+          </div>
+        </div>
       </TabPanel>
     </Box>
   );
