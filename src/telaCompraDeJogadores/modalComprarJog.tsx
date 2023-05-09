@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {jogadoresType} from '../types'
 import { comprarJogadoresApi } from '../api/jogadoresApi';
 import CarregandoBtn from '../carregandoBtn';
+import { tratarValorDoJogador } from '../metodosUteis';
 export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
   const [open, setOpen] = React.useState(false);
   const idElenco = localStorage.getItem('idDoElenco') || ''
@@ -23,7 +24,6 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
   const comprar = async()=>{
       setCarregando(true)
       const res =await comprarJogadoresApi(idElenco, jogadores)
-      alert(res)
       if (res === "jogador comprado com sucesso") {   
         window.location.reload()
       }
@@ -32,8 +32,7 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
 
     useEffect(()=>{
       setJogadores(jogador)
-   
- },[])
+    },[handleClickOpen])
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -51,6 +50,7 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Deseja comprar o jogador {jogador.nome}?
+            Seu valor é {tratarValorDoJogador(jogador.valorDoJogador)} e
           </DialogContentText>
         </DialogContent>
         <DialogActions>

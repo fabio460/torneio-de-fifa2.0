@@ -58,7 +58,7 @@ export default function TelaPrincipal() {
               </div>
                 <div className='telaPrincipalInferior'>
                   {
-                    usuario?.torneio[torneio]?.participantes.map((elem, key)=>{
+                    usuario?.torneio[torneio]?.participantes?.map((elem, key)=>{
                       return <CardElenco key={key} elenco = {elem}/>
                     })
                   }

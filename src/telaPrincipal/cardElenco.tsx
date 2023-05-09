@@ -10,25 +10,19 @@ import { calculaFolha, formatoMonetario } from '../metodosUteis';
 import ModalDeletarParticipantes from './modalDeletarParticipantes';
 import { useNavigate } from 'react-router-dom';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
 export default function CardElenco({elenco}:{elenco:participantesType}) {
+
   const navigate = useNavigate()
-  const linkComprarJogador:any = (id:any)=>{
+  const linkComprarJogador:any = ()=>{
+    localStorage.setItem('idDoElenco',elenco.id)
     localStorage.setItem('idDoTorneio',elenco.idTorneio)
     navigate('/compraDeJogadores')  
   }
-  const linkGerenciaDeElenco:any = (id:any)=>{
-    localStorage.setItem('idDoElenco',id)
+  const linkGerenciaDeElenco:any = ()=>{
+    localStorage.setItem('idDoElenco',elenco.id)
     navigate('/elenco')
   }
+  
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -46,8 +40,8 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
         <Typography variant="body2">
    
         </Typography>
-        <Button onClick={()=> linkGerenciaDeElenco(elenco.id)} variant='contained' size="small" sx={{width:"100%", marginBottom:1}}>Gerenciar time</Button>
-        <Button onClick={()=> linkComprarJogador(elenco?.idTorneio)} variant='contained' size="small"  sx={{width:"100%", marginBottom:1}}>Comprar jogador</Button>
+        <Button onClick={()=> linkGerenciaDeElenco()} variant='contained' size="small" sx={{width:"100%", marginBottom:1}}>Gerenciar time</Button>
+        <Button onClick={()=> linkComprarJogador()} variant='contained' size="small"  sx={{width:"100%", marginBottom:1}}>Comprar jogador</Button>
       </CardContent>
     </Card>
   );

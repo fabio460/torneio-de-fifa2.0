@@ -35,3 +35,8 @@ export function calculaFolha(arrayDeJogadore:jogadoresType[]) {
      })
      return nomeTratado
    }
+
+   export const tratarValorDoJogador = (valor:string | undefined)=>{
+       let valorArray = valor?.split('.') || ''
+       return valorArray[0]
+   }

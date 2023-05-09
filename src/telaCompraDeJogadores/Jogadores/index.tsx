@@ -28,15 +28,17 @@ export default function Jogadores() {
 
   const getJogadoresDoTorneio = async()=>{
    const torneio = await listaJogadoresPorTorneioApi(idDoTorneio)
-    const nomeDosJog =await torneio.map((e:jogadoresType)=>{
-      return e.nome
-    })
-    let listaFiltrada = listaDeJogadores.filter((l:jogadoresType, key)=>{
-      if (!nomeDosJog.includes(l.nome)) {
-         return l
-      }
-    })
-    setListaFiltrada(listaFiltrada)
+   if(torneio){
+     const nomeDosJog =await torneio?.map((e:jogadoresType)=>{
+       return e.nome
+     })
+     let listaFiltrada = listaDeJogadores?.filter((l:jogadoresType, key)=>{
+       if (!nomeDosJog.includes(l.nome)) {
+          return l
+       }
+     })
+     setListaFiltrada(listaFiltrada)
+   }
   }
   getJogadoresDoTorneio()
   useEffect(()=>{

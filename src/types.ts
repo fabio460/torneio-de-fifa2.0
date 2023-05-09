@@ -12,6 +12,7 @@ export interface jogadoresType{
     liga: string,
     linkSoFifa:string,
     posicaoNoCampinho?:posicaoNoCampinhoType[]
+    participante?:participantesType
 }
 
 export type participantesType = {
