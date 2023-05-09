@@ -18,7 +18,9 @@
     display: flex;
     justify-content: space-between;
 }
-
+.telaDeComprasDeJogadoresTextoCheckgox{
+    font-size: 10px;
+}
 @media (max-width:800px) {
    .compraDeJogadoresBody{
      flex-direction: column;
