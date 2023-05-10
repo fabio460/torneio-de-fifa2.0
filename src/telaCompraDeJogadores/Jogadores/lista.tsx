@@ -3,6 +3,7 @@ import CardJogador from './cardJogador'
 import { useSelector } from 'react-redux';
 import { jogadoresType } from '../../types';
 import Carregando from './carregando';
+import { traduzirParaInglesArrayDePosicoes } from '../../metodosUteis';
 
 type intervaloType = {
     intervalo:{
@@ -12,14 +13,17 @@ type intervaloType = {
 }
 export default function Lista({intervalo}:intervaloType) {
     var lista:jogadoresType[] = useSelector((state:any)=>state.campoDeBuscaReducer.lista) 
-    const [posicao, setPosicao] = useState(["GK", "CM"])
+    const [posicao, setPosicao] = useState<string[]>([])
     const filtrada = posicao ? lista?.filter((l, key)=>{
-
-      if ( posicao.includes(l.posicao)) {
+      if (posicao.includes(l.posicao) || posicao.length === 0) {
         return l
       }
     }): lista
-    
+
+    const posicoesReducer = useSelector((state:any)=>state.posicaoSelectJogadorReducer.posicao)
+    useEffect(()=>{
+      setPosicao(traduzirParaInglesArrayDePosicoes(posicoesReducer))
+    },[posicoesReducer])
     return (
     <div className='jogadores'>
     {

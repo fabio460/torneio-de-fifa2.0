@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
+import { Theme, useTheme, Palette } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import { useDispatch } from 'react-redux';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,6 +47,7 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 export default function SelectPosicao() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
+  const dispatch = useDispatch()
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -55,14 +57,18 @@ export default function SelectPosicao() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+    dispatch({
+      type:'posicao',
+      payload:{posicao:value}
+    })
   };
-
   return (
-    <div>
-      <FormControl sx={{ p: '1px', width: '100%',  }} >
-              <Select
-          sx={{bgcolor:'white',}}
-          size='small'
+    <div style={{marginTop:"10px"}}>
+      <FormControl sx={{ width: 300 }} size='small'>
+        <InputLabel  id="demo-multiple-chip-label" sx={{bgcolor:"white", padding:"0px 6px", marginLeft:"-5px"}}>Posições</InputLabel>
+        <Select
+          sx={{bgcolor:'white'}}
+         
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple

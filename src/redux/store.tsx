@@ -10,8 +10,10 @@ import colocacaoReducer from './colocacaoReducer'
 import artilhariaReducer from './artilhariaReducer'
 import assisteciaReducer from './assisteciaReducer'
 import golsEmpVitoriasReducer from './golsEmpVitoriasReducer'
+import posicaoSelectJogadorReducer from './posicaoSelectJogadorReducer'
 export const store = configureStore({
   reducer: {
+    posicaoSelectJogadorReducer,
     artilhariaReducer,
     assisteciaReducer,
     golsEmpVitoriasReducer,

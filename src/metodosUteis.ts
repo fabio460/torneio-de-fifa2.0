@@ -40,3 +40,40 @@ export function calculaFolha(arrayDeJogadore:jogadoresType[]) {
        let valorArray = valor?.split('.') || ''
        return valorArray[0]
    }
+
+   export const traduzirParaInglesArrayDePosicoes = (array:string[])=>{
+      let arrAux = []
+      arrAux = array.map((p, key)=>{
+        switch (p) {
+          case 'GOL':
+              return 'GK'
+          case 'ZAG':
+              return 'CB'
+          case 'LD':
+              return 'RB'
+          case 'LE':
+              return 'LB'
+          case 'VOL':
+              return 'CDM'
+          case 'MC':
+              return 'CM'
+          case 'MD':
+              return 'RM'
+          case 'ME':
+              return 'LM'
+          case 'MEI':
+              return 'CAM'
+          case 'PE':
+              return 'LW'
+          case 'PD':
+              return 'RW'
+          case 'SA':
+              return 'CF'
+          case 'ATA':
+              return 'ST'    
+          default:
+              return ''
+        }
+       })     
+      return arrAux
+   }
