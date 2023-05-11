@@ -61,7 +61,7 @@ export default function CampoDeBusca() {
     display: 'flex',
     alignItems: 'center',
     width: 450,
-    "@media (max-width:1100px)":{
+    "@media (max-width:800px)":{
       width: "95vw",
     }
   }

@@ -47,14 +47,14 @@ export const deletarTorneioApi = async(id:string)=>{
     return f
 }
 
-export const atualizaTorneioApi = async(id:string ,nome:string,idUsuario:string)=>{
+export const atualizaTorneioApi = async(id:string ,nome:string)=>{
     const f = await fetch(linkLocal+"torneio/"+id,{
         headers:{
             "Content-Type":"application/json",
         },
         method:"put",
         body:JSON.stringify({
-            nome,idUsuario
+            nome
         })
     })
     .then(res=>res.json())

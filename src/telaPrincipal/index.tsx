@@ -45,10 +45,12 @@ export default function TelaPrincipal() {
             <div className='main'>
               <div className='appBar'>
                 <h1>Bem vindo {usuario?.nome}!</h1>
-                <Button onClick={deslogar}>Deslogar</Button>
               </div>
               <div className='telaPrincipalSuperior'>
-                <CardParticipantes participantes = {usuario?.torneio[torneio]?.participantes}/>
+                <CardParticipantes 
+                  participantes = {usuario?.torneio[torneio]?.participantes}
+                  torneio = {usuario?.torneio}  
+                />
                 <CradPremiacoes/>
               </div>
               <div className='telaPrincipalMeio'>

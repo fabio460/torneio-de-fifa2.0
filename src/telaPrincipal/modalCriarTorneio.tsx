@@ -35,8 +35,8 @@ export default function ModalCriarTorneio() {
  
   return (
     <div>
-      <Button size='small'  sx={{height:'41px', width:'100%'}} variant="contained" onClick={handleClickOpen}>
-        Criar torneio
+      <Button size='small' color='success' sx={{width:"100%"}} variant="contained" onClick={handleClickOpen}>
+        Criar 
       </Button>
       <Dialog
         open={open}

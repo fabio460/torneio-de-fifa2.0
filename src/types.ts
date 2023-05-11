@@ -45,19 +45,23 @@ export interface torneioType {
  export type selecionadosType={
     primeiro:{
       nome:string,
-      dados:participantesType
+      dados:participantesType,
+      dadosDaApi?:dadosPremiacoesDaApiType
     },
     segundo:{
       nome:string,
-      dados:participantesType
+      dados:participantesType,
+      dadosDaApi?:dadosPremiacoesDaApiType
     },
     terceiro:{
       nome:string,
-      dados:participantesType
+      dados:participantesType,
+      dadosDaApi?:dadosPremiacoesDaApiType
     },
     quarto:{
       nome:string,
-      dados:participantesType
+      dados:participantesType,
+      dadosDaApi?:dadosPremiacoesDaApiType
     }
  }
 
@@ -71,3 +75,19 @@ export interface torneioType {
   jogador: jogadoresType,
   selecionado:boolean
 }
+
+export type premiadosType = {
+  idParticipante:string,
+  debito:number
+}[]
+
+export type pagadoresType = {
+  pagadores:[
+    {
+      idParticipante:string
+    }
+  ],
+  id:string
+}
+
+export type dadosPremiacoesDaApiType = {idParticipante:string,premio:number}

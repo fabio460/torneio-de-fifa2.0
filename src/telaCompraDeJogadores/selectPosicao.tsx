@@ -64,7 +64,7 @@ export default function SelectPosicao() {
   };
   return (
     <div style={{marginTop:"10px"}}>
-      <FormControl sx={{ width: 300 }} size='small'>
+      <FormControl sx={{ width: 300, mb:1 }} size='small'>
         <InputLabel  id="demo-multiple-chip-label" sx={{bgcolor:"white", padding:"0px 6px", marginLeft:"-5px"}}>Posições</InputLabel>
         <Select
           sx={{bgcolor:'white'}}

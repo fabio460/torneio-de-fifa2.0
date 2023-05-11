@@ -10,29 +10,34 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
-import { chekedType, participantesType } from '../types';
+import { chekedType, dadosPremiacoesDaApiType, participantesType } from '../types';
 import { useSelector } from 'react-redux';
+import { campeao, quartoColocado, terceiroColocado, viceCampeao } from './valoresDosPremios';
 
 export default function ModalColocacao() {
   const [open, setOpen] = React.useState(false);
-  const [primeiro, setPrimeiro] = React.useState<{nome:string, dados:participantesType}>();
-  const [segundo, setSegundo] = React.useState<{nome:string, dados:participantesType}>();
-  const [terceiro, setTerceiro] = React.useState<{nome:string, dados:participantesType}>();
-  const [quarto, setQuarto] = React.useState<{nome:string, dados:participantesType}>();
+  const [primeiro, setPrimeiro] = React.useState<{nome:string, dados:participantesType,dadosDaApi:dadosPremiacoesDaApiType}>();
+  const [segundo, setSegundo] = React.useState<{nome:string, dados:participantesType,dadosDaApi:dadosPremiacoesDaApiType}>();
+  const [terceiro, setTerceiro] = React.useState<{nome:string, dados:participantesType,dadosDaApi:dadosPremiacoesDaApiType}>();
+  const [quarto, setQuarto] = React.useState<{nome:string, dados:participantesType,dadosDaApi:dadosPremiacoesDaApiType}>();
 
   const participantes:chekedType[] = useSelector((state:any)=>state.participantesReducer.participantes)
   
   const handleChangePrimeiro = (event: any, data:any) => {
-    setPrimeiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)})
+    const idParticipante =  JSON.parse(data.props.nonce).id
+    setPrimeiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce), dadosDaApi:{idParticipante:idParticipante,premio:campeao}})
   };
   const handleChangeSegundo = (event: any, data:any) => {
-    setSegundo({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+    const idParticipante =  JSON.parse(data.props.nonce).id
+    setSegundo({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce), dadosDaApi:{idParticipante:idParticipante,premio:viceCampeao}});
   };
   const handleChangeTerceiro = (event: any, data:any) => {
-    setTerceiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+    const idParticipante =  JSON.parse(data.props.nonce).id
+    setTerceiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce), dadosDaApi:{idParticipante:idParticipante,premio:terceiroColocado}});
   };
   const handleChangeQuarto = (event: any, data:any) => {
-    setQuarto({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+    const idParticipante =  JSON.parse(data.props.nonce).id
+    setQuarto({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce), dadosDaApi:{idParticipante:idParticipante,premio:quartoColocado}});
   };
   const handleClickOpen = () => {
     setOpen(true);

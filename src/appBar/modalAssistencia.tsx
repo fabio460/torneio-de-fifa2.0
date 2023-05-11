@@ -10,29 +10,34 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
-import { chekedType, participantesType } from '../types';
+import { chekedType, dadosPremiacoesDaApiType, participantesType } from '../types';
 import { useSelector } from 'react-redux';
+import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from './valoresDosPremios';
 
 export default function ModalAssistencia() {
   const [open, setOpen] = React.useState(false);
-  const [primeiro, setPrimeiro] = React.useState<{nome:string, dados:participantesType}>();
-  const [segundo, setSegundo] = React.useState<{nome:string, dados:participantesType}>();
-  const [terceiro, setTerceiro] = React.useState<{nome:string, dados:participantesType}>();
-  const [quarto, setQuarto] = React.useState<{nome:string, dados:participantesType}>();
+  const [primeiro, setPrimeiro] = React.useState<{nome:string, dados:participantesType, dadosDaApi:dadosPremiacoesDaApiType}>();
+  const [segundo, setSegundo] = React.useState<{nome:string, dados:participantesType, dadosDaApi:dadosPremiacoesDaApiType}>();
+  const [terceiro, setTerceiro] = React.useState<{nome:string, dados:participantesType, dadosDaApi:dadosPremiacoesDaApiType}>();
+  const [quarto, setQuarto] = React.useState<{nome:string, dados:participantesType, dadosDaApi:dadosPremiacoesDaApiType}>();
 
   const participantes:chekedType[] = useSelector((state:any)=>state.participantesReducer.participantes)
   
   const handleChangePrimeiro = (event: any, data:any) => {
-    setPrimeiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)})
+    let jogadorSelecionado = JSON.parse(data.props.nonce)
+    setPrimeiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:assistencia}})
   };
   const handleChangeSegundo = (event: any, data:any) => {
-    setSegundo({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+    let jogadorSelecionado = JSON.parse(data.props.nonce)
+    setSegundo({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:viceAssistencia}});
   };
   const handleChangeTerceiro = (event: any, data:any) => {
-    setTerceiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+    let jogadorSelecionado = JSON.parse(data.props.nonce)
+    setTerceiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:terceiroAssistencia}});
   };
   const handleChangeQuarto = (event: any, data:any) => {
-    setQuarto({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+    let jogadorSelecionado = JSON.parse(data.props.nonce)
+    setQuarto({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:quartoAssistencia}});
   };
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,7 +48,12 @@ export default function ModalAssistencia() {
     setOpen(false);
     dispatch({
       type:"assistencia",
-      payload:{assistentes:{primeiro,segundo,terceiro,quarto}}
+      payload:{assistentes:{
+        primeiro:primeiro?.dadosDaApi,
+        segundo:segundo?.dadosDaApi,
+        terceiro:terceiro?.dadosDaApi,
+        quarto:quarto?.dadosDaApi
+      }}
     })
     
   };
@@ -84,9 +94,13 @@ export default function ModalAssistencia() {
                 <MenuItem id={''} value="">
                   <em>None</em>
                 </MenuItem>
-                {participantes?.map((elem:chekedType,key)=>{
-                  return <MenuItem value={elem.participante.nome} nonce={JSON.stringify(elem.participante)}>{elem.participante.nome}</MenuItem>
-                })}
+                {
+                  participantes.map(e=>{
+                    return e.participante.jogadores.map(e=>{
+                      return <MenuItem value={e.nome} nonce={JSON.stringify(e)}>{e.nome}</MenuItem>
+                    })
+                  })
+                }
               </Select>
             </FormControl>
 
@@ -102,9 +116,13 @@ export default function ModalAssistencia() {
                 <MenuItem id={''} value="">
                   <em>None</em>
                 </MenuItem>
-                {participantes?.map((elem,key)=>{
-                  return <MenuItem nonce={JSON.stringify(elem.participante)} value={elem.participante.nome}>{elem.participante.nome}</MenuItem>
-                })}
+                {
+                  participantes.map(e=>{
+                    return e.participante.jogadores.map(e=>{
+                      return <MenuItem value={e.nome} nonce={JSON.stringify(e)}>{e.nome}</MenuItem>
+                    })
+                  })
+                }
               </Select>
             </FormControl>
 
@@ -120,9 +138,13 @@ export default function ModalAssistencia() {
                 <MenuItem id={''} value="">
                   <em>None</em>
                 </MenuItem>
-                {participantes?.map((elem,key)=>{
-                  return <MenuItem nonce={JSON.stringify(elem.participante)} value={elem.participante.nome}>{elem.participante.nome}</MenuItem>
-                })}
+                {
+                  participantes.map(e=>{
+                    return e.participante.jogadores.map(e=>{
+                      return <MenuItem value={e.nome} nonce={JSON.stringify(e)}>{e.nome}</MenuItem>
+                    })
+                  })
+                }
               </Select>
             </FormControl>
             <FormControl className='modalColocacaoForms' size="small">
@@ -137,9 +159,13 @@ export default function ModalAssistencia() {
                 <MenuItem id={''} value="">
                   <em>None</em>
                 </MenuItem>
-                {participantes?.map((elem,key)=>{
-                  return <MenuItem nonce={JSON.stringify(elem.participante)} value={elem.participante.nome}>{elem.participante.nome}</MenuItem>
-                })}
+                {
+                  participantes.map(e=>{
+                    return e.participante.jogadores.map(e=>{
+                      return <MenuItem value={e.nome} nonce={JSON.stringify(e)}>{e.nome}</MenuItem>
+                    })
+                  })
+                }
               </Select>
             </FormControl>
           </DialogContentText>

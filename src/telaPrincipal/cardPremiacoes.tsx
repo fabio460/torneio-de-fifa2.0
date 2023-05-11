@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import { selecionadosType } from '../types';
+import { pagarPremiacoesApi } from '../api/pagamentosApi';
 
 
 
@@ -16,6 +17,26 @@ export default function CradPremiacoes() {
   const artilheiros:selecionadosType = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
   const assistentes:selecionadosType = useSelector((state:any)=>state.assisteciaReducer.assistentes)
   const dadosDoJogo:selecionadosType = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
+
+  const pagarPremiacao =async ()=>{
+     let premiados:any = []
+     artilheiros.primeiro && premiados.push(artilheiros.primeiro)
+     artilheiros.segundo && premiados.push(artilheiros.segundo)
+     artilheiros.terceiro && premiados.push(artilheiros.terceiro)
+     artilheiros.quarto && premiados.push(artilheiros.quarto)
+     assistentes.primeiro && premiados.push(assistentes.primeiro)
+     assistentes.segundo && premiados.push(assistentes.segundo)
+     assistentes.terceiro && premiados.push(assistentes.terceiro)
+     assistentes.quarto && premiados.push(assistentes.quarto)
+     colocacao.primeiro && premiados.push(colocacao.primeiro.dadosDaApi)
+     colocacao.segundo && premiados.push(colocacao.segundo.dadosDaApi)
+     colocacao.terceiro && premiados.push(colocacao.terceiro.dadosDaApi)
+     colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
+     
+     const res =await pagarPremiacoesApi(premiados)
+     alert(res)
+     window.location.reload()
+  }
   
   return (
     <Card sx={{ minWidth: 275 }} >
@@ -23,7 +44,7 @@ export default function CradPremiacoes() {
          <div className='cardPremiacoesBox'>
            <h2>Colocação</h2>
            <ul>
-             {colocacao.primeiro && <li>Primeiro: {colocacao.primeiro?.nome}</li> }
+             {colocacao.primeiro && <li>Primeiro: {colocacao.primeiro.nome}</li> }
              {colocacao.segundo && <li>Segundo: {colocacao.segundo?.nome}</li> }
              {colocacao.terceiro && <li>Terceiro: {colocacao.terceiro?.nome}</li> }
              {colocacao.quarto && <li>Quarto: {colocacao.quarto?.nome}</li> }
@@ -58,7 +79,7 @@ export default function CradPremiacoes() {
          </div> 
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" variant='outlined' onClick={pagarPremiacao}>Pagar premiação</Button>
       </CardActions>
     </Card>
   );

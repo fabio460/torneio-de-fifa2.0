@@ -4,23 +4,23 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { usuarioLogadoType } from '../types';
+import { participantesType, torneioType, usuarioLogadoType } from '../types';
 import { useSelector } from 'react-redux';
-import { adicionarParticipantesoApi } from '../api/participantesApi';
-import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-export default function ModalAdicionarParticipantes() {
+import FormControl from '@mui/material/FormControl';
+import { deletarTorneioApi } from '../api/torneioApi';
+
+export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | undefined}) {
   const [open, setOpen] = React.useState(false);
-  const [nomeDoParticipante, setNomeDoParticipante] = useState('')
   const [age, setAge] = React.useState('');
+  const [nomeDoParticipante, setNomeDoParticipante] = useState('')
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
   };
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
-  const torneio = useSelector((state:any)=>state.torneioReducer.torneio)
+  //const torneios = useSelector((state:any)=>state.torneioReducer.torneio)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -29,20 +29,16 @@ export default function ModalAdicionarParticipantes() {
     setOpen(false);
   };
 
-  const adicionarParticipantes = async()=>{
-    if (nomeDoParticipante.trim() === "" || age.trim() === "") {
-      alert("Não pode haver campos nulos")
-      return null
-    }
-    const res = await adicionarParticipantesoApi(nomeDoParticipante,age)
-    alert(res)
-    window.location.reload()
+  const deletarTorneio = async()=>{
+      const res = await deletarTorneioApi(age)
+      alert(res)
+      window.location.reload()
   }
-  
+
   return (
     <div>
-      <Button size='small'  sx={{height:'41px', width:'100%'}} variant="contained" onClick={handleClickOpen}>
-        Adicionar paticipantes
+      <Button size='small' color='error' sx={{width:"100%"}} onClick={handleClickOpen} variant='contained'>
+        Deletar
       </Button>
       <Dialog
         open={open}
@@ -51,10 +47,11 @@ export default function ModalAdicionarParticipantes() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"dicione participantes para seu torneio!"}
+          Deleção de torneio
         </DialogTitle>
         <DialogContent>
-          <FormControl sx={{ m: '2% 0', width:'100%',height:'41px' }} size="small">
+           Escolha o torneio a ser deletado
+           <FormControl sx={{ m: '2% 0', width:'100%',height:'41px' }} size="small">
           <InputLabel id="demo-select-small-label" sx={{minWidth:"60px", background:"white", marginRight:'20px'}}>Torneio</InputLabel>
           <Select
               labelId="demo-select-small-label"
@@ -64,18 +61,15 @@ export default function ModalAdicionarParticipantes() {
               onChange={handleChange}
           >
               {
-                  usuario.torneio?.map((elem, key)=>{
-                      return  <MenuItem key={key} value={elem.id} className={elem.id}>{elem.nome}</MenuItem>
-                  })
+                torneio?.map((t, key)=>{
+                   return  <MenuItem key={key} value={t.id} className={t.id}>{t.nome}</MenuItem>
+                })
               }
           </Select>
           </FormControl>
-          <TextField id="outlined-basic" label="nome" variant="outlined" size='small' sx={{margin:"2% 0",  width:'100%'}}
-              onChange={e => setNomeDoParticipante(e.target.value)}
-            />
         </DialogContent>
         <DialogActions>
-          <Button onClick={adicionarParticipantes}>adicionar</Button>
+          <Button onClick={deletarTorneio}>deletar</Button>
           <Button color='error' onClick={handleClose} autoFocus>
             cancelar
           </Button>
