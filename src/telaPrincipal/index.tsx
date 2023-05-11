@@ -12,6 +12,9 @@ import { usuarioLogadoType } from '../types'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import Carregando from '../carregando'
+import EstatisticaArtilheiros from './estatisticaArtilheiro'
+import EstatisticaCampeao from './estatisticaCampeao'
+import EstatisticaAssistencia from './estatisticaAssistencia'
 
 export default function TelaPrincipal() {
   const dispatch = useDispatch()
@@ -54,9 +57,9 @@ export default function TelaPrincipal() {
                 <CradPremiacoes/>
               </div>
               <div className='telaPrincipalMeio'>
-                <CardEstatisticas/>
-                <CardEstatisticas/>
-                <CardEstatisticas/>
+                <EstatisticaCampeao/>
+                <EstatisticaAssistencia/>
+                <EstatisticaArtilheiros/>
               </div>
                 <div className='telaPrincipalInferior'>
                   {

@@ -1,40 +1,5 @@
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import EstatisticaArtilheiros from './estatisticaArtilheiro';
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
-export default function CardEstatisticas() {
-  return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <EstatisticaArtilheiros/>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  );
-}
-
-
-
-
-
 
 const data = [
   {
@@ -81,7 +46,7 @@ const data = [
   },
 ];
 
-export  class Artilharia extends PureComponent {
+export default class EstatisticaArtilheiros extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/stacked-area-chart-ix341';
 
   render() {

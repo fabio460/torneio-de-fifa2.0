@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import { selecionadosType } from '../types';
 import { pagarPremiacoesApi } from '../api/pagamentosApi';
+import { adicionarEstatisticaApi } from '../api/estatisticasApi';
 
 
 
@@ -34,7 +35,18 @@ export default function CradPremiacoes() {
      colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
      
      const res =await pagarPremiacoesApi(premiados)
+     const resSta = await adicionarEstatisticaApi(
+      artilheiros.primeiro ? artilheiros.primeiro.nome: "",
+      assistentes.primeiro ? assistentes.primeiro.nome: "",
+      colocacao.primeiro ? colocacao.primeiro.nome: ""
+      )
      alert(res)
+     console.log({
+       art:artilheiros.primeiro,
+       ass:assistentes.primeiro,
+       col:colocacao.primeiro
+     })
+     alert(resSta.toString())
      window.location.reload()
   }
   

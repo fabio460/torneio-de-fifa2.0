@@ -25,19 +25,51 @@ export default function ModalAssistencia() {
   
   const handleChangePrimeiro = (event: any, data:any) => {
     let jogadorSelecionado = JSON.parse(data.props.nonce)
-    setPrimeiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:assistencia}})
+    setPrimeiro({
+      nome:event.target.value,
+      dados:data.props.nonce && JSON.parse(data.props.nonce),
+      dadosDaApi:{
+        idParticipante:jogadorSelecionado.idParticipante,
+        premio:assistencia,
+        nome:jogadorSelecionado.nome
+      }
+    })
   };
   const handleChangeSegundo = (event: any, data:any) => {
     let jogadorSelecionado = JSON.parse(data.props.nonce)
-    setSegundo({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:viceAssistencia}});
+    setSegundo({
+      nome:event.target.value,
+      dados:data.props.nonce && JSON.parse(data.props.nonce),
+      dadosDaApi:{
+        idParticipante:jogadorSelecionado.idParticipante,
+        premio:viceAssistencia,
+        nome:jogadorSelecionado.nome
+      }
+    });
   };
   const handleChangeTerceiro = (event: any, data:any) => {
     let jogadorSelecionado = JSON.parse(data.props.nonce)
-    setTerceiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:terceiroAssistencia}});
+    setTerceiro({
+      nome:event.target.value, 
+      dados:data.props.nonce && JSON.parse(data.props.nonce),
+      dadosDaApi:{
+        idParticipante:jogadorSelecionado.idParticipante,
+        premio:terceiroAssistencia,
+        nome:jogadorSelecionado.nome
+      }
+    });
   };
   const handleChangeQuarto = (event: any, data:any) => {
     let jogadorSelecionado = JSON.parse(data.props.nonce)
-    setQuarto({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce),dadosDaApi:{idParticipante:jogadorSelecionado.idParticipante,premio:quartoAssistencia}});
+    setQuarto({
+      nome:event.target.value, 
+      dados:data.props.nonce && JSON.parse(data.props.nonce),
+      dadosDaApi:{
+        idParticipante:jogadorSelecionado.idParticipante,
+        premio:quartoAssistencia,
+        nome:jogadorSelecionado.nome
+      }
+    });
   };
   const handleClickOpen = () => {
     setOpen(true);

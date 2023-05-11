@@ -13,12 +13,11 @@ const deslogar = ()=>{
   window.location.reload()
 }
 const pages = [
-  <div><ModalDadosDoJogo/></div>, 
+  <div><ModalColocacao /></div>,
   <div><ModalArtilharia/></div>,
   <div><ModalAssistencia/></div>,
-  <div><ModalColocacao /></div>,
-  <div>saldo</div>
-  ];
+  <div><ModalDadosDoJogo/></div>, 
+];
 const settings = ['Profile', 'Account', 'Dashboard', <div onClick={deslogar}>Deslogar</div>];
 
 function ResponsiveAppBar() {
