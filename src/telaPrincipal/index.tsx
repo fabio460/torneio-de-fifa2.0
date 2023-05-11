@@ -15,11 +15,13 @@ import Carregando from '../carregando'
 import EstatisticaArtilheiros from './estatisticaArtilheiro'
 import EstatisticaCampeao from './estatisticaCampeao'
 import EstatisticaAssistencia from './estatisticaAssistencia'
+import { listarStatisticaApi } from '../api/estatisticasApi'
 
 export default function TelaPrincipal() {
   const dispatch = useDispatch()
   const [usuario, setUsuario] = useState<usuarioLogadoType>()
   const [carregando, setCarregando] = useState(true)
+  const [estatisticas, setEstatisticas] = useState()
   const torneio = useSelector((state:any)=>state.torneioReducer.torneio)
   const deslogar = ()=>{
     localStorage.removeItem('jwt')
@@ -34,6 +36,8 @@ export default function TelaPrincipal() {
       type:"usuario",
       payload:{usuario:u}
     })
+    const est = await listarStatisticaApi()
+    setEstatisticas(est)
   }
   useEffect(()=>{
     getUsuario()
@@ -59,7 +63,7 @@ export default function TelaPrincipal() {
               <div className='telaPrincipalMeio'>
                 <EstatisticaCampeao/>
                 <EstatisticaAssistencia/>
-                <EstatisticaArtilheiros/>
+                <EstatisticaArtilheiros estatistica={estatisticas}/>
               </div>
                 <div className='telaPrincipalInferior'>
                   {

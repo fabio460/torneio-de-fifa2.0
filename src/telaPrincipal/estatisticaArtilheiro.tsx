@@ -46,10 +46,10 @@ const data = [
   },
 ];
 
-export default class EstatisticaArtilheiros extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/stacked-area-chart-ix341';
+export default function EstatisticaArtilheiros({estatistica}:any) {
+  const demoUrl = 'https://codesandbox.io/s/stacked-area-chart-ix341';
 
-  render() {
+ 
     return (
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
@@ -73,5 +73,5 @@ export default class EstatisticaArtilheiros extends PureComponent {
         </AreaChart>
       </ResponsiveContainer>
     );
-  }
+
 }
