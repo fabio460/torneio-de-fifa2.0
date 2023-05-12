@@ -12,7 +12,13 @@ export default function SelectTorneio() {
   const [age, setAge] = React.useState('0');
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
+    localStorage.setItem('selectTorneio',event.target.value)
   };
+  React.useEffect(()=>{
+    if (localStorage.getItem('selectTorneio')) {
+      setAge(localStorage.getItem('selectTorneio')?.toString() || "0")
+    }
+  })
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
   dispatch({
     type:"torneio",

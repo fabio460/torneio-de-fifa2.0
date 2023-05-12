@@ -12,8 +12,8 @@ export default 	function Meias({handlePosition, jogadores}) {
             
             <Draggable         
               defaultPosition={{
-                x:elem.posicaoNoCampinho[0] ? elem.posicaoNoCampinho[0]?.x : 0,
-                y:elem.posicaoNoCampinho[0] ? elem.posicaoNoCampinho[0]?.y : 0
+                x:elem?.posicaoNoCampinho[0] ? elem?.posicaoNoCampinho[0]?.x : 0,
+                y:elem?.posicaoNoCampinho[0] ? elem?.posicaoNoCampinho[0]?.y : 0
               }}
               onStop={handlePosition}
             >

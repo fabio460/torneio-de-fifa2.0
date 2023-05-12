@@ -1,6 +1,6 @@
 export const getPosicaoPrincipal = (p:string)=>{
     const posicaoArray = p?.split(',')
-    return  traduzirPosicao(posicaoArray[0])
+    return  posicaoArray && traduzirPosicao(posicaoArray[0])
 }
 
 export function manipularPaginacao(pagina:number, itensPorPagina=10) {

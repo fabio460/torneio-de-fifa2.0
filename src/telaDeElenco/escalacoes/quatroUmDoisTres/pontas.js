@@ -9,8 +9,8 @@ export default 	function Pontas({handlePosition, jogadores}) {
        return (key >= 1 && key <= 2) && <div style={{display:"flex"}}>
          <Draggable         
             defaultPosition={{
-              x:elem.posicaoNoCampinho[0] ? elem.posicaoNoCampinho[0]?.x : 0,
-              y:elem.posicaoNoCampinho[0] ? elem.posicaoNoCampinho[0]?.y : 0
+              x:elem?.posicaoNoCampinho[0] ? elem?.posicaoNoCampinho[0]?.x : 0,
+              y:elem?.posicaoNoCampinho[0] ? elem?.posicaoNoCampinho[0]?.y : 0
             }}
            onStop={handlePosition}
          >

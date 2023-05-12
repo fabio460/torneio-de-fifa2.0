@@ -9,8 +9,8 @@ export default  function Reservas({handlePosition, jogadores}) {
              return (key >= 11) && <div style={{display:"flex"}}>
                  <Draggable          
                     defaultPosition={{
-                        x:elem.posicaoNoCampinho[0] ? elem.posicaoNoCampinho[0]?.x : 0,
-                        y:elem.posicaoNoCampinho[0] ? elem.posicaoNoCampinho[0]?.y : 0
+                        x:elem?.posicaoNoCampinho[0] ? elem?.posicaoNoCampinho[0]?.x : 0,
+                        y:elem?.posicaoNoCampinho[0] ? elem?.posicaoNoCampinho[0]?.y : 0
                     }}
                      onStop={handlePosition}
                  >

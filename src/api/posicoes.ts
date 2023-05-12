@@ -35,3 +35,14 @@ export const atualizarOuCriarPosicoesApi = async(idDoJogador:string ,x:number, y
     .then(res=>res.json())
     return f
 }
+
+export const deletarTodasPosicoesApi = async(idDoParticipantes:string | undefined)=>{
+    const f = await fetch(linkLocal+"posicoes/"+idDoParticipantes,{
+        headers:{
+            "Content-Type":"application/json",
+        },
+        method:"delete"
+    })
+    .then(res=>res.json())
+    return f
+}

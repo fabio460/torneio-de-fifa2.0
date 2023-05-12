@@ -15,6 +15,8 @@ import { participantesType } from '../types';
 import TabelaDeJogadores from './tabelaDeJogadores';
 import { listarParticipantesApi } from '../api/participantesApi';
 import { formatoMonetario } from '../metodosUteis';
+import { Button } from '@mui/material';
+import { deletarTodasPosicoesApi } from '../api/posicoes';
 
 
 interface TabPanelProps {
@@ -56,6 +58,7 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
   const [value, setValue] = React.useState(0);
  
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    localStorage.setItem('selectCampinho',newValue.toString())
     setValue(newValue);
   };
 
@@ -63,8 +66,22 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
     setValue(index);
   };
 
-  
-  
+  useEffect(()=>{
+    if (localStorage.getItem('selectCampinho')) {   
+      setValue(parseInt(localStorage.getItem('selectCampinho') || ''))
+    }
+  },[])
+  const ajustarPosicao = async()=>{
+     const res = await deletarTodasPosicoesApi(elenco?.id)
+     window.location.reload()
+  }
+  const btnAjustPos={
+    margin:"10px 0px",
+    "@media (max-width:700px)":{
+      width:"100%",
+      margin:"10px auto"
+    }
+  }
   return (
     <Box sx={{ bgcolor: 'white', width: "100%"}}>
       <div>
@@ -100,7 +117,10 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
       <TabPanel value={value} index={0}>
         <TabelaDeJogadores jogadores={elenco?.jogadores} elenco={elenco}/>
       </TabPanel>
-      <TabPanel  value={value} index={1}>
+      <TabPanel value={value} index={1}>
+        <div className='btnAjustPos'>
+          <Button  sx={btnAjustPos} variant='contained' onClick={ajustarPosicao}>Ajustar posições</Button>
+        </div>
         <QuatroUmDoisTres handlePosition={handlePosition} jogadores={elenco?.jogadores}/>
         <div className='reservarContainer'>
           <h3>Reservas</h3>

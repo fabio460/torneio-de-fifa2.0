@@ -125,6 +125,7 @@
 .TabsMobile{
     display: none;
 }
+
 @media (max-width:700px) {
     .TabsDesctop{
         display: none;
@@ -146,9 +147,14 @@
         z-index: 6;
     }
     .containerDeEscalacao{
-        width: 80%;
+        width: 100%;
         min-height: 70vh;
         margin: auto;
+    }
+    .btnAjustPos{
+        display: flex;
+        justify-content: center;
+        padding: 2%;
     }
     .meiasContainer{
         margin: auto;
