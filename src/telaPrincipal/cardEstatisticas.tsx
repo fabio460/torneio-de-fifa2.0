@@ -22,7 +22,7 @@ export default function CardEstatisticas() {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <EstatisticaArtilheiros/>
+        {/* <EstatisticaArtilheiros /> */}
       </CardContent>
       <CardActions>
         <Button size="small">Learn More</Button>

@@ -1,61 +1,56 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect,useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { statisticasTypes } from '../types';
+import { removerDuplicataArrayDeObjetos } from '../metodosUteis';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
 
-export default class EstatisticaAssistencia extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/stacked-area-chart-ix341';
+export default function EstatisticaAssistencia({estatistica}:{estatistica:statisticasTypes[] | undefined}) {
+  const [dados, setDados] = useState([])
+  const [limiteDeItens, setLimiteDeItens] = useState(5)
+  async function getEstatistica() {
+      const e = estatistica
+      const nomesComRepeticoes = e?.map(item=>{
+          return item.melhorAssistente
+      }) 
+      const u = removerDuplicataArrayDeObjetos(nomesComRepeticoes)
+      const usuarios = u?.filter((e:any)=>{
+          if (e !== "") {
+              return e
+          }
+      })
 
-  render() {
+   
+      let aux:any = []
+      usuarios?.filter((usuario:any, key:any)=>{
+          let cont = 0          
+            nomesComRepeticoes?.filter((item)=>{ 
+              if (item === usuario) {
+                cont+=1;
+              }
+            })
+            aux.push({name:usuario, Artilharias:cont})
+      })
+      const ordenada = aux.sort((a:any,b:any)=>{
+          return a.Artilharias > b.Artilharias ? -1 : a.Artilharias < b.Artilharias ? 1 : 0
+      })
+      const primeiros = ordenada?.filter((elem:any, key:any)=>{
+          if (key < limiteDeItens) {    
+              return elem
+          }
+      })
+      setDados(primeiros.reverse())
+  }
+  useEffect(()=>{
+    getEstatistica()
+  },[estatistica])  
+
+
     return (
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={500}
           height={400}
-          data={data}
+          data={dados}
           margin={{
             top: 10,
             right: 30,
@@ -68,10 +63,9 @@ export default class EstatisticaAssistencia extends PureComponent {
           <YAxis />
           <Tooltip />
           <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-          <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+          <Area type="monotone" dataKey="Artilharias" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
           <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
         </AreaChart>
       </ResponsiveContainer>
     );
-  }
 }

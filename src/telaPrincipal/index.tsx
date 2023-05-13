@@ -36,12 +36,18 @@ export default function TelaPrincipal() {
       type:"usuario",
       payload:{usuario:u}
     })
-    const est = await listarStatisticaApi()
-    setEstatisticas(est)
   }
   useEffect(()=>{
     getUsuario()
   },[])
+  async function getEstatistica() {
+    const est = await listarStatisticaApi(usuario?.torneio[torneio].id || '')
+    setEstatisticas(est)
+    
+  }
+  useEffect(()=>{
+    getEstatistica()
+  },[torneio])
   return (
     <div className='container'>
       {
@@ -58,11 +64,11 @@ export default function TelaPrincipal() {
                   participantes = {usuario?.torneio[torneio]?.participantes}
                   torneio = {usuario?.torneio}  
                 />
-                <CradPremiacoes/>
+                <CradPremiacoes torneio = {usuario?.torneio} usuario={usuario}/>
               </div>
               <div className='telaPrincipalMeio'>
-                <EstatisticaCampeao/>
-                <EstatisticaAssistencia/>
+                <EstatisticaCampeao estatistica={estatisticas}/>
+                <EstatisticaAssistencia estatistica={estatisticas}/>
                 <EstatisticaArtilheiros estatistica={estatisticas}/>
               </div>
                 <div className='telaPrincipalInferior'>

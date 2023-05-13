@@ -1,8 +1,8 @@
 import { linkLocal } from "./link"
 
 
-export const listarStatisticaApi = async()=>{
-    const f = await fetch(linkLocal+"estatistica/",{
+export const listarStatisticaApi = async(torneioId:string)=>{
+    const f = await fetch(linkLocal+"estatistica/"+torneioId,{
         headers:{
             "Content-Type":"application/json",
         },
@@ -12,7 +12,7 @@ export const listarStatisticaApi = async()=>{
     return f
 }
 
-export const adicionarEstatisticaApi = async(artilheiro:string, melhorAssistente:string, vencedor:string)=>{
+export const adicionarEstatisticaApi = async(artilheiro:string, melhorAssistente:string, vencedor:string,torneioId:string | undefined)=>{
     
     const f = await fetch(linkLocal+"estatistica",{
         headers:{
@@ -20,11 +20,11 @@ export const adicionarEstatisticaApi = async(artilheiro:string, melhorAssistente
         },
         method:"post",
         body:JSON.stringify({
-            vencedor,melhorAssistente,artilheiro
+            vencedor,melhorAssistente,artilheiro,torneioId
         })
     })
     .then(res=>res.json())
-    return f
+    return 5
 }
 
 export const removerHistoricoEstatisticoApi = async()=>{

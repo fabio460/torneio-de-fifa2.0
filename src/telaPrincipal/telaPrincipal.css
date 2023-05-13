@@ -55,7 +55,7 @@
 @media (max-width:1100px) {
     .telaPrincipalMeio{
         grid-template-columns: 1fr 1fr;
-        min-height: 400px;
+        min-height: 700px;
     }
     .telaPrincipalSuperior{
         grid-template-columns: 1fr 1fr;

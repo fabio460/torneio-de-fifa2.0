@@ -90,4 +90,15 @@ export type pagadoresType = {
   id:string
 }
 
-export type dadosPremiacoesDaApiType = {idParticipante:string,premio:number,nome?:string}
+export type dadosPremiacoesDaApiType = {
+  idParticipante:string,
+  premio:number,nome?:string
+}
+
+export type statisticasTypes = {
+  id?:string,
+  artilheiro:string,
+  data:Date,
+  melhorAssistente:string,
+  vencedor:string
+}

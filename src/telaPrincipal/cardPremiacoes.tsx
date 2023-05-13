@@ -6,21 +6,26 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { selecionadosType } from '../types';
+import { selecionadosType, usuarioLogadoType } from '../types';
 import { pagarPremiacoesApi } from '../api/pagamentosApi';
 import { adicionarEstatisticaApi } from '../api/estatisticasApi';
 import CarregandoBtn from '../carregandoBtn';
+import { torneioType } from '../types';
 
 
 
 
-export default function CradPremiacoes() {
+export default function CradPremiacoes({torneio,usuario}:{
+  usuario:usuarioLogadoType | undefined,
+  torneio:torneioType[] | undefined
+}) {
   const colocacao:selecionadosType = useSelector((state:any)=>state.colocacaoReducer.colocacao)
   const artilheiros:selecionadosType = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
   const assistentes:selecionadosType = useSelector((state:any)=>state.assisteciaReducer.assistentes)
   const dadosDoJogo:selecionadosType = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
   const [carregandoPremio, setCarregandoPremio] = useState(false)
   const [carregandoFolha, setCarregandoFolha] = useState(false)
+  const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
 
   const pagarPremiacao =async ()=>{
     setCarregandoPremio(true)
@@ -37,12 +42,13 @@ export default function CradPremiacoes() {
      colocacao.segundo && premiados.push(colocacao.segundo.dadosDaApi)
      colocacao.terceiro && premiados.push(colocacao.terceiro.dadosDaApi)
      colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
-     
+
      const res =await pagarPremiacoesApi(premiados)
      const resSta = await adicionarEstatisticaApi(
       artilheiros.primeiro ? artilheiros.primeiro.nome: "",
       assistentes.primeiro ? assistentes.primeiro.nome: "",
-      colocacao.primeiro ? colocacao.primeiro.nome: ""
+      colocacao.primeiro ? colocacao.primeiro.nome: "",
+      usuario?.torneio[torneioReducer].id || ''
       )
      alert(res)
      window.location.reload()
