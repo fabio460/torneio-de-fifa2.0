@@ -54,9 +54,6 @@ export default function CradPremiacoes() {
     let idsPagadores:string[] = participantes.map((e:any)=>{
        return e.participante.id
       })
-    
-    console.log()
-    console.log(participantes)
   }
   const btnPagamentosStyle ={
     marginRight:"10px",

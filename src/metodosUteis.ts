@@ -157,8 +157,6 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
         return e
       }
     })
-   
-    console.log([...removerDuplicataArrayDeObjetos(titulares), ...reservas])
     return [...removerDuplicataArrayDeObjetos(titulares), ...reservas]
   }
 
