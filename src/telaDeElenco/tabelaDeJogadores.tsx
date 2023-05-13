@@ -15,6 +15,7 @@ import ModalTransferencia from './modalTransferencia';
 import ModalDespensarJogador from './modalDespensarJogador';
 import { listarParticipantesApi } from '../api/participantesApi';
 import { getTorneioPorIdApi } from '../api/torneioApi';
+import { traduzirPosicao } from '../telaCompraDeJogadores/Jogadores/metodosUteis';
 
 
 export default function TabelaDeJogadores({jogadores, elenco}:{
@@ -88,9 +89,9 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                 <TableCell> </TableCell>
                 <TableCell>Nome</TableCell>
                 <TableCell >Overall</TableCell>
-                <TableCell >time</TableCell>
                 <TableCell >Valor</TableCell>
-                <TableCell >Nacionalidade</TableCell>
+                <TableCell >Posição</TableCell>
+                <TableCell >Time</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
@@ -114,9 +115,9 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                         {jog.nome}
                     </TableCell>
                     <TableCell >{jog.overall}</TableCell>
-                    <TableCell >{jog.time}</TableCell>
                     <TableCell >{formatoMonetario(parseFloat(jog?.valorDoJogador || ''))}</TableCell>
-                    <TableCell >{jog.nacionalidade}</TableCell>
+                    <TableCell >{traduzirPosicao(jog.posicao)}</TableCell>
+                    <TableCell >{jog.time}</TableCell>
                 </TableRow>
             ))}
             </TableBody>

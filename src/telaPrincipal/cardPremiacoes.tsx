@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { selecionadosType } from '../types';
 import { pagarPremiacoesApi } from '../api/pagamentosApi';
 import { adicionarEstatisticaApi } from '../api/estatisticasApi';
+import CarregandoBtn from '../carregandoBtn';
 
 
 
@@ -18,8 +19,11 @@ export default function CradPremiacoes() {
   const artilheiros:selecionadosType = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
   const assistentes:selecionadosType = useSelector((state:any)=>state.assisteciaReducer.assistentes)
   const dadosDoJogo:selecionadosType = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
+  const [carregandoPremio, setCarregandoPremio] = useState(false)
+  const [carregandoFolha, setCarregandoFolha] = useState(false)
 
   const pagarPremiacao =async ()=>{
+    setCarregandoPremio(true)
      let premiados:any = []
      artilheiros.primeiro && premiados.push(artilheiros.primeiro)
      artilheiros.segundo && premiados.push(artilheiros.segundo)
@@ -41,15 +45,25 @@ export default function CradPremiacoes() {
       colocacao.primeiro ? colocacao.primeiro.nome: ""
       )
      alert(res)
-     console.log({
-       art:artilheiros.primeiro,
-       ass:assistentes.primeiro,
-       col:colocacao.primeiro
-     })
-     alert(resSta.toString())
      window.location.reload()
   }
-  
+
+  const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
+  const pagarFolha = async()=>{
+    setCarregandoFolha(true)
+    let idsPagadores:string[] = participantes.map((e:any)=>{
+       return e.participante.id
+      })
+    
+    console.log()
+    console.log(participantes)
+  }
+  const btnPagamentosStyle ={
+    marginRight:"10px",
+    "@media (max-width:800px)":{
+      marginRight:"0px",
+    }
+  }
   return (
     <Card sx={{ minWidth: 275 }} >
       <CardContent  className='cardPremiacoesContainer'>
@@ -91,7 +105,19 @@ export default function CradPremiacoes() {
          </div> 
       </CardContent>
       <CardActions>
-        <Button size="small" variant='outlined' onClick={pagarPremiacao}>Pagar premiação</Button>
+        <div className='btnPagamentos'>
+           {
+             carregandoPremio ? 
+             <Button sx={btnPagamentosStyle} color='success' size="small" variant='contained' ><CarregandoBtn /></Button>:
+             <Button sx={btnPagamentosStyle} color='success' size="small" variant='contained' onClick={pagarPremiacao}>Pagar premiação</Button>
+           }
+           {
+             carregandoFolha ?
+             <Button color='secondary' size="small" variant='contained' ><CarregandoBtn/></Button>:
+             <Button color='secondary' size="small" variant='contained' onClick={pagarFolha}>Pagar folha</Button>    
+           }
+          
+        </div>
       </CardActions>
     </Card>
   );

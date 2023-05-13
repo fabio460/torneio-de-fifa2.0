@@ -14,7 +14,7 @@ import Reservas from './escalacoes/quatroUmDoisTres/reservas';
 import { participantesType } from '../types';
 import TabelaDeJogadores from './tabelaDeJogadores';
 import { listarParticipantesApi } from '../api/participantesApi';
-import { formatoMonetario } from '../metodosUteis';
+import { formatoMonetario, refinaPosicao } from '../metodosUteis';
 import { Button } from '@mui/material';
 import { deletarTodasPosicoesApi } from '../api/posicoes';
 
@@ -82,6 +82,7 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
       margin:"10px auto"
     }
   }
+  let jogadores = refinaPosicao(elenco?.jogadores)
   return (
     <Box sx={{ bgcolor: 'white', width: "100%"}}>
       <div>
@@ -121,10 +122,10 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
         <div className='btnAjustPos'>
           <Button  sx={btnAjustPos} variant='contained' onClick={ajustarPosicao}>Ajustar posições</Button>
         </div>
-        <QuatroUmDoisTres handlePosition={handlePosition} jogadores={elenco?.jogadores}/>
+        <QuatroUmDoisTres handlePosition={handlePosition} jogadores={jogadores}/>
         <div className='reservarContainer'>
           <h3>Reservas</h3>
-          <Reservas handlePosition={handlePosition} jogadores={elenco?.jogadores}/>
+          <Reservas handlePosition={handlePosition} jogadores={jogadores}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>

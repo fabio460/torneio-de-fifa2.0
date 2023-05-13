@@ -77,3 +77,97 @@ export function calculaFolha(arrayDeJogadore:jogadoresType[]) {
        })     
       return arrAux
    }
+   
+export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
+    jogadores = jogadores?.sort((a:jogadoresType,b:jogadoresType)=>{
+      return a.overall < b.overall ? 1 : a.overall > b.overall ? -1 : 0
+    })
+
+    const ATA = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'ST' || e.posicao.split(',')[0] === 'CF') {
+        return e
+      }
+    })
+    const PE = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'LW' || e.posicao.split(',')[0] === 'LM') {
+        return e
+      }
+    })    
+    const PD = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'RW' || e.posicao.split(',')[0] === 'RM') {
+        return e
+      }
+    })
+    const MEI = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'CM' || e.posicao.split(',')[0] === 'CAM') {
+        return e
+      }
+    })
+    const MEI2 = jogadores?.reverse()?.find(e=>{
+      if (e.posicao.split(',')[0] === 'CM' || e.posicao.split(',')[0] === 'CAM') {
+        return e
+      }
+    })
+    const VOL = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'CDM') {
+        return e
+      }
+    })
+    const LE = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'LB') {
+        return e
+      }
+    })
+    const LD = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'RB') {
+        return e
+      }
+    })
+  
+    const ZAG = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'CB') {
+        return e
+      }
+    })
+    const ZAG2 = jogadores?.reverse()?.find(e=>{
+      if (e.posicao.split(',')[0] === 'CB') {
+        return e
+      }
+    })
+    const GOL = jogadores?.find(e=>{
+      if (e.posicao.split(',')[0] === 'GK') {
+        return e
+      }
+    })
+    
+    let titulares:any = []
+    titulares.push(ATA)
+    titulares.push(PE)
+    titulares.push(PD)  
+    titulares.push(MEI)
+    titulares.push(MEI2)
+    titulares.push(VOL)
+    titulares.push(LE)
+    titulares.push(LD)
+    titulares.push(ZAG)
+    titulares.push(ZAG2)
+    titulares.push(GOL)
+    let reservas:any = jogadores?.filter(e=>{
+      if (!titulares?.includes(e)) {
+        return e
+      }
+    })
+   
+    console.log([...removerDuplicataArrayDeObjetos(titulares), ...reservas])
+    return [...removerDuplicataArrayDeObjetos(titulares), ...reservas]
+  }
+
+
+  export function removerDuplicataArrayDeObjetos(arrayDeObjetos:any){
+    const parsed_array = arrayDeObjetos?.map((val:any)=>{
+      return JSON?.stringify(val)
+    })
+    return parsed_array?.filter((value:any, ind:any)=> 
+     parsed_array.indexOf(value) == ind)
+    .map((val:any)=>{ return val && JSON?.parse(val)})
+  }
