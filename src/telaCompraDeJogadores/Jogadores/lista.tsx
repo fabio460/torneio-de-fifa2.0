@@ -24,6 +24,7 @@ export default function Lista({intervalo}:intervaloType) {
     useEffect(()=>{
       setPosicao(traduzirParaInglesArrayDePosicoes(posicoesReducer))
     },[posicoesReducer])
+    
     return (
     <div className='jogadores'>
     {

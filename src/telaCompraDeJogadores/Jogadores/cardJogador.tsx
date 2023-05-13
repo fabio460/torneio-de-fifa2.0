@@ -9,9 +9,7 @@ type JogadorType = {
   jogador:jogadoresType
 }
 export default function CardJogador({jogador}:JogadorType) {
-  const getItens = ()=>{
-    console.log(jogador)
-  }
+
   return (
      <div className='jogadorCard'>
         <div className='jogadorCardEsquerdo'>

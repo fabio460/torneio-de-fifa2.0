@@ -22,7 +22,7 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
   };
   const comprar = async()=>{
       setCarregando(true)
-      const res =await comprarJogadoresApi(idElenco, jogadores)
+      const res =await comprarJogadoresApi(idElenco, jogador)
       alert(res)
       if (res === "jogador comprado com sucesso") {   
         window.location.reload()
@@ -30,10 +30,6 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
       setCarregando(false)
     }
 
-    useEffect(()=>{
-      setJogadores(jogador)
-   
-    },[handleClickOpen])
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
