@@ -46,9 +46,8 @@ export default function Jogadores() {
       type:'busca',
       payload:{lista:listaFiltrada}
     })
-    while (listaFiltrada.length === 0) {
+    if (listaFiltrada.length === 0) {
       setVerify(!Verify)
-      break;
     }
   },[Verify])
   
