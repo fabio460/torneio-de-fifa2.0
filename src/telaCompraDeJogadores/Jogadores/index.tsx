@@ -40,8 +40,12 @@ export default function Jogadores() {
      setListaFiltrada(listaFiltrada)
    }
   }
-  getJogadoresDoTorneio()
   useEffect(()=>{
+    getJogadoresDoTorneio()
+  },[])
+
+  useEffect(()=>{
+    
     dispatch({
       type:'busca',
       payload:{lista:listaFiltrada}
