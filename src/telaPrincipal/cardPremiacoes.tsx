@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import { selecionadosType, usuarioLogadoType } from '../types';
-import { pagarPremiacoesApi } from '../api/pagamentosApi';
+import { pagarFolhasApi, pagarPremiacoesApi } from '../api/pagamentosApi';
 import { adicionarEstatisticaApi } from '../api/estatisticasApi';
 import CarregandoBtn from '../carregandoBtn';
 import { torneioType } from '../types';
@@ -44,22 +44,36 @@ export default function CradPremiacoes({torneio,usuario}:{
      colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
 
      const res =await pagarPremiacoesApi(premiados)
-     const resSta = await adicionarEstatisticaApi(
-      artilheiros.primeiro ? artilheiros.primeiro.nome: "",
-      assistentes.primeiro ? assistentes.primeiro.nome: "",
-      colocacao.primeiro ? colocacao.primeiro.nome: "",
-      usuario?.torneio[torneioReducer].id || ''
-      )
-     alert(res)
-     window.location.reload()
+     if (artilheiros.primeiro || assistentes.primeiro || colocacao.primeiro) {     
+       const resSta = await adicionarEstatisticaApi(
+        artilheiros.primeiro ? artilheiros.primeiro.nome: "",
+        assistentes.primeiro ? assistentes.primeiro.nome: "",
+        colocacao.primeiro ? colocacao.primeiro.nome: "",
+        usuario?.torneio[torneioReducer].id || ''
+        )
+       alert(res)
+       window.location.reload()
+     }else{
+      alert("Não há participantes selecionados!")
+      setCarregandoPremio(false)
+     }
   }
 
   const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
   const pagarFolha = async()=>{
     setCarregandoFolha(true)
-    let idsPagadores:string[] = participantes.map((e:any)=>{
-       return e.participante.id
-      })
+    let pagadores:any = []
+    participantes.map((e:any)=>{
+       pagadores.push({
+        idParticipante:e.participante.id
+       })
+       return pagadores[0]
+    })
+    const res = await pagarFolhasApi(pagadores)
+    alert(res.toString())
+    setCarregandoFolha(false)
+    window.location.reload()
+
   }
   const btnPagamentosStyle ={
     marginRight:"10px",

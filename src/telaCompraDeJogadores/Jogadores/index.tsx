@@ -45,7 +45,6 @@ export default function Jogadores() {
   },[])
 
   useEffect(()=>{
-    
     dispatch({
       type:'busca',
       payload:{lista:listaFiltrada}

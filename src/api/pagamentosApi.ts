@@ -14,14 +14,14 @@ export const pagarPremiacoesApi = async(premiados:premiadosType)=>{
     return f
 }
 
-export const pagarFolhasApi = async(pagadores:pagadoresType,id:string)=>{
-    const f = await fetch(linkLocal+"pagamentos/pagarFolha/"+id,{
+export const pagarFolhasApi = async(pagadores:pagadoresType)=>{
+    const f = await fetch(linkLocal+"pagamentos/pagarFolha/",{
         headers:{
             "Content-Type":"application/json",
         },
         method:"put",
         body:JSON.stringify({
-            pagadores,id  
+            pagadores  
         })
     })
     .then(res=>res.json())
