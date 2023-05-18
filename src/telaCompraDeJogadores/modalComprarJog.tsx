@@ -32,7 +32,7 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{marginBottom:0.5}}>
         Comprar
       </Button>
       <Dialog

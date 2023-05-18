@@ -36,8 +36,11 @@ export default function CardJogador({jogador}:JogadorType) {
               {formatoMonetario(jogador.valorDoJogador)}
             </div>
           </div>
-          <div className='jogadorCardBtnComprar'>
-            <ModalComprarJogador jogador={jogador}/>
+          <div className='jogadorCardBtn'>
+            <div>
+              <ModalComprarJogador jogador={jogador}/>
+              <a style={{marginTop:"5px"}} href={jogador.linkSoFifa}>Jogador no fifa</a>
+            </div>
           </div>
         </div>
  

@@ -102,3 +102,7 @@ export type statisticasTypes = {
   melhorAssistente:string,
   vencedor:string
 }
+export type timesType = {
+  time:string,
+  escudo:string
+}

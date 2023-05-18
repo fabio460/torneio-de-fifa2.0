@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { usuarioLogadoType } from '../types';
+import { timesType, usuarioLogadoType } from '../types';
 import { useSelector } from 'react-redux';
 import { adicionarParticipantesoApi } from '../api/participantesApi';
 import TextField from '@mui/material/TextField';
@@ -12,12 +12,19 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { getTimes } from '../metodosUteis';
+import Autocomplete from '@mui/material/Autocomplete';
 export default function ModalAdicionarParticipantes() {
   const [open, setOpen] = React.useState(false);
   const [nomeDoParticipante, setNomeDoParticipante] = useState('')
   const [age, setAge] = React.useState('');
+  const [time, setTime] = React.useState('');
+  // const [value, setValue] = useState<SetStateAction<undefined>>()
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
+  };
+  const handleChangeTime = (event: SelectChangeEvent) => {
+    setTime(event.target.value);
   };
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
   const torneio = useSelector((state:any)=>state.torneioReducer.torneio)
@@ -39,6 +46,8 @@ export default function ModalAdicionarParticipantes() {
     window.location.reload()
   }
   
+  var arrayTimes:timesType[] = getTimes()
+ 
   return (
     <div>
       <Button size='small'  sx={{height:'41px', width:'100%'}} variant="contained" onClick={handleClickOpen}>
@@ -70,6 +79,18 @@ export default function ModalAdicionarParticipantes() {
               }
           </Select>
           </FormControl>
+
+          {/* <Autocomplete
+            value={value}
+            onChange={(event, newValue) => {
+            setValue(newValue);
+            }}
+            id="combo-box-demo"
+            options={arrayTimes}
+            sx={{ width: "100%"}}
+            renderInput={(params) => <TextField {...params} label="Selecione o clube" size='small'/>}
+          /> */}
+
           <TextField id="outlined-basic" label="nome" variant="outlined" size='small' sx={{margin:"2% 0",  width:'100%'}}
               onChange={e => setNomeDoParticipante(e.target.value)}
             />

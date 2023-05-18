@@ -1,5 +1,6 @@
 import { getUsuarioPorIdApi } from "./api/usuarioApi"
-import { jogadoresType, usuarioLogadoType } from "./types"
+import { listaDeJogadores } from "./listaDeJogadoresCompleta"
+import { jogadoresType, timesType, usuarioLogadoType } from "./types"
 
 export const idDoUsuarioLogado = localStorage.getItem('idDoUsuarioLogado') || ''
 
@@ -168,4 +169,12 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
     return parsed_array?.filter((value:any, ind:any)=> 
      parsed_array.indexOf(value) == ind)
     .map((val:any)=>{ return val && JSON?.parse(val)})
+  }
+
+  export const getTimes = ()=>{
+    let arrayTimes = listaDeJogadores.map((j:jogadoresType, key:number)=>{
+       return {time:j.time, escudo:j.escudoDoTime}
+    })
+    const arrayResult:timesType[] = removerDuplicataArrayDeObjetos(arrayTimes)
+    return arrayResult
   }

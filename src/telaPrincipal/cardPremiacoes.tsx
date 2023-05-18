@@ -61,19 +61,29 @@ export default function CradPremiacoes({torneio,usuario}:{
 
   const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
   const pagarFolha = async()=>{
-    setCarregandoFolha(true)
-    let pagadores:any = []
-    participantes.map((e:any)=>{
-       pagadores.push({
-        idParticipante:e.participante.id
-       })
-       return pagadores[0]
-    })
-    const res = await pagarFolhasApi(pagadores)
-    alert(res.toString())
-    setCarregandoFolha(false)
-    window.location.reload()
-
+    if (participantes.length === 0) {
+      alert('Não há participantes selecionados!')
+    }else{
+      setCarregandoFolha(true)
+      let pagadores:any = []
+      participantes.map((e:any)=>{
+         pagadores.push({
+          idParticipante:e.participante.id
+         })
+         return pagadores[0]
+      })
+      const res = await pagarFolhasApi(pagadores)
+      if (res === "pagamento efetuada com sucesso!") {        
+        setTimeout(() => {      
+          alert(res.toString())
+          setCarregandoFolha(false)
+          window.location.reload()
+        }, 5000);
+      }else{
+        alert("falha ao efetuar pagamento!")
+         window.location.reload()
+      }
+    }
   }
   const btnPagamentosStyle ={
     marginRight:"10px",

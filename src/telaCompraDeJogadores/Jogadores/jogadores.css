@@ -27,7 +27,7 @@
     height: 30px;
     border-radius: 15px;
 }
-.jogadorCardBtnComprar{
+.jogadorCardBtn{
     display: flex;
     justify-content: flex-end;
 }
@@ -75,5 +75,6 @@
 @media (max-width:900px) {
     .jogadores{
         grid-template-columns: 1fr;
+        margin-top: 170px;
     }
 }
