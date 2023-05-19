@@ -50,8 +50,8 @@ export default function TelaPrincipal() {
   //   type:"jogadoresDoTorneioSelecionado",
   //   payload:{jogadores:listaDosJogadoresDoTorneioSelecionado(usuario?.torneio[torneio].participantes)}
   // })
+  localStorage.setItem("idDoTorneio",usuario?.torneio[torneio].id || '')
   useEffect(()=>{
-    localStorage.setItem("idDoTorneio",usuario?.torneio[torneio].id || '')
     
     getEstatistica()
   },[torneio])
