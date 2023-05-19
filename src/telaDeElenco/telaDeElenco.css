@@ -125,13 +125,26 @@
 .TabsMobile{
     display: none;
 }
-
+.campinhoBody{
+    display: flex;
+}
+.reservarContainer{
+    padding:0px 30px;
+}
 @media (max-width:1500px) {
     .containerDeEscalacao{
         width: 45%;
     }
 }
 @media (max-width:1100px) {
+    .reservarContainer{
+        padding:20px;
+    }
+    .TelaDeElencoEmblemaDoTime{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
     .TabsDesctop{
         display: none;
     }

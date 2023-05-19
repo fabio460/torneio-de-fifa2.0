@@ -14,7 +14,7 @@ import Reservas from './escalacoes/quatroUmDoisTres/reservas';
 import { participantesType } from '../types';
 import TabelaDeJogadores from './tabelaDeJogadores';
 import { listarParticipantesApi } from '../api/participantesApi';
-import { formatoMonetario, refinaPosicao } from '../metodosUteis';
+import { calculaFolha, formatoMonetario, refinaPosicao } from '../metodosUteis';
 import { Button } from '@mui/material';
 import { deletarTodasPosicoesApi } from '../api/posicoes';
 
@@ -119,17 +119,26 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
         <TabelaDeJogadores jogadores={elenco?.jogadores} elenco={elenco}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
+       {elenco?.emblemaDoTime && <div className='TelaDeElencoEmblemaDoTime'>
+          <div>
+            <img src={elenco?.emblemaDoTime} alt="sem imagem" />
+            <h5>{elenco?.time}</h5>
+          </div>
+        </div>}
         <div className='btnAjustPos'>
           <Button  sx={btnAjustPos} variant='contained' onClick={ajustarPosicao}>Ajustar posições</Button>
         </div>
-        <QuatroUmDoisTres handlePosition={handlePosition} jogadores={jogadores}/>
-        <div className='reservarContainer'>
-          <h3>Reservas</h3>
-          <Reservas handlePosition={handlePosition} jogadores={jogadores}/>
+        <div className='campinhoBody'>
+          <QuatroUmDoisTres handlePosition={handlePosition} jogadores={jogadores}/>
+          <div className='reservarContainer'>
+            <h3>Reservas</h3>
+            <Reservas handlePosition={handlePosition} jogadores={jogadores}/>
+          </div>
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div className='dadosDoUsuario'>
+          <img src={elenco?.emblemaDoTime} alt="" />
           <div>
             Usuário {elenco?.nome}
           </div>
@@ -137,10 +146,13 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
             Saldo {formatoMonetario(elenco?.saldo)}
           </div>
           <div>
-            Time{elenco?.time}
+            Time {elenco?.time}
           </div>
           <div>
             {elenco?.jogadores.length} jogadores
+          </div>
+          <div>
+           Folha {calculaFolha(elenco?.jogadores || [])}
           </div>
         </div>
       </TabPanel>

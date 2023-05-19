@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { loginApi } from '../api/usuarioApi';
+import CarregandoBtn from '../carregandoBtn';
 
 function Copyright(props: any) {
   return (
@@ -32,16 +33,26 @@ const theme = createTheme();
 
 export default function Login() {
   const [dadosDoUsuario, setDadosDoUsuario] = React.useState<any>()
+  const [carregando, setCarregando] = React.useState(false)
+  const [error, setError] = React.useState(false)
   const navigate = useNavigate()
+
   const handleSubmit =async (event: React.FormEvent<HTMLFormElement>) => {
+    setCarregando(true)
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     let email = data.get('email')?.toString() || ''
     let senha = data.get('password')?.toString() || ''
     const dados = await loginApi(email,senha)
+    if (dados === "usuário ou senha inválidos") {
+     alert(dados.toString())
+     setCarregando(false)
+     return setError(true)
+    }
     localStorage.setItem('jwt',dados?.token)
     localStorage.setItem('usuarioLogado',JSON.stringify(dados.auth))
     localStorage.setItem('idDoUsuarioLogado',dados.auth?.id)
+    setCarregando(false)
     navigate('/')  
     window.location.reload()
   };  
@@ -91,6 +102,7 @@ export default function Login() {
                     name="email"
                     autoComplete="email"
                     autoFocus
+                    error={error}
                 />
                 <TextField
                     margin="normal"
@@ -101,19 +113,33 @@ export default function Login() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    error={error}
                 />
                 <FormControlLabel
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
                 />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                >
-                   Entrar
-                </Button>
+
+                {
+                  carregando ? 
+                    <div>
+                      <Button
+                         fullWidth
+                         variant="contained"
+                         sx={{ mt: 3, mb: 2 }}
+                      >
+                        <CarregandoBtn/>
+                      </Button>
+                    </div>:
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                      Entrar
+                    </Button>
+                }
                 <Grid container>
                     <Grid item xs>
                     <Link href="/" variant="body2">

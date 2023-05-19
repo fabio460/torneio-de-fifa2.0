@@ -7,6 +7,7 @@ import ModalArtilharia from './modalArtilharia';
 import ModalAssistencia from './modalAssistencia';
 import ModalDadosDoJogo from './modalDadosDoJogo';
 import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
+import ModalDeletarPerfil from './modalDeletarPerfil';
 
 const deslogar = ()=>{
   localStorage.removeItem('jwt')
@@ -18,7 +19,7 @@ const pages = [
   <div><ModalAssistencia/></div>,
   <div><ModalDadosDoJogo/></div>, 
 ];
-const settings = ['Profile', 'Account', 'Dashboard', <div onClick={deslogar}>Deslogar</div>];
+const settings = ['Profile', 'Account', <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
