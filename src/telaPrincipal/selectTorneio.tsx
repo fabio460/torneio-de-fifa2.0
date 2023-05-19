@@ -18,7 +18,7 @@ export default function SelectTorneio() {
     if (localStorage.getItem('selectTorneio')) {
       setAge(localStorage.getItem('selectTorneio')?.toString() || "0")
     }
-  })
+  },[])
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
   dispatch({
     type:"torneio",

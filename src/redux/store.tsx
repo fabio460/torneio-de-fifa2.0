@@ -11,8 +11,10 @@ import artilhariaReducer from './artilhariaReducer'
 import assisteciaReducer from './assisteciaReducer'
 import golsEmpVitoriasReducer from './golsEmpVitoriasReducer'
 import posicaoSelectJogadorReducer from './posicaoSelectJogadorReducer'
+import jogadoresDoTorneioSelecionadoReducer from './jogadoresDoTorneioSelecionadoReducer'
 export const store = configureStore({
   reducer: {
+    jogadoresDoTorneioSelecionadoReducer,
     posicaoSelectJogadorReducer,
     artilhariaReducer,
     assisteciaReducer,

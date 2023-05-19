@@ -5,7 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { timesType, usuarioLogadoType } from '../types';
+import { jogadoresType, timesType, usuarioLogadoType } from '../types';
 import { useSelector } from 'react-redux';
 import { adicionarParticipantesoApi } from '../api/participantesApi';
 import TextField from '@mui/material/TextField';
@@ -15,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { getEmblemaDoTime, getJogadoresPorTime, getTimeName, getTimes } from '../metodosUteis';
 import Autocomplete from '@mui/material/Autocomplete';
+import { listaJogadoresPorTorneioApi } from '../api/jogadoresApi';
 export default function ModalAdicionarParticipantes() {
   const [open, setOpen] = React.useState(false);
   const [nomeDoParticipante, setNomeDoParticipante] = useState('')
@@ -31,7 +32,15 @@ export default function ModalAdicionarParticipantes() {
     setValue(newValue);
   }
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
-  const torneio = useSelector((state:any)=>state.torneioReducer.torneio)
+  
+  const [jogadoresDoTorneioSelecionado, setJogadoresDoTorneioSelecionado] = useState<any>([])
+  async function torneioSelecionado() {
+    const res = await listaJogadoresPorTorneioApi(localStorage.getItem('idDoTorneio') || "")
+    res.map((r:jogadoresType)=>{
+      return jogadoresDoTorneioSelecionado.push(r?.nome);
+    })
+  }
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -40,10 +49,19 @@ export default function ModalAdicionarParticipantes() {
     setOpen(false);
   };
 
+  useEffect(()=>{
+    
+    torneioSelecionado()
+  },[open])
   const adicionarParticipantes = async()=>{
+    const jogadores = getJogadoresPorTime(value.label)
+    const jogadoresdTime = jogadores.filter(j=>{
+      if (!jogadoresDoTorneioSelecionado.includes(j.nome)) {
+        return j
+      }
+    })
     const nomeDoTime = value.label;
     const emblemaDoTime = getEmblemaDoTime(value.label);
-    const jogadoresdTime = getJogadoresPorTime(value.label)
     if (nomeDoParticipante.trim() === "" || age.trim() === "") {
       alert("Não pode haver campos nulos")
       return null

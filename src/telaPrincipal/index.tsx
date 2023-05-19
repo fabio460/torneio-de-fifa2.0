@@ -7,7 +7,7 @@ import CradPremiacoes from './cardPremiacoes'
 import CardEstatisticas from './cardEstatisticas'
 import CardElenco from './cardElenco'
 import ResponsiveAppBar from '../appBar'
-import { idDoUsuarioLogado } from '../metodosUteis'
+import { idDoUsuarioLogado, listaDosJogadoresDoTorneioSelecionado } from '../metodosUteis'
 import { usuarioLogadoType } from '../types'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
@@ -45,7 +45,14 @@ export default function TelaPrincipal() {
     setEstatisticas(est)
     
   }
+
+  // dispatch({
+  //   type:"jogadoresDoTorneioSelecionado",
+  //   payload:{jogadores:listaDosJogadoresDoTorneioSelecionado(usuario?.torneio[torneio].participantes)}
+  // })
   useEffect(()=>{
+    localStorage.setItem("idDoTorneio",usuario?.torneio[torneio].id || '')
+    
     getEstatistica()
   },[torneio])
   return (

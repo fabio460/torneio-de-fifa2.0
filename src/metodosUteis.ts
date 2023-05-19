@@ -1,6 +1,6 @@
 import { getUsuarioPorIdApi } from "./api/usuarioApi"
 import { listaDeJogadores } from "./listaDeJogadoresCompleta"
-import { jogadoresType, timesType, usuarioLogadoType } from "./types"
+import { jogadoresType, participantesType, timesType, usuarioLogadoType } from "./types"
 
 export const idDoUsuarioLogado = localStorage.getItem('idDoUsuarioLogado') || ''
 
@@ -219,4 +219,13 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
     }else{
       return ""
     }
+  }
+  export function listaDosJogadoresDoTorneioSelecionado(participantes:participantesType[] | undefined) {
+    let jogadores:jogadoresType[] = []
+    participantes?.map((p, key)=>{
+       p.jogadores.map(j=>{
+        jogadores.push(j)
+       })
+    })
+    return jogadores
   }

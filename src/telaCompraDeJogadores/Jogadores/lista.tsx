@@ -5,6 +5,7 @@ import { jogadoresType } from '../../types';
 import Carregando from './carregando';
 import { traduzirParaInglesArrayDePosicoes } from '../../metodosUteis';
 
+
 type intervaloType = {
     intervalo:{
         inicial: number;
@@ -23,8 +24,10 @@ export default function Lista({intervalo}:intervaloType) {
     const posicoesReducer = useSelector((state:any)=>state.posicaoSelectJogadorReducer.posicao)
     useEffect(()=>{
       setPosicao(traduzirParaInglesArrayDePosicoes(posicoesReducer))
+
     },[posicoesReducer])
     
+   
     return (
     <div className='jogadores'>
     {

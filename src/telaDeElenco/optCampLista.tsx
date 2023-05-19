@@ -120,8 +120,8 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
       </TabPanel>
       <TabPanel value={value} index={1}>
        {elenco?.emblemaDoTime && <div className='TelaDeElencoEmblemaDoTime'>
-          <div>
-            <img src={elenco?.emblemaDoTime} alt="sem imagem" />
+          <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+            <img src={elenco?.emblemaDoTime} alt="sem imagem" style={{width:"70px"}}/>
             <h5>{elenco?.time}</h5>
           </div>
         </div>}

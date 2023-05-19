@@ -51,7 +51,6 @@ export default function CardParticipantes({participantes, torneio}:
     type:'participantes',
     payload:{participantes:listaDeParticipantes}
   })
-  //var arrayTimes:timesType[] = getTimes()
   return (
     <Card sx={{ minWidth: 275, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
       <CardContent sx={{padding:'3%'}}>
