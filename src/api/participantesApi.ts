@@ -1,3 +1,4 @@
+import { jogadoresType } from "../types"
 import { linkLocal } from "./link"
 
 export const listarParticipantesApi = async()=>{
@@ -21,14 +22,26 @@ export const getParticipantesPorIdApi = async(id:string)=>{
     return f
 }
 
-export const adicionarParticipantesoApi = async(nome:string, idTorneio:string)=>{
+export const adicionarParticipantesoApi = async(
+        nome:string,
+        idTorneio:string,
+        saldo = 100000,
+        time:string,
+        emblemaDoTime:string | undefined,
+        listaDeJogadores:jogadoresType[] | undefined = []
+    )=>{
     const f = await fetch(linkLocal+"participantes",{
         headers:{
             "Content-Type":"application/json",
         },
         method:"post",
         body:JSON.stringify({
-            nome,idTorneio
+            nome,
+            idTorneio,
+            saldo,
+            time,
+            emblemaDoTime,
+            listaDeJogadores
         })
     })
     .then(res=>res.json())

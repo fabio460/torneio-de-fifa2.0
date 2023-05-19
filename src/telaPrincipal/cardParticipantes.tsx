@@ -4,13 +4,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Checkbox } from '@mui/material';
-import { chekedType, participantesType, torneioType } from '../types';
+import { chekedType, participantesType, timesType, torneioType } from '../types';
 import ModalCriarTorneio from './modalCriarTorneio';
 import ModalAdicionarParticipantes from './modalAdicionarParticipantes';
 import SelectTorneio from './selectTorneio';
 import { useDispatch } from 'react-redux';
 import ModalDeletarTorneio from './modalDeletarTorneio';
 import ModalAtualizarTorneio from './modalAtualizarTorneio';
+import { getTimes } from '../metodosUteis';
 
 
 
@@ -50,6 +51,7 @@ export default function CardParticipantes({participantes, torneio}:
     type:'participantes',
     payload:{participantes:listaDeParticipantes}
   })
+  //var arrayTimes:timesType[] = getTimes()
   return (
     <Card sx={{ minWidth: 275, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
       <CardContent sx={{padding:'3%'}}>

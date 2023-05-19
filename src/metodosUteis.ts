@@ -163,6 +163,7 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
 
 
   export function removerDuplicataArrayDeObjetos(arrayDeObjetos:any){
+    let arrayDeObjetos2 = arrayDeObjetos.filter((value:any, index:any, array:any) => array.indexOf(value) === index);
     const parsed_array = arrayDeObjetos?.map((val:any)=>{
       return JSON?.stringify(val)
     })
@@ -170,11 +171,52 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
      parsed_array.indexOf(value) == ind)
     .map((val:any)=>{ return val && JSON?.parse(val)})
   }
-
   export const getTimes = ()=>{
     let arrayTimes = listaDeJogadores.map((j:jogadoresType, key:number)=>{
-       return {time:j.time, escudo:j.escudoDoTime}
+      if(key < listaDeJogadores.length){
+        return j.time+"-"+j.escudoDoTime
+      }
     })
-    const arrayResult:timesType[] = removerDuplicataArrayDeObjetos(arrayTimes)
-    return arrayResult
+    const timesName = [... new Set(arrayTimes)]
+
+    return timesName.map((t, key)=>{
+        return {
+          label: t?.split("-")[0],
+          escudo: t?.split("-")[1],
+          key
+        }
+    })
+  }
+  export function getTimeName() {
+    let arrayTimes:any = listaDeJogadores.map((j:jogadoresType, key:number)=>{
+      if(key < listaDeJogadores.length){
+        return {label:j.time}
+      }
+    })
+    const timesName = removerDuplicataArrayDeObjetos(arrayTimes)
+    return timesName
+  }
+  export function getJogadoresPorTime(time:string) {
+    if(time){
+      let jogadores = listaDeJogadores.filter((j:jogadoresType, key)=>{
+         if (j.time === time) {
+            return j
+         }
+      })
+      return jogadores;
+    }else{
+      return []
+    }
+  }
+  export function getEmblemaDoTime(time:string) {
+    if(time){
+      let emblema = listaDeJogadores.find((j:jogadoresType, key)=>{
+         if (j.time === time) {
+            return j
+         }
+      })
+      return emblema?.escudoDoTime;
+    }else{
+      return ""
+    }
   }

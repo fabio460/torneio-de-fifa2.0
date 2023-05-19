@@ -9,6 +9,7 @@ import { participantesType } from '../types';
 import { calculaFolha, formatoMonetario } from '../metodosUteis';
 import ModalDeletarParticipantes from './modalDeletarParticipantes';
 import { useNavigate } from 'react-router-dom';
+import { Avatar } from '@mui/material';
 
 export default function CardElenco({elenco}:{elenco:participantesType}) {
 
@@ -22,12 +23,14 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
     localStorage.setItem('idDoElenco',elenco.id)
     navigate('/elenco')
   }
-  
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant="h5" component="div" sx={{display:'flex', justifyContent:'space-between'}}>
-          {elenco.nome}
+          <div style={{display:"flex", alignItems:"center"}}>
+            {elenco?.emblemaDoTime && <Avatar src={elenco?.emblemaDoTime} sx={{marginRight:1}}/> }
+            {elenco.nome}
+          </div>
           <ModalDeletarParticipantes elenco={elenco}/>
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

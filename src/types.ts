@@ -22,7 +22,8 @@ export type participantesType = {
    saldo: number,
    time: string,
    idTorneio: string,
-   torneio: torneioType
+   torneio: torneioType,
+   emblemaDoTime?: string
 }
 
 export interface torneioType {
@@ -103,6 +104,6 @@ export type statisticasTypes = {
   vencedor:string
 }
 export type timesType = {
-  time:string,
+  label:string,
   escudo:string
 }

@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+
+import React,{useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -12,20 +13,23 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { getTimes } from '../metodosUteis';
+import { getEmblemaDoTime, getJogadoresPorTime, getTimeName, getTimes } from '../metodosUteis';
 import Autocomplete from '@mui/material/Autocomplete';
 export default function ModalAdicionarParticipantes() {
   const [open, setOpen] = React.useState(false);
   const [nomeDoParticipante, setNomeDoParticipante] = useState('')
   const [age, setAge] = React.useState('');
   const [time, setTime] = React.useState('');
-  // const [value, setValue] = useState<SetStateAction<undefined>>()
+  const [listaDeTimes, setListaDeTimes] = useState<any>([])
+  const [value, setValue] = useState<any>()
+  const [saldo, setSaldo] = useState(0)
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
   };
-  const handleChangeTime = (event: SelectChangeEvent) => {
-    setTime(event.target.value);
-  };
+  const handleChangeTime = (event:any, newValue:any) => {
+    console.log(10)
+    setValue(newValue);
+  }
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
   const torneio = useSelector((state:any)=>state.torneioReducer.torneio)
   const handleClickOpen = () => {
@@ -37,17 +41,30 @@ export default function ModalAdicionarParticipantes() {
   };
 
   const adicionarParticipantes = async()=>{
+    const nomeDoTime = value.label;
+    const emblemaDoTime = getEmblemaDoTime(value.label);
+    const jogadoresdTime = getJogadoresPorTime(value.label)
     if (nomeDoParticipante.trim() === "" || age.trim() === "") {
       alert("Não pode haver campos nulos")
       return null
     }
-    const res = await adicionarParticipantesoApi(nomeDoParticipante,age)
-    alert(res)
-    window.location.reload()
+    const res = await adicionarParticipantesoApi(
+      nomeDoParticipante,
+      age,
+      saldo,
+      nomeDoTime,
+      emblemaDoTime,
+      jogadoresdTime
+    )
+    alert(res.toString())
+    window.location.reload();
   }
   
-  var arrayTimes:timesType[] = getTimes()
- 
+  let lis = [{label:"Resende",escudo:"ff"}]
+  useEffect(()=>{
+    setListaDeTimes(getTimeName())
+  },[])
+  
   return (
     <div>
       <Button size='small'  sx={{height:'41px', width:'100%'}} variant="contained" onClick={handleClickOpen}>
@@ -79,21 +96,20 @@ export default function ModalAdicionarParticipantes() {
               }
           </Select>
           </FormControl>
-
-          {/* <Autocomplete
+          <Autocomplete
             value={value}
-            onChange={(event, newValue) => {
-            setValue(newValue);
-            }}
+            onChange={handleChangeTime}
             id="combo-box-demo"
-            options={arrayTimes}
+            options={listaDeTimes}
             sx={{ width: "100%"}}
             renderInput={(params) => <TextField {...params} label="Selecione o clube" size='small'/>}
-          /> */}
-
+          /> 
           <TextField id="outlined-basic" label="nome" variant="outlined" size='small' sx={{margin:"2% 0",  width:'100%'}}
               onChange={e => setNomeDoParticipante(e.target.value)}
-            />
+          />
+          <TextField id="outlined-basic" label="saldo" variant="outlined" size='small' sx={{margin:"2% 0",  width:'100%'}}
+              onChange={e => setSaldo(parseFloat(e.target.value))}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={adicionarParticipantes}>adicionar</Button>
