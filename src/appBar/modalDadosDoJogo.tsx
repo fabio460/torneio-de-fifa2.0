@@ -10,49 +10,127 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
-import { chekedType, participantesType } from '../types';
+import { chekedType, pagadoresType, participantesType } from '../types';
 import { useSelector } from 'react-redux';
+import { TextField } from '@mui/material';
+import { empates, gols, vitoria } from './valoresDosPremios';
 
+type dadosType = {
+  idParticipante:string, 
+  premio:number
+}
+
+const golsPremio = gols
+const vitoriasPremio = vitoria
+const empatesPremio = empates
 export default function ModalDadosDoJogo() {
   const [open, setOpen] = React.useState(false);
-  const [primeiro, setPrimeiro] = React.useState<{nome:string, dados:participantesType}>();
-  const [segundo, setSegundo] = React.useState<{nome:string, dados:participantesType}>();
-  const [terceiro, setTerceiro] = React.useState<{nome:string, dados:participantesType}>();
-  const [quarto, setQuarto] = React.useState<{nome:string, dados:participantesType}>();
-
+  const [gols, setgols] = React.useState<dadosType[]>([]);
+  const [vitorias, setvitorias] = React.useState<dadosType[]>([]);
+  const [empates, setempates] = React.useState<dadosType[]>([]);
+  
   const participantes:chekedType[] = useSelector((state:any)=>state.participantesReducer.participantes)
   
-  const handleChangePrimeiro = (event: any, data:any) => {
-    setPrimeiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)})
+  const handleChangegols = (event: any, data:chekedType) => {
+    let gol = event.target.value 
+    let golsFilter = []
+    if (gol.trim() === '') {
+      golsFilter = gols.filter((e)=>{
+        if ( !e.idParticipante.includes(data.participante.id)) {
+          return e
+        }
+      })
+      setgols(golsFilter)
+      return null
+    }
+    golsFilter = gols.filter((e)=>{
+      if ( !e.idParticipante.includes(data.participante.id)) {
+        return e
+      }
+    })
+    setgols([...golsFilter,{
+      idParticipante:data.participante.id,
+      premio:parseInt(gol || "")*golsPremio,
+    }])
   };
-  const handleChangeSegundo = (event: any, data:any) => {
-    setSegundo({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+
+
+  const handleChangevitorias = (event: any, data:any) => {
+    let gol = event.target.value 
+    let vitoriasFilter = []
+    if (gol.trim() === '') {
+      vitoriasFilter = vitorias.filter((e)=>{
+        if ( !e.idParticipante.includes(data.participante.id)) {
+          return e
+        }
+      })
+      setvitorias(vitoriasFilter)
+      return null
+    }
+    vitoriasFilter = vitorias.filter((e)=>{
+      if ( !e.idParticipante.includes(data.participante.id)) {
+        return e
+      }
+    })
+    setvitorias([...vitoriasFilter,{
+      idParticipante:data.participante.id,
+      premio:parseInt(gol || "")*vitoriasPremio,
+    }])
   };
-  const handleChangeTerceiro = (event: any, data:any) => {
-    setTerceiro({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
+  const handleChangeempates = (event: any, data:any) => {
+    let empate = event.target.value 
+    let empateFilter = []
+    if (empate.trim() === '') {
+      empateFilter = empates.filter((e)=>{
+        if ( !e.idParticipante.includes(data.participante.id)) {
+          return e
+        }
+      })
+      setempates(empateFilter)
+      return null
+    }
+    empateFilter = empates.filter((e)=>{
+      if ( !e.idParticipante.includes(data.participante.id)) {
+        return e
+      }
+    })
+    setempates([...empateFilter,{
+      idParticipante:data.participante.id,
+      premio:parseInt(empate || "")*empatesPremio,
+    }])
   };
-  const handleChangeQuarto = (event: any, data:any) => {
-    setQuarto({nome:event.target.value, dados:data.props.nonce && JSON.parse(data.props.nonce)});
-  };
+
   const handleClickOpen = () => {
+    dispatch({
+      type:"dados",
+      payload:{dados:[]}
+    })
     setOpen(true);
   };
 
   const dispatch = useDispatch()
   const handleClose = () => {
     setOpen(false);
+  };
+  
+  React.useEffect(()=>{
+  },[])
+  const adicionar = ()=>{
     dispatch({
       type:"dados",
-      payload:{dados:{primeiro,segundo,terceiro,quarto}}
+      payload:{dados:{gols,vitorias,empates}}
     })
-    
-  };
-
+    handleClose()
+  }
   const dialogStyle = {
     width:"400px",
     "@media (max-width:800px)":{
       width:"100%"
     }
+  }
+  const textFielStyle = {
+    maxWidth:"30%",
+    margin:"1%"
   }
   return (
     <div>
@@ -70,82 +148,34 @@ export default function ModalDadosDoJogo() {
           Insira os dados do jogo
         </DialogTitle>
         <DialogContent className='modalColocacaoFormsContainer' >
-          <DialogContentText id="alert-dialog-description">
-            
-            <FormControl className='modalColocacaoForms' sx={{margin:"9px 0"}} size="small">
-              <InputLabel id="demo-select-small" >Primeiro lugar</InputLabel>
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={primeiro?.nome}
-                label="Primeiro lugar"
-                onChange={handleChangePrimeiro}
-              >
-                <MenuItem id={''} value="">
-                  <em>None</em>
-                </MenuItem>
-                {participantes?.map((elem:chekedType,key)=>{
-                  return <MenuItem value={elem.participante.nome} nonce={JSON.stringify(elem.participante)}>{elem.participante.nome}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
-
-            <FormControl className='modalColocacaoForms' size="small"  sx={{marginBottom:1}}>
-              <InputLabel id="demo-select-small">Segundo lugar</InputLabel>
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={segundo?.nome}
-                label="Segundo lugar"
-                onChange={handleChangeSegundo}
-              >
-                <MenuItem id={''} value="">
-                  <em>None</em>
-                </MenuItem>
-                {participantes?.map((elem,key)=>{
-                  return <MenuItem nonce={JSON.stringify(elem.participante)} value={elem.participante.nome}>{elem.participante.nome}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
-
-            <FormControl className='modalColocacaoForms' size="small"  sx={{marginBottom:1}}>
-              <InputLabel id="demo-select-small" >Segundo lugar</InputLabel>
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={terceiro?.nome}
-                label="Segundo lugar"
-                onChange={handleChangeTerceiro}
-              >
-                <MenuItem id={''} value="">
-                  <em>None</em>
-                </MenuItem>
-                {participantes?.map((elem,key)=>{
-                  return <MenuItem nonce={JSON.stringify(elem.participante)} value={elem.participante.nome}>{elem.participante.nome}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
-            <FormControl className='modalColocacaoForms' size="small">
-              <InputLabel id="demo-select-small" >Quarto lugar</InputLabel>
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={quarto?.nome}
-                label="Segundo lugar"
-                onChange={handleChangeQuarto}
-              >
-                <MenuItem id={''} value="">
-                  <em>None</em>
-                </MenuItem>
-                {participantes?.map((elem,key)=>{
-                  return <MenuItem nonce={JSON.stringify(elem.participante)} value={elem.participante.nome}>{elem.participante.nome}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
+          <DialogContentText id="alert-dialog-description" 
+            sx={{width:"100%"}}>
+             {participantes?.map((elem:any,key)=>{
+                return <div>
+                  <h4>{elem.participante.nome}</h4>
+                  <div style={{display:"flex", justifyContent:"center"}}>
+                    <TextField 
+                      sx={textFielStyle}
+                      label="gols"    
+                      onChange={(e:any)=>handleChangegols(e, elem)}              
+                    />
+                    <TextField 
+                    sx={textFielStyle}
+                      label="vitórias"   
+                      onChange={(e:any)=>handleChangevitorias(e, elem)}                  
+                    />
+                    <TextField
+                    sx={textFielStyle} 
+                      label="empates"      
+                      onChange={(e:any)=>handleChangeempates(e, elem)}   
+                    />
+                  </div>
+                </div>
+              })}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Confirmar</Button>
+          <Button onClick={adicionar}>Confirmar</Button>
           <Button color='error' onClick={handleClose} autoFocus>
             Cancelar
           </Button>

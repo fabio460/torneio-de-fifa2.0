@@ -22,26 +22,29 @@ export default function CradPremiacoes({torneio,usuario}:{
   const colocacao:selecionadosType = useSelector((state:any)=>state.colocacaoReducer.colocacao)
   const artilheiros:selecionadosType = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
   const assistentes:selecionadosType = useSelector((state:any)=>state.assisteciaReducer.assistentes)
-  const dadosDoJogo:selecionadosType = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
+  const dadosDoJogo:any = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
   const [carregandoPremio, setCarregandoPremio] = useState(false)
   const [carregandoFolha, setCarregandoFolha] = useState(false)
   const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
 
   const pagarPremiacao =async ()=>{
-    setCarregandoPremio(true)
-     let premiados:any = []
-     artilheiros.primeiro && premiados.push(artilheiros.primeiro)
-     artilheiros.segundo && premiados.push(artilheiros.segundo)
-     artilheiros.terceiro && premiados.push(artilheiros.terceiro)
-     artilheiros.quarto && premiados.push(artilheiros.quarto)
-     assistentes.primeiro && premiados.push(assistentes.primeiro)
-     assistentes.segundo && premiados.push(assistentes.segundo)
-     assistentes.terceiro && premiados.push(assistentes.terceiro)
-     assistentes.quarto && premiados.push(assistentes.quarto)
-     colocacao.primeiro && premiados.push(colocacao.primeiro.dadosDaApi)
-     colocacao.segundo && premiados.push(colocacao.segundo.dadosDaApi)
-     colocacao.terceiro && premiados.push(colocacao.terceiro.dadosDaApi)
-     colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
+    //setCarregandoPremio(true)
+    let premiados:any = []
+    artilheiros.primeiro && premiados.push(artilheiros.primeiro)
+    artilheiros.segundo && premiados.push(artilheiros.segundo)
+    artilheiros.terceiro && premiados.push(artilheiros.terceiro)
+    artilheiros.quarto && premiados.push(artilheiros.quarto)
+    assistentes.primeiro && premiados.push(assistentes.primeiro)
+    assistentes.segundo && premiados.push(assistentes.segundo)
+    assistentes.terceiro && premiados.push(assistentes.terceiro)
+    assistentes.quarto && premiados.push(assistentes.quarto)
+    colocacao.primeiro && premiados.push(colocacao.primeiro.dadosDaApi)
+    colocacao.segundo && premiados.push(colocacao.segundo.dadosDaApi)
+    colocacao.terceiro && premiados.push(colocacao.terceiro.dadosDaApi)
+    colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
+    if (dadosDoJogo.gols) {
+      premiados = [...premiados, ...dadosDoJogo.gols, ...dadosDoJogo.empates, ...dadosDoJogo.vitorias]
+    }
 
      const res =await pagarPremiacoesApi(premiados)
      if (artilheiros.primeiro || assistentes.primeiro || colocacao.primeiro) {     

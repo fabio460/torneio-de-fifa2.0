@@ -26,7 +26,7 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
     <div onClick={()=>n('/')}>home</div>,
     <div onClick={()=>n('/compraDeJogadores')}>comprar</div>,
     <div>saldo {formatoMonetario(elenco?.saldo)}</div>, 
-    <div>{elenco?.jogadores.length} jogadores</div>,
+    <div>{elenco?.jogadores?.length} jogadores</div>,
     <div>folha {elenco?.jogadores && calculaFolha(elenco?.jogadores)}</div>,
     <div>{elenco?.time}</div>,
   ];
