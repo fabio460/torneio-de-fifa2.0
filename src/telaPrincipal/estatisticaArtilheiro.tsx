@@ -1,7 +1,7 @@
 import React, { PureComponent, useEffect, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { statisticasTypes } from '../types';
-import { artilheiro } from '../appBar/valoresDosPremios';
+import { artilheiro } from '../valoresDosPremios';
 import { removerDuplicataArrayDeObjetos } from '../metodosUteis';
 
 export default function EstatisticaArtilheiros({estatistica}:{estatistica:statisticasTypes[] | undefined}) {

@@ -16,6 +16,7 @@ import ModalDespensarJogador from './modalDespensarJogador';
 import { listarParticipantesApi } from '../api/participantesApi';
 import { getTorneioPorIdApi } from '../api/torneioApi';
 import { traduzirPosicao } from '../telaCompraDeJogadores/Jogadores/metodosUteis';
+import { Link } from 'react-router-dom';
 
 
 export default function TabelaDeJogadores({jogadores, elenco}:{
@@ -92,6 +93,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                 <TableCell >Valor</TableCell>
                 <TableCell >Posição</TableCell>
                 <TableCell >Time</TableCell>
+                <TableCell >Só fifa</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
@@ -118,6 +120,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     <TableCell >{formatoMonetario(parseFloat(jog?.valorDoJogador || ''))}</TableCell>
                     <TableCell >{traduzirPosicao(jog.posicao)}</TableCell>
                     <TableCell >{jog.time}</TableCell>
+                    <TableCell ><Link to={jog.linkSoFifa}>{jog.nome}</Link></TableCell>
                 </TableRow>
             ))}
             </TableBody>

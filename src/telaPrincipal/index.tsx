@@ -119,18 +119,20 @@ export default function TelaPrincipal() {
                 />
                 <CradPremiacoes torneio = {usuario?.torneio} usuario={usuario}/>
               </div>
+              <h2 style={{textAlign:"center",marginTop:"20px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>
                 <EstatisticaCampeao estatistica={estatisticas}/>
                 <EstatisticaAssistencia estatistica={estatisticas}/>
                 <EstatisticaArtilheiros estatistica={estatisticas}/>
               </div>
-                <div className='telaPrincipalInferior'>
-                  {
-                    usuario?.torneio[torneio]?.participantes?.map((elem, key)=>{
-                      return <CardElenco key={key} elenco = {elem}/>
-                    })
-                  }
-                </div>
+              <h2 style={{textAlign:"center",marginTop:"20px"}}>Elencos do torneio</h2>
+              <div className='telaPrincipalInferior'>
+                {
+                  usuario?.torneio[torneio]?.participantes?.map((elem, key)=>{
+                    return <CardElenco key={key} elenco = {elem}/>
+                  })
+                }
+              </div>
             </div>
           </div>
       }

@@ -12,7 +12,7 @@ import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
 import { chekedType, dadosPremiacoesDaApiType, participantesType } from '../types';
 import { useSelector } from 'react-redux';
-import { campeao, quartoColocado, terceiroColocado, viceCampeao } from './valoresDosPremios';
+import { campeao, quartoColocado, terceiroColocado, viceCampeao } from '../valoresDosPremios';
 
 export default function ModalColocacao() {
   const [open, setOpen] = React.useState(false);

@@ -137,6 +137,9 @@
     }
 }
 @media (max-width:1100px) {
+    .imgEmblema{
+        width: 150px;
+    }
     .reservarContainer{
         padding:20px;
     }
@@ -211,8 +214,11 @@
         margin: 0px;
      }
     .dadosDoUsuario{
+       margin-top: 50px;
+       font-size: large; 
        display: flex;
        flex-direction: column;
+       align-items: center;
     }
 }
 

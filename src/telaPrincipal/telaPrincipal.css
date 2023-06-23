@@ -18,6 +18,7 @@
     gap: 2%;
     padding:1% 2%;
     height: 300px;
+    margin-bottom: 60px;
 }
 .telaPrincipalInferior{
     display: grid;

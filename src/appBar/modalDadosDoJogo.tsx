@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux/es/exports';
 import { chekedType, pagadoresType, participantesType } from '../types';
 import { useSelector } from 'react-redux';
 import { TextField } from '@mui/material';
-import { empates, gols, vitoria } from './valoresDosPremios';
+import { empates, gols, vitoria } from '../valoresDosPremios';
 
 type dadosType = {
   idParticipante:string, 

@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { transferenciaDeJogadoresApi } from '../api/jogadoresApi';
 import CarregandoBtn from '../carregandoBtn';
+import { formatoMonetario } from '../metodosUteis';
 
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{
@@ -39,6 +40,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   const idsDosJogadoresSelecionados = listaDeSelecionados?.map(j=>{
     return j.jogador.id
   })
+  console.log(listaDeSelecionados)
   const idDoProprietario = elenco?.id
   async function transferir() {
     setLoading(true)
@@ -48,6 +50,14 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
     if (res === "transferência concluida com sucesso") {
       window.location.reload()
     }
+  }
+  function getValoresTotais(lista:checkedType[] | undefined) {
+    
+    let total = 0
+    lista?.map(j=>{
+      total += parseFloat(j.jogador.valorDoJogador || "")
+    })
+    return formatoMonetario(total)
   }
   return (
     <div>
@@ -61,12 +71,22 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Transferência dos jogadores"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
+            {
+              listaDeSelecionados?.map(j=>{
+                return <div>
+                  {j.jogador.nome} - {formatoMonetario(parseFloat(j.jogador.valorDoJogador || ""))}
+                </div>
+              })
+            }
+            <h5 style={{color:"red", marginTop:"10px"}}>
+              No total de: {getValoresTotais(listaDeSelecionados)}
+            </h5>
           <FormControl fullWidth sx={{marginTop:3}} size='small'>
-            <InputLabel id="demo-simple-select-label" sx={{bgcolor:'white', paddingRight:1}}>Participantes</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{bgcolor:'white', paddingRight:1}}>Transferir para</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"

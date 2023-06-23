@@ -56,7 +56,6 @@ function a11yProps(index: number) {
 export default function OptCampoLista({handlePosition, elenco}:{handlePosition:any, elenco:participantesType | undefined}) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
- 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     localStorage.setItem('selectCampinho',newValue.toString())
     setValue(newValue);
@@ -138,10 +137,10 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div className='dadosDoUsuario'>
-          <img src={elenco?.emblemaDoTime} alt="" />
-          <div>
+          <img src={elenco?.emblemaDoTime} alt="" className="imgEmblema" />
+          <h4>
             Usuário {elenco?.nome}
-          </div>
+          </h4>
           <div>
             Saldo {formatoMonetario(elenco?.saldo)}
           </div>

@@ -12,7 +12,7 @@ import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
 import { chekedType, dadosPremiacoesDaApiType, participantesType } from '../types';
 import { useSelector } from 'react-redux';
-import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from './valoresDosPremios';
+import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from '../valoresDosPremios';
 
 export default function ModalAssistencia() {
   const [open, setOpen] = React.useState(false);

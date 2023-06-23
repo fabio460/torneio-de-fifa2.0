@@ -27,15 +27,9 @@ export default function TelaDeElenco() {
   },[])
   const handlePosition =async (e:any, data:any)=>{
     const res =await atualizarOuCriarPosicoesApi(data.node.firstChild.id, data.lastX, data.lastY)
+    //window.location.reload()
 	}
 
-    const getZerarPosicoes = ()=>{
-		elenco?.jogadores.map((e, key)=>{
-			localStorage.setItem(`${key}`,JSON.stringify({x: 0, y:0, id: key}))
-		})
-		window.location.reload()
-	}
-  const navigate = useNavigate()
   return (
     <div>
       {
