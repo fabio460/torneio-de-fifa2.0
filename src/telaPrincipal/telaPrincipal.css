@@ -4,7 +4,7 @@
     min-width: 100%;
 }
 .main{
-    margin-top: 70px;
+    
 }
 .telaPrincipalSuperior{
     display: grid;
@@ -42,8 +42,8 @@
 }
 .btnPagamentos{
     padding: 8px;
-    
     min-width: 400px;
+    display: flex;
 }
 @media (max-width:1270px) {
     .telaPrincipalInferior{

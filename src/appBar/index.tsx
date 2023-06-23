@@ -9,7 +9,7 @@ import ModalDadosDoJogo from './modalDadosDoJogo';
 import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import ModalDeletarPerfil from './modalDeletarPerfil';
 import SwitchesDeletarParticipantes from '../telaPrincipal/switchDeletarParticipantes';
-
+import icone from '../icone_fifa.png'
 const deslogar = ()=>{
   localStorage.removeItem('jwt')
   window.location.reload()
@@ -45,7 +45,9 @@ function ResponsiveAppBar() {
     <AppBar position="fixed" sx={{}}>
       <div className='appBarContainer'>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+             <img src={icone} style={{width:"40px"}}/>
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -61,7 +63,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Recanto
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -100,7 +102,9 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
+            <img src={icone} style={{width:"40px"}}/>
+          </Box>
           <Typography
             variant="h5"
             noWrap
@@ -117,7 +121,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Recanto
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
