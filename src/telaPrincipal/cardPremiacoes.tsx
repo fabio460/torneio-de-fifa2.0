@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { selecionadosType, usuarioLogadoType } from '../types';
+import { dadosDoJogoType, selecionadosType, usuarioLogadoType } from '../types';
 import { pagarFolhasApi, pagarPremiacoesApi } from '../api/pagamentosApi';
 import { adicionarEstatisticaApi } from '../api/estatisticasApi';
 import CarregandoBtn from '../carregandoBtn';
@@ -28,7 +28,7 @@ export default function CradPremiacoes({torneio,usuario}:{
   const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
 
   const pagarPremiacao =async ()=>{
-    //setCarregandoPremio(true)
+    setCarregandoPremio(true)
     let premiados:any = []
     artilheiros.primeiro && premiados.push(artilheiros.primeiro)
     artilheiros.segundo && premiados.push(artilheiros.segundo)
@@ -42,9 +42,10 @@ export default function CradPremiacoes({torneio,usuario}:{
     colocacao.segundo && premiados.push(colocacao.segundo.dadosDaApi)
     colocacao.terceiro && premiados.push(colocacao.terceiro.dadosDaApi)
     colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
-    if (dadosDoJogo.gols) {
-      premiados = [...premiados, ...dadosDoJogo.gols, ...dadosDoJogo.empates, ...dadosDoJogo.vitorias]
-    }
+    
+    premiados = [...premiados, ...dadosDoJogo.gols, ...dadosDoJogo.empates, ...dadosDoJogo.vitorias]
+    
+    
 
      const res =await pagarPremiacoesApi(premiados)
      if (artilheiros.primeiro || assistentes.primeiro || colocacao.primeiro) {     
@@ -127,10 +128,21 @@ export default function CradPremiacoes({torneio,usuario}:{
          <div className='cardPremiacoesBox'>
            <h2>Dados da partida</h2>
            <ul>
-             {dadosDoJogo.primeiro && <li>Primeiro: {dadosDoJogo.primeiro?.nome}</li> }
-             {dadosDoJogo.segundo && <li>Segundo: {dadosDoJogo.segundo?.nome}</li> }
-             {dadosDoJogo.terceiro && <li>Terceiro: {dadosDoJogo.terceiro?.nome}</li> }
-             {dadosDoJogo.quarto && <li>Quarto: {dadosDoJogo.quarto?.nome}</li> }
+             {dadosDoJogo.gols && <li>Gols: {dadosDoJogo.gols.map((e:any)=>{
+              return <div>
+                {e.participante} fez {e.dado}
+              </div>
+             })}</li> }
+             {dadosDoJogo.empates && <li>Empate: {dadosDoJogo.empates.map((e:any)=>{
+              return <div>
+                {e.participante} empatou {e.dado} 
+              </div>
+             })}</li> }
+             {dadosDoJogo.vitorias && <li>Vitórias: {dadosDoJogo.vitorias.map((e:any)=>{
+              return <div>
+                {e.participante} venceu {e.dado}
+              </div>
+             })}</li> }
            </ul> 
          </div> 
       </CardContent>

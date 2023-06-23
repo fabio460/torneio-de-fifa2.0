@@ -107,3 +107,30 @@ export type timesType = {
   label:string,
   escudo:string
 }
+
+export type dadosDoJogoType = {
+  dadosDoJogo:{
+     gols:{
+      idParticipante:string, 
+      premio:number,
+      dado?:number,
+      tipoDeDado?:string,
+      participante?:string
+     },
+     empates:{
+      idParticipante:string, 
+      premio:number,
+      dado?:number,
+      tipoDeDado?:string,
+      participante?:string
+     },
+     vitorias:{
+      idParticipante:string, 
+      premio:number,
+      dado?:number,
+      tipoDeDado?:string,
+      participante?:string
+     }
+
+   }
+}

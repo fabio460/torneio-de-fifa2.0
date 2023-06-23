@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
+import { IconButton } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -10,6 +10,7 @@ import { calculaFolha, formatoMonetario } from '../metodosUteis';
 import ModalDeletarParticipantes from './modalDeletarParticipantes';
 import { useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 export default function CardElenco({elenco}:{elenco:participantesType}) {
 
@@ -23,6 +24,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
     localStorage.setItem('idDoElenco',elenco.id)
     navigate('/elenco')
   }
+  const deleteChecked = useSelector((state:any)=>state.checkedDeletarPart.status)
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -31,7 +33,13 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
             {elenco?.emblemaDoTime && <Avatar src={elenco?.emblemaDoTime} sx={{marginRight:1}}/> }
             {elenco.nome}
           </div>
-          <ModalDeletarParticipantes elenco={elenco}/>
+          {deleteChecked ? 
+              <ModalDeletarParticipantes elenco={elenco}/>
+                :
+              <IconButton  size='small' disabled>
+                  <DeleteOutlineIcon />
+              </IconButton>
+          }
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
          Saldo {formatoMonetario(elenco.saldo)}

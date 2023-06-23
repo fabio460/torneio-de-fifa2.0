@@ -12,8 +12,10 @@ import assisteciaReducer from './assisteciaReducer'
 import golsEmpVitoriasReducer from './golsEmpVitoriasReducer'
 import posicaoSelectJogadorReducer from './posicaoSelectJogadorReducer'
 import jogadoresDoTorneioSelecionadoReducer from './jogadoresDoTorneioSelecionadoReducer'
+import checkedDeletarPart from './checkedDeletarPart'
 export const store = configureStore({
   reducer: {
+    checkedDeletarPart,
     jogadoresDoTorneioSelecionadoReducer,
     posicaoSelectJogadorReducer,
     artilhariaReducer,

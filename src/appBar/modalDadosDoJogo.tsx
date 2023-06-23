@@ -17,7 +17,10 @@ import { empates, gols, vitoria } from './valoresDosPremios';
 
 type dadosType = {
   idParticipante:string, 
-  premio:number
+  premio:number,
+  dado?:number,
+  tipoDeDado?:string,
+  participante?:string
 }
 
 const golsPremio = gols
@@ -51,14 +54,17 @@ export default function ModalDadosDoJogo() {
     setgols([...golsFilter,{
       idParticipante:data.participante.id,
       premio:parseInt(gol || "")*golsPremio,
+      dado:gol,
+      participante:data.participante.nome,
+      tipoDeDado:"gol"
     }])
   };
 
 
   const handleChangevitorias = (event: any, data:any) => {
-    let gol = event.target.value 
+    let vitoria = event.target.value 
     let vitoriasFilter = []
-    if (gol.trim() === '') {
+    if (vitoria.trim() === '') {
       vitoriasFilter = vitorias.filter((e)=>{
         if ( !e.idParticipante.includes(data.participante.id)) {
           return e
@@ -74,7 +80,10 @@ export default function ModalDadosDoJogo() {
     })
     setvitorias([...vitoriasFilter,{
       idParticipante:data.participante.id,
-      premio:parseInt(gol || "")*vitoriasPremio,
+      premio:parseInt(vitoria || "")*vitoriasPremio,
+      dado:vitoria,
+      participante:data.participante.nome,
+      tipoDeDado:"vitoria"
     }])
   };
   const handleChangeempates = (event: any, data:any) => {
@@ -97,6 +106,9 @@ export default function ModalDadosDoJogo() {
     setempates([...empateFilter,{
       idParticipante:data.participante.id,
       premio:parseInt(empate || "")*empatesPremio,
+      dado:empate,
+      participante:data.participante.nome,
+      tipoDeDado:"empate"
     }])
   };
 
@@ -113,8 +125,6 @@ export default function ModalDadosDoJogo() {
     setOpen(false);
   };
   
-  React.useEffect(()=>{
-  },[])
   const adicionar = ()=>{
     dispatch({
       type:"dados",
