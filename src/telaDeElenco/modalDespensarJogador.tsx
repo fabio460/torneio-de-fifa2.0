@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import { checkedType, participantesType } from '../types';
 import { removerJogadoresApi } from '../api/jogadoresApi';
 import CarregandoBtn from '../carregandoBtn';
+import { formatoMonetario } from '../metodosUteis';
 
 export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     listaDeSelecionados:checkedType[] | undefined,
@@ -34,6 +35,7 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     if (somaDosValores) {
         const saldo = elenco?.saldo || 0
         const saldoAtualizado = somaDosValores*0.6 + saldo
+        console.log(saldoAtualizado)
         const res = await removerJogadoresApi(listaDeIds, saldoAtualizado, elenco?.id)
         window.location.reload()
     }
@@ -52,14 +54,19 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Voçê esta prestes a remover seu jogador"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {
                 listaDeSelecionados?.map((jog, key)=>{
                     return <div>
-                        {jog.jogador.nome}
+                        <div>
+                          {jog.jogador.nome}
+                        </div>
+                        <div>
+                          Você recebera {formatoMonetario(parseFloat(jog.jogador.valorDoJogador || "")*0.6)} por este jogador
+                        </div>
                     </div>
                 })
             }
