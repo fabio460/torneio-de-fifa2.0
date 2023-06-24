@@ -89,12 +89,12 @@ export default function TelaPrincipal() {
     getUsuario()
   },[])
   async function getEstatistica() {
-    const est = await listarStatisticaApi(usuario?.torneio[torneio].id || '')
+    const est = await listarStatisticaApi(usuario?.torneio[torneio]?.id || '')
     setEstatisticas(est)
     
   }
   
-  localStorage.setItem("idDoTorneio",usuario?.torneio[torneio].id || '')
+  localStorage.setItem("idDoTorneio",usuario?.torneio[torneio]?.id || '')
   useEffect(()=>{    
     getEstatistica()
   },[torneio])
