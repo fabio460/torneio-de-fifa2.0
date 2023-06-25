@@ -19,19 +19,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 type propsType = {
     handleChangePrimeiro:any,
     participantes:chekedType[],
@@ -42,15 +29,21 @@ export default function Primeiro({handleChangePrimeiro, participantes, setPrimei
   const [personName, setPersonName] = React.useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
+      const {
+          target: { value },
     } = event;
     setPersonName(
-      // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
 
+  let listFilter = participantes.filter(p=>{
+      if (personName.includes(p.participante.nome)) {
+          return p
+        }
+  })
+   console.log(listFilter)
+    
   return (
     <div>
       <FormControl className='modalColocacaoForms' sx={{marginBottom:1, marginTop:2}} size="small">
@@ -65,10 +58,11 @@ export default function Primeiro({handleChangePrimeiro, participantes, setPrimei
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {participantes.map((p) => (
+
+            <MenuItem key={p.participante.nome} value={p.participante.nome}>
+              <Checkbox checked={personName.indexOf(p.participante.nome) > -1} />
+              <ListItemText primary={p.participante.nome+"-"} />
             </MenuItem>
           ))}
         </Select>

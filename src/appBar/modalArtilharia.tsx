@@ -11,10 +11,9 @@ export default function ModalArtilharia() {
   const [terceiro, setTerceiro] = React.useState<{nome:string, dados:participantesType, dadosDaApi:dadosPremiacoesDaApiType}>();
   const [quarto, setQuarto] = React.useState<{nome:string, dados:participantesType, dadosDaApi:dadosPremiacoesDaApiType}>();
   const participantes:chekedType[] = useSelector((state:any)=>state.participantesReducer.participantes)
-  console.log(participantes)
+
   const handleChangePrimeiro = (event: any, data:any) => {
     let jogadorSelecionado = JSON.parse(data.props.nonce)
-    console.log(jogadorSelecionado.nome)
     setPrimeiro({
       nome:event.target.value,dados:data.props.nonce && JSON.parse(data.props.nonce),
       dadosDaApi:{
