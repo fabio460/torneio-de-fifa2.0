@@ -12,7 +12,9 @@ import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
 import { chekedType, dadosPremiacoesDaApiType, participantesType } from '../types';
 import { useSelector } from 'react-redux';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from '../valoresDosPremios';
+import Primeiro from './selectsAssistecias/primeiro';
 
 export default function ModalAssistencia() {
   const [open, setOpen] = React.useState(false);
@@ -96,6 +98,16 @@ export default function ModalAssistencia() {
       width:"100%"
     }
   }
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
   return (
     <div>
       <div onClick={handleClickOpen}>
@@ -114,28 +126,11 @@ export default function ModalAssistencia() {
         <DialogContent className='modalColocacaoFormsContainer' >
           <DialogContentText id="alert-dialog-description">
             
-            <FormControl className='modalColocacaoForms' sx={{margin:"9px 0"}} size="small">
-              <InputLabel id="demo-select-small" >Primeiro lugar</InputLabel>
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={primeiro?.nome}
-                label="Primeiro lugar"
-                onChange={handleChangePrimeiro}
-              >
-                <MenuItem id={''} value="">
-                  <em>None</em>
-                </MenuItem>
-                {
-                  participantes.map(e=>{
-                    return e.participante.jogadores.map(e=>{
-                      return <MenuItem value={e.nome} nonce={JSON.stringify(e)}>{e.nome}</MenuItem>
-                    })
-                  })
-                }
-              </Select>
-            </FormControl>
-
+            <Primeiro 
+              handleChangePrimeiro={handleChangePrimeiro}
+              participantes={participantes}
+              setPrimeiro={setPrimeiro}  
+            />
             <FormControl className='modalColocacaoForms' size="small"  sx={{marginBottom:1}}>
               <InputLabel id="demo-select-small">Segundo lugar</InputLabel>
               <Select
