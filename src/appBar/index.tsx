@@ -10,6 +10,7 @@ import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Toolt
 import ModalDeletarPerfil from './modalDeletarPerfil';
 import SwitchesDeletarParticipantes from '../telaPrincipal/switchDeletarParticipantes';
 import icone from '../icone_fifa.png'
+import { useNavigate } from 'react-router-dom';
 const deslogar = ()=>{
   localStorage.removeItem('jwt')
   window.location.reload()
@@ -20,9 +21,10 @@ const pages = [
   <div><ModalAssistencia/></div>,
   <div><ModalDadosDoJogo/></div>, 
 ];
-const settings = ['Profile', <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
 
 function ResponsiveAppBar() {
+  const h = useNavigate()
+  const settings = [<div onClick={()=>h("/valores")}>Valores</div>, <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
