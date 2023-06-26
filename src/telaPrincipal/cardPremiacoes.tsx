@@ -22,8 +22,8 @@ export default function CradPremiacoes({torneio,usuario}:{
   torneio:torneioType[] | undefined
 }) {
   const colocacao:selecionadosType = useSelector((state:any)=>state.colocacaoReducer.colocacao)
-  const artilheiros:selecionadosType = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
-  const assistentes:selecionadosType = useSelector((state:any)=>state.assisteciaReducer.assistentes)
+  const artilheiros:any = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
+  const assistentes:any = useSelector((state:any)=>state.assisteciaReducer.assistentes)
   const dadosDoJogo:any = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
   const [carregandoFolha, setCarregandoFolha] = useState(false)
   const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
@@ -44,19 +44,67 @@ export default function CradPremiacoes({torneio,usuario}:{
          <div className='cardPremiacoesBox'>
            <h2>Artiharia</h2>
            <ul>
-             {artilheiros.primeiro && <li>Primeiro: {artilheiros.primeiro?.nome}</li> }
-             {artilheiros.segundo && <li>Segundo: {artilheiros.segundo?.nome}</li> }
-             {artilheiros.terceiro && <li>Terceiro: {artilheiros.terceiro?.nome}</li> }
-             {artilheiros.quarto && <li>Quarto: {artilheiros.quarto?.nome}</li> }
+           {artilheiros.primeiro?.length > 0 && <li>Primeiro:  
+              {
+                artilheiros.primeiro.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
+            {artilheiros.segundo?.length > 0 && <li>Segundo: 
+              {
+                artilheiros.segundo.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
+            {artilheiros.terceiro?.length > 0 && <li>Terceiro: 
+              {
+                artilheiros.terceiro.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
+            {artilheiros.quarto?.length > 0 && <li>Quarto: 
+              {
+                artilheiros.quarto.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
            </ul> 
          </div>  
          <div className='cardPremiacoesBox'>
            <h2>Assisências</h2>
            <ul>
-             {assistentes.primeiro && <li>Primeiro: {assistentes.primeiro?.nome}</li> }
-             {assistentes.segundo && <li>Segundo: {assistentes.segundo?.nome}</li> }
-             {assistentes.terceiro && <li>Terceiro: {assistentes.terceiro?.nome}</li> }
-             {assistentes.quarto && <li>Quarto: {assistentes.quarto?.nome}</li> }
+            {assistentes.primeiro?.length > 0 && <li>Primeiro:  
+              {
+                assistentes.primeiro.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
+            {assistentes.segundo?.length > 0 && <li>Segundo: 
+              {
+                assistentes.segundo.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
+            {assistentes.terceiro?.length > 0 && <li>Terceiro: 
+              {
+                assistentes.terceiro.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
+            {assistentes.quarto?.length > 0 && <li>Quarto: 
+              {
+                assistentes.quarto.map((e:any)=>{
+                  return " "+e.nome + ", "
+                })
+              }
+            </li> }
            </ul> 
          </div> 
          <div className='cardPremiacoesBox'>

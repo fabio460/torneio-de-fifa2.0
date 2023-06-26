@@ -22,10 +22,10 @@ const MenuProps = {
 type propsType = {
     handleChangePrimeiro?:any,
     participantes:chekedType[],
-    setPrimeiro?:any
+    setTerceiro?:any
 }
 
-export default function Primeiro({handleChangePrimeiro, participantes, setPrimeiro}:propsType) {
+export default function Terceiro({handleChangePrimeiro, participantes, setTerceiro}:propsType) {
   const [personName, setPersonName] = React.useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -50,12 +50,12 @@ export default function Primeiro({handleChangePrimeiro, participantes, setPrimei
   })
    
   React.useEffect(()=>{
-      setPrimeiro(listFilter) 
+      setTerceiro(listFilter) 
   },[personName])  
   return (
     <div>
       <FormControl className='modalColocacaoForms' sx={{marginBottom:1, marginTop:2}} size="small">
-        <InputLabel id="demo-multiple-checkbox-label">Primeiro lugar</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">Terceiro lugar</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"

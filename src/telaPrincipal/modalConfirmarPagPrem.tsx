@@ -10,6 +10,7 @@ import { selecionadosType, usuarioLogadoType } from '../types';
 import { useSelector } from 'react-redux';
 import { adicionarEstatisticaApi } from '../api/estatisticasApi';
 import CarregandoBtn from '../carregandoBtn';
+import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from '../valoresDosPremios';
 
 export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
    usuario:usuarioLogadoType | undefined,
@@ -26,21 +27,72 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
   };
 
   const colocacao:selecionadosType = useSelector((state:any)=>state.colocacaoReducer.colocacao)
-  const artilheiros:selecionadosType = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
-  const assistentes:selecionadosType = useSelector((state:any)=>state.assisteciaReducer.assistentes)
+  const artilheiros:any = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
+  const assistentes:any = useSelector((state:any)=>state.assisteciaReducer.assistentes)
   const dadosDoJogo:any = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
   const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
   const pagarPremiacao =async ()=>{
     setCarregandoPremio(true)
     let premiados:any = []
-    artilheiros.primeiro && premiados.push(artilheiros.primeiro)
-    artilheiros.segundo && premiados.push(artilheiros.segundo)
-    artilheiros.terceiro && premiados.push(artilheiros.terceiro)
-    artilheiros.quarto && premiados.push(artilheiros.quarto)
-    assistentes.primeiro && premiados.push(assistentes.primeiro)
-    assistentes.segundo && premiados.push(assistentes.segundo)
-    assistentes.terceiro && premiados.push(assistentes.terceiro)
-    assistentes.quarto && premiados.push(assistentes.quarto)
+    
+    assistentes.primeiro.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:assistencia
+      })
+    })
+    assistentes.segundo.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:viceAssistencia
+      })
+    })
+    assistentes.terceiro.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:terceiroAssistencia
+      })
+    })
+    assistentes.quarto.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:quartoAssistencia
+      })
+    })
+
+    artilheiros.primeiro.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:assistencia
+      })
+    })
+    artilheiros.segundo.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:viceAssistencia
+      })
+    })
+    artilheiros.terceiro.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:terceiroAssistencia
+      })
+    })
+    artilheiros.quarto.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:quartoAssistencia
+      })
+    })
+
     colocacao.primeiro && premiados.push(colocacao.primeiro.dadosDaApi)
     colocacao.segundo && premiados.push(colocacao.segundo.dadosDaApi)
     colocacao.terceiro && premiados.push(colocacao.terceiro.dadosDaApi)
@@ -48,6 +100,7 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
     if (dadosDoJogo.gols || dadosDoJogo.empates || dadosDoJogo.vitorias) {
       premiados = [...premiados, ...dadosDoJogo.gols, ...dadosDoJogo.empates, ...dadosDoJogo.vitorias]
     }
+    
     if (premiados.length === 0) {
        alert("Não há dados selecionados!")
        setCarregandoPremio(false)
