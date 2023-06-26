@@ -11,6 +11,7 @@ import ModalDeletarPerfil from './modalDeletarPerfil';
 import SwitchesDeletarParticipantes from '../telaPrincipal/switchDeletarParticipantes';
 import icone from '../icone_fifa.png'
 import { useNavigate } from 'react-router-dom';
+import { usuarioLogado } from '../metodosUteis';
 const deslogar = ()=>{
   localStorage.removeItem('jwt')
   window.location.reload()
@@ -22,9 +23,10 @@ const pages = [
   <div><ModalDadosDoJogo/></div>, 
 ];
 
+
 function ResponsiveAppBar() {
   const h = useNavigate()
-  const settings = [<div onClick={()=>h("/valores")}>Valores</div>, <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
+  const settings = [<div>{usuarioLogado.nome}</div>,<div onClick={()=>h("/valores")}>Valores</div>, <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -140,7 +142,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Opções">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg">{usuarioLogado.nome[0].toUpperCase()}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu

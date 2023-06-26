@@ -100,7 +100,6 @@ export default function TelaPrincipal() {
   },[torneio])
   return (
     <React.Fragment>
-      
       <Toolbar id="back-to-top-anchor" />
       <div className='container'>
       {
@@ -110,7 +109,7 @@ export default function TelaPrincipal() {
             <ResponsiveAppBar/>
             <div className='main'>
               <div className='appBar'>
-                <h1 style={{textAlign:"center", marginTop:"10px"}}>Bem vindo {usuario?.nome}!</h1>
+                <h1 style={{textAlign:"center", marginTop:"10px"}}></h1>
               </div>
               <div className='telaPrincipalSuperior'>
                 <CardParticipantes 

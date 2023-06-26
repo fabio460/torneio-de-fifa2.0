@@ -13,6 +13,7 @@ import CarregandoBtn from '../carregandoBtn';
 import { torneioType } from '../types';
 import ModalConfirmarPagamentoPremiacao from './modalConfirmarPagPrem';
 import ModalConfirmaPagamentoFolha from './modalConfirPagFolha';
+import { Avatar } from '@mui/material';
 
 
 
@@ -80,7 +81,10 @@ export default function CradPremiacoes({torneio,usuario}:{
             {assistentes.primeiro?.length > 0 && <li>Primeiro:  
               {
                 assistentes.primeiro.map((e:any)=>{
-                  return " "+e.nome + ", "
+                  return  <div style={{display:"flex"}}>
+                    {/* <Avatar sx={{width:"10px", heigth:"10px"}}/> */}
+                    <div>{" "+e.nome + ", "}</div>
+                  </div>
                 })
               }
             </li> }
