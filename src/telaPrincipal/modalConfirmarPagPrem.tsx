@@ -35,28 +35,28 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
     setCarregandoPremio(true)
     let premiados:any = []
     
-    assistentes.primeiro.map((e:any)=>{
+    assistentes.primeiro?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
         premio:assistencia
       })
     })
-    assistentes.segundo.map((e:any)=>{
+    assistentes.segundo?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
         premio:viceAssistencia
       })
     })
-    assistentes.terceiro.map((e:any)=>{
+    assistentes.terceiro?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
         premio:terceiroAssistencia
       })
     })
-    assistentes.quarto.map((e:any)=>{
+    assistentes.quarto?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
@@ -64,28 +64,28 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
       })
     })
 
-    artilheiros.primeiro.map((e:any)=>{
+    artilheiros.primeiro?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
         premio:assistencia
       })
     })
-    artilheiros.segundo.map((e:any)=>{
+    artilheiros.segundo?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
         premio:viceAssistencia
       })
     })
-    artilheiros.terceiro.map((e:any)=>{
+    artilheiros.terceiro?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
         premio:terceiroAssistencia
       })
     })
-    artilheiros.quarto.map((e:any)=>{
+    artilheiros.quarto?.map((e:any)=>{
       premiados.push({
         idParticipante:e.idParticipante,
         nome:e.nome,
