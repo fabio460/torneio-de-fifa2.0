@@ -28,10 +28,17 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography variant="h5" component="div" sx={{display:'flex', justifyContent:'space-between'}}>
+        <Typography variant="h5" component="div" sx={{display:'flex', justifyContent:'space-between', marginBottom:2}}>
           <div style={{display:"flex", alignItems:"center"}}>
             {elenco?.emblemaDoTime && <Avatar src={elenco?.emblemaDoTime} sx={{marginRight:1}}/> }
-            {elenco.nome}
+            <div style={{display:"flex", flexDirection:"column"}}>
+              <div>
+                {elenco.nome}
+              </div>
+              <div style={{fontSize:"13px",color:"gray"}}>
+                {elenco.time}
+              </div>
+            </div>
           </div>
           {deleteChecked ? 
               <ModalDeletarParticipantes elenco={elenco}/>
@@ -41,6 +48,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
               </IconButton>
           }
         </Typography>
+      
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
          Saldo {formatoMonetario(elenco.saldo)}
           

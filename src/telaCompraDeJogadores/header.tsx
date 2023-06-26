@@ -3,10 +3,6 @@ import { participantesType } from '../types'
 import CampoDeBusca from './Jogadores/campoDeBusca'
 import { useNavigate } from 'react-router-dom'
 import { formatoMonetario } from '../metodosUteis'
-import FormGroup from '@mui/material/FormGroup';
-import { pink, lightBlue } from '@mui/material/colors';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import SelectPosicao from './selectPosicao'
 import { useDispatch } from 'react-redux'
 export default function Header({elenco}:{elenco:participantesType | undefined}) {
@@ -35,10 +31,11 @@ export default function Header({elenco}:{elenco:participantesType | undefined}) 
   return (
     <div className='compraDeJogadoresHeader'>
       <h3 className='compraDeJogadoresTitulo'>{elenco?.nome}</h3>
+      <div style={{textAlign:'center'}}>{elenco?.time}</div>
       <div className='compraDeJogadoresBody'>
         <div>
           <div className='compraDeJogadoresBodyLeft'>
-            <div onClick={paraTelaPrincipal} className='compraDeJogadoresItens'>Home</div> 
+            <div onClick={paraTelaPrincipal} className='compraDeJogadoresItens'>Principal</div> 
             <div onClick={pataTelaDeElenco} className='compraDeJogadoresItens'>Elenco</div> 
             <div style={{marginLeft:"auto"}} className=''>Saldo {formatoMonetario(elenco?.saldo)}</div> 
           </div>

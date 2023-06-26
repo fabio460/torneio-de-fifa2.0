@@ -62,7 +62,7 @@ export default function CampoDeBusca() {
     alignItems: 'center',
     width: 450,
     "@media (max-width:800px)":{
-      width: "95vw",
+      width: "100%",
     }
   }
   return (
