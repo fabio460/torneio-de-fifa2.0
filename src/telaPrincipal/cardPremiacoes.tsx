@@ -29,7 +29,7 @@ export default function CradPremiacoes({torneio,usuario}:{
   const [carregandoFolha, setCarregandoFolha] = useState(false)
   const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
   const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
-
+  
   return (
     <Card sx={{ minWidth: 275 }} >
       <CardContent  className='cardPremiacoesContainer'>
@@ -48,29 +48,33 @@ export default function CradPremiacoes({torneio,usuario}:{
            {artilheiros.primeiro?.length > 0 && <li>Primeiro:  
               {
                 artilheiros.primeiro.map((e:any)=>{
-                  return " "+e.nome + ", "
-                })
+                  return  <div style={{display:"flex"}}>
+                  <div>{" "+e.nome + ", "}</div>
+                </div>                })
               }
             </li> }
             {artilheiros.segundo?.length > 0 && <li>Segundo: 
               {
                 artilheiros.segundo.map((e:any)=>{
-                  return " "+e.nome + ", "
-                })
+                  return  <div style={{display:"flex"}}>
+                  <div>{" "+e.nome + ", "}</div>
+                </div>                })
               }
             </li> }
             {artilheiros.terceiro?.length > 0 && <li>Terceiro: 
               {
                 artilheiros.terceiro.map((e:any)=>{
-                  return " "+e.nome + ", "
-                })
+                  return  <div style={{display:"flex"}}>
+                  <div>{" "+e.nome + ", "}</div>
+                </div>                })
               }
             </li> }
             {artilheiros.quarto?.length > 0 && <li>Quarto: 
               {
                 artilheiros.quarto.map((e:any)=>{
-                  return " "+e.nome + ", "
-                })
+                  return  <div style={{display:"flex"}}>
+                  <div>{" "+e.nome + ", "}</div>
+                </div>                })
               }
             </li> }
            </ul> 
@@ -82,7 +86,6 @@ export default function CradPremiacoes({torneio,usuario}:{
               {
                 assistentes.primeiro.map((e:any)=>{
                   return  <div style={{display:"flex"}}>
-                    {/* <Avatar sx={{width:"10px", heigth:"10px"}}/> */}
                     <div>{" "+e.nome + ", "}</div>
                   </div>
                 })
@@ -91,22 +94,25 @@ export default function CradPremiacoes({torneio,usuario}:{
             {assistentes.segundo?.length > 0 && <li>Segundo: 
               {
                 assistentes.segundo.map((e:any)=>{
-                  return " "+e.nome + ", "
-                })
+                  return  <div style={{display:"flex"}}>
+                  <div>{" "+e.nome + ", "}</div>
+                </div>                })
               }
             </li> }
             {assistentes.terceiro?.length > 0 && <li>Terceiro: 
               {
                 assistentes.terceiro.map((e:any)=>{
-                  return " "+e.nome + ", "
-                })
+                  return  <div style={{display:"flex"}}>
+                  <div>{" "+e.nome + ", "}</div>
+                </div>                })
               }
             </li> }
             {assistentes.quarto?.length > 0 && <li>Quarto: 
               {
                 assistentes.quarto.map((e:any)=>{
-                  return " "+e.nome + ", "
-                })
+                  return  <div style={{display:"flex"}}>
+                  <div>{" "+e.nome + ", "}</div>
+                </div>                })
               }
             </li> }
            </ul> 
