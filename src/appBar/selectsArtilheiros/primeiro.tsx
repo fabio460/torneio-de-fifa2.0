@@ -73,9 +73,9 @@ export default function Primeiro({participantes, setPrimeiro}:propsType) {
           {
             participantes.map((p) => (
               p.participante.jogadores.map(j=>(
-                <MenuItem key={j.nome} value={j.nome} onChange={e=> alert(1)}>
+                <MenuItem key={j.nome} value={j.nome}>
                 <Checkbox checked={personName.indexOf(j.nome) > -1} />
-                <ListItemText primary={j.nome+" ("+p.participante.nome+")"} />
+                <ListItemText primary={j.nome+" ("+p.participante.nome+")"} onChange={e=> setParticipante(p.participante.nome)}/>
                 </MenuItem>     
               ))
             ))

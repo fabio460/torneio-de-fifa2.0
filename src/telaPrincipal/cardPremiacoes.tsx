@@ -47,36 +47,36 @@ export default function CradPremiacoes({torneio,usuario}:{
            <ul>
            {artilheiros.primeiro?.length > 0 && <li>Primeiro:  
               {
-                artilheiros.primeiro.map((e:jogadoresType)=>{
+                artilheiros.primeiro?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
             </li> }
             {artilheiros.segundo?.length > 0 && <li>Segundo: 
               {
-                artilheiros.segundo.map((e:jogadoresType)=>{
+                artilheiros.segundo?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
             </li> }
             {artilheiros.terceiro?.length > 0 && <li>Terceiro: 
               {
-                artilheiros.terceiro.map((e:jogadoresType)=>{
+                artilheiros.terceiro?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
             </li> }
             {artilheiros.quarto?.length > 0 && <li>Quarto: 
               {
-                artilheiros.quarto.map((e:jogadoresType)=>{
+                artilheiros.quarto?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
@@ -88,36 +88,36 @@ export default function CradPremiacoes({torneio,usuario}:{
            <ul>
             {assistentes.primeiro?.length > 0 && <li>Primeiro:  
               {
-                artilheiros.quarto.map((e:jogadoresType)=>{
+                artilheiros.quarto?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
             </li> }
             {assistentes.segundo?.length > 0 && <li>Segundo: 
               {
-                assistentes.segundo.map((e:jogadoresType)=>{
+                assistentes.segundo?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
             </li> }
             {assistentes.terceiro?.length > 0 && <li>Terceiro: 
               {
-                assistentes.terceiro.map((e:jogadoresType)=>{
+                assistentes.terceiro?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
             </li> }
             {assistentes.quarto?.length > 0 && <li>Quarto: 
               {
-                assistentes.quarto.map((e:jogadoresType)=>{
+                assistentes.quarto?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div> {" "+e.nome + ", "}</div>
+                    <div> {" - "+e.nome + ", "}</div>
                   </div> 
                 })
               }
@@ -127,17 +127,17 @@ export default function CradPremiacoes({torneio,usuario}:{
          <div className='cardPremiacoesBox'>
            <h2>Dados da partida</h2>
            <ul>
-             {dadosDoJogo.gols && <li>Gols: {dadosDoJogo.gols.map((e:any)=>{
+             {dadosDoJogo.gols && <li>Gols: {dadosDoJogo.gols?.map((e:any)=>{
               return <div>
                 {e.participante} fez {e.dado}
               </div>
              })}</li> }
-             {dadosDoJogo.empates && <li>Empate: {dadosDoJogo.empates.map((e:any)=>{
+             {dadosDoJogo.empates && <li>Empate: {dadosDoJogo.empates?.map((e:any)=>{
               return <div>
                 {e.participante} empatou {e.dado} 
               </div>
              })}</li> }
-             {dadosDoJogo.vitorias && <li>Vitórias: {dadosDoJogo.vitorias.map((e:any)=>{
+             {dadosDoJogo.vitorias && <li>Vitórias: {dadosDoJogo.vitorias?.map((e:any)=>{
               return <div>
                 {e.participante} venceu {e.dado}
               </div>
