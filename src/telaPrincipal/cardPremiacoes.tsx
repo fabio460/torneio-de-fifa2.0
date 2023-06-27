@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { dadosDoJogoType, selecionadosType, usuarioLogadoType } from '../types';
+import { dadosDoJogoType, jogadoresType, selecionadosType, usuarioLogadoType } from '../types';
 import { pagarFolhasApi, pagarPremiacoesApi } from '../api/pagamentosApi';
 import { adicionarEstatisticaApi } from '../api/estatisticasApi';
 import CarregandoBtn from '../carregandoBtn';
@@ -29,7 +29,7 @@ export default function CradPremiacoes({torneio,usuario}:{
   const [carregandoFolha, setCarregandoFolha] = useState(false)
   const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
   const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
-  
+  console.log(artilheiros)
   return (
     <Card sx={{ minWidth: 275 }} >
       <CardContent  className='cardPremiacoesContainer'>
@@ -47,34 +47,38 @@ export default function CradPremiacoes({torneio,usuario}:{
            <ul>
            {artilheiros.primeiro?.length > 0 && <li>Primeiro:  
               {
-                artilheiros.primeiro.map((e:any)=>{
+                artilheiros.primeiro.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                  <div>{" "+e.nome + ", "}</div>
-                </div>                })
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
+                })
               }
             </li> }
             {artilheiros.segundo?.length > 0 && <li>Segundo: 
               {
-                artilheiros.segundo.map((e:any)=>{
+                artilheiros.segundo.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                  <div>{" "+e.nome + ", "}</div>
-                </div>                })
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
+                })
               }
             </li> }
             {artilheiros.terceiro?.length > 0 && <li>Terceiro: 
               {
-                artilheiros.terceiro.map((e:any)=>{
+                artilheiros.terceiro.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                  <div>{" "+e.nome + ", "}</div>
-                </div>                })
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
+                })
               }
             </li> }
             {artilheiros.quarto?.length > 0 && <li>Quarto: 
               {
-                artilheiros.quarto.map((e:any)=>{
+                artilheiros.quarto.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                  <div>{" "+e.nome + ", "}</div>
-                </div>                })
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
+                })
               }
             </li> }
            </ul> 
@@ -84,35 +88,38 @@ export default function CradPremiacoes({torneio,usuario}:{
            <ul>
             {assistentes.primeiro?.length > 0 && <li>Primeiro:  
               {
-                assistentes.primeiro.map((e:any)=>{
+                artilheiros.quarto.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                    <div>{" "+e.nome + ", "}</div>
-                  </div>
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
                 })
               }
             </li> }
             {assistentes.segundo?.length > 0 && <li>Segundo: 
               {
-                assistentes.segundo.map((e:any)=>{
+                assistentes.segundo.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                  <div>{" "+e.nome + ", "}</div>
-                </div>                })
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
+                })
               }
             </li> }
             {assistentes.terceiro?.length > 0 && <li>Terceiro: 
               {
-                assistentes.terceiro.map((e:any)=>{
+                assistentes.terceiro.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                  <div>{" "+e.nome + ", "}</div>
-                </div>                })
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
+                })
               }
             </li> }
             {assistentes.quarto?.length > 0 && <li>Quarto: 
               {
-                assistentes.quarto.map((e:any)=>{
+                assistentes.quarto.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
-                  <div>{" "+e.nome + ", "}</div>
-                </div>                })
+                    <div> {" "+e.nome + ", "}</div>
+                  </div> 
+                })
               }
             </li> }
            </ul> 

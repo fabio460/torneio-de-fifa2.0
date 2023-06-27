@@ -25,9 +25,9 @@ type propsType = {
     setPrimeiro?:any
 }
 
-export default function Primeiro({handleChangePrimeiro, participantes, setPrimeiro}:propsType) {
+export default function Primeiro({participantes, setPrimeiro}:propsType) {
   const [personName, setPersonName] = React.useState<string[]>([]);
-
+  const [participante, setParticipante] = React.useState<string>()
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
       const {
           target: { value },
@@ -43,12 +43,16 @@ export default function Primeiro({handleChangePrimeiro, participantes, setPrimei
         jogadoresSelecionados.push(j)
     })
   })
+  let aux:any = []
   let listFilter = jogadoresSelecionados.filter(p=>{
     if (personName.includes(p.nome)) {
+        aux.push({
+          p, participante
+        })
         return p
     }
   })
-   
+   console.log(aux)
   React.useEffect(()=>{
       setPrimeiro(listFilter) 
   },[personName])  
@@ -69,7 +73,7 @@ export default function Primeiro({handleChangePrimeiro, participantes, setPrimei
           {
             participantes.map((p) => (
               p.participante.jogadores.map(j=>(
-                <MenuItem key={j.nome} value={j.nome}>
+                <MenuItem key={j.nome} value={j.nome} onChange={e=> alert(1)}>
                 <Checkbox checked={personName.indexOf(j.nome) > -1} />
                 <ListItemText primary={j.nome+" ("+p.participante.nome+")"} />
                 </MenuItem>     
