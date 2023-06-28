@@ -66,6 +66,7 @@
     .main{
       margin-bottom: 50px;
       border:  2px;
+      height: 100%;
     }
     .btnPagamentos{
         display: flex;
