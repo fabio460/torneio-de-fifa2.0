@@ -1,17 +1,17 @@
 import * as React from 'react';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Card from '@mui/material/Card';
-import { IconButton } from '@mui/material';
+import { Divider, IconButton } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { participantesType } from '../types';
-import { calculaFolha, formatoMonetario } from '../metodosUteis';
+import { calculaFolha, calculaQuantDeJogadores, formatoMonetario } from '../metodosUteis';
 import ModalDeletarParticipantes from './modalDeletarParticipantes';
 import { useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
-
+import { calculaValoresDosJogadores } from '../metodosUteis';
 export default function CardElenco({elenco}:{elenco:participantesType}) {
 
   const navigate = useNavigate()
@@ -48,19 +48,24 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
               </IconButton>
           }
         </Typography>
-      
+        <Divider sx={{marginBottom:1}}/>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-         Saldo {formatoMonetario(elenco.saldo)}
-          
+          Saldo {formatoMonetario(elenco.saldo)}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          folha {calculaFolha(elenco.jogadores)}
+        <Typography  color="text.secondary" sx={{ fontSize: 14 }}>
+          Folha {calculaFolha(elenco.jogadores)}
         </Typography>
-        <Typography variant="body2">
+        <Typography color="text.secondary" sx={{ fontSize: 14 }}>
+          Valor do elenco: {calculaValoresDosJogadores(elenco.jogadores)}
+        </Typography>
+        <Typography color="text.secondary" sx={{ fontSize: 14 }}>
+          Elenco com {calculaQuantDeJogadores(elenco.jogadores)} jogadores
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} variant="body2">
    
         </Typography>
-        <Button onClick={()=> linkGerenciaDeElenco()} variant='contained' size="small" sx={{width:"100%", marginBottom:1}}>Gerenciar time</Button>
-        <Button onClick={()=> linkComprarJogador()} variant='contained' size="small"  sx={{width:"100%", marginBottom:1}}>Comprar jogador</Button>
+        <Button color='info' onClick={()=> linkGerenciaDeElenco()} variant='contained' size="small" sx={{width:"100%", marginBottom:1}}>Gerenciar time</Button>
+        <Button color='warning' onClick={()=> linkComprarJogador()} variant='contained' size="small"  sx={{width:"100%"}}>Comprar jogador</Button>
       </CardContent>
     </Card>
   );

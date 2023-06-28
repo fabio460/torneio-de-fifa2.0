@@ -23,12 +23,8 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
     window.location.reload()
   }
   const pages = [
-    <div onClick={()=>n('/')}>home</div>,
-    <div onClick={()=>n('/compraDeJogadores')}>comprar</div>,
-    <div>saldo {formatoMonetario(elenco?.saldo)}</div>, 
-    <div>{elenco?.jogadores?.length} jogadores</div>,
-    <div>folha {elenco?.jogadores && calculaFolha(elenco?.jogadores)}</div>,
-    <div>{elenco?.time}</div>,
+    <div onClick={()=>n('/')}>Voltar a tela principal</div>,
+    <div onClick={()=>n('/compraDeJogadores')}>Comprar jogador</div>,
   ];
   const settings = [<ModalAtualizar elenco={elenco}/>, <ModalRemover elenco={elenco}/>, <div onClick={deslogar}>Deslogar</div>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);

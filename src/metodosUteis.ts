@@ -14,6 +14,18 @@ export function formatoMonetario(valor:any){
     return valor?.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
 }
 
+export function calculaValoresDosJogadores(jogadores:any) {
+  let res = jogadores.reduce((acc:any, dado:any)=>{
+    return acc + parseFloat(dado.valorDoJogador || "")
+ },0)
+  return formatoMonetario(res)
+}
+export function calculaQuantDeJogadores(jogadores:any) {
+  let res = jogadores.reduce((acc:any, dado:any)=>{
+    return acc + 1
+ },0)
+  return res
+}
 export function calculaFolha(arrayDeJogadore:jogadoresType[]) {
   const saldo = arrayDeJogadore.reduce((acc, jogador)=>{
     return acc + parseFloat(jogador.valorDoJogador || '')

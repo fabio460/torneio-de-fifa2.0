@@ -14,7 +14,7 @@ import Reservas from './escalacoes/quatroUmDoisTres/reservas';
 import { participantesType } from '../types';
 import TabelaDeJogadores from './tabelaDeJogadores';
 import { listarParticipantesApi } from '../api/participantesApi';
-import { calculaFolha, formatoMonetario, refinaPosicao } from '../metodosUteis';
+import { calculaFolha, calculaValoresDosJogadores, formatoMonetario, refinaPosicao } from '../metodosUteis';
 import { Button } from '@mui/material';
 import { deletarTodasPosicoesApi } from '../api/posicoes';
 
@@ -110,7 +110,7 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
           >
             <Tab label="Lista" {...a11yProps(0)} />
             <Tab label="Campinho" {...a11yProps(1)} />
-            <Tab label="Time" {...a11yProps(2)} />
+            <Tab label="informações" {...a11yProps(2)} />
           </Tabs>
         </div>
       </div>
@@ -152,6 +152,9 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
           </div>
           <div>
            Folha {calculaFolha(elenco?.jogadores || [])}
+          </div>
+          <div>
+            Valor do time {calculaValoresDosJogadores(elenco?.jogadores)}
           </div>
         </div>
       </TabPanel>

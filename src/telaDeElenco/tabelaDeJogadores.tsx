@@ -94,6 +94,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                 <TableCell >Posição</TableCell>
                 <TableCell >Time</TableCell>
                 <TableCell >Só fifa</TableCell>
+                <TableCell >Nacionalidade</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
@@ -119,8 +120,17 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     <TableCell >{jog.overall}</TableCell>
                     <TableCell >{formatoMonetario(parseFloat(jog?.valorDoJogador || ''))}</TableCell>
                     <TableCell >{traduzirPosicao(jog.posicao)}</TableCell>
-                    <TableCell >{jog.time}</TableCell>
+                    <TableCell>
+                        <div style={{display:"flex", alignItems:"center"}}>
+                          <Avatar src={jog.escudoDoTime} sx={{width:"20px",height:"20px", marginRight:1}}/>{jog.time}
+                        </div>
+                    </TableCell>
                     <TableCell ><Link to={jog.linkSoFifa}>{jog.nome}</Link></TableCell>
+                    <TableCell>
+                        <div style={{display:"flex", alignItems:"center"}}>
+                          <Avatar src={jog.imagemDaNacionalidade} sx={{width:"20px",height:"20px", marginRight:1}}/>{jog.nacionalidade}
+                        </div>
+                    </TableCell>
                 </TableRow>
             ))}
             </TableBody>
