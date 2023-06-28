@@ -12,7 +12,7 @@ export default function Footer() {
         margin:"5px"
     }
   return (
-    <Card sx={{ minWidth: 275, paddingTop:4, background:"#f5f5f5" }}>
+    <Card sx={{ minWidth: 275,minHeight:"80px" ,marginTop:2,paddingTop:4, background:"#f5f5f5" }}>
         <CardContent >
             <div style={{display:'flex',justifyContent:"center"}}>
                 <Link sx={linlStyle} color="inherit" href="https://www.linkedin.com/in/fabio-oliveira-b2589163/">
