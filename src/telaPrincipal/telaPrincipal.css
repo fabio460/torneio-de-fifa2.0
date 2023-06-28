@@ -65,7 +65,7 @@
 @media (max-width:850px) {
     .main{
       margin-bottom: 50px;
-      border:  2px;
+      border: transparent solid 2px;
       height: 100%;
     }
     .btnPagamentos{
