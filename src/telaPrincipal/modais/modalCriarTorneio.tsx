@@ -5,9 +5,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { usuarioLogadoType } from '../types';
+import { usuarioLogadoType } from '../../types';
 import { useSelector } from 'react-redux';
-import { criarTorneioApi } from '../api/torneioApi';
+import { criarTorneioApi } from '../../api/torneioApi';
 import TextField from '@mui/material/TextField';
 
 export default function ModalCriarTorneio() {

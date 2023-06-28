@@ -6,13 +6,13 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { dadosDoJogoType, jogadoresType, selecionadosType, usuarioLogadoType } from '../types';
-import { pagarFolhasApi, pagarPremiacoesApi } from '../api/pagamentosApi';
-import { adicionarEstatisticaApi } from '../api/estatisticasApi';
-import CarregandoBtn from '../carregandoBtn';
-import { torneioType } from '../types';
-import ModalConfirmarPagamentoPremiacao from './modalConfirmarPagPrem';
-import ModalConfirmaPagamentoFolha from './modalConfirPagFolha';
+import { dadosDoJogoType, jogadoresType, selecionadosType, usuarioLogadoType } from '../../types';
+import { pagarFolhasApi, pagarPremiacoesApi } from '../../api/pagamentosApi';
+import { adicionarEstatisticaApi } from '../../api/estatisticasApi';
+import CarregandoBtn from '../../carregandoBtn';
+import { torneioType } from '../../types';
+import ModalConfirmarPagamentoPremiacao from '../modais/modalConfirmarPagPrem';
+import ModalConfirmaPagamentoFolha from '../modais/modalConfirPagFolha';
 import { Avatar } from '@mui/material';
 
 
@@ -29,7 +29,7 @@ export default function CradPremiacoes({torneio,usuario}:{
   const [carregandoFolha, setCarregandoFolha] = useState(false)
   const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
   const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
-  console.log(artilheiros)
+  
   return (
     <Card sx={{ minWidth: 275 }} >
       <CardContent  className='cardPremiacoesContainer'>

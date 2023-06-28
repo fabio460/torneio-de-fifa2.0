@@ -4,12 +4,12 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { participantesType, usuarioLogadoType } from '../types';
+import { participantesType, usuarioLogadoType } from '../../types';
 import { useSelector } from 'react-redux';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { IconButton } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { deletarParticipantesApi } from '../api/participantesApi';
+import { deletarParticipantesApi } from '../../api/participantesApi';
 
 
 export default function ModalDeletarParticipantes({elenco}:{elenco:participantesType}) {

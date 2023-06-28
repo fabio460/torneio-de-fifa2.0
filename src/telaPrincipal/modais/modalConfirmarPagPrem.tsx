@@ -5,12 +5,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { pagarPremiacoesApi } from '../api/pagamentosApi';
-import { selecionadosType, usuarioLogadoType } from '../types';
+import { pagarPremiacoesApi } from '../../api/pagamentosApi';
+import { selecionadosType, usuarioLogadoType } from '../../types';
 import { useSelector } from 'react-redux';
-import { adicionarEstatisticaApi } from '../api/estatisticasApi';
-import CarregandoBtn from '../carregandoBtn';
-import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from '../valoresDosPremios';
+import { adicionarEstatisticaApi } from '../../api/estatisticasApi';
+import CarregandoBtn from '../../carregandoBtn';
+import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from '../../valoresDosPremios';
 
 export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
    usuario:usuarioLogadoType | undefined,

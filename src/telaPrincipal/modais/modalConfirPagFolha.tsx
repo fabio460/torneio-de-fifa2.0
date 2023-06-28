@@ -6,8 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useSelector } from 'react-redux';
-import { pagarFolhasApi } from '../api/pagamentosApi';
-import CarregandoBtn from '../carregandoBtn';
+import { pagarFolhasApi } from '../../api/pagamentosApi';
+import CarregandoBtn from '../../carregandoBtn';
 
 export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
   const [open, setOpen] = React.useState(false);

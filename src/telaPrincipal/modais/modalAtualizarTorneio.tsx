@@ -4,12 +4,12 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { participantesType, torneioType, usuarioLogadoType } from '../types';
+import { participantesType, torneioType, usuarioLogadoType } from '../../types';
 import { useSelector } from 'react-redux';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { IconButton, TextField } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { atualizaTorneioApi } from '../api/torneioApi';
+import { atualizaTorneioApi } from '../../api/torneioApi';
 
 
 

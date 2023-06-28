@@ -4,8 +4,8 @@ import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import ModalConfirmaPagamentoFolha from './modalConfirPagFolha';
-import ModalConfirmarPagamentoPremiacao from './modalConfirmarPagPrem';
+import ModalConfirmaPagamentoFolha from './modais/modalConfirPagFolha';
+import ModalConfirmarPagamentoPremiacao from './modais/modalConfirmarPagPrem';
 import { useSelector } from 'react-redux';
 
 

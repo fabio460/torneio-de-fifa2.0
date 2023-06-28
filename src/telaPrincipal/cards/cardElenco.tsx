@@ -5,13 +5,13 @@ import { Divider, IconButton } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { participantesType } from '../types';
-import { calculaFolha, calculaQuantDeJogadores, formatoMonetario } from '../metodosUteis';
-import ModalDeletarParticipantes from './modalDeletarParticipantes';
+import { participantesType } from '../../types';
+import { calculaFolha, calculaQuantDeJogadores, formatoMonetario } from '../../metodosUteis';
+import ModalDeletarParticipantes from '../modais/modalDeletarParticipantes';
 import { useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { calculaValoresDosJogadores } from '../metodosUteis';
+import { calculaValoresDosJogadores } from '../../metodosUteis';
 export default function CardElenco({elenco}:{elenco:participantesType}) {
 
   const navigate = useNavigate()
@@ -64,7 +64,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
         <Typography sx={{ mb: 1.5 }} variant="body2">
    
         </Typography>
-        <Button color='info' onClick={()=> linkGerenciaDeElenco()} variant='contained' size="small" sx={{width:"100%", marginBottom:1}}>Gerenciar time</Button>
+        <Button color='success' onClick={()=> linkGerenciaDeElenco()} variant='contained' size="small" sx={{width:"100%", marginBottom:1}}>Gerenciar time</Button>
         <Button color='warning' onClick={()=> linkComprarJogador()} variant='contained' size="small"  sx={{width:"100%"}}>Comprar jogador</Button>
       </CardContent>
     </Card>

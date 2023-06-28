@@ -43,7 +43,7 @@ export default function EstatisticaArtilheiros({estatistica}:{estatistica:statis
     useEffect(()=>{
       getEstatistica()
     },[estatistica])  
-
+    
     return (
       <div>
         <h5 style={{textAlign:"center"}}>Maiores Artilheiros</h5>

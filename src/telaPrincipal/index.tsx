@@ -12,9 +12,9 @@ import { Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { getUsuarioPorIdApi } from '../api/usuarioApi'
 import "./telaPrincipal.css"
-import CardParticipantes from './cardParticipantes'
-import CradPremiacoes from './cardPremiacoes'
-import CardElenco from './cardElenco'
+import CardParticipantes from './cards/cardParticipantes'
+import CradPremiacoes from './cards/cardPremiacoes'
+import CardElenco from './cards/cardElenco'
 import ResponsiveAppBar from '../appBar'
 import { idDoUsuarioLogado } from '../metodosUteis'
 import { usuarioLogadoType } from '../types'
@@ -26,6 +26,7 @@ import EstatisticaCampeao from './estatisticaCampeao'
 import EstatisticaAssistencia from './estatisticaAssistencia'
 import { listarStatisticaApi } from '../api/estatisticasApi'
 import BtnScroll from './btnScroll';
+import Footer from './footer';
 
 
 
@@ -132,6 +133,7 @@ export default function TelaPrincipal() {
                   })
                 }
               </div>
+              <Footer/>
             </div>
           </div>
       }

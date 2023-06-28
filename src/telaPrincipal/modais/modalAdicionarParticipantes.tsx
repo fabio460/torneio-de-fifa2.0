@@ -5,17 +5,17 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { jogadoresType, timesType, usuarioLogadoType } from '../types';
+import { jogadoresType, timesType, usuarioLogadoType } from '../../types';
 import { useSelector } from 'react-redux';
-import { adicionarParticipantesoApi } from '../api/participantesApi';
+import { adicionarParticipantesoApi } from '../../api/participantesApi';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { getEmblemaDoTime, getJogadoresPorTime, getTimeName, getTimes } from '../metodosUteis';
+import { getEmblemaDoTime, getJogadoresPorTime, getTimeName, getTimes } from '../../metodosUteis';
 import Autocomplete from '@mui/material/Autocomplete';
-import { listaJogadoresPorTorneioApi } from '../api/jogadoresApi';
+import { listaJogadoresPorTorneioApi } from '../../api/jogadoresApi';
 export default function ModalAdicionarParticipantes() {
   const [open, setOpen] = React.useState(false);
   const [nomeDoParticipante, setNomeDoParticipante] = useState('')

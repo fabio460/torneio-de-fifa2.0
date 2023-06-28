@@ -4,14 +4,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Checkbox } from '@mui/material';
-import { chekedType, participantesType, timesType, torneioType } from '../types';
-import ModalCriarTorneio from './modalCriarTorneio';
-import ModalAdicionarParticipantes from './modalAdicionarParticipantes';
-import SelectTorneio from './selectTorneio';
+import { chekedType, participantesType, timesType, torneioType } from '../../types';
+import ModalCriarTorneio from '../modais/modalCriarTorneio';
+import ModalAdicionarParticipantes from '../modais/modalAdicionarParticipantes';
+import SelectTorneio from '../selectTorneio';
 import { useDispatch } from 'react-redux';
-import ModalDeletarTorneio from './modalDeletarTorneio';
-import ModalAtualizarTorneio from './modalAtualizarTorneio';
-import { getTimes } from '../metodosUteis';
+import ModalDeletarTorneio from '../modais/modalDeletarTorneio';
+import ModalAtualizarTorneio from '../modais/modalAtualizarTorneio';
+import { getTimes } from '../../metodosUteis';
 
 
 
