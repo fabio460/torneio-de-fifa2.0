@@ -63,6 +63,9 @@
 }
 
 @media (max-width:850px) {
+    .main{
+      margin-bottom: 50px;
+    }
     .btnPagamentos{
         display: flex;
         flex-direction: column;
