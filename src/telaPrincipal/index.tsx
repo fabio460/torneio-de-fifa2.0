@@ -133,8 +133,8 @@ export default function TelaPrincipal() {
                   })
                 }
               </div>
-              <Footer/>
             </div>
+            <Footer/>
           </div>
       }
     </div>
