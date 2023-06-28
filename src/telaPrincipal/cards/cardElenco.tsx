@@ -29,7 +29,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
     minWidth: 275,
     paddingBottom:0,
     "@media (max-width:850px)":{
-      paddingBottom:1,
+      paddingBottom:0,
     } 
   }
   return (
