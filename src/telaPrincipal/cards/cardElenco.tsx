@@ -25,8 +25,15 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
     navigate('/elenco')
   }
   const deleteChecked = useSelector((state:any)=>state.checkedDeletarPart.status)
+  const cardStyle = { 
+    minWidth: 275,
+    paddingBottom:0,
+    "@media (max-width:850px)":{
+      paddingBottom:1,
+    } 
+  }
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={cardStyle}>
       <CardContent>
         <Typography variant="h5" component="div" sx={{display:'flex', justifyContent:'space-between', marginBottom:2}}>
           <div style={{display:"flex", alignItems:"center"}}>
