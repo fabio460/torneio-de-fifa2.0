@@ -185,7 +185,6 @@ export default function SwitchesDeletarParticipantes() {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setChecked(event.target.checked);
     };
-    console.log(checked)
     const dispatch = useDispatch()
     dispatch({
         type:"deletarParticipantes",

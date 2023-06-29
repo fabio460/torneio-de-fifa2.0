@@ -72,11 +72,15 @@ function ScrollTop(props: Props) {
 
 export default function TelaPrincipal() {
   const dispatch = useDispatch()
+  const torneio = useSelector((state:any)=>state.torneioReducer.torneio)
   const [usuario, setUsuario] = useState<usuarioLogadoType>()
+  localStorage.setItem("idDoTorneio",usuario?.torneio[torneio]?.id || '')
   const [carregando, setCarregando] = useState(true)
   const [estatisticas, setEstatisticas] = useState()
-  const torneio = useSelector((state:any)=>state.torneioReducer.torneio)
   const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
+
+  var id = localStorage.getItem("idDoTorneio") || ""
+  
   async function getUsuario() {
     var u = await getUsuarioPorIdApi(idDoUsuarioLogado)
     setCarregando(false)
@@ -89,16 +93,19 @@ export default function TelaPrincipal() {
   useEffect(()=>{
     getUsuario()
   },[])
+
   async function getEstatistica() {
-    const est = await listarStatisticaApi(usuario?.torneio[torneio]?.id || '')
-    setEstatisticas(est)
-    
+    if (id !== "") {
+      
+      const est = await listarStatisticaApi(id)
+      setEstatisticas(est)
+    }
   }
+ 
   
-  localStorage.setItem("idDoTorneio",usuario?.torneio[torneio]?.id || '')
   useEffect(()=>{    
     getEstatistica()
-  },[torneio])
+  },[torneio,id])
   return (
     <React.Fragment>
       <Toolbar id="back-to-top-anchor" />
