@@ -55,7 +55,7 @@ export default function ModalArtilharia() {
         sx={{background:"",width:"100%"}}
       >
         <DialogTitle id="alert-dialog-title">
-          Quem fez mais gols
+          Escolha os artilheiros
         </DialogTitle>
         <DialogContent className='modalColocacaoFormsContainer' sx={dialogStyle} >
           <DialogContentText id="alert-dialog-description"  >            

@@ -140,8 +140,10 @@ export default function TelaPrincipal() {
                   })
                 }
               </div>
+              <div className='footer'>
+                <Footer/>
+              </div>
             </div>
-            <Footer/>
           </div>
       }
     </div>
