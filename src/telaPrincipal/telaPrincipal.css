@@ -85,6 +85,7 @@
         min-height: 1100px;
     }
     .telaPrincipalInferior{
+        height: max-content;
         margin-bottom:20%;
     }
     .cardParticipantesBtns{

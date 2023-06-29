@@ -141,7 +141,6 @@ export default function TelaPrincipal() {
                 }
               </div>
               <div className='footer'>
-                <Footer/>
               </div>
             </div>
           </div>
@@ -153,6 +152,7 @@ export default function TelaPrincipal() {
           <BtnScroll usuario={usuario}/>
         </ScrollTop>
       }
+      <Footer/>
     </React.Fragment>
   );
 }
