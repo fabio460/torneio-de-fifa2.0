@@ -64,9 +64,11 @@
 
 @media (max-width:850px) {
     .main{
-      margin-bottom: 50px;
-      border: transparent solid 2px;
-      height: 100%;
+      
+        min-height: max-content;
+    }
+    .footer{
+        height: 80px;
     }
     .btnPagamentos{
         display: flex;
@@ -81,6 +83,9 @@
     }
     .telaPrincipalMeio{
         min-height: 1100px;
+    }
+    .telaPrincipalInferior{
+        margin-bottom:20%;
     }
     .cardParticipantesBtns{
         display: flex;
