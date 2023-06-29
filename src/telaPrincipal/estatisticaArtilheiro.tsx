@@ -5,44 +5,26 @@ import { artilheiro } from '../valoresDosPremios';
 import { removerDuplicataArrayDeObjetos } from '../metodosUteis';
 
 export default function EstatisticaArtilheiros({estatistica}:{estatistica:statisticasTypes[] | undefined}) {
-    
-    const [dados, setDados] = useState([])
-    const [limiteDeItens, setLimiteDeItens] = useState(5)
-    async function getEstatistica() {
-        const e = estatistica
-        const nomesComRepeticoes = e?.map(item=>{
-            return item.artilheiro
-        }) 
-        const u = removerDuplicataArrayDeObjetos(nomesComRepeticoes)
-        const usuarios = u?.filter((e:any)=>{
-            if (e !== "") {
-                return e
-            }
+     
+      let lista:any = []
+      estatistica?.map((e:any)=>{
+        e.artilheiros.map((a:any)=>{
+          lista.push(a)
         })
-
-        let aux:any = []
-        usuarios?.filter((usuario:any, key:any)=>{
-            let cont = 0          
-              nomesComRepeticoes?.filter((item)=>{ 
-                if (item === usuario) {
-                  cont+=1;
-                }
-              })
-              aux.push({name:usuario, Artilharias:cont})
+      })
+      const occurrences = lista.reduce((acc:any, curr:any) => {
+        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+      }, {});
+      
+      let str = JSON.stringify(occurrences)
+      let list:any = str.split("{")[1].split("}")[0].split(",")
+      let data:any=[]
+      list.map((e:any)=>{
+        data.push({
+          name:e.split(":")[0],
+          Artilharias:parseInt(e.split(":")[1])
         })
-        const ordenada = aux.sort((a:any,b:any)=>{
-            return a.Artilharias > b.Artilharias ? -1 : a.Artilharias < b.Artilharias ? 1 : 0
-        })
-        const primeiros = ordenada?.filter((elem:any, key:any)=>{
-            if (key < limiteDeItens) {    
-                return elem
-            }
-        })
-        setDados(primeiros.reverse())
-    }
-    useEffect(()=>{
-      getEstatistica()
-    },[estatistica])  
+      })
     
     return (
       <div>
@@ -51,7 +33,7 @@ export default function EstatisticaArtilheiros({estatistica}:{estatistica:statis
           <AreaChart
             width={500}
             height={400}
-            data={dados}
+            data={data}
             margin={{
               top: 10,
               right: 30,

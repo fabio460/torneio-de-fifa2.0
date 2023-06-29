@@ -98,9 +98,9 @@ export type dadosPremiacoesDaApiType = {
 
 export type statisticasTypes = {
   id?:string,
-  artilheiro:string,
+  artilheiros:string[],
   data:Date,
-  melhorAssistente:string,
+  assistentes:string[],
   vencedor:string
 }
 export type timesType = {

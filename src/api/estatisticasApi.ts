@@ -12,7 +12,7 @@ export const listarStatisticaApi = async(torneioId:string)=>{
     return f
 }
 
-export const adicionarEstatisticaApi = async(artilheiro:string, melhorAssistente:string, vencedor:string,torneioId:string | undefined)=>{
+export const adicionarEstatisticaApi = async(artilheiros:string[], assistentes:string[], vencedor:string,torneioId:string | undefined)=>{
     
     const f = await fetch(linkLocal+"estatistica",{
         headers:{
@@ -20,7 +20,7 @@ export const adicionarEstatisticaApi = async(artilheiro:string, melhorAssistente
         },
         method:"post",
         body:JSON.stringify({
-            vencedor,melhorAssistente,artilheiro,torneioId
+            vencedor,artilheiros,assistentes,torneioId
         })
     })
     .then(res=>res.json())

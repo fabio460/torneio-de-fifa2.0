@@ -88,7 +88,7 @@ export default function CradPremiacoes({torneio,usuario}:{
            <ul>
             {assistentes.primeiro?.length > 0 && <li>Primeiro:  
               {
-                artilheiros.quarto?.map((e:jogadoresType)=>{
+                assistentes.primeiro?.map((e:jogadoresType)=>{
                   return  <div style={{display:"flex"}}>
                     <div> {" - "+e.nome + ", "}</div>
                   </div> 

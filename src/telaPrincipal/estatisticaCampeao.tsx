@@ -46,8 +46,8 @@ export default function EstatisticaCampeao({estatistica}:{estatistica:statistica
   useEffect(()=>{
     getEstatistica()
   },[torneioReducer,estatistica])  
-
-
+   
+    
     return (
       <div>
         <h5 style={{textAlign:"center"}}>Meiores Vencedores</h5>

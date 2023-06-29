@@ -10,7 +10,7 @@ export default function EstatisticaAssistencia({estatistica}:{estatistica:statis
   async function getEstatistica() {
       const e = estatistica
       const nomesComRepeticoes = e?.map(item=>{
-          return item.melhorAssistente
+          return item.assistentes
       }) 
       const u = removerDuplicataArrayDeObjetos(nomesComRepeticoes)
       const usuarios = u?.filter((e:any)=>{
@@ -45,6 +45,26 @@ export default function EstatisticaAssistencia({estatistica}:{estatistica:statis
   },[estatistica])  
 
 
+  let lista:any = []
+  estatistica?.map((e:any)=>{
+    e.assistentes?.map((a:any)=>{
+      lista.push(a)
+    })
+  })
+  const occurrences = lista.reduce((acc:any, curr:any) => {
+    return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+  }, {});
+  
+  let str = JSON.stringify(occurrences)
+  let list:any = str.split("{")[1].split("}")[0].split(",")
+  let data:any=[]
+  list.map((e:any)=>{
+    data.push({
+      name:e.split(":")[0],
+      Assistencias:parseInt(e.split(":")[1])
+    })
+  })
+  
     return (
       <div>
         <h5 style={{textAlign:"center"}}>Melhores Assistentes</h5>
@@ -52,7 +72,7 @@ export default function EstatisticaAssistencia({estatistica}:{estatistica:statis
           <AreaChart
             width={500}
             height={400}
-            data={dados}
+            data={data}
             margin={{
               top: 10,
               right: 30,

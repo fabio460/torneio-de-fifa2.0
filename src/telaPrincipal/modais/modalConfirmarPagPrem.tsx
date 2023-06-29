@@ -106,12 +106,19 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
        setCarregandoPremio(false)
        return null 
     }
-
+    const assistentesArray:any = []
+    assistentes.primeiro.map((e:any)=>{
+      assistentesArray.push(e.nome)
+    })
+    const artilheirosArray:any = []
+    artilheiros.primeiro.map((e:any)=>{
+      artilheirosArray.push(e.nome)
+    })
      const res =await pagarPremiacoesApi(premiados)
      if (artilheiros.primeiro || assistentes.primeiro || colocacao.primeiro) {     
        const resSta = await adicionarEstatisticaApi(
-        artilheiros.primeiro ? artilheiros.primeiro.nome: "",
-        assistentes.primeiro ? assistentes.primeiro.nome: "",
+        artilheirosArray,
+        assistentesArray,
         colocacao.primeiro ? colocacao.primeiro.nome: "",
         usuario?.torneio[torneioReducer].id || ''
         )
