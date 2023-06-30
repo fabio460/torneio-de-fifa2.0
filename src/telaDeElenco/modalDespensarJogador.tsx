@@ -67,7 +67,9 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
                           {jog.jogador.nome}
                         </div>
                         <div>
-                          Você recebera {formatoMonetario(parseFloat(jog.jogador.valorDoJogador || "")*0.6)} por este jogador
+                          Você recebera {formatoMonetario(parseFloat(jog.jogador.valorDoJogador || "")*(
+                            parseInt(jog.jogador.overall) < 90 ? 0.4 : 0.6
+                          ))} por este jogador
                         </div>
                     </div>
                 })

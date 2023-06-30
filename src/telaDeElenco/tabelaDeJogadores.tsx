@@ -61,16 +61,19 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
     
     const somaDosValores = ()=>{
         return checkedList.reduce((acc:any, valor:checkedType)=>{
-           return acc + parseFloat(valor.jogador.valorDoJogador || '')
+           return acc + parseFloat(valor.jogador.valorDoJogador || '')*(
+            parseInt(valor.jogador.overall) < 90 ? 0.4 : 0.6
+           )
         },0)
     }
   return (
     <div>
+        <div style={{textAlign:"center",margin:"20px 0px", color:"red"}}>Saldo {formatoMonetario(elenco?.saldo)}</div>
         <div className='tabelaDeJogadoresBtnContainer'>
             {
                 checkedList.length > 0 && 
                 <div className='tabelaDeJogadoresBtnGrupo'>
-                   <div style={{marginRight:'30px'}}>Total {formatoMonetario(somaDosValores())}</div>
+                   <div style={{marginRight:'30px'}}>Total a receber {formatoMonetario(somaDosValores())}</div>
                    <ModalDespensarJogador listaDeSelecionados={checkedList} elenco={elenco}/> 
                    <ModalTransferencia listaDeSelecionados={checkedList} elenco={elenco} torneio={participantes}/>
                 </div>
