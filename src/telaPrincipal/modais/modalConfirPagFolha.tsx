@@ -29,7 +29,7 @@ export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
     }else{
       setCarregandoFolha(true)
       let pagadores:any = []
-      participantes.map((e:any)=>{
+      participantes?.map((e:any)=>{
          pagadores.push({
           idParticipante:e.participante.id
          })

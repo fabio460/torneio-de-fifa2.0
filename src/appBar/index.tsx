@@ -26,7 +26,7 @@ const pages = [
 
 function ResponsiveAppBar() {
   const h = useNavigate()
-  const settings = [<div>{usuarioLogado.nome}</div>,<div onClick={()=>h("/valores")}>Valores</div>, <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
+  const settings = [<div>{usuarioLogado.nome}</div>,<div onClick={()=>h("/valores")}>Regras gerais</div>, <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 

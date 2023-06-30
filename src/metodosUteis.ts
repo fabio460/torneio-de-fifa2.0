@@ -36,7 +36,7 @@ export function calculaFolha(arrayDeJogadore:jogadoresType[]) {
  export function removeNome(nome:string) {
      let nomeBruto = nome.split(" ")
      let nomeTratado = ""
-     nomeBruto.filter((e:string)=>{
+     nomeBruto?.filter((e:string)=>{
        if (
          e === "ZAG" || e === "VOL" || e === "MC" || e === "ATA" || e === "ME" || e === "MD" ||
          e === "MEI" || e === "GOL" || e === "SA" || e === "LD" || e === "LE" ||
@@ -175,7 +175,7 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
 
 
   export function removerDuplicataArrayDeObjetos(arrayDeObjetos:any){
-    let arrayDeObjetos2 = arrayDeObjetos.filter((value:any, index:any, array:any) => array.indexOf(value) === index);
+    let arrayDeObjetos2 = arrayDeObjetos?.filter((value:any, index:any, array:any) => array.indexOf(value) === index);
     const parsed_array = arrayDeObjetos?.map((val:any)=>{
       return JSON?.stringify(val)
     })
