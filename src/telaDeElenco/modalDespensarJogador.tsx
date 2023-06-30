@@ -30,11 +30,13 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
        return sel.jogador.id
     })
     let somaDosValores = listaDeSelecionados?.reduce((acc, item)=>{
-        return acc + parseFloat(item.jogador.valorDoJogador || '')
+        return acc + parseFloat(item.jogador.valorDoJogador || '')*(
+          parseInt(item.jogador.overall) < 90 ? 0.4 : 0.6
+        )
     },0)
     if (somaDosValores) {
         const saldo = elenco?.saldo || 0
-        const saldoAtualizado = somaDosValores*0.6 + saldo
+        const saldoAtualizado = somaDosValores + saldo
         console.log(saldoAtualizado)
         const res = await removerJogadoresApi(listaDeIds, saldoAtualizado, elenco?.id)
         window.location.reload()

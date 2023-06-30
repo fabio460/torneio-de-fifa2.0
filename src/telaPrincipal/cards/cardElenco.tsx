@@ -56,8 +56,14 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
           }
         </Typography>
         <Divider sx={{marginBottom:1}}/>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Saldo {formatoMonetario(elenco.saldo)}
+        <Typography sx={{ fontSize: 14}} color="text.secondary" gutterBottom>
+         
+          {
+            elenco.saldo < 0 ? 
+              <div style={{color:"red"}}>Saldo {formatoMonetario(elenco.saldo)}</div>:
+              <div>Saldo {formatoMonetario(elenco.saldo)}</div>
+          }
+      
         </Typography>
         <Typography  color="text.secondary" sx={{ fontSize: 14 }}>
           Folha {calculaFolha(elenco.jogadores)}

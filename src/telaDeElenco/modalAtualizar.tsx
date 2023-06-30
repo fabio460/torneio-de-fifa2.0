@@ -65,15 +65,17 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
                 defaultValue={elenco?.saldo} 
                 onChange={e=> setSaldo(e.target.value)}
                 sx={{marginBottom:1, width:"100%"}}
+                disabled
             />
-                <TextField 
-                size='small' 
-                id="outlined-basic" 
-                label="Time" 
-                variant="outlined"
-                defaultValue={elenco?.time} 
-                onChange={e=> setTime(e.target.value)}
-                sx={{marginBottom:1, width:"100%"}}
+            <TextField 
+              size='small' 
+              id="outlined-basic" 
+              label="Time" 
+              variant="outlined"
+              defaultValue={elenco?.time} 
+              onChange={e=> setTime(e.target.value)}
+              sx={{marginBottom:1, width:"100%"}}
+              disabled
             />
           </DialogContentText>
         </DialogContent>

@@ -141,9 +141,15 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
           <h4>
             Usuário {elenco?.nome}
           </h4>
-          <div>
-            Saldo {formatoMonetario(elenco?.saldo)}
-          </div>
+          {
+            elenco?.saldo || 0 < 0 ?
+            <div style={{color:"red"}}>
+              Saldo {formatoMonetario(elenco?.saldo)}
+            </div>:
+            <div>
+              Saldo {formatoMonetario(elenco?.saldo)}
+            </div>
+          }
           <div>
             Time {elenco?.time}
           </div>

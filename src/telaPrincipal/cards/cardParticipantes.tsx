@@ -60,7 +60,7 @@ export default function CardParticipantes({participantes, torneio}:
         {participantes?.map((elem, key)=>{
           return(
             <div key={key}>
-              <Checkbox id={JSON.stringify(elem)} onChange={handleChange}/> {elem.nome}
+              <Checkbox id={JSON.stringify(elem)} onChange={handleChange} disabled={elem.saldo < 0 && true}/> {elem.nome}
             </div>
           )
         })}
