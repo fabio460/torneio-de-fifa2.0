@@ -145,7 +145,7 @@ export default function ModalDadosDoJogo() {
   return (
     <div>
       <div onClick={handleClickOpen}>
-        Dados do jogo
+        Gols Vitórias e empates
       </div>
       <Dialog
         open={open}
