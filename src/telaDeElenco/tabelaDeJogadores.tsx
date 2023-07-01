@@ -69,7 +69,14 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
     }
   return (
     <div>
-        <div style={{textAlign:"center",margin:"20px 0px", color:"red"}}>Saldo {formatoMonetario(elenco?.saldo)}</div>
+        {
+            elenco?.saldo && elenco?.saldo < 0 ?
+            <div style={{textAlign:"center",margin:"20px 0px", color:"#ef5350"}}>
+                Saldo negativo {formatoMonetario(elenco?.saldo)}
+                <div>voçê precisa dispensar jogadores para participar novamente!</div>    
+            </div>:
+            <div style={{textAlign:"center",margin:"20px 0px", color:"#4caf50"}}>Saldo {formatoMonetario(elenco?.saldo)}</div>
+        }
         <div className='tabelaDeJogadoresBtnContainer'>
             {
                 checkedList.length > 0 && 

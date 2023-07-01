@@ -142,13 +142,12 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
             Usuário {elenco?.nome}
           </h4>
           {
-            elenco?.saldo || 0 < 0 ?
-            <div style={{color:"red"}}>
-              Saldo {formatoMonetario(elenco?.saldo)}
+            elenco?.saldo && elenco?.saldo < 0 ?
+            <div style={{ color:"#ef5350"}}>
+              Saldo negativo {formatoMonetario(elenco?.saldo)}
+              <div>voçê precisa dispensar jogadores para participar novamente!</div>
             </div>:
-            <div>
-              Saldo {formatoMonetario(elenco?.saldo)}
-            </div>
+            <div style={{ color:"#4caf50"}}>Saldo {formatoMonetario(elenco?.saldo)}</div>
           }
           <div>
             Time {elenco?.time}

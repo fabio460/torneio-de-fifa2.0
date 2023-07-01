@@ -77,7 +77,15 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
         <Typography sx={{ mb: 1.5 }} variant="body2">
    
         </Typography>
-        <Button color='success' onClick={()=> linkGerenciaDeElenco()} variant='contained' size="small" sx={{width:"100%", marginBottom:1}}>Gerenciar time</Button>
+        {/* {
+          elenco.saldo && elenco.saldo < 0 :
+          
+        } */}
+        <Button color={elenco.saldo < 0 ? 'error' : 'success'} onClick={()=> linkGerenciaDeElenco()} variant={elenco.saldo < 0 ? 'outlined': 'contained'} size="small" sx={{width:"100%", marginBottom:1}}>
+          {
+            elenco.saldo < 0 ? 'dispensar jogadores':'Gerenciar time'
+          }
+        </Button>
         <Button color='warning' onClick={()=> linkComprarJogador()} variant='contained' size="small"  sx={{width:"100%"}}>Comprar jogador</Button>
       </CardContent>
     </Card>
