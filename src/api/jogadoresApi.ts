@@ -57,14 +57,22 @@ export const removerJogadoresApi = async(listaDeIds:string[], saldoAtualizado:nu
 }
 
 
-export const transferenciaDeJogadoresApi = async(idDoProprietario:string | undefined, idDoComprador:string, idsDosJogadoresSelecionados:(string | undefined)[] | undefined)=>{
+export const transferenciaDeJogadoresApi = async(
+        idDoProprietario:string | undefined,
+        idDoComprador:string,
+        idsDosJogadoresSelecionados:(string | undefined)[] | undefined, 
+        valorDaNegociacao:number | undefined
+    )=>{
     const f = await fetch(linkLocal+"jogadores/transferencia",{
         headers:{
             'Content-Type':'application/json'
         },
         method:'put',
         body:JSON.stringify({
-            idDoProprietario,idDoComprador,idsDosJogadoresSelecionados
+            idDoProprietario,
+            idDoComprador,
+            idsDosJogadoresSelecionados,
+            valorDaNegociacao
         })
     })
     .then(res=>res.json())

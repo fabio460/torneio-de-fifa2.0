@@ -5,9 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'react-bootstrap';
-
 import { checkedType, participantesType, torneioType } from '../types';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -15,7 +13,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { transferenciaDeJogadoresApi } from '../api/jogadoresApi';
 import CarregandoBtn from '../carregandoBtn';
 import { formatoMonetario } from '../metodosUteis';
-
+import { Checkbox, TextField } from '@mui/material';
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{
     torneio:torneioType|undefined,
@@ -25,6 +23,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   const [open, setOpen] = React.useState(false);
   const [idDoComprador, setIdDoComprador] = React.useState('');
   const [loading, setLoading] = React.useState(false)
+  const [valorDaNegociacao, setValorDaNegociacao] = React.useState<number>()
   const handleChange = (event: SelectChangeEvent) => {
     setIdDoComprador(event.target.value as string);
   };
@@ -36,20 +35,42 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [checked, setChecked] = React.useState(false);
+
+  const  handleNovoValor = (e: any)=>{
+     let valor:number = parseFloat(e.target.value)
+     if (valor > 0) {
+      setValorDaNegociacao(valor)
+     }
+
+  }
+  const handleChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
   
   const idsDosJogadoresSelecionados = listaDeSelecionados?.map(j=>{
     return j.jogador.id
   })
-  console.log(listaDeSelecionados)
+  
   const idDoProprietario = elenco?.id
   async function transferir() {
     setLoading(true)
-    const res = await transferenciaDeJogadoresApi(idDoProprietario, idDoComprador, idsDosJogadoresSelecionados)
-    alert(res)
-    setLoading(false)
-    if (res === "transferência concluida com sucesso") {
-      window.location.reload()
-    }
+    const res = await transferenciaDeJogadoresApi(
+        idDoProprietario,
+        idDoComprador,
+        idsDosJogadoresSelecionados,
+        valorDaNegociacao
+      )
+      if (res === "transferência concluida com sucesso!!!") {
+        setTimeout(() => {
+          alert(res)
+          window.location.reload()
+        }, 2000);
+      }else{
+        setLoading(false)   
+        alert(res)
+      }
   }
   function getValoresTotais(lista:checkedType[] | undefined) {
     
@@ -83,7 +104,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
               })
             }
             <h5 style={{color:"red", marginTop:"10px"}}>
-              No total de: {getValoresTotais(listaDeSelecionados)}
+              Valor da negociação: {getValoresTotais(listaDeSelecionados)}
             </h5>
           <FormControl fullWidth sx={{marginTop:3}} size='small'>
             <InputLabel id="demo-simple-select-label" sx={{bgcolor:'white', paddingRight:1}}>Transferir para</InputLabel>
@@ -102,15 +123,34 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
               }
             </Select>
           </FormControl>
+          <div>
+            <Checkbox
+              checked={checked}
+              onChange={handleChangeCheckBox}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+            Selecione aqui caso queira mudar o valor da negociação!
+            <div style={{height:"60px"}}>
+              {
+              checked &&
+                <TextField 
+                  sx={{width:"100%"}}
+                  size='small'
+                  label='Novo valor da transação'
+                  onChange={handleNovoValor}
+                />
+              }
+            </div>
+          </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           {
             loading?
-            <Button onClick={transferir} style={{paddingBottom:"0px"}}>
+            <Button onClick={transferir} style={{paddingBottom:"0px",background:"green",width:"90px"}}>
               <CarregandoBtn/>
             </Button>:
-            <Button onClick={transferir}>
+            <Button onClick={transferir} style={{background:"green", color:"white"}}>
                Transferir    
             </Button>
           }

@@ -72,8 +72,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
         <div className='tabelaDeJogadoresBtnContainer'>
             {
                 checkedList.length > 0 && 
-                <div className='tabelaDeJogadoresBtnGrupo'>
-                   <div style={{marginRight:'30px'}}>Total a receber {formatoMonetario(somaDosValores())}</div>
+                <div className='tabelaDeJogadoresBtnGrupo'>                 
                    <ModalDespensarJogador listaDeSelecionados={checkedList} elenco={elenco}/> 
                    <ModalTransferencia listaDeSelecionados={checkedList} elenco={elenco} torneio={participantes}/>
                 </div>
