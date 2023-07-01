@@ -1,6 +1,7 @@
 import { getUsuarioPorIdApi } from "./api/usuarioApi"
 import { listaDeJogadores } from "./listaDeJogadoresCompleta"
 import { jogadoresType, participantesType, timesType, usuarioLogadoType } from "./types"
+import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from './valoresDosPremios';
 
 export const idDoUsuarioLogado = localStorage.getItem('idDoUsuarioLogado') || ''
 
@@ -240,4 +241,79 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
        })
     })
     return jogadores
+  }
+
+  export function validaNumero(num:number) {
+    
+  }
+
+  export const getPremiados = (colocacao:any,artilheiros:any,assistentes:any,dadosDoJogo:any)=>{
+     let premiados:any = []
+
+     assistentes.primeiro?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:assistencia
+      })
+    })
+    assistentes.segundo?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:viceAssistencia
+      })
+    })
+    assistentes.terceiro?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:terceiroAssistencia
+      })
+    })
+    assistentes.quarto?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:quartoAssistencia
+      })
+    })
+
+    artilheiros.primeiro?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:assistencia
+      })
+    })
+    artilheiros.segundo?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:viceAssistencia
+      })
+    })
+    artilheiros.terceiro?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:terceiroAssistencia
+      })
+    })
+    artilheiros.quarto?.map((e:any)=>{
+      premiados.push({
+        idParticipante:e.idParticipante,
+        nome:e.nome,
+        premio:quartoAssistencia
+      })
+    })
+
+    colocacao.primeiro && premiados.push(colocacao.primeiro.dadosDaApi)
+    colocacao.segundo && premiados.push(colocacao.segundo.dadosDaApi)
+    colocacao.terceiro && premiados.push(colocacao.terceiro.dadosDaApi)
+    colocacao.quarto && premiados.push(colocacao.quarto.dadosDaApi)
+    if (dadosDoJogo.gols || dadosDoJogo.empates || dadosDoJogo.vitorias) {
+      premiados = [...premiados, ...dadosDoJogo.gols, ...dadosDoJogo.empates, ...dadosDoJogo.vitorias]
+    }
+    return premiados
   }

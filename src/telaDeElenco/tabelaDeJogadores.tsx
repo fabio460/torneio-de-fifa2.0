@@ -17,6 +17,7 @@ import { listarParticipantesApi } from '../api/participantesApi';
 import { getTorneioPorIdApi } from '../api/torneioApi';
 import { traduzirPosicao } from '../telaCompraDeJogadores/Jogadores/metodosUteis';
 import { Link } from 'react-router-dom';
+import ScrollComponents from '../ScrollComponent';
 
 
 export default function TabelaDeJogadores({jogadores, elenco}:{
@@ -138,6 +139,17 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
             </TableBody>
         </Table>
         </TableContainer>
+        <ScrollComponents>
+            <div className='tabelaDeJogadoresBtnContainer'>
+                {
+                    checkedList.length > 0 && 
+                    <div className='tabelaDeJogadoresBtnGrupo'>                 
+                        <ModalDespensarJogador listaDeSelecionados={checkedList} elenco={elenco}/> 
+                        <ModalTransferencia listaDeSelecionados={checkedList} elenco={elenco} torneio={participantes}/>
+                    </div>
+                }
+            </div>
+        </ScrollComponents>
     </div>
   );
 }

@@ -79,8 +79,10 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
         <DialogActions>
           {
             loading?
-            <CarregandoBtn/>:
-            <Button onClick={despensar}>Confirmar</Button>
+            <Button  style={{paddingBottom:"0px",background:"green",width:"90px"}}>
+            <CarregandoBtn/>
+          </Button>:
+            <Button onClick={despensar} style={{background:"green", color:"white"}}>Confirmar</Button>
           }
           <Button onClick={handleClose} autoFocus>
             Cancelar
