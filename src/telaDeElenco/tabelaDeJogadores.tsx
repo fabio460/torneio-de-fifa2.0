@@ -100,10 +100,10 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                 <TableCell> </TableCell>
                 <TableCell>Nome</TableCell>
                 <TableCell >Overall</TableCell>
-                <TableCell >Valor</TableCell>
+                <TableCell >Valor do jogador</TableCell>
                 <TableCell >Posição</TableCell>
-                <TableCell >Time</TableCell>
-                <TableCell >Só fifa</TableCell>
+                <TableCell >Time de origem</TableCell>
+                <TableCell >Link do Só fifa</TableCell>
                 <TableCell >Nacionalidade</TableCell>
             </TableRow>
             </TableHead>
