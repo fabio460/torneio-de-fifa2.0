@@ -49,7 +49,19 @@ export default function CampoDeBusca() {
       })
     }
   }
-  
+  React.useEffect(()=>{
+    if(lista.length === 0){
+      dispatch({
+        type:'busca',
+        payload:{lista:[]}
+      })   
+    }else{
+      dispatch({
+        type:'busca',
+        payload:{lista}
+      })
+    }
+  },[lista])
 
   const onKey = (e:any)=>{
     if(e.code === "Enter"){
