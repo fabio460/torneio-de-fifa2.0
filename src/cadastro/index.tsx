@@ -39,8 +39,7 @@ export default function Cadastro() {
     let senha = data.get('password')?.toString() || ''
     let nome = data.get('nome')?.toString() || ''
     const resposta =await cadastrarUsuarioApi(email, senha, nome)
-    console.log(resposta)
-    alert(resposta)
+    alert(JSON.stringify(resposta))
   };  
   
   return (

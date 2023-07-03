@@ -25,7 +25,7 @@ export const getParticipantesPorIdApi = async(id:string)=>{
 export const adicionarParticipantesoApi = async(
         nome:string,
         idTorneio:string,
-        saldo = 100000,
+        saldo:number,
         time:string,
         emblemaDoTime:string | undefined,
         listaDeJogadores:jogadoresType[] | undefined = []

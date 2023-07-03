@@ -16,6 +16,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { getEmblemaDoTime, getJogadoresPorTime, getTimeName, getTimes } from '../../metodosUteis';
 import Autocomplete from '@mui/material/Autocomplete';
 import { listaJogadoresPorTorneioApi } from '../../api/jogadoresApi';
+import { Checkbox } from '@mui/material';
 export default function ModalAdicionarParticipantes() {
   const [open, setOpen] = React.useState(false);
   const [nomeDoParticipante, setNomeDoParticipante] = useState('')
@@ -24,11 +25,15 @@ export default function ModalAdicionarParticipantes() {
   const [listaDeTimes, setListaDeTimes] = useState<any>([])
   const [value, setValue] = useState<any>()
   const [saldo, setSaldo] = useState(0)
+  const [checked, setChecked] = React.useState(true);
+
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
   };
+  const handleChangeChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
   const handleChangeTime = (event:any, newValue:any) => {
-    console.log(10)
     setValue(newValue);
   }
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
@@ -55,7 +60,7 @@ export default function ModalAdicionarParticipantes() {
   },[open])
   const adicionarParticipantes = async()=>{
     const jogadores = getJogadoresPorTime(value.label)
-    const jogadoresdTime = jogadores.filter(j=>{
+    var jogadoresdTime = jogadores.filter(j=>{
       if (!jogadoresDoTorneioSelecionado.includes(j.nome)) {
         return j
       }
@@ -65,6 +70,24 @@ export default function ModalAdicionarParticipantes() {
     if (nomeDoParticipante.trim() === "" || age.trim() === "") {
       alert("Não pode haver campos nulos")
       return null
+    }
+    if (!checked) {   
+      jogadoresdTime=[]
+      jogadoresdTime.push(
+        {
+          nome:"Genérico",
+          imagemDoJogador:"",
+          nacionalidade:"",
+          imagemDaNacionalidade:"",
+          escudoDoTime:"",
+          posicao:"RW, ST, CF",
+          overall:"0",
+          valorDoJogador:"0",
+          time:"",
+          liga:"",
+          linkSoFifa:""
+        }
+      )
     }
     const res = await adicionarParticipantesoApi(
       nomeDoParticipante,
@@ -127,6 +150,12 @@ export default function ModalAdicionarParticipantes() {
           />
           <TextField id="outlined-basic" label="saldo" variant="outlined" size='small' sx={{margin:"2% 0",  width:'100%'}}
               onChange={e => setSaldo(parseFloat(e.target.value))}
+          />
+          <span>Adicionar jogadores originais do clube</span>
+          <Checkbox
+            checked={checked}
+            onChange={handleChangeChecked}
+            inputProps={{ 'aria-label': 'controlled' }}
           />
         </DialogContent>
         <DialogActions>
