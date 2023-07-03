@@ -102,7 +102,7 @@ export default function TelaPrincipal() {
           <BtnScroll usuario={usuario}/>
         </ScrollComponents>
       }
-      <Footer/>
+      {/* <Footer/> */}
     </React.Fragment>
   );
 }

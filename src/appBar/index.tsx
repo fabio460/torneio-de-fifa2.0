@@ -17,10 +17,10 @@ const deslogar = ()=>{
   window.location.reload()
 }
 const pages = [
-  <div><ModalColocacao /></div>,
-  <div><ModalArtilharia/></div>,
-  <div><ModalAssistencia/></div>,
-  <div><ModalDadosDoJogo/></div>, 
+  <ModalColocacao />,
+  <ModalArtilharia/>,
+  <ModalAssistencia/>,
+  <ModalDadosDoJogo/>, 
 ];
 
 
