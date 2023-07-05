@@ -1,34 +1,31 @@
 import * as React from 'react';
+import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Button } from 'react-bootstrap';
-import { checkedType, participantesType, torneioType } from '../../types';
+import { useSelector } from 'react-redux';
+import { torneioType } from '../../types';
+import { TextField } from '@mui/material';
+import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { transferenciaDeJogadoresApi } from '../../api/jogadoresApi';
+import { transferenciaMonetariaApi } from '../../api/participantesApi';
 import CarregandoBtn from '../../carregandoBtn';
-import { formatoMonetario } from '../../metodosUteis';
-import { Checkbox, TextField } from '@mui/material';
 
-export default function ModalTransferenciaMonetaria({torneio,listaDeSelecionados, elenco}:{
-    torneio:torneioType|undefined,
-    listaDeSelecionados:checkedType[] | undefined,
-    elenco:participantesType | undefined
-  }) {
+export default function ModalTransferenciaMonetaria() {
   const [open, setOpen] = React.useState(false);
-  const [idDoComprador, setIdDoComprador] = React.useState('');
+  const torneio:torneioType = useSelector((state:any)=>state.torneioAtualReducer.torneio)
+  const [idDoRecebidor, setidDoRecebidor] = React.useState('');
+  const [valor, setValor] = React.useState(0)
   const [loading, setLoading] = React.useState(false)
-  const [valorDaNegociacao, setValorDaNegociacao] = React.useState<number>()
   const handleChange = (event: SelectChangeEvent) => {
-    setIdDoComprador(event.target.value as string);
+    setidDoRecebidor(event.target.value as string);
   };
-
-  const handleClickOpen = async() => {
+  const handleClickOpen = () => {
     setOpen(true);
   };
 
@@ -36,55 +33,20 @@ export default function ModalTransferenciaMonetaria({torneio,listaDeSelecionados
     setOpen(false);
   };
 
-  const [checked, setChecked] = React.useState(false);
-
-  const  handleNovoValor = (e: any)=>{
-     let valor:number = parseFloat(e.target.value)
-     if (valor > 0) {
-      setValorDaNegociacao(valor)
-     }
-
-  }
-  const handleChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
-  
-  const idsDosJogadoresSelecionados = listaDeSelecionados?.map(j=>{
-    return j.jogador.id
-  })
-  
-  const idDoProprietario = elenco?.id
-  async function transferir() {
+  let idDoPagador = localStorage.getItem("idDoElenco") as string
+  const transferirDinheiro = async()=>{
     setLoading(true)
-    const res = await transferenciaDeJogadoresApi(
-        idDoProprietario,
-        idDoComprador,
-        idsDosJogadoresSelecionados,
-        valorDaNegociacao
-      )
-      if (res === "transferência concluida com sucesso!!!") {
-        setTimeout(() => {
-          alert(res)
-          window.location.reload()
-        }, 2000);
-      }else{
-        setLoading(false)   
-        alert(res)
-      }
-  }
-  function getValoresTotais(lista:checkedType[] | undefined) {
-    
-    let total = 0
-    lista?.map(j=>{
-      total += parseFloat(j.jogador.valorDoJogador || "")
-    })
-    return formatoMonetario(total)
+    const res = await transferenciaMonetariaApi(idDoRecebidor,idDoPagador,valor)
+    alert(res)
+    setLoading(false)
+    handleClose()
+    window.location.reload()
   }
   return (
     <div>
-      <Button style={{marginLeft:'5px'}} onClick={handleClickOpen}>
-        Transferir
-      </Button>
+      <div onClick={handleClickOpen}>
+        transferir dinheiro
+      </div>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -92,69 +54,44 @@ export default function ModalTransferenciaMonetaria({torneio,listaDeSelecionados
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Transferência dos jogadores"}
+          {"Escolha quem voçe deseja transferir seu dinheiro e insira o valor"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {
-              listaDeSelecionados?.map(j=>{
-                return <div>
-                  {j.jogador.nome} - {formatoMonetario(parseFloat(j.jogador.valorDoJogador || ""))}
-                </div>
-              })
-            }
-            <h5 style={{color:"red", marginTop:"10px"}}>
-              Valor da negociação: {getValoresTotais(listaDeSelecionados)}
-            </h5>
-          <FormControl fullWidth sx={{marginTop:3}} size='small'>
-            <InputLabel id="demo-simple-select-label" sx={{bgcolor:'white', paddingRight:1}}>Transferir para</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={idDoComprador}
-              label="idDoComprador"
-              onChange={handleChange}
-              sx={{}}
-            >
-              {
-                torneio?.participantes.map((item, key)=>{
-                  return idDoProprietario !== item.id && <MenuItem value={item.id}>{item.nome}</MenuItem>
-                })
-              }
-            </Select>
-          </FormControl>
-          <div>
-            <Checkbox
-              checked={checked}
-              onChange={handleChangeCheckBox}
-              inputProps={{ 'aria-label': 'controlled' }}
+            <Box sx={{ minWidth: "100%",margin:"10px 0px" }}>
+              <FormControl fullWidth  size='small'>
+                <InputLabel id="demo-simple-select-label">Enviando para</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={idDoRecebidor}
+                  label="Enviando para"
+                  onChange={handleChange}
+                >
+                  {
+                    torneio?.participantes?.map(p=>{
+                      return p?.id !== idDoPagador && <MenuItem  value={p?.id}>{p?.nome}</MenuItem>
+                    })
+                  }
+                </Select>
+              </FormControl>
+            </Box>
+            <TextField
+               size='small'
+               sx={{width:"100%"}}
+               label='Valor a transferir'
+               onChange={e=>setValor(parseFloat(e.target.value))}
             />
-            Selecione aqui caso queira mudar o valor da negociação!
-            <div style={{height:"60px"}}>
-              {
-              checked &&
-                <TextField 
-                  sx={{width:"100%"}}
-                  size='small'
-                  label='Novo valor da transação'
-                  onChange={handleNovoValor}
-                />
-              }
-            </div>
-          </div>
+            
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           {
-            loading?
-            <Button onClick={transferir} style={{paddingBottom:"0px",background:"green",width:"90px"}}>
-              <CarregandoBtn/>
-            </Button>:
-            <Button onClick={transferir} style={{background:"green", color:"white"}}>
-               Transferir    
-            </Button>
+            loading ?
+            <Button><CarregandoBtn color={"#2e7d32"}/></Button>:
+            <Button onClick={transferirDinheiro} color='success'>Confirmar</Button>
           }
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleClose} color='error' autoFocus>
             Cancelar
           </Button>
         </DialogActions>

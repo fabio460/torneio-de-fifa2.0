@@ -80,9 +80,9 @@ export const transferenciaMonetariaApi = async(idDoRecebidor:string ,idDoPagador
         headers:{
             "Content-Type":"application/json",
         },
-        method:"put",
+        method:"post",
         body:JSON.stringify({
-            idDoRecebidor, idDoPagador, valor  
+            idDoRecebidor, idDoPagador, valor 
         })
     })
     .then(res=>res.json())

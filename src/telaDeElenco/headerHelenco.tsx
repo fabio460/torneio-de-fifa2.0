@@ -10,12 +10,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { participantesType } from '../types';
+import { participantesType, torneioType } from '../types';
 import { calculaFolha, formatoMonetario } from '../metodosUteis';
 import { useNavigate } from 'react-router-dom';
 import ModalAtualizarParticipante from './modais/modalAtualizarParticipante';
 import ModalRemoverParticipante from './modais/modalRemoverParticipante';
 import ModalTransferenciaMonetaria from './modais/modalTransferenciaMonetaria';
+import { useSelector } from 'react-redux';
 
 function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
   const n = useNavigate()
@@ -23,9 +24,11 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
     localStorage.removeItem('jwt')
     window.location.reload()
   }
+
   const pages = [
     <div onClick={()=>n('/')}>Voltar a tela principal</div>,
     <div onClick={()=>n('/compraDeJogadores')}>Comprar jogador</div>,
+    <ModalTransferenciaMonetaria/>
   ];
   const settings = [<ModalAtualizarParticipante elenco={elenco}/>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
