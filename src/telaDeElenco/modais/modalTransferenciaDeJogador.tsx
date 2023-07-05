@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { transferenciaDeJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
-import { formatoMonetario, numberIsValid } from '../../metodosUteis';
+import { formatoMonetario, numberIsValid, semVirgula } from '../../metodosUteis';
 import { Checkbox, TextField } from '@mui/material';
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{
@@ -43,7 +43,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
      if (!numberIsValid(e.target.value)) {
       setvalorValido(true)
      }else{
-       let valor:number = parseFloat(e.target.value)
+       let valor:number = parseFloat(semVirgula(e.target.value))
        if (valor > 0) {
         setValorDaNegociacao(valor)
        }

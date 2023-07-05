@@ -323,3 +323,8 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
     var reg = new RegExp(/^-?\d*\.?\d*$/);
     return reg.test(numero)
   }
+
+  export const semVirgula = (numeroBruto:any)=>{
+    let numero = numeroBruto?.toString()?.replace(",",".")
+    return numero
+  }

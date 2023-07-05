@@ -15,12 +15,14 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { transferenciaMonetariaApi } from '../../api/participantesApi';
 import CarregandoBtn from '../../carregandoBtn';
+import { numberIsValid, semVirgula } from '../../metodosUteis';
 
 export default function ModalTransferenciaMonetaria() {
   const [open, setOpen] = React.useState(false);
   const torneio:torneioType = useSelector((state:any)=>state.torneioAtualReducer.torneio)
   const [idDoRecebidor, setidDoRecebidor] = React.useState('');
-  const [valor, setValor] = React.useState(0)
+  const [valorValido, setvalorValido] = React.useState(false)
+  const [valor, setValor] = React.useState<number>(0)
   const [loading, setLoading] = React.useState(false)
   const handleChange = (event: SelectChangeEvent) => {
     setidDoRecebidor(event.target.value as string);
@@ -33,20 +35,32 @@ export default function ModalTransferenciaMonetaria() {
     setOpen(false);
   };
 
+  const handleValor:any = (event: SelectChangeEvent)=>{
+    let v = event.target.value
+    if (numberIsValid(v)) {
+      setvalorValido(false)    
+      setValor(parseFloat(semVirgula(v) as string))
+    }else{
+      setvalorValido(true)    
+    }
+  }
+
   let idDoPagador = localStorage.getItem("idDoElenco") as string
   const transferirDinheiro = async()=>{
-    setLoading(true)
-    const res = await transferenciaMonetariaApi(idDoRecebidor,idDoPagador,valor)
-    alert(res)
-    setLoading(false)
-    handleClose()
-    window.location.reload()
+    if (!valorValido) {     
+      setLoading(true)
+      const res = await transferenciaMonetariaApi(idDoRecebidor,idDoPagador,valor)
+      alert(res)
+      setLoading(false)
+      handleClose()
+      window.location.reload()
+    }
   }
   return (
     <div>
       <div onClick={handleClickOpen}>
         transferir dinheiro
-      </div>
+      </div>  
       <Dialog
         open={open}
         onClose={handleClose}
@@ -80,8 +94,13 @@ export default function ModalTransferenciaMonetaria() {
                size='small'
                sx={{width:"100%"}}
                label='Valor a transferir'
-               onChange={e=>setValor(parseFloat(e.target.value))}
+               onChange={handleValor}
+               error={valorValido}
             />
+            {
+              valorValido && 
+              <span style={{color:"red"}}>Insira um número válido!</span>
+            }
             
           </DialogContentText>
         </DialogContent>
