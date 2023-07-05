@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { transferenciaDeJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
-import { formatoMonetario } from '../../metodosUteis';
+import { formatoMonetario, numberIsValid } from '../../metodosUteis';
 import { Checkbox, TextField } from '@mui/material';
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{
@@ -24,6 +24,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   const [idDoComprador, setIdDoComprador] = React.useState('');
   const [loading, setLoading] = React.useState(false)
   const [valorDaNegociacao, setValorDaNegociacao] = React.useState<number>()
+  const [valorValido, setvalorValido] = React.useState(false)
   const handleChange = (event: SelectChangeEvent) => {
     setIdDoComprador(event.target.value as string);
   };
@@ -39,9 +40,14 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   const [checked, setChecked] = React.useState(false);
 
   const  handleNovoValor = (e: any)=>{
-     let valor:number = parseFloat(e.target.value)
-     if (valor > 0) {
-      setValorDaNegociacao(valor)
+     if (!numberIsValid(e.target.value)) {
+      setvalorValido(true)
+     }else{
+       let valor:number = parseFloat(e.target.value)
+       if (valor > 0) {
+        setValorDaNegociacao(valor)
+       }
+       setvalorValido(false)
      }
 
   }
@@ -133,12 +139,19 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
             <div style={{height:"60px"}}>
               {
               checked &&
-                <TextField 
-                  sx={{width:"100%"}}
-                  size='small'
-                  label='Novo valor da transação'
-                  onChange={handleNovoValor}
-                />
+              <div>
+                  <TextField 
+                    sx={{width:"100%"}}
+                    size='small'
+                    label='Novo valor da transação'
+                    onChange={handleNovoValor}
+                    error={valorValido}
+                  />
+                  {
+                    valorValido && 
+                    <span style={{color:"red"}}>Insira um número válido!</span>
+                  }
+                </div>
               }
             </div>
           </div>

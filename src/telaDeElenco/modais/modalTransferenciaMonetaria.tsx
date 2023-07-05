@@ -54,7 +54,7 @@ export default function ModalTransferenciaMonetaria() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Escolha quem voçe deseja transferir seu dinheiro e insira o valor"}
+          {"Área de transferência de dinheiro"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

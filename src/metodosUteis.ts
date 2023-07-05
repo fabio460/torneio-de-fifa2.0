@@ -1,6 +1,6 @@
 import { getUsuarioPorIdApi } from "./api/usuarioApi"
 import { listaDeJogadores } from "./listaDeJogadoresCompleta"
-import { jogadoresType, participantesType, timesType, usuarioLogadoType } from "./types"
+import { jogadoresType, participantesType } from "./types"
 import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from './valoresDosPremios';
 
 export const idDoUsuarioLogado = localStorage.getItem('idDoUsuarioLogado') || ''
@@ -316,4 +316,10 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
       premiados = [...premiados, ...dadosDoJogo.gols, ...dadosDoJogo.empates, ...dadosDoJogo.vitorias]
     }
     return premiados
+  }
+
+  export const numberIsValid = (numeroBruto:any)=>{
+    let numero = numeroBruto.toString().replace(",",".")
+    var reg = new RegExp(/^-?\d*\.?\d*$/);
+    return reg.test(numero)
   }

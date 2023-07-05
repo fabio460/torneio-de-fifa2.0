@@ -56,6 +56,7 @@ export default function TelaPrincipal() {
   useEffect(()=>{    
     getEstatistica()
   },[torneio,id])
+  
   return (
     <React.Fragment>
       <Toolbar id="back-to-top-anchor" />
