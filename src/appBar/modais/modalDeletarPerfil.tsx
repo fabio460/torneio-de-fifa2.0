@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { deletarUsuarioApi } from '../api/usuarioApi';
+import { deletarUsuarioApi } from '../../api/usuarioApi';
 
 
 export default function ModalDeletarPerfil() {

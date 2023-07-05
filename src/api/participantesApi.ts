@@ -74,3 +74,17 @@ export const atualizarParticipantesApi = async(id:string ,nome:string,saldo:numb
     .then(res=>res.json())
     return f
 }
+
+export const transferenciaMonetariaApi = async(idDoRecebidor:string ,idDoPagador:string,valor:number)=>{
+    const f = await fetch(linkLocal+"participantes/transferenciasMonetarias",{
+        headers:{
+            "Content-Type":"application/json",
+        },
+        method:"put",
+        body:JSON.stringify({
+            idDoRecebidor, idDoPagador, valor  
+        })
+    })
+    .then(res=>res.json())
+    return f
+}

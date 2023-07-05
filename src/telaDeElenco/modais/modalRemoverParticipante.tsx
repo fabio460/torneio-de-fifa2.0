@@ -6,8 +6,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { participantesType } from '../types';
-import { deletarParticipantesApi } from '../api/participantesApi';
+import { participantesType } from '../../types';
+import { deletarParticipantesApi } from '../../api/participantesApi';
 import { useNavigate } from 'react-router-dom';
 
 export default function ModalRemover({elenco}:{elenco:participantesType | undefined}) {

@@ -11,8 +11,8 @@ import { formatoMonetario } from '../metodosUteis';
 import { Avatar } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import { Button } from 'react-bootstrap';
-import ModalTransferencia from './modalTransferencia';
-import ModalDespensarJogador from './modalDespensarJogador';
+import ModalTransferenciaDeJogador from './modais/modalTransferenciaDeJogador';
+import ModalDespensarJogador from './modais/modalDespensarJogador';
 import { listarParticipantesApi } from '../api/participantesApi';
 import { getTorneioPorIdApi } from '../api/torneioApi';
 import { traduzirPosicao } from '../telaCompraDeJogadores/Jogadores/metodosUteis';
@@ -49,13 +49,13 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
         }
     }  
     async function getTorneio() {
-        const part = await getTorneioPorIdApi(elenco?.idTorneio)
-        setParticipantes(part)
-      }
-    
-      useEffect(() => {
-        getTorneio()
-      }, [])
+       const part = await getTorneioPorIdApi(elenco?.idTorneio)
+       setParticipantes(part)
+    }
+
+    useEffect(() => {
+       getTorneio()
+    }, [])
     useEffect(() => {
         handleSelected()
     }, [checked])
@@ -82,7 +82,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                 checkedList.length > 0 && 
                 <div className='tabelaDeJogadoresBtnGrupo'>                 
                    <ModalDespensarJogador listaDeSelecionados={checkedList} elenco={elenco}/> 
-                   <ModalTransferencia listaDeSelecionados={checkedList} elenco={elenco} torneio={participantes}/>
+                   <ModalTransferenciaDeJogador listaDeSelecionados={checkedList} elenco={elenco} torneio={participantes}/>
                 </div>
             }
         </div>
@@ -152,7 +152,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     checkedList.length > 0 && 
                     <div className='tabelaDeJogadoresBtnGrupo'>                 
                         <ModalDespensarJogador listaDeSelecionados={checkedList} elenco={elenco}/> 
-                        <ModalTransferencia listaDeSelecionados={checkedList} elenco={elenco} torneio={participantes}/>
+                        <ModalTransferenciaDeJogador listaDeSelecionados={checkedList} elenco={elenco} torneio={participantes}/>
                     </div>
                 }
             </div>

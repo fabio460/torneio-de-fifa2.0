@@ -10,10 +10,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
-import { chekedType, pagadoresType, participantesType } from '../types';
+import { chekedType, pagadoresType, participantesType } from '../../types';
 import { useSelector } from 'react-redux';
 import { TextField } from '@mui/material';
-import { empates, gols, vitoria } from '../valoresDosPremios';
+import { empates, gols, vitoria } from '../../valoresDosPremios';
 
 type dadosType = {
   idParticipante:string, 

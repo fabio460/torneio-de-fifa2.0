@@ -5,10 +5,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'react-bootstrap';
-import { checkedType, participantesType } from '../types';
-import { removerJogadoresApi } from '../api/jogadoresApi';
-import CarregandoBtn from '../carregandoBtn';
-import { formatoMonetario } from '../metodosUteis';
+import { checkedType, participantesType } from '../../types';
+import { removerJogadoresApi } from '../../api/jogadoresApi';
+import CarregandoBtn from '../../carregandoBtn';
+import { formatoMonetario } from '../../metodosUteis';
 
 export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     listaDeSelecionados:checkedType[] | undefined,
@@ -33,14 +33,12 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
         return acc + parseFloat(item.jogador.valorDoJogador || '')*(
           parseInt(item.jogador.overall) < 90 ? 0.4 : 0.6
         )
-    },0)
-    if (somaDosValores) {
-        const saldo = elenco?.saldo || 0
-        const saldoAtualizado = somaDosValores + saldo
-        console.log(saldoAtualizado)
-        const res = await removerJogadoresApi(listaDeIds, saldoAtualizado, elenco?.id)
-        window.location.reload()
-    }
+    },0) || 0
+    const saldo = elenco?.saldo || 0
+    const saldoAtualizado = somaDosValores + saldo
+    console.log(saldoAtualizado)
+    const res = await removerJogadoresApi(listaDeIds, saldoAtualizado, elenco?.id)
+    window.location.reload()
     setLoading(false)
   }
   return (

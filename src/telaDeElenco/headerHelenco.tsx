@@ -13,8 +13,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { participantesType } from '../types';
 import { calculaFolha, formatoMonetario } from '../metodosUteis';
 import { useNavigate } from 'react-router-dom';
-import ModalAtualizar from './modalAtualizar';
-import ModalRemover from './modalRemover';
+import ModalAtualizarParticipante from './modais/modalAtualizarParticipante';
+import ModalRemoverParticipante from './modais/modalRemoverParticipante';
+import ModalTransferenciaMonetaria from './modais/modalTransferenciaMonetaria';
 
 function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
   const n = useNavigate()
@@ -26,7 +27,7 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
     <div onClick={()=>n('/')}>Voltar a tela principal</div>,
     <div onClick={()=>n('/compraDeJogadores')}>Comprar jogador</div>,
   ];
-  const settings = [<ModalAtualizar elenco={elenco}/>, <ModalRemover elenco={elenco}/>, <div onClick={deslogar}>Deslogar</div>];
+  const settings = [<ModalAtualizarParticipante elenco={elenco}/>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -44,7 +45,7 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+   
   return (
     <AppBar position="fixed" sx={{}}>
       <div className='appBarContainer'>

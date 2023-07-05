@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { chekedType, dadosPremiacoesDaApiType, jogadoresType, participantesType } from '../types';
-import { artilheiro, quartoAtilheiro, terceiroArtilheiro, viceArtilheiro } from '../valoresDosPremios';
-import Primeiro from './selectsArtilheiros/primeiro';
-import Segundo from './selectsArtilheiros/segundo';
-import Terceiro from './selectsArtilheiros/terceiro';
-import Quarto from './selectsArtilheiros/quarto';
+import { chekedType, dadosPremiacoesDaApiType, jogadoresType, participantesType } from '../../types';
+import { artilheiro, quartoAtilheiro, terceiroArtilheiro, viceArtilheiro } from '../../valoresDosPremios';
+import Primeiro from '../selectsArtilheiros/primeiro';
+import Segundo from '../selectsArtilheiros/segundo';
+import Terceiro from '../selectsArtilheiros/terceiro';
+import Quarto from '../selectsArtilheiros/quarto';
 
 export default function ModalArtilharia() {
   const [open, setOpen] = React.useState(false);

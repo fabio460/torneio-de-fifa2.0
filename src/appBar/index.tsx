@@ -2,12 +2,12 @@ import * as React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import "./appBar.css"
-import ModalColocacao from './modalColocacao';
-import ModalArtilharia from './modalArtilharia';
-import ModalAssistencia from './modalAssistencia';
-import ModalDadosDoJogo from './modalDadosDoJogo';
+import ModalColocacao from './modais/modalColocacao';
+import ModalArtilharia from './modais/modalArtilharia';
+import ModalAssistencia from './modais/modalAssistencia';
+import ModalDadosDoJogo from './modais/modalDadosDoJogo';
 import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
-import ModalDeletarPerfil from './modalDeletarPerfil';
+import ModalDeletarPerfil from './modais/modalDeletarPerfil';
 import SwitchesDeletarParticipantes from '../telaPrincipal/switchDeletarParticipantes';
 import icone from '../icone_fifa.png'
 import { useNavigate } from 'react-router-dom';

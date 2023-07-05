@@ -6,8 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import { participantesType } from '../types';
-import { atualizarParticipantesApi } from '../api/participantesApi';
+import { participantesType } from '../../types';
+import { atualizarParticipantesApi } from '../../api/participantesApi';
 
 export default function ModalAtualizar({elenco}:{elenco:participantesType | undefined}) {
   const [open, setOpen] = React.useState(false);

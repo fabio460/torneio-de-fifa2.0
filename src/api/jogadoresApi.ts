@@ -63,7 +63,7 @@ export const transferenciaDeJogadoresApi = async(
         idsDosJogadoresSelecionados:(string | undefined)[] | undefined, 
         valorDaNegociacao:number | undefined
     )=>{
-    const f = await fetch(linkLocal+"jogadores/transferencia",{
+    const f = await fetch(linkLocal+"jogadores",{
         headers:{
             'Content-Type':'application/json'
         },

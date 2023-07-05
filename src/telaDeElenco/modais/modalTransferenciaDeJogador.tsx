@@ -5,14 +5,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'react-bootstrap';
-import { checkedType, participantesType, torneioType } from '../types';
+import { checkedType, participantesType, torneioType } from '../../types';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { transferenciaDeJogadoresApi } from '../api/jogadoresApi';
-import CarregandoBtn from '../carregandoBtn';
-import { formatoMonetario } from '../metodosUteis';
+import { transferenciaDeJogadoresApi } from '../../api/jogadoresApi';
+import CarregandoBtn from '../../carregandoBtn';
+import { formatoMonetario } from '../../metodosUteis';
 import { Checkbox, TextField } from '@mui/material';
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{

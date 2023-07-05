@@ -10,14 +10,14 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch } from 'react-redux/es/exports';
-import { chekedType, dadosPremiacoesDaApiType, jogadoresType, participantesType } from '../types';
+import { chekedType, dadosPremiacoesDaApiType, jogadoresType, participantesType } from '../../types';
 import { useSelector } from 'react-redux';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from '../valoresDosPremios';
-import Primeiro from './selectsAssistecias/primeiro';
-import Segundo from './selectsAssistecias/segundo';
-import Terceiro from './selectsAssistecias/terceiro';
-import Quarto from './selectsAssistecias/quarto';
+import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from '../../valoresDosPremios';
+import Primeiro from '../selectsAssistecias/primeiro';
+import Segundo from '../selectsAssistecias/segundo';
+import Terceiro from '../selectsAssistecias/terceiro';
+import Quarto from '../selectsAssistecias/quarto';
 
 export default function ModalAssistencia() {
   const [open, setOpen] = React.useState(false);
