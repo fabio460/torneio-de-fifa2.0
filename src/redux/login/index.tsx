@@ -13,8 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { loginApi } from '../api/usuarioApi';
-import CarregandoBtn from '../carregandoBtn';
+import { loginApi } from '../../api/usuarioApi';
+import CarregandoBtn from '../../carregandoBtn';
 
 function Copyright(props: any) {
   return (

@@ -40,18 +40,17 @@ export default function TelaPrincipal() {
       payload:{usuario:u}
     })
   }
-  useEffect(()=>{
-    getUsuario()
-  },[])
-
+  
   async function getEstatistica() {
     if (id !== "") {
-      
       const est = await listarStatisticaApi(id)
       setEstatisticas(est)
     }
   }
- 
+  
+  useEffect(()=>{
+    getUsuario()
+  },[])
   
   useEffect(()=>{    
     getEstatistica()
