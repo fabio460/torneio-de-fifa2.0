@@ -48,15 +48,24 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    color: white;
+    font-weight: bold;
     height: 100%;
-    padding: 30px;
+    padding:0 30px;
+ 
+}
+.reservarContainer{
+    padding:30px;
+    width: 100%;
 }
 .modalAtualizarBody{
     padding: 3%;
 }
 .campinhoBody{
     display: flex;
+    padding: 5px;
+    background-color: brown;
+    color: white;
+    border-radius: 3px;
 }
 .atacantesContainer{
     display: flex;
@@ -102,7 +111,7 @@
 
 .reservas{
     display: flex;
-    height: 160px;
+    min-height: 100%;
     flex-wrap: wrap;
 }
 .reservasContainer{
@@ -110,8 +119,6 @@
 }
 .cartaNome{
     text-align: center;
-    color: blue;
-    text-shadow: 1px 1px 0.5px white;
 }
 .tabelaDeJogadoresBtnContainer{
     display: flex;
@@ -128,9 +135,7 @@
 .campinhoBody{
     display: flex;
 }
-.reservarContainer{
-    padding:0px 30px;
-}
+
 @media (max-width:1500px) {
     .containerDeEscalacao{
         width: 45%;
@@ -142,6 +147,8 @@
     }
     .reservarContainer{
         padding:20px;
+        margin: 0;
+        min-height: 100vh;
     }
     .TelaDeElencoEmblemaDoTime{
         display: flex;
@@ -190,11 +197,10 @@
         font-size: 10px;
         max-width: 70px;
         word-wrap: break-word;
-        color: black;
     }
     .cartaImg{
-        width: 30px;
-    
+        width: 55px;
+
     }
     .imgPais{
         width: 15px;
