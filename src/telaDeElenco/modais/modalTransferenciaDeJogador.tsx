@@ -5,14 +5,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'react-bootstrap';
-import { checkedType, participantesType, torneioType } from '../../types';
+import { checkedType, jogadoresType, participantesType, torneioType } from '../../types';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { transferenciaDeJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
-import { formatoMonetario, numberIsValid, semVirgula } from '../../metodosUteis';
+import { calculaFolha, calculaFolhaSemFormato, formatoMonetario, numberIsValid, semVirgula } from '../../metodosUteis';
 import { Checkbox, TextField } from '@mui/material';
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{
@@ -86,6 +86,12 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
     })
     return formatoMonetario(total)
   }
+
+  const folhaApois = ()=>{
+    const valorElenco = calculaFolhaSemFormato(elenco?.jogadores as jogadoresType[])
+    const valorDosSelecionados = calculaFolhaSemFormato(listaDeSelecionados?.map(e=>e.jogador) as jogadoresType[]) 
+    return valorElenco - valorDosSelecionados
+}
   return (
     <div>
       <Button style={{marginLeft:'5px'}} onClick={handleClickOpen}>
@@ -153,6 +159,9 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
                   }
                 </div>
               }
+            </div>
+            <div>
+              Sua folha irá reduzir de <span style={{color:"blue"}}> {calculaFolha(elenco?.jogadores as jogadoresType[])}</span> para <span style={{color:"green"}}> {formatoMonetario(folhaApois())}</span>
             </div>
           </div>
           </DialogContentText>
