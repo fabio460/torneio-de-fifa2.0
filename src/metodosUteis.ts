@@ -34,6 +34,13 @@ export function calculaFolha(arrayDeJogadore:jogadoresType[]) {
   return formatoMonetario(saldo)
 }
 
+export function calculaFolhaSemFormato(arrayDeJogadore:jogadoresType[]) {
+  const saldo = arrayDeJogadore.reduce((acc, jogador)=>{
+    return acc + parseFloat(jogador.valorDoJogador || '')
+  },0)*0.03
+  return saldo
+}
+
  export function removeNome(nome:string) {
      let nomeBruto = nome.split(" ")
      let nomeTratado = ""

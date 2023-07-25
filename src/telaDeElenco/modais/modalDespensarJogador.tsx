@@ -5,10 +5,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'react-bootstrap';
-import { checkedType, participantesType } from '../../types';
+import { checkedType, jogadoresType, participantesType } from '../../types';
 import { removerJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
-import { formatoMonetario } from '../../metodosUteis';
+import { calculaFolha, calculaFolhaSemFormato, formatoMonetario } from '../../metodosUteis';
 
 export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     listaDeSelecionados:checkedType[] | undefined,
@@ -36,11 +36,27 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     },0) || 0
     const saldo = elenco?.saldo || 0
     const saldoAtualizado = somaDosValores + saldo
-    console.log(saldoAtualizado)
+
     const res = await removerJogadoresApi(listaDeIds, saldoAtualizado, elenco?.id)
     window.location.reload()
     setLoading(false)
   }
+
+  const getTotal = ()=>{
+    return listaDeSelecionados?.reduce((acc, item)=>{
+      return acc + parseFloat(item.jogador.valorDoJogador || '')*(
+        parseInt(item.jogador.overall) < 90 ? 0.4 : 0.6
+      )
+  },0) || 0
+  }
+
+  const folhaApois = ()=>{
+      const valorElenco = calculaFolhaSemFormato(elenco?.jogadores as jogadoresType[])
+      const valorDosSelecionados = calculaFolhaSemFormato(listaDeSelecionados?.map(e=>e.jogador) as jogadoresType[]) 
+      return valorElenco - valorDosSelecionados
+  }
+ 
+  
   return (
     <div>
       <Button style={{background:"red"}} onClick={handleClickOpen}>
@@ -54,24 +70,42 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Voçê esta prestes a remover seu jogador"}
+          {"Valores a receber após a transação"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {
-                listaDeSelecionados?.map((jog, key)=>{
-                    return <div>
-                        <div>
-                          {jog.jogador.nome}
-                        </div>
-                        <div>
-                          Você recebera {formatoMonetario(parseFloat(jog.jogador.valorDoJogador || "")*(
-                            parseInt(jog.jogador.overall) < 90 ? 0.4 : 0.6
-                          ))} por este jogador
-                        </div>
-                    </div>
-                })
+              listaDeSelecionados?.length === 1 ?
+                <div>1 jogador selecionado</div>
+              :
+                <div>{listaDeSelecionados?.length} jogadores selecionados</div>
             }
+            <ul>              
+              {
+                listaDeSelecionados?.map((jog, key)=>{
+                    return <li>
+                        <div>       
+                          {jog.jogador.nome} - voçê receberá <span style={{color:"green"}}>
+                              {formatoMonetario(parseFloat(jog.jogador.valorDoJogador || "")*(
+                                  parseInt(jog.jogador.overall) < 90 ? 0.4 : 0.6
+                              ))}
+                            </span> 
+
+                           {
+                            parseInt(jog.jogador.overall) < 90 ? <span>(40%)</span>:<span>(60%)</span>
+                          } neste jogador
+                           
+                        </div>
+                    </li>
+                })
+              }
+            </ul>
+            <div>
+              Total a receber <span style={{color:"red"}}>{formatoMonetario(getTotal())}</span> 
+            </div>
+            <div>
+              sua folha ira reduzir de <span style={{color:"blue"}}> {calculaFolha(elenco?.jogadores as jogadoresType[])}</span> para <span style={{color:"green"}}> {formatoMonetario(folhaApois())}</span>
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
