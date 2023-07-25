@@ -8,27 +8,32 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {jogadoresType} from '../types'
 import { comprarJogadoresApi } from '../api/jogadoresApi';
 import CarregandoBtn from '../carregandoBtn';
+import ModalCompraFinalizada from './modais/modalCompraFinalizada';
 export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
   const [open, setOpen] = React.useState(false);
+  const [openFinalized, setOpenFinalized] = React.useState(false);
   const idElenco = localStorage.getItem('idDoElenco') || ''
-  const [jogadores, setJogadores] = useState<any>()
+  const [jogadorComprado, setJogadorComprado] = useState<any>()
   const [carregando, setCarregando] = useState(false)
   const handleClickOpen = () => {
     setOpen(true);
   };
 
+  function handleGetOpem() {
+    
+  }
   const handleClose = () => {
     setOpen(false);
   };
   const comprar = async()=>{
       setCarregando(true)
       const res =await comprarJogadoresApi(idElenco, jogador)
-      alert(res)
       if (res === "jogador comprado com sucesso") {   
-        window.location.reload()
+        setOpenFinalized(true)
       }
       setCarregando(false)
     }
+
 
   return (
     <div>
@@ -62,6 +67,12 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
           <Button color='error' variant='outlined' onClick={handleClose} fullWidth autoFocus>
             Cencelar
           </Button>
+          <ModalCompraFinalizada 
+            openFinalized={openFinalized}
+            setOpenFinalized={setOpenFinalized}
+            handleCloseFinalizedd={handleClose}
+            jogador={jogador}  
+          />
         </DialogActions>
       </Dialog>
     </div>
