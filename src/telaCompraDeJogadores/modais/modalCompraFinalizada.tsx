@@ -52,7 +52,7 @@ export default function ModalCompraFinalizada({
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Parabêns pela compra do jogador "+jogador.nome}</DialogTitle>
+        <DialogTitle color={"green"}>{"Parabêns pela compra do jogador "+jogador.nome}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description" sx={{display:"flex"}}>
              <img style={{width:""}} src={jogador.imagemDoJogador} />
@@ -64,7 +64,7 @@ export default function ModalCompraFinalizada({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Fechar</Button>
+          <Button color='error' onClick={handleClose}>Fechar</Button>
         </DialogActions>
       </Dialog>
     </div>
