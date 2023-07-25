@@ -127,7 +127,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     }
                     Overall
                 </ListItemButton></TableCell>
-                <TableCell><ListItemButton onClick={handleOrdenarValor}>
+                <TableCell><ListItemButton sx={{width:'180px'}} onClick={handleOrdenarValor}>
                     {
                         (ordenaValor === undefined || ordenaValor === "desc")?
                         <ArrowDownwardIcon/>:
@@ -159,17 +159,17 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     </TableCell>  
                     
                     <TableCell component="th" scope="row">
-                        {jog.nome}
+                        <div style={{minWidth:"130px"}}>{jog.nome}</div>
                     </TableCell>
-                    <TableCell >{jog.overall}</TableCell>
-                    <TableCell >{formatoMonetario(parseFloat(jog?.valorDoJogador || ''))}</TableCell>
+                    <TableCell align='center'>{jog.overall}</TableCell>
+                    <TableCell align='center'>{formatoMonetario(parseFloat(jog?.valorDoJogador || ''))}</TableCell>
                     <TableCell >{traduzirPosicao(jog.posicao.split(',')[0])}</TableCell>
                     <TableCell>
-                        <div style={{display:"flex", alignItems:"center"}}>
+                        <div style={{display:"flex", alignItems:"center", minWidth:"170px"}}>
                           <Avatar src={jog.escudoDoTime} sx={{width:"20px",height:"20px", marginRight:1}}/>{jog.time}
                         </div>
                     </TableCell>
-                    <TableCell ><Link to={jog.linkSoFifa}>{jog.nome}</Link></TableCell>
+                    <TableCell ><Link to={jog.linkSoFifa}><div style={{minWidth:"140px"}}>{jog.nome}</div></Link></TableCell>
                     <TableCell>
                         <div style={{display:"flex", alignItems:"center"}}>
                           <Avatar src={jog.imagemDaNacionalidade} sx={{width:"20px",height:"20px", marginRight:1}}/>{jog.nacionalidade}
