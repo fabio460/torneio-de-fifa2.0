@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import ModalDeletarTorneio from '../modais/modalDeletarTorneio';
 import ModalAtualizarTorneio from '../modais/modalAtualizarTorneio';
 import { getTimes } from '../../metodosUteis';
+import ListaDeParticipantes from '../listaParticipantes';
 
 
 
@@ -57,13 +58,7 @@ export default function CardParticipantes({participantes, torneio}:
         <Typography variant="h5" component="div" className='cardParticipantesBtns'>
           <SelectTorneio/>
         </Typography>
-        {participantes?.map((elem, key)=>{
-          return(
-            <div key={key}>
-              <Checkbox id={JSON.stringify(elem)} onChange={handleChange} disabled={elem.saldo < 0 && true}/> {elem.nome}
-            </div>
-          )
-        })}
+        <ListaDeParticipantes listaDeParticipantes={participantes} handleChange={handleChange}/>
       </CardContent>
       <div className='cardParticipantesBtnInferior'>
         <h3>Ação do torneio</h3>

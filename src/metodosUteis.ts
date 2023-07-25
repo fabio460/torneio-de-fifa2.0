@@ -335,3 +335,36 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
     let numero = numeroBruto?.toString()?.replace(",",".")
     return numero
   }
+
+  export const ordenarPorValor = (jogadores:jogadoresType[] | undefined, order?:string)=> {
+
+      if (order === "desc") {
+        return jogadores?.sort((a, b)=>{
+          return parseInt(a.valorDoJogador as string) < parseInt(b.valorDoJogador as string) ? 1 : parseInt(a.valorDoJogador as string) > parseInt(b.valorDoJogador as string) ? -1 : 0 
+        })  
+      }
+      if (order === "asc") {
+        return jogadores?.sort((a, b)=>{
+          return parseInt(a.valorDoJogador as string) > parseInt(b.valorDoJogador as string) ? 1 : parseInt(a.valorDoJogador as string) < parseInt(b.valorDoJogador as string) ? -1 : 0 
+        })  
+      }
+      if (!order) { 
+          return jogadores
+      } 
+  }
+
+  export const ordenarPorOveral = (jogadores:jogadoresType[] | undefined, order?:string)=> {
+    if (order === "desc") {
+      return jogadores?.sort((a, b)=>{
+        return parseInt(a.overall as string) < parseInt(b.overall as string) ? 1 : parseInt(a.overall as string) > parseInt(b.overall as string) ? -1 : 0 
+      })  
+    }
+    if (order === "asc") {
+      return jogadores?.sort((a, b)=>{
+        return parseInt(a.overall as string) > parseInt(b.overall as string) ? 1 : parseInt(a.overall as string) < parseInt(b.overall as string) ? -1 : 0 
+      })  
+    }
+    if (!order) { 
+        return jogadores
+    } 
+ }

@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { checkedType, jogadoresType, participantesType } from '../types';
-import { formatoMonetario } from '../metodosUteis';
+import { formatoMonetario, ordenarPorOveral, ordenarPorValor } from '../metodosUteis';
 import { Avatar } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import { Button } from 'react-bootstrap';
@@ -18,12 +18,39 @@ import { getTorneioPorIdApi } from '../api/torneioApi';
 import { traduzirPosicao } from '../telaCompraDeJogadores/Jogadores/metodosUteis';
 import { Link } from 'react-router-dom';
 import ScrollComponents from '../ScrollComponent';
-
+import ListItemButton from '@mui/material/ListItemButton';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function TabelaDeJogadores({jogadores, elenco}:{
      jogadores:jogadoresType[] | undefined,
      elenco:participantesType | undefined
     }) {
+
+    const [ordenaValor, setordenaValor] = useState<string | undefined>()
+    const [ordenaOver, setordenaOver] = useState<string | undefined>()
+    let Jogadores:jogadoresType[] | undefined 
+    Jogadores =  ordenarPorValor(jogadores,ordenaValor) 
+    Jogadores = ordenarPorOveral(jogadores,ordenaOver)
+
+    const handleOrdenarOveral = ()=>{
+        setordenaValor(undefined)
+        if (ordenaOver === undefined || ordenaOver === "desc") {
+          return  setordenaOver("asc")
+        }
+        if (ordenaOver === "asc") {
+            return setordenaOver("desc")
+        }
+    }
+    const handleOrdenarValor = ()=>{
+        setordenaOver(undefined)
+        if (ordenaValor === undefined || ordenaValor === "desc") {
+            return  setordenaValor("asc")
+          }
+          if (ordenaValor === "asc") {
+              return setordenaValor("desc")
+          }
+    }
     const [checked, setChecked] = React.useState<checkedType>();
     const [checkedList, setCheckedList] = useState<checkedType[]>([])
     const [participantes, setParticipantes] = useState()
@@ -59,14 +86,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
     useEffect(() => {
         handleSelected()
     }, [checked])
-    
-    const somaDosValores = ()=>{
-        return checkedList.reduce((acc:any, valor:checkedType)=>{
-           return acc + parseFloat(valor.jogador.valorDoJogador || '')*(
-            parseInt(valor.jogador.overall) < 90 ? 0.4 : 0.6
-           )
-        },0)
-    }
+
   return (
     <div>
         {
@@ -99,8 +119,22 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                 
                 <TableCell> </TableCell>
                 <TableCell>Nome</TableCell>
-                <TableCell >Overall</TableCell>
-                <TableCell >Valor do jogador</TableCell>
+                <TableCell ><ListItemButton onClick={handleOrdenarOveral}>
+                    {
+                       (ordenaOver === undefined || ordenaOver === "desc") ?
+                        <ArrowDownwardIcon/>:
+                        <ArrowUpwardIcon/>
+                    }
+                    Overall
+                </ListItemButton></TableCell>
+                <TableCell><ListItemButton onClick={handleOrdenarValor}>
+                    {
+                        (ordenaValor === undefined || ordenaValor === "desc")?
+                        <ArrowDownwardIcon/>:
+                        <ArrowUpwardIcon/>
+                    }
+                    Valor do jogador
+                </ListItemButton></TableCell>
                 <TableCell >Posição</TableCell>
                 <TableCell >Time de origem</TableCell>
                 <TableCell >Link do Só fifa</TableCell>
@@ -108,7 +142,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
             </TableRow>
             </TableHead>
             <TableBody>
-            {jogadores?.map((jog) => (
+            {Jogadores?.map((jog) => (
                 <TableRow
                 key={jog.nome}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -129,7 +163,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     </TableCell>
                     <TableCell >{jog.overall}</TableCell>
                     <TableCell >{formatoMonetario(parseFloat(jog?.valorDoJogador || ''))}</TableCell>
-                    <TableCell >{traduzirPosicao(jog.posicao)}</TableCell>
+                    <TableCell >{traduzirPosicao(jog.posicao.split(',')[0])}</TableCell>
                     <TableCell>
                         <div style={{display:"flex", alignItems:"center"}}>
                           <Avatar src={jog.escudoDoTime} sx={{width:"20px",height:"20px", marginRight:1}}/>{jog.time}

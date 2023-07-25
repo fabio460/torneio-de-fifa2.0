@@ -27,9 +27,10 @@ export default function SelectTorneio() {
   
   return (
     <div>
-        <FormControl sx={{ m: 0, minWidth: 120, width:'100%',height:'41px' }} size="small">
+        <FormControl sx={{ m: 0, minWidth: 200, width:'100%',height:'41px' }} size="small">
         <InputLabel id="demo-select-small-label">Torneio</InputLabel>
         <Select
+             sx={{width:"100%"}}
             labelId="demo-select-small-label"
             id="demo-select-small"
             value={age}
