@@ -118,21 +118,21 @@ export type dadosDoJogoType = {
       dado?:number,
       tipoDeDado?:string,
       participante?:string
-     },
+     }[],
      empates:{
       idParticipante:string, 
       premio:number,
       dado?:number,
       tipoDeDado?:string,
       participante?:string
-     },
+     }[],
      vitorias:{
       idParticipante:string, 
       premio:number,
       dado?:number,
       tipoDeDado?:string,
       participante?:string
-     }
+     }[]
 
 }
 

@@ -7,25 +7,25 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { artilheirosTypeReducer, assistentesTypeReducer, dadosDoJogoType, selecionadosType } from '../../../types';
+import { assistentesTypeReducer } from '../../../types';
 import AvatarComponent from './avatarComponent';
 
-export default function Artilheiros() {
-    const artilheiros:artilheirosTypeReducer = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
+export default function Assistentes() {
+    const assistentes:assistentesTypeReducer = useSelector((state:any)=>state.assisteciaReducer.assistentes)
 
   return (
     <div>
          {
-            (artilheiros?.primeiro || artilheiros.segundo || artilheiros.terceiro || artilheiros.quarto) &&
+            (assistentes?.primeiro || assistentes.segundo || assistentes.terceiro || assistentes.quarto) &&
             <div>
                 <div>
-                    <h5>Artilheiros</h5>
+                    <h5>Assistentes</h5>
                     <div>
                         {
-                            artilheiros.primeiro &&
+                            assistentes.primeiro &&
                             <div style={{display:"flex", flexWrap:"wrap"}}>
                                 {
-                                    artilheiros.primeiro.map((elem, key)=>{
+                                    assistentes.primeiro.map((elem, key)=>{
                                     return <div key={key}>
                                             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
                                                 <ListItem alignItems="flex-start">   
@@ -36,7 +36,7 @@ export default function Artilheiros() {
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
-                                                    primary="Artilheiro"
+                                                    primary="Assistente"
                                                     secondary={
                                                         <React.Fragment>
                                                         <Typography
@@ -66,10 +66,10 @@ export default function Artilheiros() {
                 <div>
                     <div>
                         {
-                            artilheiros.segundo &&
+                            assistentes.segundo &&
                             <div style={{display:"flex", flexWrap:"wrap"}}>
                                 {
-                                    artilheiros.segundo.map((elem, key)=>{
+                                    assistentes.segundo.map((elem, key)=>{
                                     return <div key={key}>
                                             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
                                                 <ListItem alignItems="flex-start">   
@@ -80,7 +80,7 @@ export default function Artilheiros() {
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
-                                                    primary="Vice-Artilheiro"
+                                                    primary="Vice-Assistente"
                                                     secondary={
                                                         <React.Fragment>
                                                         <Typography
@@ -110,10 +110,10 @@ export default function Artilheiros() {
                 <div>
                     <div>
                         {
-                            artilheiros.terceiro &&
+                            assistentes.terceiro &&
                             <div style={{display:"flex", flexWrap:"wrap"}}>
                                 {
-                                    artilheiros.terceiro.map((elem, key)=>{
+                                    assistentes.terceiro.map((elem, key)=>{
                                     return <div key={key}>
                                             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
                                                 <ListItem alignItems="flex-start">   
@@ -124,7 +124,7 @@ export default function Artilheiros() {
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
-                                                    primary="Terceiro-Artilheiro"
+                                                    primary="Terceiro-Assistente"
                                                     secondary={
                                                         <React.Fragment>
                                                         <Typography
@@ -154,10 +154,10 @@ export default function Artilheiros() {
                 <div>
                     <div>
                         {
-                            artilheiros.quarto &&
+                            assistentes.quarto &&
                             <div style={{display:"flex", flexWrap:"wrap"}}>
                                 {
-                                    artilheiros.quarto.map((elem, key)=>{
+                                    assistentes.quarto.map((elem, key)=>{
                                     return <div key={key}>
                                             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
                                                 <ListItem alignItems="flex-start">   
@@ -168,7 +168,7 @@ export default function Artilheiros() {
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
-                                                    primary="Quarto-Artilheiro"
+                                                    primary="Quarto-Assistente"
                                                     secondary={
                                                         <React.Fragment>
                                                         <Typography
