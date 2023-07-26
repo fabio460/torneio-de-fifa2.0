@@ -14,6 +14,7 @@ import { torneioType } from '../../types';
 import ModalConfirmarPagamentoPremiacao from '../modais/modalConfirmarPagPrem';
 import ModalConfirmaPagamentoFolha from '../modais/modalConfirPagFolha';
 import { Avatar } from '@mui/material';
+import PremiacoesBody from './cardPremiacoesComponents/premiacoesBody';
 
 
 
@@ -22,16 +23,9 @@ export default function CradPremiacoes({torneio,usuario}:{
   usuario:usuarioLogadoType | undefined,
   torneio:torneioType[] | undefined
 }) {
-  const colocacao:selecionadosType = useSelector((state:any)=>state.colocacaoReducer.colocacao)
-  const artilheiros:artilheirosTypeReducer = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
-  const assistentes:assistentesTypeReducer = useSelector((state:any)=>state.assisteciaReducer.assistentes)
-  const dadosDoJogo:dadosDoJogoType = useSelector((state:any)=>state.golsEmpVitoriasReducer.dados)
-  const [carregandoFolha, setCarregandoFolha] = useState(false)
-  const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
-  const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
 
   return (
-    <Card sx={{ minWidth: 275 }} >
+    <Card sx={{ minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
       <CardContent  className='cardPremiacoesContainer'>
          {/* <div>
             <div className='cardPremiacoesBox'>
@@ -146,10 +140,7 @@ export default function CradPremiacoes({torneio,usuario}:{
               </ul> 
             </div> 
          </div> */}
-        <div>
-          {assistentes?.primeiro && assistentes?.primeiro[0]?.participante?.participante?.nome}
-          {artilheiros.primeiro && artilheiros?.primeiro[0].jogador.nome}
-        </div>
+         <PremiacoesBody/>
       </CardContent>
       <CardActions sx={{}}>
         <div className='btnPagamentos'>

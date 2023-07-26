@@ -111,7 +111,7 @@ export type timesType = {
 }
 
 export type dadosDoJogoType = {
-  dadosDoJogo:{
+
      gols:{
       idParticipante:string, 
       premio:number,
@@ -134,7 +134,6 @@ export type dadosDoJogoType = {
       participante?:string
      }
 
-   }
 }
 
 export type checkedTypes = {
