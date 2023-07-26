@@ -23,7 +23,8 @@
 }
 @media (max-width:800px) {
     .focusStyle{
-        display: none;
+        transition: 0.3s;
+        margin-top: -45px;
     }
    .compraDeJogadoresBody{
      flex-direction: column;
