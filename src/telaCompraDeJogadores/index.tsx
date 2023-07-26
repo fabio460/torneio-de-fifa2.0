@@ -16,6 +16,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
+import { useSelector } from 'react-redux'
 
 interface Props {
   /**
@@ -53,12 +54,13 @@ export default function TelaCompraDeJogadores() {
     useEffect(()=>{
        getElenco()
     },[])
+    const focus = useSelector((state:any)=>state.inputFocusReducer.focus)
     const boxStyle={ 
-      mt:4,
-      padding:"50px 0px",
-      "@media (max-width:900px)":{
-        mt:14,
-      }
+      // mt:4,
+      // padding:focus?"0px":"50px 0px",
+      // "@media (max-width:900px)":{
+      //   mt:focus ? 1 :14,
+      // }
     }
   return (
     <div className='container'>

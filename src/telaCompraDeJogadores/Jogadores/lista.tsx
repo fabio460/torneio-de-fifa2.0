@@ -26,22 +26,22 @@ export default function Lista({intervalo}:intervaloType) {
       setPosicao(traduzirParaInglesArrayDePosicoes(posicoesReducer))
 
     },[posicoesReducer])
-    
+    const focus = useSelector((state:any)=>state.inputFocusReducer.focus)
    
     return (
-    <div className='jogadores'>
-    {
-      lista === null ?
-      <Carregando/>:
-      lista?.length === 0 ?
-      <div className="jogadoresNaoEncontrado">Nenhum jogador encontrado!</div>:
-      filtrada?.map((jogador, key)=>{
-        if(key >= intervalo.inicial && key <= intervalo.final){
-          return <CardJogador key={key} jogador={jogador}/>
-        }
-        return ""
-      })
-    }
+    <div className={`jogadores ${focus && "jogadoresFocus"}`}>
+      {
+        lista === null ?
+        <Carregando/>:
+        lista?.length === 0 ?
+        <div className="jogadoresNaoEncontrado">Nenhum jogador encontrado!</div>:
+        filtrada?.map((jogador, key)=>{
+          if(key >= intervalo.inicial && key <= intervalo.final){
+            return <CardJogador key={key} jogador={jogador}/>
+          }
+          return ""
+        })
+      }
   </div>
   )
 }

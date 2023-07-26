@@ -3,6 +3,10 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
     padding:3%;
+    margin-top: 80px;
+}
+.j{
+    background-color: blue;
 }
 
 .jogadorCard{
@@ -76,5 +80,11 @@
     .jogadores{
         grid-template-columns: 1fr;
         margin-top: 170px;
+    }
+    .paddinFocusHeade{
+        margin-top: 0;
+    }
+    .jogadoresFocus{
+        margin-top: 20px;
     }
 }
