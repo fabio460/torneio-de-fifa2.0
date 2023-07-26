@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { checkedType, chekedType, jogadoresType } from '../../types';
+import { assistencia } from '../../valoresDosPremios';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -37,20 +38,37 @@ export default function Primeiro({handleChangePrimeiro, participantes, setPrimei
     );
   };
 
-  let jogadoresSelecionados:jogadoresType[] = [] 
+  let jogadoresSelecionados:any[] = [] 
   participantes.map(p=>{
     p.participante.jogadores.map(j=>{
         jogadoresSelecionados.push(j)
     })
   })
+  function getParticipante(id:string) {    
+    let Participante = participantes.filter(p=>{
+      if (p.participante.id === id) {
+        return p
+      }
+    }) 
+    return Participante[0]
+  }
+  let listaResponse:any = []
   let listFilter = jogadoresSelecionados.filter(p=>{
     if (personName.includes(p.nome)) {
+        listaResponse.push({
+          jogador:p, 
+          participante:getParticipante(p.idParticipante),
+          dadosDaApi:{
+            idParticipante:p.idParticipante,
+            premio:assistencia
+          }
+        })
         return p
     }
   })
    
   React.useEffect(()=>{
-      setPrimeiro(listFilter) 
+      setPrimeiro(listaResponse) 
   },[personName])  
   return (
     <div>

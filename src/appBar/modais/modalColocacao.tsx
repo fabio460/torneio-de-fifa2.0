@@ -50,7 +50,6 @@ export default function ModalColocacao() {
       type:"colocacao",
       payload:{colocacao:{primeiro,segundo,terceiro,quarto}}
     })
-    
   };
 
   return (

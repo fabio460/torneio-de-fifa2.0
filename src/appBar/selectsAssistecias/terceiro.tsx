@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { checkedType, chekedType, jogadoresType } from '../../types';
+import { terceiroAssistencia } from '../../valoresDosPremios';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -37,21 +38,38 @@ export default function Terceiro({handleChangePrimeiro, participantes, setTercei
     );
   };
 
-  let jogadoresSelecionados:jogadoresType[] = [] 
+  let jogadoresSelecionados:any[] = [] 
   participantes.map(p=>{
     p.participante.jogadores.map(j=>{
         jogadoresSelecionados.push(j)
     })
   })
+  function getParticipante(id:string) {    
+    let Participante = participantes.filter(p=>{
+      if (p.participante.id === id) {
+        return p
+      }
+    }) 
+    return Participante[0]
+  }
+  let listaResponse:any = []
   let listFilter = jogadoresSelecionados.filter(p=>{
     if (personName.includes(p.nome)) {
+        listaResponse.push({
+          jogador:p, 
+          participante:getParticipante(p.idParticipante),
+          dadosDaApi:{
+            idParticipante:p.idParticipante,
+            premio:terceiroAssistencia
+          }
+        })
         return p
     }
   })
    
   React.useEffect(()=>{
-      setTerceiro(listFilter) 
-  },[personName])  
+      setTerceiro(listaResponse) 
+  },[personName])   
   return (
     <div>
       <FormControl className='modalColocacaoForms' sx={{marginBottom:1, marginTop:2}} size="small">

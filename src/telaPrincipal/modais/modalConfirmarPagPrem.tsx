@@ -50,6 +50,7 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
     artilheiros.primeiro?.map((e:any)=>{
       artilheirosArray.push(e.nome)
     })
+
      const res =await pagarPremiacoesApi(premiados)
      if (artilheiros.primeiro || assistentes.primeiro || colocacao.primeiro) {     
        const resSta = await adicionarEstatisticaApi(

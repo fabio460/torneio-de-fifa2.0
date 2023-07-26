@@ -258,61 +258,29 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
      let premiados:any = []
 
      assistentes.primeiro?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:assistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
     assistentes.segundo?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:viceAssistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
     assistentes.terceiro?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:terceiroAssistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
     assistentes.quarto?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:quartoAssistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
 
     artilheiros.primeiro?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:assistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
     artilheiros.segundo?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:viceAssistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
     artilheiros.terceiro?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:terceiroAssistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
     artilheiros.quarto?.map((e:any)=>{
-      premiados.push({
-        idParticipante:e.idParticipante,
-        nome:e.nome,
-        premio:quartoAssistencia
-      })
+      premiados.push(e?.dadosDaApi)
     })
 
     colocacao.primeiro && premiados.push(colocacao.primeiro.dadosDaApi)

@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { checkedType, chekedType, jogadoresType } from '../../types';
+import { artilheiro } from '../../valoresDosPremios';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -37,25 +38,41 @@ export default function Primeiro({participantes, setPrimeiro}:propsType) {
     );
   };
 
-  let jogadoresSelecionados:jogadoresType[] = [] 
+  let jogadoresSelecionados:any = [] 
   participantes.map(p=>{
     p.participante.jogadores.map(j=>{
         jogadoresSelecionados.push(j)
     })
   })
-  let aux:any = []
-  let listFilter = jogadoresSelecionados.filter(p=>{
+
+
+  function getParticipante(id:string) {    
+    let Participante = participantes.filter(p=>{
+      if (p.participante.id === id) {
+        return p
+      }
+    }) 
+    return Participante[0]
+  }
+  let listaResponse:any = []
+  let listFilter = jogadoresSelecionados.filter((p:any)=>{
     if (personName.includes(p.nome)) {
-        aux.push({
-          p, participante
+        listaResponse.push({
+          jogador:p, 
+          participante:getParticipante(p.idParticipante),
+          dadosDaApi:{
+            idParticipante:p.idParticipante,
+            premio:artilheiro
+          }
         })
         return p
     }
   })
-   console.log(aux)
   React.useEffect(()=>{
-      setPrimeiro(listFilter) 
-  },[personName])  
+      setPrimeiro(listaResponse) 
+  },[personName]) 
+  
+  
   return (
     <div>
       <FormControl className='modalColocacaoForms' sx={{marginBottom:1, marginTop:2}} size="small">

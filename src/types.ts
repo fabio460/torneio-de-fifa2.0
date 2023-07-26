@@ -74,7 +74,9 @@ export interface torneioType {
 
  export type checkedType = {
   jogador: jogadoresType,
-  selecionado:boolean
+  selecionado:boolean,
+  participante?:participantesType,
+  checked?:boolean
 }
 
 export type premiadosType = {
@@ -133,4 +135,71 @@ export type dadosDoJogoType = {
      }
 
    }
+}
+
+export type checkedTypes = {
+  participante:participantesType,
+  checked:boolean
+}
+
+export type artilheirosTypeReducer={
+  primeiro:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
+  quarto:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
+  segundo:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
+  terceiro:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
+}
+
+export type assistentesTypeReducer={
+  primeiro:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
+  quarto:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
+  segundo:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
+  terceiro:{
+    jogador: jogadoresType,
+    participante: {
+      participante:participantesType
+    },
+    dadosDaApi: dadosPremiacoesDaApiType
+  }[],
 }

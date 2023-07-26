@@ -52,6 +52,7 @@
     height: 100%;
     padding:0 30px;
     border-radius: 10px 10px;
+    min-height: 80vh;
 }
 .reservarContainer{
     padding:30px;
@@ -65,7 +66,7 @@
     padding: 5px;
     background-color: brown;
     color: white;
-    border-radius: 3px
+    border-radius: 3px;
 }
 .atacantesContainer{
     display: flex;
