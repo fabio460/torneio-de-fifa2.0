@@ -55,7 +55,7 @@ export default function ModalCompraFinalizada({
         <DialogTitle color={"green"}>{"Parabêns pela compra do jogador "+jogador.nome}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description" sx={{display:"flex"}}>
-             <img style={{width:""}} src={jogador.imagemDoJogador} />
+             <img className='imgJogadorComprado' src={jogador.imagemDoJogador} />
              <ul>
                 <li> Verifique seu novo saldo!</li>
                 <li>Atenção a folha de pagamento, deixe um valor em caixa para pagar</li>

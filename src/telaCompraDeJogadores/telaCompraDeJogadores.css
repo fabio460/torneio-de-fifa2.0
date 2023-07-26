@@ -21,7 +21,16 @@
 .telaDeComprasDeJogadoresTextoCheckgox{
     font-size: 10px;
 }
+.imgJogadorComprado{
+   min-width: 250px;
+   min-height: 300px;
+}
 @media (max-width:800px) {
+    .imgJogadorComprado{
+        min-width: 50px;
+        min-height: 0;
+        max-height: 150px;
+    }
     .focusStyle{
         transition: 0.3s;
         margin-top: -45px;

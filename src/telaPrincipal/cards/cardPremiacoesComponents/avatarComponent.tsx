@@ -39,17 +39,17 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   border: `2px solid ${theme.palette.background.paper}`,
 }));
 
-export default function AvatarComponent() {
+export default function AvatarComponent({imgJogador, imgTime}:any) {
   return (
     <Stack direction="row" spacing={2}>
       <Badge
         overlap="circular"
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         badgeContent={
-          <SmallAvatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <SmallAvatar alt="Remy Sharp" src={imgTime} />
         }
       >
-        <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+        <Avatar alt="Travis Howard" src={imgJogador} />
       </Badge>
     </Stack>
   );
