@@ -22,6 +22,9 @@
     font-size: 10px;
 }
 @media (max-width:800px) {
+    .focusStyle{
+        display: none;
+    }
    .compraDeJogadoresBody{
      flex-direction: column;
    }

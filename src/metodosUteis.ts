@@ -368,3 +368,8 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
         return jogadores
     } 
  }
+
+
+export function valorInteiro(v:any) {
+  return parseInt(v?.split('.')[0])
+}

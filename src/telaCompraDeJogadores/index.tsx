@@ -55,6 +55,7 @@ export default function TelaCompraDeJogadores() {
     },[])
     const boxStyle={ 
       mt:4,
+      padding:"50px 0px",
       "@media (max-width:900px)":{
         mt:14,
       }

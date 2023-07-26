@@ -68,13 +68,30 @@ export default function CampoDeBusca() {
       buscar()
     }
   }
+  const [color, setcolor] = useState("")
+  const [focus, setfocus] = useState(false)
   const paperStyle = { 
     p: '2px 4px',
     display: 'flex',
     alignItems: 'center',
     width: 450,
+    background:color,
     "@media (max-width:800px)":{
       width: "100%",
+    }
+  }
+
+  const handleFocus = (action:string)=>{
+    if(action === "focado"){
+      dispatch({
+        type:"inputFocus",
+        payload:{focus:true}
+      })
+    }else{
+      dispatch({
+        type:"inputFocus",
+        payload:{focus:false}
+      })
     }
   }
   return (
@@ -89,6 +106,8 @@ export default function CampoDeBusca() {
             inputProps={{ 'aria-label': 'search google maps' }}
             onChange={getLista}
             onKeyUp={onKey}
+            onBlur={(e)=>handleFocus("desfocado")} 
+            onFocus={(e)=>handleFocus("focado")}
           />
           <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
             <SearchIcon onClick={buscar}/>

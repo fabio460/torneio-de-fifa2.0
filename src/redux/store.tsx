@@ -14,8 +14,10 @@ import posicaoSelectJogadorReducer from './posicaoSelectJogadorReducer'
 import jogadoresDoTorneioSelecionadoReducer from './jogadoresDoTorneioSelecionadoReducer'
 import checkedDeletarPart from './checkedDeletarPart'
 import torneioAtualReducer from './torneioAtualReducer'
+import inputFocusReducer from './inputFocusReducer'
 export const store = configureStore({
   reducer: {
+    inputFocusReducer,
     torneioAtualReducer,
     checkedDeletarPart,
     jogadoresDoTorneioSelecionadoReducer,

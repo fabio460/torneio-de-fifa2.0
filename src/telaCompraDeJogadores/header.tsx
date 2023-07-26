@@ -4,7 +4,7 @@ import CampoDeBusca from './Jogadores/campoDeBusca'
 import { useNavigate } from 'react-router-dom'
 import { formatoMonetario } from '../metodosUteis'
 import SelectPosicao from './selectPosicao'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 export default function Header({elenco}:{elenco:participantesType | undefined}) {
     const n = useNavigate()
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -28,12 +28,14 @@ export default function Header({elenco}:{elenco:participantesType | undefined}) 
       })
       n('/')
     } 
+    const focus = useSelector((state:any)=>state.inputFocusReducer.focus)
+   
   return (
     <div className='compraDeJogadoresHeader'>
-      <h3 className='compraDeJogadoresTitulo'>{elenco?.nome}</h3>
-      <div style={{textAlign:'center'}}>{elenco?.time}</div>
+      <h3 className={`compraDeJogadoresTitulo ${focus && "focusStyle"}`}>{elenco?.nome}</h3>
+      <div style={{textAlign:'center'}} className={`${focus && "focusStyle"}`}>{elenco?.time}</div>
       <div className='compraDeJogadoresBody'>
-        <div>
+        <div className={`${focus && "focusStyle"}`}>
           <div className='compraDeJogadoresBodyLeft'>
             <div onClick={paraTelaPrincipal} className='compraDeJogadoresItens'>Principal</div> 
             <div onClick={pataTelaDeElenco} className='compraDeJogadoresItens'>Elenco</div> 

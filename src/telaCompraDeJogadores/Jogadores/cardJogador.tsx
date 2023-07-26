@@ -3,8 +3,8 @@ import {jogadoresType} from "../../types"
 import "./jogadores.css"
 import { Button } from '@mui/material'
 import { getPosicaoPrincipal } from './metodosUteis'
-import { formatoMonetario } from '../metodosUteisGerais'
-import ModalComprarJogador from '../modalComprarJog'
+import ModalComprarJogador from '../modais/modalComprarJog'
+import { formatoMonetario } from '../../metodosUteis'
 type JogadorType = {
   jogador:jogadoresType
 }
@@ -24,7 +24,7 @@ export default function CardJogador({jogador}:JogadorType) {
         </div>
         <div className='jogadorCardMeio'>
           <div>
-            <img src={jogador.imagemDoJogador} alt='sem imagem'/>
+            <img src={jogador.imagemDoJogador} alt='sem imagem' style={{maxWidth:"125px"}}/>
           </div>
         </div>
         <div className='jogadorCardDireito'>
@@ -33,7 +33,7 @@ export default function CardJogador({jogador}:JogadorType) {
               {jogador.nome}
             </div>
             <div className='jogadorCardPreco'>
-              {formatoMonetario(jogador.valorDoJogador)}
+              {formatoMonetario(parseFloat(jogador.valorDoJogador as string))}
             </div>
           </div>
           <div className='jogadorCardBtn'>
