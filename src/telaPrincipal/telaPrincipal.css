@@ -53,11 +53,7 @@
 }
 
 
-@media (max-width:1400px) {
-    .telaPrincipalMeio{
-       grid-template-columns: 1fr 1fr;
-    }
-}
+
 @media (max-width:1270px) {
     .telaPrincipalInferior{
         grid-template-columns: 1fr 1fr;

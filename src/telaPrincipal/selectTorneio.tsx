@@ -13,6 +13,10 @@ export default function SelectTorneio() {
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
     localStorage.setItem('selectTorneio',event.target.value)
+    dispatch({
+      type:"arrayPremiadosReducer",
+      payload:{premiados:[]}
+    })
   };
   React.useEffect(()=>{
     if (localStorage.getItem('selectTorneio')) {

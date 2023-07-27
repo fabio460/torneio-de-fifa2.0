@@ -8,13 +8,11 @@ import { chekedType, participantesType, timesType, torneioType } from '../../typ
 import ModalCriarTorneio from '../modais/modalCriarTorneio';
 import ModalAdicionarParticipantes from '../modais/modalAdicionarParticipantes';
 import SelectTorneio from '../selectTorneio';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ModalDeletarTorneio from '../modais/modalDeletarTorneio';
 import ModalAtualizarTorneio from '../modais/modalAtualizarTorneio';
 import { getTimes } from '../../metodosUteis';
 import ListaDeParticipantes from '../listaParticipantes';
-
-
 
 export default function CardParticipantes({participantes, torneio}:
   {
@@ -52,6 +50,7 @@ export default function CardParticipantes({participantes, torneio}:
     type:'participantes',
     payload:{participantes:listaDeParticipantes}
   })
+
   return (
     <Card sx={{ minWidth: 275, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
       <CardContent sx={{padding:'3%'}}>
