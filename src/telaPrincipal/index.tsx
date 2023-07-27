@@ -76,7 +76,7 @@ export default function TelaPrincipal() {
                 />
                 <CradPremiacoes usuario={usuario}/>
               </div>
-              <h2 style={{textAlign:"center",marginTop:"20px"}}>Estatisticas</h2>
+              <h2 style={{textAlign:"center",margin:"auto"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>
                 <EstatisticaCampeao estatistica={estatisticas}/>
                 <EstatisticaAssistencia estatistica={estatisticas}/>
