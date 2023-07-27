@@ -52,7 +52,7 @@
 }
 
 
-@media (max-width:2200px) {
+@media (max-width:1400px) {
     .telaPrincipalMeio{
        grid-template-columns: 1fr 1fr;
     }
