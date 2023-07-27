@@ -26,6 +26,8 @@ export default function BtnScroll({usuario}:any) {
      bottom: 16, right: 25,
      "@media(max-width : 700px)":{
        bottom: 5, right: 5,
+       width:"60px",
+       marginTop:"0px"
      }
     }
   return (

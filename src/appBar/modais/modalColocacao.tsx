@@ -79,9 +79,7 @@ export default function ModalColocacao() {
                 label="Primeiro lugar"
                 onChange={handleChangePrimeiro}
               >
-                <MenuItem id={''} value="">
-                  <em>None</em>
-                </MenuItem>
+
                 {participantes?.map((elem:chekedType,key)=>{
                   return <MenuItem value={elem.participante.nome} nonce={JSON.stringify(elem.participante)}>{elem.participante.nome}</MenuItem>
                 })}
