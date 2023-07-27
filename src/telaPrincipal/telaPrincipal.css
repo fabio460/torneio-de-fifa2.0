@@ -22,8 +22,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2%;
     padding:1% 2%;
-    height: 300px;
-    margin-bottom: 60px;
+
 }
 .telaPrincipalInferior{
     display: grid;
@@ -50,6 +49,13 @@
     padding: 8px;
     min-width: 400px;
     display: flex;
+}
+
+
+@media (max-width:2200px) {
+    .telaPrincipalMeio{
+       grid-template-columns: 1fr 1fr;
+    }
 }
 @media (max-width:1270px) {
     .telaPrincipalInferior{
