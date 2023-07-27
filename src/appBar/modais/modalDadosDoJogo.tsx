@@ -132,6 +132,16 @@ export default function ModalDadosDoJogo() {
     })
     handleClose()
   }
+  const cancelar = ()=>{
+    setgols([])
+    setvitorias([])
+    setempates([])
+    dispatch({
+      type:"dados",
+      payload:{dados:[]}
+    })
+    handleClose()
+  }
   const dialogStyle = {
     width:"400px",
     "@media (max-width:800px)":{
@@ -186,7 +196,7 @@ export default function ModalDadosDoJogo() {
         </DialogContent>
         <DialogActions>
           <Button onClick={adicionar}>Confirmar</Button>
-          <Button color='error' onClick={handleClose} autoFocus>
+          <Button color='error' onClick={cancelar} autoFocus>
             Cancelar
           </Button>
         </DialogActions>

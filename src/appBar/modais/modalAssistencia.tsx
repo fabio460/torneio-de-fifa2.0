@@ -34,6 +34,10 @@ export default function ModalAssistencia() {
   const dispatch = useDispatch()
   const handleClose = () => {
     setOpen(false);
+    
+  };
+  
+  const confirmar = ()=>{
     dispatch({
       type:"assistencia",
       payload:{assistentes:{
@@ -43,8 +47,16 @@ export default function ModalAssistencia() {
         quarto:quarto
       }}
     })
-    
-  };
+    handleClose()
+  }
+
+  const cancelar = ()=>{
+    dispatch({
+      type:"assistencia",
+      payload:{assistentes:[]}
+    })
+    handleClose()
+  }
 
   const dialogStyle = {
     minWidth:"600px",
@@ -89,8 +101,8 @@ export default function ModalAssistencia() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Confirmar</Button>
-          <Button color='error' onClick={handleClose} autoFocus>
+          <Button onClick={confirmar}>Confirmar</Button>
+          <Button color='error' onClick={cancelar} autoFocus>
             Cancelar
           </Button>
         </DialogActions>

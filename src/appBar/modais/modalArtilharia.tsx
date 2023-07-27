@@ -23,6 +23,9 @@ export default function ModalArtilharia() {
   const dispatch = useDispatch()
   const handleClose = () => {
     setOpen(false);
+    
+  };
+  const confirmar = ()=>{
     dispatch({
       type:"artilharia",
       payload:{artilheiros:{
@@ -32,8 +35,16 @@ export default function ModalArtilharia() {
         quarto:quarto
       }}
     })
-    
-  };
+    handleClose()
+  }
+
+  const cancelar = ()=>{
+    dispatch({
+      type:"artilharia",
+      payload:{artilheiros:[]}
+    })
+    handleClose()
+  }
 
   const dialogStyle = {
     minWidth:"600px",
@@ -78,8 +89,8 @@ export default function ModalArtilharia() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Confirmar</Button>
-          <Button color='error' onClick={handleClose} autoFocus>
+          <Button onClick={confirmar}>Confirmar</Button>
+          <Button color='error' onClick={cancelar} autoFocus>
             Cancelar
           </Button>
         </DialogActions>

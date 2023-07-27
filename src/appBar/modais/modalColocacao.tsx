@@ -46,12 +46,22 @@ export default function ModalColocacao() {
   const dispatch = useDispatch()
   const handleClose = () => {
     setOpen(false);
+  };
+  
+  const confirmar = ()=>{
     dispatch({
       type:"colocacao",
       payload:{colocacao:{primeiro,segundo,terceiro,quarto}}
     })
-  };
-
+    handleClose()
+  }
+  const cancelar = ()=>{
+    dispatch({
+      type:"colocacao",
+      payload:{colocacao:[]}
+    })
+    handleClose()
+  }
   return (
     <div>
       <div onClick={handleClickOpen}>
@@ -141,8 +151,8 @@ export default function ModalColocacao() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Confirmar</Button>
-          <Button color='error' onClick={handleClose} autoFocus>
+          <Button onClick={confirmar}>Confirmar</Button>
+          <Button color='error' onClick={cancelar} autoFocus>
             Cancelar
           </Button>
         </DialogActions>
