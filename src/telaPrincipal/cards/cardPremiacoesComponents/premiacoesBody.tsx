@@ -14,12 +14,19 @@ import Assistentes from './assistentes';
 import GolsVitEmpates from './golsVitEmpates';
 
 export default function PremiacoesBody() {
-    return (
-        <div>  
-            <Colocacao/>
-            <Artilheiros/>   
-            <Assistentes/>
-            <GolsVitEmpates/>       
+    const premiados = useSelector((state:any)=>state.arrayPremiadosReducer.premiados)
+    if (premiados.length === 0) {
+        return <div className='naoHaDados'>
+            Insira os dados das premiações!
         </div>
-    );
+    }else{
+        return (
+            <div>  
+                <Colocacao/>
+                <Artilheiros/>   
+                <Assistentes/>
+                <GolsVitEmpates/>       
+            </div>
+        );
+    }
 }

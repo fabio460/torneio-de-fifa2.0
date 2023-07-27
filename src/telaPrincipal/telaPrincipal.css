@@ -3,8 +3,13 @@
     min-height: 100vh;
     min-width: 100%;
 }
-.cardParticipantesBody{
-    
+.naoHaDados{
+    color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    min-height:300px;
 }
 .telaPrincipalSuperior{
     display: grid;

@@ -31,8 +31,8 @@ export default function Assistentes() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
@@ -75,8 +75,8 @@ export default function Assistentes() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
@@ -119,8 +119,8 @@ export default function Assistentes() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
@@ -163,8 +163,8 @@ export default function Assistentes() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText

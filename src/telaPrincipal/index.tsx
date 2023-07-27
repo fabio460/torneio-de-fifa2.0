@@ -74,7 +74,7 @@ export default function TelaPrincipal() {
                   participantes = {usuario?.torneio[torneio]?.participantes}
                   torneio = {usuario?.torneio}  
                 />
-                <CradPremiacoes torneio = {usuario?.torneio} usuario={usuario}/>
+                <CradPremiacoes usuario={usuario}/>
               </div>
               <h2 style={{textAlign:"center",marginTop:"20px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>

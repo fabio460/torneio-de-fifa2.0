@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { pagarPremiacoesApi } from '../../api/pagamentosApi';
 import { selecionadosType, usuarioLogadoType } from '../../types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { adicionarEstatisticaApi } from '../../api/estatisticasApi';
 import CarregandoBtn from '../../carregandoBtn';
 import { getPremiados } from '../../metodosUteis';
@@ -32,11 +32,17 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
     setOpen(false);
   };
 
-
+  let premiados:any = []
+  premiados = getPremiados(colocacao,artilheiros,assistentes,dadosDoJogo)
+  const dispatch = useDispatch()
+  React.useEffect(()=>{
+    dispatch({
+      type:"arrayPremiadosReducer",
+      payload:{premiados}
+    })
+  },[premiados])
   const pagarPremiacao =async ()=>{
     setCarregandoPremio(true)
-    let premiados:any = []
-    premiados = getPremiados(colocacao,artilheiros,assistentes,dadosDoJogo)
     if (premiados.length === 0) {
        alert("Não há dados selecionados!")
        setCarregandoPremio(false)

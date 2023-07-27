@@ -4,15 +4,13 @@ import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import { artilheirosTypeReducer, assistentesTypeReducer, dadosDoJogoType, selecionadosType } from '../../../types';
+import { artilheirosTypeReducer } from '../../../types';
 import AvatarComponent from './avatarComponent';
 
 export default function Artilheiros() {
-    const artilheiros:artilheirosTypeReducer = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
-
+  const artilheiros:artilheirosTypeReducer = useSelector((state:any)=>state.artilhariaReducer.artilheiros)
   return (
     <div>
          {
@@ -31,8 +29,8 @@ export default function Artilheiros() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
@@ -75,8 +73,8 @@ export default function Artilheiros() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
@@ -119,8 +117,8 @@ export default function Artilheiros() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
@@ -163,8 +161,8 @@ export default function Artilheiros() {
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
-                                                        imgJogador={elem.jogador.imagemDoJogador}
-                                                        imgTime={elem.participante.participante.emblemaDoTime}
+                                                        imgMaior={elem.jogador.imagemDoJogador}
+                                                        imgMenor={elem.participante.participante.emblemaDoTime}
                                                         />
                                                     </ListItemAvatar>
                                                     <ListItemText
