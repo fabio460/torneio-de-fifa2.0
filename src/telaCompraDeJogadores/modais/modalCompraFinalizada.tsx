@@ -56,15 +56,15 @@ export default function ModalCompraFinalizada({
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description" sx={{display:"flex"}}>
              <img className='imgJogadorComprado' src={jogador.imagemDoJogador} />
-             <div>
-              <ul>
-                  <li>jogador <span style={{color:"blue"}}>{jogador.nome}</span></li>
-                  <li> Verifique seu novo saldo!</li>
-                  <li>Atenção a folha de pagamento, deixe um valor em caixa para pagar</li>
-              </ul>
-              <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"50%"}}>
-                 <img style={{width:"50%"}} src="https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-check-mark-icon-design-template-vector-isolated-png-image_711429.jpg" alt="" />
-              </div>
+             <div style={{width:"50%"}}>
+                {/* <ul>
+                    <li>jogador <span style={{color:"blue"}}>{jogador.nome}</span></li>
+                    <li> Verifique seu novo saldo!</li>
+                    <li>Atenção a folha de pagamento, deixe um valor em caixa para pagar</li>
+                </ul> */}
+                <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"100%"}}>
+                  <img style={{width:"80%"}} src="https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-check-mark-icon-design-template-vector-isolated-png-image_711429.jpg" alt="" />
+                </div>
              </div>
           </DialogContentText>
         </DialogContent>
