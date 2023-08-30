@@ -9,19 +9,17 @@ import {jogadoresType} from '../../types'
 import { comprarJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
 import ModalCompraFinalizada from './modalCompraFinalizada';
+import ModalCompraNegada from './modalCompraNegada';
 export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
   const [open, setOpen] = React.useState(false);
   const [openFinalized, setOpenFinalized] = React.useState(false);
   const idElenco = localStorage.getItem('idDoElenco') || ''
-  const [jogadorComprado, setJogadorComprado] = useState<any>()
+  const [openCompraNegada, setCompraNegada] = useState(false)
   const [carregando, setCarregando] = useState(false)
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  function handleGetOpem() {
-    
-  }
   const handleClose = () => {
     setOpen(false);
   };
@@ -30,6 +28,8 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
       const res =await comprarJogadoresApi(idElenco, jogador)
       if (res === "jogador comprado com sucesso") {   
         setOpenFinalized(true)
+      }else{
+        setCompraNegada(true)
       }
       setCarregando(false)
     }
@@ -70,6 +70,12 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
           <ModalCompraFinalizada 
             openFinalized={openFinalized}
             setOpenFinalized={setOpenFinalized}
+            handleCloseFinalizedd={handleClose}
+            jogador={jogador}  
+          />
+          <ModalCompraNegada 
+            openFinalized={openCompraNegada}
+            setOpenFinalized={setCompraNegada}
             handleCloseFinalizedd={handleClose}
             jogador={jogador}  
           />

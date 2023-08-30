@@ -19,7 +19,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ModalCompraFinalizada({
+export default function ModalCompraNegada({
     openFinalized,
     setOpenFinalized,
     handleCloseFinalizedd,
@@ -32,14 +32,11 @@ export default function ModalCompraFinalizada({
     }) {
  
 
-  const handleClickOpenFinalized = () => {
-    setOpenFinalized(true);
-  };
 
   const handleClose = () => {
     setOpenFinalized(false);
     handleCloseFinalizedd()
-    window.location.reload()
+    setOpenFinalized(true)
   };
 
   return (
@@ -52,20 +49,14 @@ export default function ModalCompraFinalizada({
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle color={"green"} style={{textAlign:"center"}}>Compra finalizada com sucesso!</DialogTitle>
+        <DialogTitle color={"red"} style={{textAlign:"center"}}>Saldo insuficiênte!</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description" sx={{display:"flex"}}>
              <img className='imgJogadorComprado' src={jogador.imagemDoJogador} />
-             <div>
-              <ul>
-                  <li>jogador <span style={{color:"blue"}}>{jogador.nome}</span></li>
-                  <li> Verifique seu novo saldo!</li>
-                  <li>Atenção a folha de pagamento, deixe um valor em caixa para pagar</li>
-              </ul>
-              <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"50%"}}>
-                 <img style={{width:"50%"}} src="https://png.pngtree.com/png-vector/20190228/ourmid/pngtree-check-mark-icon-design-template-vector-isolated-png-image_711429.jpg" alt="" />
-              </div>
-             </div>
+            <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"50%"}}>
+                {/* <div>Voçe não pode comprar o {jogador.nome}</div> */}
+                <img style={{width:"50%"}} src="https://img.freepik.com/vetores-premium/design-de-icone-de-botao-da-cruz-vermelha_178156-173.jpg" alt="" />
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

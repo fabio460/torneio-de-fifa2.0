@@ -114,7 +114,8 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     <Checkbox
                         onChange={handleChangeAll}
                         inputProps={{ 'aria-label': 'controlled' }}
-                        />
+                        disabled
+                    />
                 </TableCell>
                 
                 <TableCell> </TableCell>
