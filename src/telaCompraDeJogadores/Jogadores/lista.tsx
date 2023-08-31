@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { jogadoresType } from '../../types';
 import Carregando from './carregando';
 import { traduzirParaInglesArrayDePosicoes } from '../../metodosUteis';
+import { createTheme } from '@mui/material';
 
 
 type intervaloType = {
@@ -27,7 +28,16 @@ export default function Lista({intervalo}:intervaloType) {
 
     },[posicoesReducer])
     const focus = useSelector((state:any)=>state.inputFocusReducer.focus)
-   
+    const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+
+    const darkTheme = createTheme({
+      palette: {
+        mode: 'dark',
+        primary: {
+          main: '#1976d2',
+        },
+      },
+    });
     return (
     <div className={`jogadores ${focus && "jogadoresFocus"}`}>
       {

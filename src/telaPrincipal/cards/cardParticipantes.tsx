@@ -13,12 +13,14 @@ import ModalDeletarTorneio from '../modais/modalDeletarTorneio';
 import ModalAtualizarTorneio from '../modais/modalAtualizarTorneio';
 import { getTimes } from '../../metodosUteis';
 import ListaDeParticipantes from '../listaParticipantes';
+import { darkBackgroundBox, colorDark, dark } from '../../temaDark';
 
 export default function CardParticipantes({participantes, torneio}:
   {
     participantes:participantesType[] | undefined,
     torneio:torneioType[] | undefined
   }) {
+  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
   const [checked, setChecked] = useState<any>()
   const [listaDeParticipantes, setListaDeParticipantes] = useState<any>([])
   const dispatch = useDispatch()
@@ -52,7 +54,7 @@ export default function CardParticipantes({participantes, torneio}:
   })
 
   return (
-    <Card sx={{ minWidth: 275, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+    <Card className='darkBoxs' sx={{background:!darkMode ? darkBackgroundBox:"", color: !darkMode ? colorDark:"" ,minWidth: 275, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
       <CardContent sx={{padding:'3%'}}>
         <Typography variant="h5" component="div" className='cardParticipantesBtns'>
           <SelectTorneio/>

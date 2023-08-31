@@ -12,7 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { calculaValoresDosJogadores } from '../../metodosUteis';
+import { darkBackgroundBox, colorDark, dark } from '../../temaDark';
 export default function CardElenco({elenco}:{elenco:participantesType}) {
+  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
   const navigate = useNavigate()
   const linkComprarJogador:any = ()=>{
@@ -26,6 +28,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
   }
   const deleteChecked = useSelector((state:any)=>state.checkedDeletarPart.status)
   const cardStyle = { 
+    background:!darkMode ? darkBackgroundBox:"", color: !darkMode ? colorDark:"",
     minWidth: 275,
     paddingBottom:0,
     "@media (max-width:850px)":{
@@ -56,7 +59,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
           }
         </Typography>
         <Divider sx={{marginBottom:1}}/>
-        <Typography sx={{ fontSize: 14}} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 14, color: !darkMode ? colorDark:""}} color="text.secondary" gutterBottom>
          
           {
             elenco.saldo < 0 ? 
@@ -65,16 +68,16 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
           }
       
         </Typography>
-        <Typography  color="text.secondary" sx={{ fontSize: 14 }}>
+        <Typography  color="text.secondary" sx={{ fontSize: 14, color: !darkMode ? colorDark:"" }}>
           Folha {calculaFolha(elenco.jogadores)}
         </Typography>
-        <Typography color="text.secondary" sx={{ fontSize: 14 }}>
+        <Typography color="text.secondary" sx={{ fontSize: 14, color: !darkMode ? colorDark:"" }}>
           Valor do elenco: {calculaValoresDosJogadores(elenco.jogadores)}
         </Typography>
-        <Typography color="text.secondary" sx={{ fontSize: 14 }}>
+        <Typography color="text.secondary" sx={{ fontSize: 14, color: !darkMode ? colorDark:"" }}>
           Elenco com {calculaQuantDeJogadores(elenco.jogadores)} jogadores
         </Typography>
-        <Typography sx={{ mb: 1.5 }} variant="body2">
+        <Typography sx={{ mb: 1.5, color: !darkMode ? colorDark:"" }} variant="body2">
    
         </Typography>
         <Button color={elenco.saldo < 0 ? 'error' : 'success'} onClick={()=> linkGerenciaDeElenco()} variant={elenco.saldo < 0 ? 'outlined': 'contained'} size="small" sx={{width:"100%", marginBottom:1}}>

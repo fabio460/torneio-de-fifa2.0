@@ -2,13 +2,15 @@ import React,{useState, useEffect} from 'react'
 import {listaDeJogadores} from "../../listaDeJogadoresCompleta"
 import Paginacao from './paginacao'
 import { manipularPaginacao } from './metodosUteis'
-import CampoDeBusca from './campoDeBusca'
+import CampoDeBusca from '../campoDeBusca'
 import { useSelector } from 'react-redux';
 import { jogadoresType } from '../../types';
 import Lista from './lista'
 import {useDispatch} from 'react-redux'
 import { getTorneioPorIdApi } from '../../api/torneioApi'
 import { listaJogadoresPorTorneioApi } from '../../api/jogadoresApi'
+import { createTheme } from '@mui/material'
+import { colorDark, dark, darkBackgroundContainer } from '../../temaDark'
 export default function Jogadores() {
   const [pagina, setPagina] = useState(1)
   const [itensPorPagina] = useState(16)
@@ -54,8 +56,16 @@ export default function Jogadores() {
     }
   },[Verify])
   
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#1976d2',
+      },
+    },
+  });
   return (
-    <div className='jogadoresContainer'>
+    <div className='jogadoresContainer' style={{background:dark ? 'inherit':'', color:dark?colorDark:""}}>
       <Lista intervalo={intervalo}/>
       <Paginacao 
         setPagina={setPagina} 

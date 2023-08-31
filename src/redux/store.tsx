@@ -16,8 +16,10 @@ import checkedDeletarPart from './checkedDeletarPart'
 import torneioAtualReducer from './torneioAtualReducer'
 import inputFocusReducer from './inputFocusReducer'
 import arrayPremiadosReducer from './arrayPremiadosReducer'
+import darkReducer from './darkReducer'
 export const store = configureStore({
   reducer: {
+    darkReducer,
     arrayPremiadosReducer,
     inputFocusReducer,
     torneioAtualReducer,

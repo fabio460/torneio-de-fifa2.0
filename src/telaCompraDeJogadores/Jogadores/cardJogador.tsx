@@ -5,13 +5,16 @@ import { Button } from '@mui/material'
 import { getPosicaoPrincipal } from './metodosUteis'
 import ModalComprarJogador from '../modais/modalComprarJog'
 import { formatoMonetario } from '../../metodosUteis'
+import { colorDark, dark, darkBackgroundBox } from '../../temaDark'
+import { useSelector } from 'react-redux'
 type JogadorType = {
   jogador:jogadoresType
 }
 export default function CardJogador({jogador}:JogadorType) {
+  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
   return (
-     <div className='jogadorCard'>
+     <div className='jogadorCard' style={{background:!darkMode ? darkBackgroundBox:'', color:!darkMode?colorDark:""}}>
         <div className='jogadorCardEsquerdo'>
           <div>
             <div className='jogadorCardOverall'>{jogador.overall}</div>

@@ -3,10 +3,11 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import { jogadoresType } from '../../types';
-import {listaDeJogadores} from "../../listaDeJogadoresCompleta"
+import { jogadoresType } from '../types';
+import {listaDeJogadores} from "../listaDeJogadoresCompleta"
 import {useDispatch, useSelector} from 'react-redux'
-import { listaJogadoresPorTorneioApi } from '../../api/jogadoresApi';
+import { listaJogadoresPorTorneioApi } from '../api/jogadoresApi';
+import SelectDarkMode from '../appBar/selectDarkMode';
 export default function CampoDeBusca() {
   const [lista, setLista] = useState<jogadoresType[]>([])
   var listaReducer:jogadoresType[] = useSelector((state:any)=>state.campoDeBuscaReducer.lista) 
@@ -114,7 +115,10 @@ export default function CampoDeBusca() {
           </IconButton>
 
         </Paper>
-        <div className="">{tamanhoDaLista} jogador{tamanhoDaLista === 1 ? "":"es"} encontrado{tamanhoDaLista === 1 ? "":"s"}</div>
+        <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+          <div className="">{tamanhoDaLista} jogador{tamanhoDaLista === 1 ? "":"es"} encontrado{tamanhoDaLista === 1 ? "":"s"}</div>
+          <SelectDarkMode/>
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,15 @@
   pointer-events: none;
 }
 
+.darkContainer{
+  background-color: rgba(0, 0, 0, 0.87);
+  
+}
+.darkBoxs{
+  background-color: rgba(255, 255, 255, 0.12);
+  color: gray;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

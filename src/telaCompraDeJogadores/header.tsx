@@ -1,6 +1,6 @@
 import React from 'react'
 import { participantesType } from '../types'
-import CampoDeBusca from './Jogadores/campoDeBusca'
+import CampoDeBusca from './campoDeBusca'
 import { useNavigate } from 'react-router-dom'
 import { formatoMonetario } from '../metodosUteis'
 import SelectPosicao from './selectPosicao'

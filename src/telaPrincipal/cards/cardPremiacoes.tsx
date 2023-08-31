@@ -14,10 +14,13 @@ import { torneioType } from '../../types';
 import ModalConfirmarPagamentoPremiacao from '../modais/modalConfirmarPagPrem';
 import ModalConfirmaPagamentoFolha from '../modais/modalConfirPagFolha';
 import PremiacoesBody from './cardPremiacoesComponents/premiacoesBody';
+import { darkBackgroundBox, colorDark, dark } from '../../temaDark';
 
 export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | undefined}) {
+  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+
   return (
-    <Card sx={{ minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
+    <Card sx={{background:!darkMode ? darkBackgroundBox:"", color: !darkMode ? colorDark:"", minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
       <CardContent  className='cardPremiacoesContainer'>
          <PremiacoesBody/>
       </CardContent>

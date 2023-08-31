@@ -3,6 +3,16 @@
     min-height: 100vh;
     min-width: 100%;
 }
+
+.darkContainer{
+    background-color: rgba(0, 0, 0, 0.87);
+    
+  }
+  .darkBoxs{
+    background-color: rgba(255, 255, 255, 0.12);
+    color: gray;
+  }
+
 .naoHaDados{
     color: grey;
     display: flex;

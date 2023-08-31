@@ -6,6 +6,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useSelector } from 'react-redux';
 import { usuarioLogadoType } from '../types';
 import { useDispatch } from 'react-redux';
+import { darkBackgroundBox, colorDark, dark } from '../temaDark';
 
 export default function SelectTorneio() {
   const dispatch = useDispatch()
@@ -28,13 +29,14 @@ export default function SelectTorneio() {
     type:"torneio",
     payload:{torneio:age}
   })
-  
+  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+
   return (
-    <div>
-        <FormControl sx={{ m: 0, minWidth: 200, width:'100%',height:'41px' }} size="small">
-        <InputLabel id="demo-select-small-label">Torneio</InputLabel>
+    <div style={{background:dark ? 'inherit':"", color: !darkMode ? colorDark:"" }}>
+        <FormControl sx={{ m: 0, minWidth: 200, width:'100%',height:'41px',background:"inherit" }} size="small">
+        <InputLabel id="demo-select-small-label" sx={{color: !darkMode ? colorDark:""}}>Torneio</InputLabel>
         <Select
-             sx={{width:"100%"}}
+            sx={{width:"100%", background: !darkMode ? darkBackgroundBox:"", color: !darkMode ? colorDark:""}}
             labelId="demo-select-small-label"
             id="demo-select-small"
             value={age}
@@ -43,7 +45,7 @@ export default function SelectTorneio() {
         >
             {
                 usuario.torneio?.map((elem, key)=>{
-                    return  <MenuItem key={key} value={key}>{elem.nome}</MenuItem>
+                    return  <MenuItem sx={{ background: !darkMode ? 'inherit':""}} key={key} value={key}>{elem.nome}</MenuItem>
                 })
             }
         </Select>

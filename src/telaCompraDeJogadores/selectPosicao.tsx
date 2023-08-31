@@ -7,7 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { darkBackgroundBox } from '../temaDark';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -62,12 +63,14 @@ export default function SelectPosicao() {
       payload:{posicao:value}
     })
   };
+  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+
   return (
     <div style={{marginTop:"10px"}}>
       <FormControl sx={{ width: "100%", mb:1 }} size='small'>
-        <InputLabel  id="demo-multiple-chip-label" sx={{bgcolor:"white", padding:"0px 6px", marginLeft:"-5px"}}>Posições</InputLabel>
+        <InputLabel  id="demo-multiple-chip-label" sx={{bgcolor:!darkMode? 'ThreeDDarkShadow':"white", padding:"0px 6px", marginLeft:"-5px"}}>Posições</InputLabel>
         <Select
-          sx={{bgcolor:'white'}}
+          sx={{bgcolor:!darkMode? darkBackgroundBox:'white'}}
          
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"

@@ -17,6 +17,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
 import { useSelector } from 'react-redux'
+import { ThemeProvider, createTheme } from '@mui/material'
+import { colorDark, dark, darkBackgroundContainer } from '../temaDark'
 
 interface Props {
   /**
@@ -43,6 +45,15 @@ function HideOnScroll(props: Props) {
   );
 }
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#1976d2',
+    },
+  },
+});
+
 export default function TelaCompraDeJogadores() {
     const h = useNavigate()
     const [elenco, setElenco] = useState<participantesType>()
@@ -62,20 +73,25 @@ export default function TelaCompraDeJogadores() {
       //   mt:focus ? 1 :14,
       // }
     }
+    const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+
   return (
-    <div className='container'>
-      <React.Fragment>
-        <CssBaseline />
-        <HideOnScroll >
-          <AppBar>
-            <Header elenco={elenco}/>
-          </AppBar>
-        </HideOnScroll>
-        <Toolbar />
-          <Box sx={boxStyle}>
-            <Jogadores/>
-          </Box>
-      </React.Fragment>
+    <div className='container' style={{background:!darkMode ? darkBackgroundContainer:'', color:!darkMode?colorDark:""}}>
+          <ThemeProvider theme={darkMode ? {} : darkTheme}>
+            <React.Fragment>
+              <CssBaseline />
+              <HideOnScroll >
+                <AppBar>
+                  <Header elenco={elenco}/>
+                </AppBar>
+              </HideOnScroll>
+              <Toolbar />
+                <Box sx={boxStyle}>
+                  <Jogadores/>
+                </Box>
+            </React.Fragment>
+          </ThemeProvider>
+
     </div>
   );
 }
