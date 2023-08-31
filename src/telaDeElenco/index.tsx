@@ -48,7 +48,9 @@ export default function TelaDeElenco() {
         <div>
           <HeaderHelenco elenco={elenco}/>
           <div className='campinho'>
-          <SelectDarkMode/>
+          <div style={{display:"flex", justifyContent:"flex-end"}}>
+             <SelectDarkMode/>
+          </div>  
             <OptCampoLista elenco={elenco} handlePosition={handlePosition}/>
           </div>
         </div>

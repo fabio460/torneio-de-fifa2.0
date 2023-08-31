@@ -119,7 +119,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
               Valor da negociação: {getValoresTotais(listaDeSelecionados)}
             </h5>
           <FormControl fullWidth sx={{marginTop:3}} size='small'>
-            <InputLabel id="demo-simple-select-label" sx={{bgcolor:'white', paddingRight:1}}>Transferir para</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{bgcolor:'', paddingRight:1}}>Transferir para</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
