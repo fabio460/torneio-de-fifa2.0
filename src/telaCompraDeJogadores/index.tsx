@@ -77,21 +77,19 @@ export default function TelaCompraDeJogadores() {
 
   return (
     <div className='container' style={{background:!darkMode ? darkBackgroundContainer:'', color:!darkMode?colorDark:""}}>
-          <ThemeProvider theme={darkMode ? {} : darkTheme}>
             <React.Fragment>
               <CssBaseline />
               <HideOnScroll >
                 <AppBar>
                   <Header elenco={elenco}/>
                 </AppBar>
+
               </HideOnScroll>
               <Toolbar />
                 <Box sx={boxStyle}>
                   <Jogadores/>
                 </Box>
             </React.Fragment>
-          </ThemeProvider>
-
     </div>
   );
 }

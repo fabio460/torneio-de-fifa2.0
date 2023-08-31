@@ -68,7 +68,7 @@ export default function SelectPosicao() {
   return (
     <div style={{marginTop:"10px"}}>
       <FormControl sx={{ width: "100%", mb:1 }} size='small'>
-        <InputLabel  id="demo-multiple-chip-label" sx={{bgcolor:!darkMode? 'ThreeDDarkShadow':"white", padding:"0px 6px", marginLeft:"-5px"}}>Posições</InputLabel>
+        <InputLabel  id="demo-multiple-chip-label" sx={{bgcolor:!darkMode? "inherit":"white", padding:"0px 6px", marginLeft:"-5px"}}>Posições</InputLabel>
         <Select
           sx={{bgcolor:!darkMode? darkBackgroundBox:'white'}}
          
@@ -77,7 +77,7 @@ export default function SelectPosicao() {
           multiple
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          input={<OutlinedInput id="select-multiple-chip" label="Posições" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {selected.map((value) => (

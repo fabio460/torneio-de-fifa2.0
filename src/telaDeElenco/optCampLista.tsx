@@ -17,6 +17,8 @@ import { listarParticipantesApi } from '../api/participantesApi';
 import { calculaFolha, calculaValoresDosJogadores, formatoMonetario, refinaPosicao } from '../metodosUteis';
 import { Button } from '@mui/material';
 import { deletarTodasPosicoesApi } from '../api/posicoes';
+import { useSelector } from 'react-redux';
+import { darkBackgroundBox } from '../temaDark';
 
 
 interface TabPanelProps {
@@ -82,8 +84,10 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
     }
   }
   let jogadores = refinaPosicao(elenco?.jogadores)
+  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+
   return (
-    <Box sx={{ bgcolor: 'white', width: "100%"}}>
+    <Box sx={{ bgcolor: 'inherit', color:darkMode? "black":"white", width: "100%", minHeight:"100vh"}}>
       <div>
         <div className='TabsDesctop'>
           <Tabs

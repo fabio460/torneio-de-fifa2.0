@@ -8,6 +8,7 @@ import { atualizarOuCriarPosicoesApi } from '../api/posicoes';
 import OptCampoLista from './optCampLista';
 import { getTorneioPorIdApi } from '../api/torneioApi'
 import { useDispatch, useSelector } from 'react-redux'
+import SelectDarkMode from '../appBar/selectDarkMode'
 
 export default function TelaDeElenco() {
   const idElenco = localStorage.getItem('idDoElenco') || ''
@@ -43,10 +44,11 @@ export default function TelaDeElenco() {
     <div>
       {
         carregando?
-        <div><Carregando/></div>:
+        <div style={{minHeight:"100vh"}}><Carregando/></div>:
         <div>
           <HeaderHelenco elenco={elenco}/>
           <div className='campinho'>
+          <SelectDarkMode/>
             <OptCampoLista elenco={elenco} handlePosition={handlePosition}/>
           </div>
         </div>
