@@ -18,7 +18,7 @@ export default function RotaPrivada({children}:any) {
     <div>
       {
          !autorizado ?
-         <h2 style={{textAlign:"center", marginTop:"80px"}}>carregando...</h2>:
+         <h2 style={{textAlign:"center", paddingTop:"10%", minHeight:"100vh"}}>Carregando...</h2>:
          (token === 'undefined') || !token ?
           <div><Navigate to={'/login'}/></div> :
           children 

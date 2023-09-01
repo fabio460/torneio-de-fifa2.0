@@ -65,7 +65,6 @@ export default function TelaCompraDeJogadores() {
     useEffect(()=>{
        getElenco()
     },[])
-    const focus = useSelector((state:any)=>state.inputFocusReducer.focus)
     const boxStyle={ 
       // mt:4,
       // padding:focus?"0px":"50px 0px",
@@ -83,7 +82,6 @@ export default function TelaCompraDeJogadores() {
                 <AppBar>
                   <Header elenco={elenco}/>
                 </AppBar>
-
               </HideOnScroll>
               <Toolbar />
                 <Box sx={boxStyle}>
