@@ -18,7 +18,7 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
   
   return (
-    <List sx={{ width: '100%', background: !darkMode ? 'inherit': '', color: !darkMode ? colorDark:""  }}>
+    <List sx={{ width: '100%', background: darkMode ? 'inherit': '', color: darkMode ? colorDark:""  }}>
        {
         listaDeParticipantes?.map((elem, key)=>{
             return(
@@ -29,9 +29,9 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
                             <BeachAccessIcon />
                         </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={elem.nome} secondary={elem.time} sx={{color: !darkMode ? colorDark:"" }}/>
+                        <ListItemText primary={elem.nome} secondary={elem.time} sx={{color: darkMode ? colorDark:"" }}/>
                     </ListItem>
-                    <Checkbox sx={{color: !darkMode ? colorDark:""}} id={JSON.stringify(elem)} onChange={handleChange} disabled={elem.saldo < 0 && true}/>
+                    <Checkbox sx={{color: darkMode ? colorDark:""}} id={JSON.stringify(elem)} onChange={handleChange} disabled={elem.saldo < 0 && true}/>
 
                 </div>
             )

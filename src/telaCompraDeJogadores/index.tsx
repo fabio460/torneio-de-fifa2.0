@@ -76,7 +76,7 @@ export default function TelaCompraDeJogadores() {
     const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
   return (
-    <div className='container' style={{background:!darkMode ? darkBackgroundContainer:'', color:!darkMode?colorDark:""}}>
+    <div className='container' style={{background:darkMode ? darkBackgroundContainer:''}}>
             <React.Fragment>
               <CssBaseline />
               <HideOnScroll >

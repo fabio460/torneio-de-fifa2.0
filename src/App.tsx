@@ -21,8 +21,8 @@ export default function App() {
     },
   });
   return (
-    <ThemeProvider theme={darkMode ? {} : darkTheme}>
-      <div style={{background:!darkMode ? darkBackgroundContainer:"",color: darkMode ? colorDark:"" }}>
+    <ThemeProvider theme={darkMode ? darkTheme: {}}>
+      <div style={{background:darkMode ? darkBackgroundContainer:"",color: darkMode ? colorDark:"" }}>
           <BrowserRouter>
             <Routes>
                 <Route path='/' element={<RotaPrivada><TelaPrincipal/></RotaPrivada>}></Route>

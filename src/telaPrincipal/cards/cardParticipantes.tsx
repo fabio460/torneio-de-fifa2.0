@@ -54,7 +54,7 @@ export default function CardParticipantes({participantes, torneio}:
   })
 
   return (
-    <Card className='darkBoxs' sx={{background:!darkMode ? darkBackgroundBox:"", color: !darkMode ? colorDark:"" ,minWidth: 275, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+    <Card className='darkBoxs' sx={{background:darkMode ? darkBackgroundBox:"", color: darkMode ? colorDark:"" ,minWidth: 275, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
       <CardContent sx={{padding:'3%'}}>
         <Typography variant="h5" component="div" className='cardParticipantesBtns'>
           <SelectTorneio/>

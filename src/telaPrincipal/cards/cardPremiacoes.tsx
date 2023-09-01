@@ -20,7 +20,7 @@ export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | un
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
   return (
-    <Card sx={{background:!darkMode ? darkBackgroundBox:"", color: !darkMode ? colorDark:"", minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
+    <Card sx={{background:darkMode ? darkBackgroundBox:"", color: darkMode ? colorDark:"", minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
       <CardContent  className='cardPremiacoesContainer'>
          <PremiacoesBody/>
       </CardContent>

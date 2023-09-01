@@ -56,15 +56,10 @@ function a11yProps(index: number) {
 }
 
 export default function OptCampoLista({handlePosition, elenco}:{handlePosition:any, elenco:participantesType | undefined}) {
-  const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     localStorage.setItem('selectCampinho',newValue.toString())
     setValue(newValue);
-  };
-
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
   };
 
   useEffect(()=>{
@@ -87,7 +82,7 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
   return (
-    <Box sx={{ bgcolor: 'inherit', color:darkMode? "black":"white", width: "100%", minHeight:"100vh"}}>
+    <Box sx={{ bgcolor:darkMode? 'black':"white", color:darkMode? "white":"black", width: "100%", minHeight:"100vh"}}>
       <div>
         <div className='TabsDesctop'>
           <Tabs

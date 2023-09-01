@@ -1,6 +1,5 @@
 import * as React from 'react'; 
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
 import "./appBar.css"
 import ModalColocacao from './modais/modalColocacao';
 import ModalArtilharia from './modais/modalArtilharia';
@@ -12,10 +11,7 @@ import SwitchesDeletarParticipantes from '../telaPrincipal/switchDeletarParticip
 import icone from '../icone_fifa.png'
 import { useNavigate } from 'react-router-dom';
 import { usuarioLogado } from '../metodosUteis';
-import { colorDark, dark, darkBackgroundBox, darkBackgroundContainer } from '../temaDark';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import SelectDarkMode from './selectDarkMode';
-import { useSelector } from 'react-redux';
 
 const deslogar = ()=>{
   localStorage.removeItem('jwt')
@@ -50,17 +46,7 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'dark',
-      primary: {
-        main: '#1976d2',
-      },
-    },
-  });
-  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
   return (
-    <ThemeProvider theme={darkMode ? {}:darkTheme}>
       <AppBar position="fixed" >
         <div className='appBarContainer' >
           <Toolbar disableGutters >
@@ -186,7 +172,6 @@ function ResponsiveAppBar() {
           </Toolbar>
         </div>
       </AppBar>
-    </ThemeProvider>
   );
 }
 export default ResponsiveAppBar;

@@ -61,16 +61,13 @@ export default function TelaPrincipal() {
   return (
     <React.Fragment >
       <Toolbar id="back-to-top-anchor" />
-      <div className='container' style={{background:!darkMode ? darkBackgroundContainer:""}}>
+      <div className='container' style={{background:darkMode ? darkBackgroundContainer :""}}>
       {
         carregando?
         <div><Carregando/></div>:
           <div>
             <ResponsiveAppBar/>
             <div className='main'>
-              <div className='appBar'>
-                <h1 style={{textAlign:"center", marginTop:"10px"}}></h1>
-              </div>
               <div className='telaPrincipalSuperior '>
                 <CardParticipantes 
                   participantes = {usuario?.torneio[torneio]?.participantes}

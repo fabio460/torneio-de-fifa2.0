@@ -30,7 +30,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
   },
   '& .MuiSwitch-thumb': {
-    backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
+    backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#fdd835',
     width: 32,
     height: 32,
     '&:before': {
@@ -187,9 +187,10 @@ export default function SelectDarkMode() {
   const dispath = useDispatch()
   const handleSelect = (e:React.ChangeEvent<HTMLInputElement>)=>{
     localStorage.setItem("dark",(e.target.checked).toString())
+    let checked = e.target.checked;
     dispath({
         type:"dark",
-        payload:{dark:e.target.checked}
+        payload:{dark:checked}
     })
   }
   return (

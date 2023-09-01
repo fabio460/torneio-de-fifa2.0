@@ -14,7 +14,7 @@ export default function CardJogador({jogador}:JogadorType) {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
   return (
-     <div className='jogadorCard' style={{background:!darkMode ? darkBackgroundBox:'', color:!darkMode?colorDark:""}}>
+     <div className='jogadorCard' style={{background:darkMode ? darkBackgroundBox:'', color:darkMode?colorDark:"black"}}>
         <div className='jogadorCardEsquerdo'>
           <div>
             <div className='jogadorCardOverall'>{jogador.overall}</div>

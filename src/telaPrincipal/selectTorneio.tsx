@@ -32,20 +32,20 @@ export default function SelectTorneio() {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
   return (
-    <div style={{background:dark ? 'inherit':"", color: !darkMode ? colorDark:"" }}>
+    <div style={{background:dark ? 'inherit':"", color: darkMode ? colorDark:"" }}>
         <FormControl sx={{ m: 0, minWidth: 200, width:'100%',height:'41px',background:"inherit" }} size="small">
-        <InputLabel id="demo-select-small-label" sx={{color: !darkMode ? colorDark:""}}>Torneio</InputLabel>
+        <InputLabel id="demo-select-small-label" sx={{color: darkMode ? colorDark:""}}>Torneio</InputLabel>
         <Select
-            sx={{width:"100%", background: !darkMode ? darkBackgroundBox:"", color: !darkMode ? colorDark:""}}
+            sx={{width:"100%", background: darkMode ? darkBackgroundBox:"", color: darkMode ? colorDark:""}}
             labelId="demo-select-small-label"
             id="demo-select-small"
             value={age}
-            label="Age"
+            label="Torneio"
             onChange={handleChange}
         >
             {
                 usuario.torneio?.map((elem, key)=>{
-                    return  <MenuItem sx={{ background: !darkMode ? 'inherit':""}} key={key} value={key}>{elem.nome}</MenuItem>
+                    return  <MenuItem sx={{ background: darkMode ? 'inherit':""}} key={key} value={key}>{elem.nome}</MenuItem>
                 })
             }
         </Select>
