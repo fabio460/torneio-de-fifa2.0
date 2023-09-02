@@ -138,10 +138,10 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title={elenco?.nome}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg">
-                  {elenco?.nome[0]}{elenco?.nome[1]}
+                  {elenco?.nome[0].toUpperCase()}
                 </Avatar>
               </IconButton>
             </Tooltip>
