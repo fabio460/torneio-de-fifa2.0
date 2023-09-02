@@ -9,6 +9,7 @@ import { checkedType, jogadoresType, participantesType } from '../../types';
 import { removerJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
 import { calculaFolha, calculaFolhaSemFormato, formatoMonetario } from '../../metodosUteis';
+import ModalDispensaConfirmada from './modalDispensaConfirmada';
 
 export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     listaDeSelecionados:checkedType[] | undefined,
@@ -16,6 +17,7 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     }) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false)
+  const [confir, setConfir] = React.useState(false)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -38,7 +40,8 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     const saldoAtualizado = somaDosValores + saldo
 
     const res = await removerJogadoresApi(listaDeIds, saldoAtualizado, elenco?.id)
-    window.location.reload()
+    setConfir(true)
+    setOpen(false)
     setLoading(false)
   }
 
@@ -121,6 +124,7 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
           </Button>
         </DialogActions>
       </Dialog>
+      <ModalDispensaConfirmada confir={confir} listaDeSelecionados={listaDeSelecionados}/>
     </div>
   );
 }

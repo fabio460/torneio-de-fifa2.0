@@ -14,6 +14,7 @@ import { transferenciaDeJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
 import { calculaFolha, calculaFolhaSemFormato, formatoMonetario, numberIsValid, semVirgula } from '../../metodosUteis';
 import { Checkbox, TextField } from '@mui/material';
+import ModalTransferenciaConfirmada from './modalTransferenciaConfirmada';
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{
     torneio:torneioType|undefined,
@@ -25,6 +26,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   const [loading, setLoading] = React.useState(false)
   const [valorDaNegociacao, setValorDaNegociacao] = React.useState<number>()
   const [valorValido, setvalorValido] = React.useState(false)
+  const [confir, setconfir] = React.useState(false)
   const handleChange = (event: SelectChangeEvent) => {
     setIdDoComprador(event.target.value as string);
   };
@@ -70,8 +72,8 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
       )
       if (res === "transferência concluida com sucesso!!!") {
         setTimeout(() => {
-          alert(res)
-          window.location.reload()
+          setconfir(true)
+          setOpen(false)
         }, 2000);
       }else{
         setLoading(false)   
@@ -181,6 +183,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
           </Button>
         </DialogActions>
       </Dialog>
+      <ModalTransferenciaConfirmada confir={confir} listaDeSelecionados={listaDeSelecionados}/>
     </div>
   );
 }
