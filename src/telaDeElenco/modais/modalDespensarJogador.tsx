@@ -73,7 +73,7 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Valores a receber após a transação"}
+          {"Dispensa de jogadores"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -88,15 +88,15 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
                 listaDeSelecionados?.map((jog, key)=>{
                     return <li>
                         <div>       
-                          {jog.jogador.nome} - voçê receberá <span style={{color:"green"}}>
+                          {jog.jogador.nome} - você receberá <span style={{color:""}}>
                               {formatoMonetario(parseFloat(jog.jogador.valorDoJogador || "")*(
                                   parseInt(jog.jogador.overall) < 90 ? 0.4 : 0.6
                               ))}
                             </span> 
 
                            {
-                            parseInt(jog.jogador.overall) < 90 ? <span>(40%)</span>:<span>(60%)</span>
-                          } neste jogador
+                            parseInt(jog.jogador.overall) < 90 ? <span> (40% do seu valor)</span>:<span> (60% do seu valor)</span>
+                          }!
                            
                         </div>
                     </li>
@@ -104,10 +104,10 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
               }
             </ul>
             <div>
-              Total a receber <span style={{color:"red"}}>{formatoMonetario(getTotal())}</span> 
+              Total a receber <span style={{color:"#4caf50"}}>{formatoMonetario(getTotal())}</span> 
             </div>
             <div>
-              sua folha ira reduzir de <span style={{color:"blue"}}> {calculaFolha(elenco?.jogadores as jogadoresType[])}</span> para <span style={{color:"green"}}> {formatoMonetario(folhaApois())}</span>
+              sua folha ira reduzir de <span style={{color:""}}> {calculaFolha(elenco?.jogadores as jogadoresType[])}</span> para <span style={{color:"#1976d2"}}> {formatoMonetario(folhaApois())}</span>
             </div>
           </DialogContentText>
         </DialogContent>

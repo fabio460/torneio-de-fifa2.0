@@ -45,12 +45,17 @@ export default function ModalTransferenciaConfirmada({confir, listaDeSelecionado
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Jogador transferido com sucesso"}</DialogTitle>
+        {
+            (listaDeSelecionados?.length as any) > 1 ?
+              <DialogTitle>{"Jogadores transferidos com sucesso"}</DialogTitle>
+            :
+              <DialogTitle>{"Jogador transferido com sucesso"}</DialogTitle>
+        }
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {(listaDeSelecionados?.length as any) > 1 ?
               <div>
-                <h5>Jogadores transferidos do seu time</h5>
+                <h5>Os jogadores abaixo foram removidos do seu time!</h5>
                 <ul>
                     {
                         listaDeSelecionados?.map((jog, key)=>{
@@ -63,7 +68,7 @@ export default function ModalTransferenciaConfirmada({confir, listaDeSelecionado
                 </ul>
               </div>:
               <h5>
-                 Voçê transferiu o jogador  {listaDeSelecionados && listaDeSelecionados[0].jogador.nome} para outro elenco 
+                 O jogador  {listaDeSelecionados && listaDeSelecionados[0].jogador.nome} foi removido do seu time! 
               </h5>  
             }
           </DialogContentText>

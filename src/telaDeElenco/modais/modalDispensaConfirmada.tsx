@@ -45,12 +45,18 @@ export default function ModalDispensaConfirmada({confir, listaDeSelecionados}:{
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Jogador dispensado com sucesso"}</DialogTitle>
+        {
+          (listaDeSelecionados?.length as any) > 1 ?
+            <DialogTitle>{"Jogadores dispensados com sucesso"}</DialogTitle>
+          :
+            <DialogTitle>{"Jogador dispensado com sucesso"}</DialogTitle>
+
+        }
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {(listaDeSelecionados?.length as any) > 1 ?
               <div>
-                <h5>Jogadores removidos do seu time</h5>
+                <h5>Os jogadores abaixo foram removidos do seu time!</h5>
                 <ul>
                     {
                         listaDeSelecionados?.map((jog, key)=>{
@@ -63,7 +69,7 @@ export default function ModalDispensaConfirmada({confir, listaDeSelecionados}:{
                 </ul>
               </div>:
               <h5>
-                 Voçê removeu o jogador  {listaDeSelecionados && listaDeSelecionados[0].jogador.nome} do seu time   
+                 O jogador  {listaDeSelecionados && listaDeSelecionados[0].jogador.nome} foi removido do seu time! 
               </h5>  
             }
           </DialogContentText>
