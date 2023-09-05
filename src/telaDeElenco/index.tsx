@@ -34,12 +34,13 @@ export default function TelaDeElenco() {
     })
  }
 
- useEffect(() => {
-    getTorneio()
- }, [])
+  useEffect(() => {
+      getTorneio()
+  }, [])
   const handlePosition =async (e:any, data:any)=>{
     const res =await atualizarOuCriarPosicoesApi(data.node.firstChild.id, data.lastX, data.lastY)
 	}
+  const dark = useSelector((state:any)=>state.darkReducer.dark)
   return (
     <div >
       {
@@ -47,7 +48,7 @@ export default function TelaDeElenco() {
         <div style={{minHeight:"100vh"}}><Carregando/></div>:
         <div>
           <HeaderHelenco elenco={elenco}/>
-          <div className='campinho'>
+          <div className='campinho' style={{background:dark ?"black":""}}>
           <div style={{display:"flex", justifyContent:"flex-end"}}>
              <SelectDarkMode/>
           </div>  
