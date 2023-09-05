@@ -49,7 +49,7 @@ export default function EstatisticaCampeao({estatistica}:{estatistica:statistica
    
     
     return (
-      <div>
+      <div className='cardEstatistica'>
         <h5 style={{textAlign:"center"}}>Meiores Vencedores</h5>
         <ResponsiveContainer width="100%" maxHeight={300}>
           <AreaChart

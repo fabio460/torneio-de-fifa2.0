@@ -89,8 +89,10 @@ export default function TelaPrincipal() {
                   })
                 }
               </div>
-              <div className='footer'>
-              </div>
+              {/* <div className='footer' style={{background:darkMode ? darkBackgroundContainer :""}}>
+                footer
+                <div>foter</div>
+              </div> */}
             </div>
           </div>
       }
@@ -101,7 +103,7 @@ export default function TelaPrincipal() {
           <BtnScroll usuario={usuario}/>
         </ScrollComponents>
       }
-      {/* <Footer/> */}
+      <Footer/>
     </React.Fragment>
   );
 }

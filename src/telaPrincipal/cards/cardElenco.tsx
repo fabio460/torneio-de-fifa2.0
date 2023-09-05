@@ -80,12 +80,12 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
         <Typography sx={{ mb: 1.5, color: darkMode ? colorDark:"" }} variant="body2">
    
         </Typography>
-        <Button color={elenco.saldo < 0 ? 'error' : 'success'} onClick={()=> linkGerenciaDeElenco()} variant={elenco.saldo < 0 ? 'outlined': 'contained'} size="small" sx={{width:"100%", marginBottom:1}}>
+        <Button color={elenco.saldo < 0 ? 'error' : 'success'} onClick={()=> linkGerenciaDeElenco()} variant={elenco.saldo < 0 ? 'outlined': 'contained'}  sx={{width:"100%", margin:"20px 0px"}}>
           {
             elenco.saldo < 0 ? 'dispensar jogadores':'Gerenciar time'
           }
         </Button>
-        <Button color='warning' onClick={()=> linkComprarJogador()} variant='contained' size="small"  sx={{width:"100%"}}>Comprar jogador</Button>
+        <Button color='warning' onClick={()=> linkComprarJogador()} variant='contained'   sx={{width:"100%"}}>Comprar jogador</Button>
       </CardContent>
     </Card>
   );

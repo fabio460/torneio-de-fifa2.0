@@ -27,7 +27,7 @@ export default function EstatisticaArtilheiros({estatistica}:{estatistica:statis
       })
     
     return (
-      <div>
+      <div className='cardEstatistica'>
         <h5 style={{textAlign:"center"}}>Maiores Artilheiros</h5>
         <ResponsiveContainer width="100%" maxHeight={300}>
           <AreaChart

@@ -7,12 +7,16 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { useSelector } from 'react-redux';
+import { darkBackgroundContainer } from '../temaDark';
 export default function Footer() {
     const linlStyle ={
         margin:"5px"
     }
+    const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+
   return (
-    <div style={{width:"100%" ,minWidth: 275,minHeight:"100px" , background:"#f5f5f5" }}>
+    <div style={{paddingTop:"50px" ,width:"100%" ,minWidth: 275,minHeight:"100px" , background:darkMode?darkBackgroundContainer :"#f5f5f5" }}>
         <CardContent >
             <div style={{display:'flex',justifyContent:"center"}}>
                 <Link sx={linlStyle} color="inherit" href="https://www.linkedin.com/in/fabio-oliveira-b2589163/">
