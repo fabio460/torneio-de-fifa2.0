@@ -3,7 +3,7 @@
 }
 .campinho{
     padding:30px;
-    margin-top: 70px;
+    margin-top: 65px;
 }
 .cartaImg{
     width: 50px;
@@ -164,6 +164,8 @@
     }
     .campinho{
         padding: 0px;
+        margin-top: 55px;
+
     }
     .campinhoBody{
         display: flex;

@@ -41,7 +41,7 @@ export default function TelaDeElenco() {
     const res =await atualizarOuCriarPosicoesApi(data.node.firstChild.id, data.lastX, data.lastY)
 	}
   return (
-    <div>
+    <div >
       {
         carregando?
         <div style={{minHeight:"100vh"}}><Carregando/></div>:

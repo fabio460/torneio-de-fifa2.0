@@ -51,7 +51,7 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
    
   return (
     <AppBar position="fixed" sx={{}}>
-      <div className='appBarContainer'>
+      <div className='appBarContainer' >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
