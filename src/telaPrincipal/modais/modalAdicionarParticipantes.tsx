@@ -117,7 +117,7 @@ export default function ModalAdicionarParticipantes() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"dicione participantes para seu torneio!"}
+          {"Adicione participantes para seu torneio!"}
         </DialogTitle>
         <DialogContent>
           <FormControl sx={{ m: '2% 0', width:'100%',height:'41px' }} size="small">
@@ -158,8 +158,8 @@ export default function ModalAdicionarParticipantes() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={adicionarParticipantes}>adicionar</Button>
-          <Button color='error' onClick={handleClose} autoFocus>
+          <Button onClick={adicionarParticipantes} variant='outlined' color='success'>adicionar</Button>
+          <Button variant='outlined' color='error' onClick={handleClose} autoFocus>
             cancelar
           </Button>
         </DialogActions>

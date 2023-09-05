@@ -11,6 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { deletarTorneioApi } from '../../api/torneioApi';
+import { DialogContentText } from '@mui/material';
 
 export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | undefined}) {
   const [open, setOpen] = React.useState(false);
@@ -30,9 +31,14 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
   };
 
   const deletarTorneio = async()=>{
-      const res = await deletarTorneioApi(age)
-      alert(res)
-      window.location.reload()
+    if (age === "") {
+      alert("Selecione um torneio")
+      return null
+    }
+
+    const res = await deletarTorneioApi(age)
+    alert(res)
+    window.location.reload()
   }
   let dark = useSelector((state:any)=>state.darkReducer.dark)
 
@@ -48,17 +54,19 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Deleção de torneio
+          Deletar torneio
         </DialogTitle>
         <DialogContent>
-           Escolha o torneio a ser deletado
+          <DialogContentText>
+              Atenção, ao confirmar você estará deletando o torneio e todos os seus dados
+          </DialogContentText>
            <FormControl sx={{ m: '2% 0', width:'100%',height:'41px' }} size="small">
-          <InputLabel id="demo-select-small-label" sx={{minWidth:"60px", background:dark? "":"white", marginRight:'20px'}}>Torneio</InputLabel>
+          <InputLabel id="demo-select-small-label" sx={{minWidth:"60px", background:dark? "":"white", marginRight:'20px'}}>Torneio a deletar</InputLabel>
           <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
               value={age}
-              label="Torneio"
+              label="Torneio a deletar"
               onChange={handleChange}
           >
               {
@@ -68,10 +76,12 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
               }
           </Select>
           </FormControl>
+          <DialogContentText>Tem certeza que deseja deletar? se sim, clique em remover torneio!</DialogContentText>
         </DialogContent>
+        
         <DialogActions>
-          <Button onClick={deletarTorneio}>deletar</Button>
-          <Button color='error' onClick={handleClose} autoFocus>
+          <Button color='success' variant='outlined' onClick={deletarTorneio}>remover torneio</Button>
+          <Button color='error' variant='outlined' onClick={handleClose} autoFocus>
             cancelar
           </Button>
         </DialogActions>

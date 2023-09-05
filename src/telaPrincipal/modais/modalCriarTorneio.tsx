@@ -45,17 +45,18 @@ export default function ModalCriarTorneio() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Qual o nome do torneio?"}
+          {"Criar torneio"}
         </DialogTitle>
         <DialogContent>
+          <DialogContentText>Escolha um nome para seu torneio e depois adicione participantes!</DialogContentText>
           <DialogContentText id="alert-dialog-description">
-            <TextField id="outlined-basic" label="nome" variant="outlined" size='small' sx={{margin:3}}
+            <TextField fullWidth id="outlined-basic" label="Nome do torneio" variant="outlined" size='small' sx={{marginTop:1}}
               onChange={e => setNomeDoTorneio(e.target.value)}
             />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={adicionarTorneio}>Criar</Button>
+          <Button color='success' onClick={adicionarTorneio}>Criar</Button>
           <Button color='error' onClick={handleClose} autoFocus>
             Cancelar
           </Button>
