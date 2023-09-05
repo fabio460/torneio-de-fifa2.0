@@ -89,10 +89,6 @@ export default function TelaPrincipal() {
                   })
                 }
               </div>
-              {/* <div className='footer' style={{background:darkMode ? darkBackgroundContainer :""}}>
-                footer
-                <div>foter</div>
-              </div> */}
             </div>
           </div>
       }
