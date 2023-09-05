@@ -34,6 +34,7 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
       alert(res)
       window.location.reload()
   }
+  let dark = useSelector((state:any)=>state.darkReducer.dark)
 
   return (
     <div>
@@ -52,12 +53,12 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
         <DialogContent>
            Escolha o torneio a ser deletado
            <FormControl sx={{ m: '2% 0', width:'100%',height:'41px' }} size="small">
-          <InputLabel id="demo-select-small-label" sx={{minWidth:"60px", background:"white", marginRight:'20px'}}>Torneio</InputLabel>
+          <InputLabel id="demo-select-small-label" sx={{minWidth:"60px", background:dark? "":"white", marginRight:'20px'}}>Torneio</InputLabel>
           <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
               value={age}
-              label="Age"
+              label="Torneio"
               onChange={handleChange}
           >
               {

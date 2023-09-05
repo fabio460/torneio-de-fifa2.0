@@ -51,7 +51,8 @@ export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
   const btnPagamentosStyle ={
      width:"100%", ml:"20px",
     "@media (max-width:800px)":{
-        width:"100%", ml:"0px"
+        width:"100%", ml:"0px",
+        margin:"50px 0px"
     }
   }
   return (

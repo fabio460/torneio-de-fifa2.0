@@ -55,7 +55,6 @@ export default function ModalAdicionarParticipantes() {
   };
 
   useEffect(()=>{
-    
     torneioSelecionado()
   },[open])
   const adicionarParticipantes = async()=>{
@@ -101,7 +100,7 @@ export default function ModalAdicionarParticipantes() {
     window.location.reload();
   }
   
-  let lis = [{label:"Resende",escudo:"ff"}]
+  let dark = useSelector((state:any)=>state.darkReducer.dark)
   useEffect(()=>{
     setListaDeTimes(getTimeName())
   },[])
@@ -122,12 +121,12 @@ export default function ModalAdicionarParticipantes() {
         </DialogTitle>
         <DialogContent>
           <FormControl sx={{ m: '2% 0', width:'100%',height:'41px' }} size="small">
-          <InputLabel id="demo-select-small-label" sx={{minWidth:"60px", background:"white", marginRight:'20px'}}>Torneio</InputLabel>
+          <InputLabel id="demo-select-small-label" sx={{minWidth:"60px", background:dark?"": "white", marginRight:'20px'}}>Torneio</InputLabel>
           <Select
               labelId="demo-select-small-label"
               id="demo-select-small"
               value={age}
-              label="Age"
+              label="Torneio"
               onChange={handleChange}
           >
               {
