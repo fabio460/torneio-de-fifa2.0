@@ -62,7 +62,7 @@ export default function CardParticipantes({participantes, torneio}:
         <ListaDeParticipantes listaDeParticipantes={participantes} handleChange={handleChange}/>
       </CardContent>
       <div className='cardParticipantesBtnInferior'>
-        <h3>Ação do torneio</h3>
+        <h3 style={{textAlign:"center"}}>Ações do torneio</h3>
         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:10, marginBottom:10}}>
           <ModalCriarTorneio/>
           <ModalDeletarTorneio torneio={torneio}/>
