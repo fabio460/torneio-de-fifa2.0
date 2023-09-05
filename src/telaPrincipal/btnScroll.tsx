@@ -31,7 +31,7 @@ export default function BtnScroll({usuario}:any) {
      }
     }
   return (
-    <Box sx={{ height: 320, width:300,transform: 'translateZ(0px)', flexGrow: 1 }}>
+    <Box sx={{ height: 320, maxWidth:300,transform: 'translateZ(0px)', flexGrow: 1, background:"red" }}>
       <SpeedDial
         ariaLabel="SpeedDial controlled open example"
         sx={speedStyle}
