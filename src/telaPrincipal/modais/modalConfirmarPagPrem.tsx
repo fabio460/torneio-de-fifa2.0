@@ -78,7 +78,7 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
     width:"100%",
     "@media (max-width:800px)":{
       marginRight:"0px",
-      marginBottom:"10px"
+      marginBottom:"20px"
     }
   }
   return (
