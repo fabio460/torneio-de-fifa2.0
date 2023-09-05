@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 export default function Carregando() {
   return (
-      <div className='carregando' style={{ height:"100vh", display:"flex", alignItems:"center", justifyContent:"center"}}>
+      <div className='carregando' style={{ height:"90vh", display:"flex", alignItems:"center", justifyContent:"center"}}>
         <CircularProgress/>
       </div>
   )
