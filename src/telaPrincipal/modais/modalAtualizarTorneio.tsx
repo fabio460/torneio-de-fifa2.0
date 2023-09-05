@@ -45,7 +45,7 @@ export default function ModalAtualizarTorneio({torneio}:{torneio:torneioType[] |
   
   return (
     <div>
-      <Button size='small' color='warning' sx={{width:"100%"}} onClick={handleClickOpen} variant='contained'>
+      <Button color='warning' sx={{width:"100%"}} onClick={handleClickOpen} variant='contained'>
         Atualizar
       </Button>
       <Dialog

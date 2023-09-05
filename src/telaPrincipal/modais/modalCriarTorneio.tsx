@@ -35,7 +35,7 @@ export default function ModalCriarTorneio() {
  
   return (
     <div>
-      <Button size='small' color='success' sx={{width:"100%"}} variant="contained" onClick={handleClickOpen}>
+      <Button  color='success' sx={{width:"100%"}} variant="contained" onClick={handleClickOpen}>
         Criar 
       </Button>
       <Dialog

@@ -88,7 +88,7 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
       </div>:
         <Button 
            sx={btnPagamentosStyle} 
-           color='success' size="small" variant='contained'
+           color='success'  variant='contained'
            onClick={handleClickOpen}
            disabled={participantes.length === 0 ? true : false}
         >Pagar premiação</Button>
@@ -111,10 +111,10 @@ export default function ModalConfirmarPagamentoPremiacao({usuario, icone}:{
         <DialogActions>
             {
              carregandoPremio ? 
-             <Button  color='success' size="small" variant='contained' ><CarregandoBtn /></Button>:
-             <Button  color='success' size="small" variant='contained' onClick={pagarPremiacao}>confirmar</Button>
+             <Button  color='success'  variant='contained' ><CarregandoBtn /></Button>:
+             <Button  color='success'  variant='contained' onClick={pagarPremiacao}>confirmar</Button>
             }
-          <Button onClick={handleClose} autoFocus color='error' size="small" variant='outlined' >
+          <Button onClick={handleClose} autoFocus color='error' variant='outlined' >
             cancelar
           </Button>
         </DialogActions>

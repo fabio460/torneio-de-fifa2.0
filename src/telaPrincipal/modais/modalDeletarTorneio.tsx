@@ -37,7 +37,7 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
 
   return (
     <div>
-      <Button size='small' color='error' sx={{width:"100%"}} onClick={handleClickOpen} variant='contained'>
+      <Button  color='error' sx={{width:"100%"}} onClick={handleClickOpen} variant='contained'>
         Deletar
       </Button>
       <Dialog

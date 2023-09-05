@@ -61,7 +61,7 @@ export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
         PF
       </div>: 
        <Button color='secondary' 
-           size="small" variant='contained' 
+            variant='contained' 
            onClick={handleClickOpen}
            sx={btnPagamentosStyle}
            disabled={participantes.length === 0 ? true : false}
@@ -85,10 +85,10 @@ export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
         <DialogActions>
             {
              carregandoFolha ?
-             <Button color='secondary' size="small" variant='contained' ><CarregandoBtn/></Button>:
-             <Button color='secondary' size="small" variant='contained' onClick={pagarFolha}>Confirmar</Button>    
+             <Button color='secondary'  variant='contained' ><CarregandoBtn/></Button>:
+             <Button color='secondary'  variant='contained' onClick={pagarFolha}>Confirmar</Button>    
             }
-          <Button onClick={handleClose} autoFocus color='error' size="small" variant='outlined'>
+          <Button onClick={handleClose} autoFocus color='error'  variant='outlined'>
             cancelar
           </Button>
         </DialogActions>
