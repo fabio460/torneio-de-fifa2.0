@@ -120,7 +120,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
                 </div>
               })
             }
-            <h5 style={{color:"red", marginTop:"10px"}}>
+            <h5 style={{color:"#4caf50", marginTop:"10px"}}>
               Valor da negociação: {getValoresTotais(listaDeSelecionados)}
             </h5>
           <FormControl fullWidth sx={{marginTop:3}} size='small' error={error}>
@@ -140,7 +140,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
               }
             </Select>
           </FormControl>
-          {error && <div style={{color:"red"}}>Escolha um usuário!</div> } 
+          {error && <div style={{color:"#d32f2f"}}>Escolha um usuário!</div> } 
           <div>
             <Checkbox
               checked={checked}
@@ -161,13 +161,13 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
                   />
                   {
                     valorValido && 
-                    <span style={{color:"red"}}>Insira um número válido!</span>
+                    <span style={{color:"#d32f2f"}}>Insira um número válido!</span>
                   }
                 </div>
               }
             </div>
             <div>
-              Sua folha irá reduzir de <span style={{color:"blue"}}> {calculaFolha(elenco?.jogadores as jogadoresType[])}</span> para <span style={{color:"green"}}> {formatoMonetario(folhaApois())}</span>
+              Sua folha irá reduzir de <span style={{color:""}}> {calculaFolha(elenco?.jogadores as jogadoresType[])}</span> para <span style={{color:"#ff9800"}}> {formatoMonetario(folhaApois())}</span>
             </div>
           </div>
           </DialogContentText>
@@ -175,10 +175,10 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
         <DialogActions>
           {
             loading?
-            <Button onClick={transferir} style={{paddingBottom:"0px",background:"green",width:"90px"}}>
+            <Button onClick={transferir} style={{paddingBottom:"0px",background:"#4caf50",width:"90px"}}>
               <CarregandoBtn/>
             </Button>:
-            <Button onClick={transferir} style={{background:"green", color:"white"}}>
+            <Button onClick={transferir} style={{background:"#4caf50", color:"white"}}>
                Transferir    
             </Button>
           }

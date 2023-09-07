@@ -20,6 +20,7 @@ import BtnScroll from './btnScroll';
 import Footer from './footer';
 import ScrollComponents from '../ScrollComponent';
 import { dark, darkBackgroundContainer } from '../temaDark';
+import Mensagens from '../componentesGlobais/mensagens';
 
 
 export default function TelaPrincipal() {
@@ -53,11 +54,13 @@ export default function TelaPrincipal() {
     getUsuario()
   },[])
   
+  
   useEffect(()=>{    
     getEstatistica()
   },[torneio,id])
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
-
+  const mensagemReducer = useSelector((state:any)=>state.checkedDeletarPart.status)
+  console.log(mensagemReducer)
   return (
     <React.Fragment >
       <Toolbar id="back-to-top-anchor" />
@@ -67,6 +70,7 @@ export default function TelaPrincipal() {
         <div><Carregando/></div>:
           <div>
             <ResponsiveAppBar/>
+            <Mensagens checked={mensagemReducer} mensagem={"Deleção de participantes habilitada!"} mensagemSec={"Deleção de participantes desabilitada!"}/>
             <div className='main'>
               <div className='telaPrincipalSuperior '>
                 <CardParticipantes 
@@ -92,6 +96,7 @@ export default function TelaPrincipal() {
             </div>
           </div>
       }
+      
     </div>
       {
         participantes.length > 0 &&

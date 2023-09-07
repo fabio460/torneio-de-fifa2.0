@@ -1,14 +1,14 @@
 import * as React from 'react'; 
 import MenuIcon from '@mui/icons-material/Menu';
-import "./appBar.css"
+import "./appBar.css";
 import ModalColocacao from './modais/modalColocacao';
 import ModalArtilharia from './modais/modalArtilharia';
 import ModalAssistencia from './modais/modalAssistencia';
 import ModalDadosDoJogo from './modais/modalDadosDoJogo';
 import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import ModalDeletarPerfil from './modais/modalDeletarPerfil';
-import SwitchesDeletarParticipantes from '../telaPrincipal/switchDeletarParticipantes';
-import icone from '../icone_fifa.png'
+import SwitchesDeletarParticipantes from './switchDeletarParticipantes';
+import icone from '../icone_fifa.png';
 import { useNavigate } from 'react-router-dom';
 import { usuarioLogado } from '../metodosUteis';
 import SelectDarkMode from './selectDarkMode';

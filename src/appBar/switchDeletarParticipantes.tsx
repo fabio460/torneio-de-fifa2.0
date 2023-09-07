@@ -183,6 +183,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 export default function SwitchesDeletarParticipantes() {
     const [checked, setChecked] = React.useState(false);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
       setChecked(event.target.checked);
     };
     const dispatch = useDispatch()
@@ -191,29 +192,17 @@ export default function SwitchesDeletarParticipantes() {
         payload:{status:checked}
     })
   return (
-    <FormGroup>
-      {/* <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-        label="MUI switch"
-      />
-      <FormControlLabel
-        control={<Android12Switch defaultChecked />}
-        label="Android 12"
-      /> */}
-      <FormControlLabel
-        control={<IOSSwitch sx={{ m: 1 }} 
-            checked={checked}
-            onChange={handleChange}
-            inputProps={{ 'aria-label': 'controlled' }}
-        />}
-        label="Deletar participantes"
-      />
-     
-      {/* <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Off</Typography>
-        <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
-        <Typography>On</Typography>
-      </Stack> */}
-    </FormGroup>
+    <div>
+      <FormGroup>
+        <FormControlLabel
+          control={<IOSSwitch sx={{ m: 1 }} 
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ 'aria-label': 'controlled' }}
+          />}
+          label="Deletar participantes"
+        />
+      </FormGroup>
+    </div>
   );
 }
