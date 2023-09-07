@@ -27,6 +27,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   const [valorDaNegociacao, setValorDaNegociacao] = React.useState<number>()
   const [valorValido, setvalorValido] = React.useState(false)
   const [confir, setconfir] = React.useState(false)
+  const [error, setError] = React.useState(false)
   const handleChange = (event: SelectChangeEvent) => {
     setIdDoComprador(event.target.value as string);
   };
@@ -36,6 +37,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
   };
 
   const handleClose = () => {
+    setError(false)
     setOpen(false);
   };
 
@@ -72,12 +74,13 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
       )
       if (res === "transferência concluida com sucesso!!!") {
         setTimeout(() => {
+          setError(false)
           setconfir(true)
           setOpen(false)
         }, 2000);
       }else{
-        setLoading(false)   
-        alert(res)
+        setLoading(false)
+        setError(true)   
       }
   }
   function getValoresTotais(lista:checkedType[] | undefined) {
@@ -120,7 +123,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
             <h5 style={{color:"red", marginTop:"10px"}}>
               Valor da negociação: {getValoresTotais(listaDeSelecionados)}
             </h5>
-          <FormControl fullWidth sx={{marginTop:3}} size='small'>
+          <FormControl fullWidth sx={{marginTop:3}} size='small' error={error}>
             <InputLabel id="demo-simple-select-label" sx={{bgcolor:'', paddingRight:1}}>Transferir para</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -137,6 +140,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
               }
             </Select>
           </FormControl>
+          {error && <div style={{color:"red"}}>Escolha um usuário!</div> } 
           <div>
             <Checkbox
               checked={checked}

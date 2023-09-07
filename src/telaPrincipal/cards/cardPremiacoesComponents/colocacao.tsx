@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { selecionadosType } from '../../../types';
 import AvatarComponent from './avatarComponent';
 
-export default function Colocacao() {
+export default function Colocacao({dark}:{dark?:boolean}) {
     const colocacao:selecionadosType = useSelector((state:any)=>state.colocacaoReducer.colocacao)
     const imgCampeao = "https://images.emojiterra.com/google/android-12l/512px/1f3c6.png"
     const imgPrimeiro = "https://w7.pngwing.com/pngs/556/205/png-transparent-trophy-cup-medal-communion-medal-prize-champion.png"
@@ -26,7 +26,7 @@ export default function Colocacao() {
                         {
                             colocacao.primeiro &&
                             <div>
-                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                     <ListItem alignItems="flex-start">   
                                         <ListItemAvatar>
                                         <AvatarComponent imgMaior={imgCampeao} imgMenor={colocacao.primeiro.dados.emblemaDoTime}/>
@@ -56,7 +56,7 @@ export default function Colocacao() {
                         {
                             colocacao.segundo &&
                             <div>
-                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                     <ListItem alignItems="flex-start">   
                                         <ListItemAvatar>
                                         <AvatarComponent imgMaior={imgVice} imgMenor={colocacao.segundo.dados.emblemaDoTime}/>
@@ -88,7 +88,7 @@ export default function Colocacao() {
                         {
                             colocacao.terceiro &&
                             <div>
-                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                     <ListItem alignItems="flex-start">   
                                         <ListItemAvatar>
                                         <AvatarComponent imgMaior={imgTerceiroColocado} imgMenor={colocacao.terceiro.dados.emblemaDoTime}/>
@@ -119,7 +119,7 @@ export default function Colocacao() {
                         {
                             colocacao.quarto &&
                             <div>
-                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                     <ListItem alignItems="flex-start">   
                                         <ListItemAvatar>
                                            <AvatarComponent imgMaior={imgQuartoColocado} imgMenor={colocacao.quarto.dados.emblemaDoTime}/>

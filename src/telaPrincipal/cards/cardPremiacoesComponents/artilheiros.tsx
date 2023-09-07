@@ -25,7 +25,7 @@ export default function Artilheiros() {
                                 {
                                     artilheiros.primeiro.map((elem, key)=>{
                                     return <div key={key}>
-                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
@@ -69,7 +69,7 @@ export default function Artilheiros() {
                                 {
                                     artilheiros.segundo.map((elem, key)=>{
                                     return <div key={key}>
-                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
@@ -113,7 +113,7 @@ export default function Artilheiros() {
                                 {
                                     artilheiros.terceiro.map((elem, key)=>{
                                     return <div key={key}>
-                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
@@ -157,7 +157,7 @@ export default function Artilheiros() {
                                 {
                                     artilheiros.quarto.map((elem, key)=>{
                                     return <div key={key}>
-                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>   
+                                            <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>   
                                                 <ListItem alignItems="flex-start">   
                                                     <ListItemAvatar>
                                                     <AvatarComponent 
