@@ -19,7 +19,7 @@ export default function GolsVitEmpates() {
     <div>
         {
             (dadosDoJogo.empates || dadosDoJogo.gols || dadosDoJogo.vitorias) &&            
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: '' }}>
              {
                 dadosDoJogo.gols.map((elem, key)=>{
                     return(                    
