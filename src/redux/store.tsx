@@ -17,8 +17,10 @@ import torneioAtualReducer from './torneioAtualReducer'
 import inputFocusReducer from './inputFocusReducer'
 import arrayPremiadosReducer from './arrayPremiadosReducer'
 import darkReducer from './darkReducer'
+import selectFormatoDaCompeticaoReducer from './selectFormatoDaCompeticaoReducer'
 export const store = configureStore({
   reducer: {
+    selectFormatoDaCompeticaoReducer,
     darkReducer,
     arrayPremiadosReducer,
     inputFocusReducer,
