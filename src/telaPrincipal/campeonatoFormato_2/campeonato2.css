@@ -1,0 +1,8 @@
+.cardList{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cardContainer{
+    background-color: red;
+}

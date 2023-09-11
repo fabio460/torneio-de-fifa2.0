@@ -74,7 +74,7 @@ export default function SwitchSelecioarTipoDeTorneio() {
       <FormControlLabel
         onChange={selectType}
         control={<MaterialUISwitch sx={{ m: 0 }} checked={state} />}
-        label="Formato da competição"
+        label={`Formato ${tipoDeTorneio}`}
       />
  
     </FormGroup>
