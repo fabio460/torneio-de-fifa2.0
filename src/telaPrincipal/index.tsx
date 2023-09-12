@@ -60,7 +60,7 @@ export default function TelaPrincipal() {
   },[torneio,id])
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
   const mensagemReducer = useSelector((state:any)=>state.checkedDeletarPart.status)
-  console.log(mensagemReducer)
+  
   return (
     <React.Fragment >
       <Toolbar id="back-to-top-anchor" />

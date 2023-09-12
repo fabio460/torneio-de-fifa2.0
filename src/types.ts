@@ -202,3 +202,20 @@ export type assistentesTypeReducer={
     dadosDaApi: dadosPremiacoesDaApiType
   }[],
 }
+
+export type participanteeducerType ={
+  participante:participantesType,
+  selecionado:boolean
+}
+export type jogosType = { 
+  casa:participanteeducerType,
+  fora:participanteeducerType,
+  golsCasa?:number,
+  golsFora?:number
+}
+
+export type golsType = {participante:participantesType, gol:number}
+export type resultadoDaPartidaType= {
+  golCasa:golsType,
+  golFora:golsType
+}
