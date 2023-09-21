@@ -130,7 +130,7 @@ export default function ModalAdicionarParticipantes() {
               onChange={handleChange}
           >
               {
-                  usuario.torneio?.map((elem, key)=>{
+                  usuario?.torneio?.map((elem, key)=>{
                       return  <MenuItem key={key} value={elem.id} className={elem.id}>{elem.nome}</MenuItem>
                   })
               }
