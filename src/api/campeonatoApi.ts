@@ -1,6 +1,8 @@
 import { linkLocal } from "./link"
 
+ //const local = "http://localhost:4000/"
 const local = linkLocal
+
 export const criarCampeonatoApi = (times:any, voltas:any)=>{
     return fetch(local+"torneioTipoDois/gerarTorneio",{
       headers:{
@@ -46,7 +48,7 @@ export const atualizarTabelaApi = (resultado:any)=>{
     },
     method:"put",
     body:JSON.stringify({resultado})
-  }).then(r=>r.json())
+  }).then(r=>r.json()).then(res=>console.log(res))
 }
 
 export const listarTabelaApi = ()=>{

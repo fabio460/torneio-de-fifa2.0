@@ -41,7 +41,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
   const atualizarDados = useSelector((state:any)=>state.atualizarDadosReducer.status)
   const dispatch = useDispatch()
 
-  const randleResultado = ()=>{
+  const atualizarRodada = ()=>{
     setCarregando(true)
     const id = rodada.id
     atualizarRodadaApi(id, golCasa?.gol, golFora?.gol)
@@ -53,9 +53,8 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       })
       setCarregando(false)
     }, 1000);
-
-
   }
+  
   return (
     <Card sx={cardStyle} className='cardContainer'>
       <CardContent>
@@ -117,7 +116,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       <CardActions>
         {
           (rodada.statusDaRodada === "aberto") ?
-          <Button variant='contained' sx={{width:"100%"}} onClick={randleResultado}>
+          <Button variant='contained' sx={{width:"100%"}} onClick={atualizarRodada}>
             {
               carregando? <CarregandoBtn/>:
               <span>Registrar</span>

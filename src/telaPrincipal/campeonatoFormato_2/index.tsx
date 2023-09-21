@@ -43,7 +43,7 @@ export default function CampeonatoFormato_2() {
         payload:{status:!atualizarDados}
       })
       window.location.reload()
-    }, 5000);
+    }, 1000);
   }
   const handleRodadas = (e:any)=>{
     if (e.target.checked) {
