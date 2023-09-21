@@ -44,7 +44,7 @@ export default function SelectTorneio() {
             onChange={handleChange}
         >
             {
-                usuario.torneio?.map((elem, key)=>{
+                usuario?.torneio?.map((elem, key)=>{
                     return  <MenuItem sx={{ background: darkMode ? 'inherit':""}} key={key} value={key}>{elem.nome}</MenuItem>
                 })
             }
