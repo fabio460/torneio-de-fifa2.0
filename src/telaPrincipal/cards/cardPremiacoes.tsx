@@ -28,6 +28,9 @@ export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | un
         }
       </CardContent>
       <CardActions sx={{}}>
+        {
+          tipoDeTorneio && tipoDeTorneio === "2"?
+          <div></div>:
         <div className='btnPagamentos'>
             <ModalConfirmarPagamentoPremiacao
                usuario={usuario}
@@ -35,6 +38,7 @@ export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | un
             />
             <ModalConfirmaPagamentoFolha icone={false}/>
         </div>
+        }
       </CardActions>
     </Card>
   );

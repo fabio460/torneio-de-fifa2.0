@@ -55,6 +55,9 @@
 .cardParticipantesBtnInferior{
     margin: 3%;
 }
+.telaPrincipalTabelaDeClassificacao{
+    padding:1% 2%;
+}
 .btnPagamentos{
     padding: 8px;
     min-width: 400px;

@@ -1,49 +1,49 @@
 import React, { HtmlHTMLAttributes, useState } from 'react'
 import Cards from './Cards'
 import "./campeonato2.css"
-import { useSelector } from 'react-redux'
-import { jogosType, participanteeducerType, participantesType, resultadoDaPartidaType } from '../../types'
+import { useDispatch, useSelector } from 'react-redux'
+import { campeonatoType, jogosType, participanteeducerType, participantesType, resultadoDaPartidaType, tabelaCampeonatoType } from '../../types'
 import { Button, Checkbox } from '@mui/material'
-import { gols } from '../../valoresDosPremios'
+import { campeao, gols, quartoColocado, terceiroColocado, viceCampeao } from '../../valoresDosPremios'
+import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTabelaApi } from '../../api/campeonatoApi'
+import Carregando from '../../carregando'
+import { calculoDasPremiacoesDaTabela } from './funcoesDoComponentes'
+import { pagarPremiacoesApi } from '../../api/pagamentosApi'
 
 export default function CampeonatoFormato_2() {
-  let [cards, setCards] =React.useState<participantesType[]>([])
+  let [carregando, setCarregando] =React.useState<boolean>(false)
   let participantes:participanteeducerType[] = useSelector((state:any)=>state.participantesReducer.participantes)
-  let jogosJsonResponse = JSON.parse(localStorage.getItem("jogos") as string)
-  const [jogos, setjogos] = React.useState<jogosType[]>(jogosJsonResponse?jogosJsonResponse:[])
-  const [resultado, setResultado]= React.useState<resultadoDaPartidaType>()
-  const tam = participantes.length
+  
+  const [campeonato, setCampeonato] = useState<campeonatoType>()
+  const atualizarDados = useSelector((state:any)=>state.atualizarDadosReducer.status)
+  const dispatch = useDispatch()
   const [voltas, setVoltas] =useState(1)
+  let listaDeParticipantes = participantes
+  let times = listaDeParticipantes.map(elem=>{
+    return {
+      id: elem.participante.id,
+      nome: elem.participante.nome,
+      emblemaDoTime: elem.participante.emblemaDoTime,
+      idTorneio: elem.participante.idTorneio,
+      jogadores: elem.participante.jogadores,
+      saldo: elem.participante.saldo,
+      time: elem.participante.time,
+      torneio: elem.participante.torneio,
+      gols:0
+    }
+  })
 
-  const comecar = ()=>{
-    let aux = []
-    for (let i = 0; i < tam - 1; i++) {
-      for (let j = 1; j < tam ; j++) {
-        if (participantes[j+i]) {          
-          aux.push({
-            casa:participantes[i],
-            fora: participantes[i+j]
-          })
-        }
+  const comecar =async()=>{
+    setCarregando(true)
+    const r =await criarCampeonatoApi(times, voltas)
     
-      }
-    }
-    if (voltas === 2) {
-      for (let i = 0; i < tam - 1; i++) {
-        for (let j = 1; j < tam ; j++) {
-          if (participantes[j+i]) {          
-            aux.push({
-              casa:participantes[i],
-              fora: participantes[i+j]
-            })
-          }
-      
-        }
-      }
-    }
-    let responseJogos = aux.sort(()=>(Math.round(Math.random())-0.5))
-    setjogos(responseJogos)
-    localStorage.setItem("jogos",JSON.stringify(responseJogos))
+    setTimeout(() => {
+      dispatch({
+        type:"atualizarDados",
+        payload:{status:!atualizarDados}
+      })
+      window.location.reload()
+    }, 5000);
   }
   const handleRodadas = (e:any)=>{
     if (e.target.checked) {
@@ -52,24 +52,34 @@ export default function CampeonatoFormato_2() {
       setVoltas(1)
     }
   }
+  async function listarCampeonato() {
+    setCarregando(true)
+    const camp = await listarCampeonatoApi()
+    const ultimoCampeonato = camp[camp.length -1]
+    setCampeonato(ultimoCampeonato)
+    setCarregando(false)
+    return camp
+  }
   React.useEffect(()=>{
-    if (resultado?.golCasa && resultado.golFora) {
-      
-      console.log(jogos)
-    }
-  },[resultado])
-  let filter = jogos.filter(j=>{
-    if  (
-          j.casa?.participante.id === resultado?.golCasa?.participante.id &&
-          j.fora?.participante.id === resultado.golFora?.participante.id
-        ) {
-      return Object.assign(j,{golsCasa:resultado.golCasa.gol, golsFora:resultado.golFora.gol})
-    }
-  })
-  
-  localStorage.setItem("jogos",JSON.stringify(jogos))
-  const encerrarTorneio = ()=>{
-    setjogos([])
+    listarCampeonato()
+  },[atualizarDados])
+
+  const encerrarTorneio = async()=>{
+    setCarregando(true)
+    const tabela:tabelaCampeonatoType[] = await listarTabelaApi()
+    const premiados = await calculoDasPremiacoesDaTabela(tabela)
+    pagarPremiacoesApi(premiados)
+
+    const idDoCampeonato = campeonato && campeonato.id
+    deletarCampeonatoApi(idDoCampeonato)
+    setTimeout(() => {
+      dispatch({
+        type:"atualizarDados",
+        payload:{status:!atualizarDados}
+      })
+      setCarregando(false)
+      window.location.reload()
+    }, 4000);
   }
 return (
   <div style={{textAlign:"center"}}>
@@ -79,9 +89,13 @@ return (
         <span>Ida e volta</span>
       </div>
       <div className='cardList'>
-        {
-          jogos.map((jogo, key)=>{
-            return <Cards key={key} jogo={jogo} partida={key+1} setResultado={setResultado}/>
+        { 
+          carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
+            <Carregando size='120px'/>
+          </div>
+          :
+          campeonato && campeonato?.rodada?.map((rodada, key)=>{
+             return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
           })
         }
       </div>

@@ -219,3 +219,49 @@ export type resultadoDaPartidaType= {
   golCasa:golsType,
   golFora:golsType
 }
+export type rodadasType ={
+  id: string,
+  idDoMandante: string,
+  idDoVisitante: string,
+  idCampeonato: string,
+  golsMandante: number,
+  golsVisitante: number,
+  statusDaRodada:string,
+  mandante: {
+    id: string,
+    nome: string,
+    saldo: number,
+    time: string,
+    emblemaDoTime: string,
+    idTorneio: string
+  }[],
+  visitante: {
+    id: string,
+    nome: string,
+    saldo: number,
+    time: string,
+    emblemaDoTime: string,
+    idTorneio: string
+  }[]
+} 
+export type campeonatoType = {
+  id: string,
+  status: string,
+  data: string,
+  rodada:rodadasType[]
+}
+
+export type tabelaCampeonatoType ={
+  equipe: string,
+  avatar:string,
+  pontos: number,
+  jogos: number,
+  vitorias: number,
+  empates: number,
+  derrota:number,
+  golsPro:number,
+  golsContra:number,
+  saldoDeGol:number,
+  idDoParticipante:string,
+  idDoTorneio:string
+}

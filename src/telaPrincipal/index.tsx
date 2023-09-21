@@ -21,6 +21,7 @@ import Footer from './footer';
 import ScrollComponents from '../ScrollComponent';
 import { dark, darkBackgroundContainer } from '../temaDark';
 import Mensagens from '../componentesGlobais/mensagens';
+import CardTabelaDeClassificacao from './cards/cardTabelaDeClassificacao';
 
 
 export default function TelaPrincipal() {
@@ -78,6 +79,9 @@ export default function TelaPrincipal() {
                   torneio = {usuario?.torneio}  
                 />
                 <CradPremiacoes usuario={usuario}/>
+              </div>
+              <div className='telaPrincipalTabelaDeClassificacao '>
+                <CardTabelaDeClassificacao/>
               </div>
               <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>
