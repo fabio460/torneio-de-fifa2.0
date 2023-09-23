@@ -67,6 +67,7 @@ export default function SwitchSelecioarTipoDeTorneio() {
         type:"selectFormatoDaCompeticao",
         payload:{tipo:state?"2":"1"}
      })
+     localStorage.setItem("tipoDeTorneio",state?"2":"1")
   }  
 
   return (

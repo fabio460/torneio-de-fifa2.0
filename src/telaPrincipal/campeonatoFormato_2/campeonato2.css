@@ -1,11 +1,23 @@
 .cardList{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
 }
 
 .cardContainer{
-    background-color: red;
+  
 }
 .placar{
     margin: 8px 27px;
+}
+@media (max-width:1300px) {
+    .cardList{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:1050px) {
+    .cardList{
+        grid-template-columns: 1fr;
+    }
 }

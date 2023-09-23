@@ -24,7 +24,7 @@ const bull = (
 );
 
 const cardStyle = {
-  minWidth: 175, margin:1,
+   margin:1,
   "@media (max-width:1050px)":{
     minWidth: "100%",
   }
@@ -86,7 +86,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
                       >
                       <InputBase
                           onChange={e=>setGolCasa({gol:parseInt(e.target.value), time:rodada.mandante})}
-                          sx={{ ml: "45%"}}
+                          sx={{ ml: "35%"}}
                           defaultValue={rodada.golsMandante}
                           inputProps={{ 'aria-label': 'search google maps' }}
                       />

@@ -14,6 +14,7 @@ import CampeonatoFormato_2 from '../campeonatoFormato_2';
 export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | undefined}) {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
   const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
+  
   return (
     <Card sx={{background:darkMode ? darkBackgroundBox:"", color: darkMode ? colorDark:"", minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
       <div style={{display:"flex", justifyContent:"flex-end", marginTop:"10px"}}>

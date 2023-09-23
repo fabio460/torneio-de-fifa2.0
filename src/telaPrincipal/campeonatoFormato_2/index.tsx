@@ -32,7 +32,7 @@ export default function CampeonatoFormato_2() {
       gols:0
     }
   })
-
+  
   const comecar =async()=>{
     setCarregando(true)
     const r =await criarCampeonatoApi(times, voltas)
@@ -81,6 +81,23 @@ export default function CampeonatoFormato_2() {
       window.location.reload()
     }, 4000);
   }
+  const cancelarCompetição = async()=>{
+    setCarregando(true)
+    const tabela:tabelaCampeonatoType[] = await listarTabelaApi()
+    const premiados = await calculoDasPremiacoesDaTabela(tabela)
+    const idDoCampeonato = campeonato && campeonato.id
+    deletarCampeonatoApi(idDoCampeonato)
+    setTimeout(() => {
+      dispatch({
+        type:"atualizarDados",
+        payload:{status:!atualizarDados}
+      })
+      setCarregando(false)
+      window.location.reload()
+    }, 4000);
+  }
+  let torneioFinalizado = campeonato?.rodada.every(r=>r.statusDaRodada==="fechado")
+  
 return (
   <div style={{textAlign:"center"}}>
       <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
@@ -88,20 +105,31 @@ return (
         <Checkbox onChange={handleRodadas}/>
         <span>Ida e volta</span>
       </div>
-      <div className='cardList'>
-        { 
-          carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
-            <Carregando size='120px'/>
-          </div>
-          :
-          campeonato && campeonato?.rodada?.map((rodada, key)=>{
-             return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
-          })
-        }
+      <div style={{display:"flex", justifyContent:"center"}}>
+        <div className='cardList'>
+          { 
+            carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
+              <Carregando size='120px'/>
+            </div>
+            :
+            campeonato && campeonato?.rodada?.map((rodada, key)=>{
+              return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
+            })
+          }
+        </div>
       </div>
-      
-        <Button onClick={encerrarTorneio}>Encerrar</Button>
-      
+      {
+        campeonato?.rodada.length === 0 ?<div></div>:
+        torneioFinalizado?
+        <div>
+          <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>
+          <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
+        </div>:
+        <div>
+          <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
+        </div>
+
+      }
   </div>
 )
 }
