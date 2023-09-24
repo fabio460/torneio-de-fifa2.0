@@ -33,17 +33,21 @@ export default function CampeonatoFormato_2() {
     }
   })
   
-  const comecar =async()=>{
-    setCarregando(true)
-    const r =await criarCampeonatoApi(times, voltas)
-    
-    setTimeout(() => {
-      dispatch({
-        type:"atualizarDados",
-        payload:{status:!atualizarDados}
-      })
-      window.location.reload()
-    }, 1000);
+  const comecar =()=>{
+    if (times.length > 2) {      
+      setCarregando(true)
+      criarCampeonatoApi(times, voltas)
+      
+      setTimeout(() => {
+        dispatch({
+          type:"atualizarDados",
+          payload:{status:!atualizarDados}
+        })
+        window.location.reload()
+      }, 3000);
+    }else{
+      alert("Não é possível criar um torneio com menos de 3 participantes!")
+    }
   }
   const handleRodadas = (e:any)=>{
     if (e.target.checked) {
@@ -81,10 +85,8 @@ export default function CampeonatoFormato_2() {
       window.location.reload()
     }, 4000);
   }
-  const cancelarCompetição = async()=>{
+  const cancelarCompetição = ()=>{
     setCarregando(true)
-    const tabela:tabelaCampeonatoType[] = await listarTabelaApi()
-    const premiados = await calculoDasPremiacoesDaTabela(tabela)
     const idDoCampeonato = campeonato && campeonato.id
     deletarCampeonatoApi(idDoCampeonato)
     setTimeout(() => {
@@ -94,40 +96,66 @@ export default function CampeonatoFormato_2() {
       })
       setCarregando(false)
       window.location.reload()
-    }, 4000);
+    }, 1000);
   }
-  let torneioFinalizado = campeonato?.rodada.every(r=>r.statusDaRodada==="fechado")
+  let torneioEncerrado = campeonato?.rodada.every(r=>r.statusDaRodada==="fechado")
   
+  console.log(torneioEncerrado)
+  console.log(campeonato)
 return (
   <div style={{textAlign:"center"}}>
-      <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
-      <div style={{display:"flex", alignItems:"center"}}>
-        <Checkbox onChange={handleRodadas}/>
-        <span>Ida e volta</span>
-      </div>
-      <div style={{display:"flex", justifyContent:"center"}}>
-        <div className='cardList'>
+      
+      {
+        (campeonato === undefined) && <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
+      }
+      
+      {
+        torneioEncerrado &&
+        <div style={{display:"flex", alignItems:"center"}}>
+          <Checkbox onChange={handleRodadas}/>
+          <span>Ida e volta</span>
+        </div>
+
+      }
+      <div 
+      >
           { 
             carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
               <Carregando size='120px'/>
             </div>
             :
-            campeonato && campeonato?.rodada?.map((rodada, key)=>{
-              return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
-            })
+            <div className='cardList'>
+              {  
+                campeonato && campeonato?.rodada?.map((rodada, key)=>{
+                  return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
+                })
+              }
+            </div>
           }
-        </div>
       </div>
+     
       {
-        campeonato?.rodada.length === 0 ?<div></div>:
-        torneioFinalizado?
-        <div>
-          <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>
-          <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
-        </div>:
-        <div>
-          <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
-        </div>
+         campeonato &&
+            <div>
+              {
+                torneioEncerrado ?
+                <div>
+                  <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>
+                  <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
+                </div>:
+                <div>
+                  <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
+                </div>
+              }
+            </div>
+    
+        
+        // <div>
+
+        // </div>:
+        // <div>
+        //   <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
+        // </div>
 
       }
   </div>

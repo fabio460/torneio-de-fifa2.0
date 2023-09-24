@@ -30,40 +30,42 @@ export default function CardTabelaDeClassificacao() {
     },[atualizarDados])
     
     return (
-        <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
-            <TableHead>
-            <TableRow>
-                <TableCell align="left">Equipe</TableCell>
-                <TableCell align="left">P</TableCell>
-                <TableCell align="left">J</TableCell>
-                <TableCell align="left">V</TableCell>
-                <TableCell align="left">E</TableCell>
-                <TableCell align="left">D</TableCell>
-                <TableCell align="left">GP</TableCell>
-                <TableCell align="left">GC</TableCell>
-                <TableCell align="left">SG</TableCell>
-            </TableRow>
-            </TableHead>
-            <TableBody>
-            {rows?.map((row) => (
-                <TableRow
-                key={row.equipe}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                <TableCell align="left">{row.equipe}</TableCell>
-                <TableCell align="left">{row.pontos}</TableCell>
-                <TableCell align="left">{row.jogos}</TableCell>
-                <TableCell align="left">{row.vitorias}</TableCell>
-                <TableCell align="left">{row.empates}</TableCell>
-                <TableCell align="left">{row.derrota}</TableCell>
-                <TableCell align="left">{row.golsPro}</TableCell>
-                <TableCell align="left">{row.golsContra}</TableCell>
-                <TableCell align="left">{row.saldoDeGol}</TableCell>
+        <div>
+            <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
+                <TableHead>
+                <TableRow>
+                    <TableCell align="left">Equipe</TableCell>
+                    <TableCell align="left">P</TableCell>
+                    <TableCell align="left">J</TableCell>
+                    <TableCell align="left">V</TableCell>
+                    <TableCell align="left">E</TableCell>
+                    <TableCell align="left">D</TableCell>
+                    <TableCell align="left">GP</TableCell>
+                    <TableCell align="left">GC</TableCell>
+                    <TableCell align="left">SG</TableCell>
                 </TableRow>
-            ))}
-            </TableBody>
-        </Table>
-        </TableContainer>
+                </TableHead>
+                <TableBody>
+                {rows?.map((row) => (
+                    <TableRow
+                    key={row.equipe}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                    <TableCell align="left">{row.equipe}</TableCell>
+                    <TableCell align="left">{row.pontos}</TableCell>
+                    <TableCell align="left">{row.jogos}</TableCell>
+                    <TableCell align="left">{row.vitorias}</TableCell>
+                    <TableCell align="left">{row.empates}</TableCell>
+                    <TableCell align="left">{row.derrota}</TableCell>
+                    <TableCell align="left">{row.golsPro}</TableCell>
+                    <TableCell align="left">{row.golsContra}</TableCell>
+                    <TableCell align="left">{row.saldoDeGol}</TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+            </TableContainer>
+        </div>
     );
 }
