@@ -18,16 +18,19 @@ export default function CardTabelaDeClassificacao() {
     const [campeonato, setCampeonato] = React.useState<campeonatoType>()
     const atualizarDados = useSelector((state:any)=>state.atualizarDadosReducer.status)
     const [rows, setrows] = React.useState<tabelaCampeonatoType[]>([])
-    async function getList() {
+    async function getList(idTorneio:string) {
         const list = await listarCampeonatoApi()
-        const tabela = await listarTabelaApi()
+        const tabela = await listarTabelaApi(idTorneio) || []
         setrows(tabela)
         const ultimoCampeonato = list[list.length -1]
         setCampeonato(ultimoCampeonato)
     }
+    const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
+    let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
+    let idTorneio = usuarioReducer.torneio[torneioAtual].id
     React.useEffect(()=>{
-        getList()
-    },[atualizarDados])
+        getList(idTorneio)
+    },[atualizarDados, torneioAtual])
     
     return (
         <div>

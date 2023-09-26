@@ -5,14 +5,15 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Avatar, InputBase, Paper } from '@mui/material';
+import { Avatar, IconButton, InputBase, Paper } from '@mui/material';
 import { golsType, rodadasType } from '../../types';
 import  "./campeonato2.css";
-import { atualizaTorneioApi } from '../../api/torneioApi';
-import { atualizarRodadaApi } from '../../api/campeonatoApi';
+import UpdateIcon from '@mui/icons-material/Update';
+import { atualizarRodadaApi, atualizarStatusDaRodadaApi, atualizarTabelaApi, listarTabelaApi } from '../../api/campeonatoApi';
 import { useDispatch, useSelector } from 'react-redux';
 import CarregandoBtn from '../../carregandoBtn';
 import { calculaDadosDaTabela } from './funcoesDoComponentes';
+
 
 const bull = (
   <Box
@@ -35,17 +36,21 @@ type cardType = {
   idDoCampeonato:string
 }
 export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
+  const dispatch = useDispatch()
   const [golCasa, setGolCasa] = React.useState<{gol:number, time:any}>()
   const [golFora, setGolFora] = React.useState<{gol:number, time:any}>()
   const [carregando, setCarregando] = React.useState(false)
   const atualizarDados = useSelector((state:any)=>state.atualizarDadosReducer.status)
-  const dispatch = useDispatch()
+  const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
+  let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
+  let idTorneio = usuarioReducer.torneio[torneioAtual].id
 
-  const atualizarRodada = ()=>{
+  const atualizarRodada =async ()=>{
     setCarregando(true)
     const id = rodada.id
     atualizarRodadaApi(id, golCasa?.gol, golFora?.gol)
-    calculaDadosDaTabela(idDoCampeonato, golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})
+     const res =await calculaDadosDaTabela(golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})
+     await atualizarTabelaApi(res)
     setTimeout(() => {
       dispatch({
         type:"atualizarDados",  
@@ -53,10 +58,38 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       })
       setCarregando(false)
     }, 1000);
+    console.log(golCasa ? golCasa : {gol:rodada.golsMandante, time:rodada.mandante}, golFora ? golFora : {gol:rodada.golsVisitante, time:rodada.visitante})
   }
   
+  const corrigirResultado = async()=>{
+    setGolCasa({gol:rodada.golsMandante, time:rodada.mandante})
+    setGolFora({gol:rodada.golsVisitante, time:rodada.visitante})
+     setCarregando(true)
+     const res = await calculaDadosDaTabela(golCasa ? golCasa : {gol:rodada.golsMandante, time:rodada.mandante}, golFora ? golFora : {gol:rodada.golsVisitante, time:rodada.visitante})
+     await atualizarStatusDaRodadaApi(rodada.id, "aberto", res)
+     setTimeout(() => {
+      dispatch({
+        type:"atualizarDados",  
+        payload:{status:!atualizarDados}
+      })
+      
+      setCarregando(false)
+    }, 1000);
+  }
+  console.log({golCasa, golFora})
+  
   return (
-    <Card sx={cardStyle} className='cardContainer'>
+    <Card sx={cardStyle} className='cardContainer' >
+      {
+        rodada.statusDaRodada === "fechado" ?
+      <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
+        <IconButton onClick={corrigirResultado}><UpdateIcon/></IconButton>
+      </Typography>
+      :
+      <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
+        <IconButton disabled><UpdateIcon/></IconButton>
+      </Typography>
+      }
       <CardContent>
         <Typography variant="h5" component="div">
           Partida {partida}

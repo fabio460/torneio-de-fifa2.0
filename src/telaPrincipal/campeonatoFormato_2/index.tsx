@@ -32,11 +32,13 @@ export default function CampeonatoFormato_2() {
       gols:0
     }
   })
-  
+  const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
+  let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
+  let idTorneio = usuarioReducer.torneio[torneioAtual].id
   const comecar =()=>{
     if (times.length > 2) {      
       setCarregando(true)
-      criarCampeonatoApi(times, voltas)
+      criarCampeonatoApi(times, voltas, idTorneio)
       
       setTimeout(() => {
         dispatch({
@@ -44,7 +46,7 @@ export default function CampeonatoFormato_2() {
           payload:{status:!atualizarDados}
         })
         window.location.reload()
-      }, 3000);
+      }, 4000);
     }else{
       alert("Não é possível criar um torneio com menos de 3 participantes!")
     }
@@ -58,19 +60,19 @@ export default function CampeonatoFormato_2() {
   }
   async function listarCampeonato() {
     setCarregando(true)
-    const camp = await listarCampeonatoApi()
-    const ultimoCampeonato = camp[camp.length -1]
-    setCampeonato(ultimoCampeonato)
+    const camp = await listarCampeonatoApi(idTorneio) || []
+    setCampeonato(camp)
     setCarregando(false)
     return camp
   }
+    
   React.useEffect(()=>{
     listarCampeonato()
-  },[atualizarDados])
+  },[atualizarDados, idTorneio])
 
   const encerrarTorneio = async()=>{
     setCarregando(true)
-    const tabela:tabelaCampeonatoType[] = await listarTabelaApi()
+    const tabela:tabelaCampeonatoType[] = await listarTabelaApi(idTorneio)
     const premiados = await calculoDasPremiacoesDaTabela(tabela)
     pagarPremiacoesApi(premiados)
 
@@ -98,15 +100,13 @@ export default function CampeonatoFormato_2() {
       window.location.reload()
     }, 1000);
   }
-  let torneioEncerrado = campeonato?.rodada.every(r=>r.statusDaRodada==="fechado")
-  
-  console.log(torneioEncerrado)
-  console.log(campeonato)
+  let torneioEncerrado = campeonato?.rodada?.every(r=>r.statusDaRodada==="fechado")
+  let camp:any = campeonato || []
 return (
   <div style={{textAlign:"center"}}>
       
       {
-        (campeonato === undefined) && <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
+        (camp.length === 0) && <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
       }
       
       {

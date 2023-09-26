@@ -2,7 +2,7 @@ import { atualizarTabelaApi } from "../../api/campeonatoApi";
 import { golsType, tabelaCampeonatoType } from "../../types";
 import { artilheiro, campeao, empates, gols, quartoAtilheiro, quartoColocado, terceiroArtilheiro, terceiroColocado, viceArtilheiro, viceCampeao, vitoria } from "../../valoresDosPremios";
 
-export async function calculaDadosDaTabela(idDoCampeonato:string, golCasa:any , golFora:any) {
+export async function calculaDadosDaTabela(golCasa:any , golFora:any) {
    
     const resultado = [
         {
@@ -31,8 +31,9 @@ export async function calculaDadosDaTabela(idDoCampeonato:string, golCasa:any , 
             saldoDeGol:golFora.gol - golCasa.gol,
         },
     ]
-  
-    const res = await atualizarTabelaApi(resultado)
+    //
+    //const res = await atualizarTabelaApi(resultado)
+    return resultado
 }
 
 export const calculoDasPremiacoesDaTabela = (tabela:any)=>{
