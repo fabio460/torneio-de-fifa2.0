@@ -46,7 +46,7 @@ export default function CampeonatoFormato_2() {
           payload:{status:!atualizarDados}
         })
         window.location.reload()
-      }, 4000);
+      }, 5000);
     }else{
       alert("Não é possível criar um torneio com menos de 3 participantes!")
     }

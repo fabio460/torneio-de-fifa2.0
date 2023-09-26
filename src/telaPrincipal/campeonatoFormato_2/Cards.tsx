@@ -57,7 +57,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
         payload:{status:!atualizarDados}
       })
       setCarregando(false)
-    }, 1000);
+    }, 2000);
     console.log(golCasa ? golCasa : {gol:rodada.golsMandante, time:rodada.mandante}, golFora ? golFora : {gol:rodada.golsVisitante, time:rodada.visitante})
   }
   
@@ -74,9 +74,8 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       })
       
       setCarregando(false)
-    }, 1000);
+    }, 2000);
   }
-  console.log({golCasa, golFora})
   
   return (
     <Card sx={cardStyle} className='cardContainer' >

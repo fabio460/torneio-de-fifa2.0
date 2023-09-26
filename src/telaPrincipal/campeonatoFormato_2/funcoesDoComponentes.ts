@@ -31,8 +31,6 @@ export async function calculaDadosDaTabela(golCasa:any , golFora:any) {
             saldoDeGol:golFora.gol - golCasa.gol,
         },
     ]
-    //
-    //const res = await atualizarTabelaApi(resultado)
     return resultado
 }
 
