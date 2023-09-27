@@ -4,11 +4,16 @@
     
 }
 
-.cardContainer{
-  
+.btnActionsTipo2{
+ display: flex;
+ justify-content: flex-end;
+ margin-top: 20px;
 }
 .placar{
     margin: 8px 27px;
+}
+.campeonato2Container{
+
 }
 @media (max-width:1300px) {
     .cardList{

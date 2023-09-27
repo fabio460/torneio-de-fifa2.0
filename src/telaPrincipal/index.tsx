@@ -61,7 +61,8 @@ export default function TelaPrincipal() {
   },[torneio,id])
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
   const mensagemReducer = useSelector((state:any)=>state.checkedDeletarPart.status)
-  
+  const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
+
   return (
     <React.Fragment >
       <Toolbar id="back-to-top-anchor" />
@@ -80,9 +81,13 @@ export default function TelaPrincipal() {
                 />
                 <CradPremiacoes usuario={usuario}/>
               </div>
-              <div className='telaPrincipalTabelaDeClassificacao '>
-                <CardTabelaDeClassificacao/>
-              </div>
+              {
+                tipoDeTorneio === "2" &&
+                <div className='telaPrincipalTabelaDeClassificacao '>
+                  <h2 style={{textAlign:"center",marginTop:"30px"}}>Tabela de classificação</h2>
+                  <CardTabelaDeClassificacao/>
+                </div>
+              }
               <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>
                 <EstatisticaCampeao estatistica={estatisticas}/>

@@ -9,7 +9,7 @@ import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTa
 import Carregando from '../../carregando'
 import { calculoDasPremiacoesDaTabela } from './funcoesDoComponentes'
 import { pagarPremiacoesApi } from '../../api/pagamentosApi'
-import ModalConfCancelTorneio from './modais/modalConfCancelamentoDoTorneio'
+import ModalConfirmacoes from './modais/modalConfirmacao'
 
 export default function CampeonatoFormato_2() {
   let [carregando, setCarregando] =React.useState<boolean>(false)
@@ -36,7 +36,9 @@ export default function CampeonatoFormato_2() {
   const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
   let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
   let idTorneio = usuarioReducer.torneio[torneioAtual].id
-  const comecar =()=>{
+
+
+  const iniciarCompeticao =()=>{
     if (times.length > 2) {      
       setCarregando(true)
       criarCampeonatoApi(times, voltas, idTorneio)
@@ -47,11 +49,12 @@ export default function CampeonatoFormato_2() {
           payload:{status:!atualizarDados}
         })
         window.location.reload()
-      }, 5000);
+      }, 6000);
     }else{
       alert("Não é possível criar um torneio com menos de 3 participantes!")
     }
   }
+
   const handleRodadas = (e:any)=>{
     if (e.target.checked) {
       setVoltas(2)
@@ -59,6 +62,7 @@ export default function CampeonatoFormato_2() {
       setVoltas(1)
     }
   }
+
   async function listarCampeonato() {
     setCarregando(true)
     const camp = await listarCampeonatoApi(idTorneio) || []
@@ -86,7 +90,7 @@ export default function CampeonatoFormato_2() {
       })
       setCarregando(false)
       window.location.reload()
-    }, 4000);
+    }, 6000);
   }
   const cancelarCompetição = ()=>{
     setCarregando(true)
@@ -103,74 +107,70 @@ export default function CampeonatoFormato_2() {
   }
   let torneioEncerrado = campeonato?.rodada?.every(r=>r.statusDaRodada==="fechado")
   let camp:any = campeonato || []
-  console.log(campeonato?.id)
+
   return (
-    <div style={{textAlign:"center"}}>
-        {
-          (camp.length === 0) && <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
-        }
-        
-        {
-          (camp.length === 0) &&
-          <div style={{display:"flex", alignItems:"center"}}>
-            <Checkbox onChange={handleRodadas}/>
-            <span>Ida e volta</span>
+    <div className='campeonato2Container'>
+        <div >
+          {
+            (camp.length === 0) && <Button variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
+          }
+          {
+            (camp.length === 0) &&
+            <div style={{display:"flex", alignItems:"center"}}>
+              <Checkbox onChange={handleRodadas}/>
+              <span>Ida e volta</span>
+            </div>
+
+          }
+          <div 
+          >
+              { 
+                carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
+                  <Carregando size='120px'/>
+                </div>
+                :
+                <div className='cardList'>
+                  {  
+                    campeonato && campeonato?.rodada?.map((rodada, key)=>{
+                      return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
+                    })
+                  }
+                </div>
+              }
           </div>
 
-        }
-        <div 
-        >
-            { 
-              carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
-                <Carregando size='120px'/>
-              </div>
-              :
-              <div className='cardList'>
-                {  
-                  campeonato && campeonato?.rodada?.map((rodada, key)=>{
-                    return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
-                  })
-                }
-              </div>
+        </div>
+        <div className='btnActionsTipo2'>
+          <div>
+            {torneioEncerrado && 
+              <ModalConfirmacoes 
+                action={cancelarCompetição}
+                titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
+                textoBtn='cancelar'   
+              />
             }
-        </div>
-      
-        <div>
-          {torneioEncerrado && <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/> }
-        </div>
-        <div>
-          {(campeonato?.id && torneioEncerrado === false) && 
-            <div>
-              <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
+          </div>
+          <div style={{display:"flex"}}>
+            <div>            
+              {(campeonato?.id && torneioEncerrado === false) && 
+                <ModalConfirmacoes 
+                  action={cancelarCompetição}
+                  titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
+                  textoBtn='cancelar'   
+                />              }
             </div>
-          }
-        </div>
-        <div>
-          {
-            (campeonato?.id && torneioEncerrado ) && 
-            <div>
-               <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
-               <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>s
+            <div style={{marginLeft:"10px"}}>
+              {(campeonato?.id && torneioEncerrado ) && 
+                
+                <ModalConfirmacoes 
+                action={encerrarTorneio}
+                titulo='Deseja finalizar o torneio?' mensagem='Ao confirmar, voçê fará o pagamento das premiações, tem certeza que deseja finalizar?'
+                textoBtn='finalizar competição'   
+              />
+              }
             </div>
-          }
+          </div>
         </div>
-        {
-              // <div>
-              //   {
-              //     torneioEncerrado ?
-              //     <div>
-              //       <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>
-              //       <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
-              //     </div>:
-              //     <div>
-              //       <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>ss
-              //     </div>
-              //   }
-              // </div>:
-              // <div>
-              //   <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
-              // </div>
-        }
     </div>
   )
 }

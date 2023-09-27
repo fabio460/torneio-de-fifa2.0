@@ -20,27 +20,30 @@ export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | un
       <div style={{display:"flex", justifyContent:"flex-end", marginTop:"10px"}}>
           <SwitchSelecioarTipoDeTorneio/>
       </div>
-      <CardContent  className='cardPremiacoesContainer'>
-        {
-          tipoDeTorneio && tipoDeTorneio === "1"?
-          <PremiacoesBody/>
-          :
-          <CampeonatoFormato_2/>
-        }
-      </CardContent>
-      <CardActions sx={{}}>
-        {
-          tipoDeTorneio && tipoDeTorneio === "2"?
-          <div></div>:
-        <div className='btnPagamentos'>
-            <ModalConfirmarPagamentoPremiacao
-               usuario={usuario}
-               icone={false}
-            />
-            <ModalConfirmaPagamentoFolha icone={false}/>
-        </div>
-        }
-      </CardActions>
+      <div>
+
+        <CardContent  className='cardPremiacoesContainer'>
+          {
+            tipoDeTorneio && tipoDeTorneio === "1"?
+            <PremiacoesBody/>
+            :
+            <CampeonatoFormato_2/>
+          }
+        </CardContent>
+        <CardActions sx={{}}>
+          {
+            tipoDeTorneio && tipoDeTorneio === "2"?
+            <div></div>:
+          <div className='btnPagamentos'>
+              <ModalConfirmarPagamentoPremiacao
+                usuario={usuario}
+                icone={false}
+              />
+              <ModalConfirmaPagamentoFolha icone={false}/>
+          </div>
+          }
+        </CardActions>
+      </div>
     </Card>
   );
 }
