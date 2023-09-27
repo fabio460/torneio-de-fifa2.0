@@ -53,6 +53,7 @@ export default function CampeonatoFormato_2() {
           payload:{status:!atualizarDados}
         })
         window.location.reload()
+      
       }, 9000);
     }else{
       alert("Não é possível criar um torneio com menos de 3 participantes!")
@@ -114,7 +115,10 @@ export default function CampeonatoFormato_2() {
 
   return (
     <div className='campeonato2Container'>
-      
+        {
+          (camp.length === 0 && !carregandoTorneio) && 
+          <h5>Atenção: atualize a tela se os valores não entrarem a cada interação!</h5>
+        }
         <div >
           {
             (camp.length === 0 && !carregandoTorneio) && <Button variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
