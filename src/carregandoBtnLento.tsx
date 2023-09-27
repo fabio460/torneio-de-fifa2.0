@@ -45,7 +45,7 @@ export default function CarregandoBtnLento({mensagem, mensagem2, mensagem3}:prop
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
-    }, 800);
+    }, 1000);
     return () => {
       clearInterval(timer);
     };

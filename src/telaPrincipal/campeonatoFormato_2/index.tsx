@@ -15,6 +15,8 @@ import CarregandoBtnLento from '../../carregandoBtnLento'
 export default function CampeonatoFormato_2() {
   let [carregando, setCarregando] =React.useState<boolean>(false)
   const [carregandoTorneio, setcarregandoTorneio] = React.useState<boolean>(false)
+  const [carregandoPagaento, setcarregandoPagamento] = React.useState<boolean>(false)
+
   let participantes:participanteeducerType[] = useSelector((state:any)=>state.participantesReducer.participantes)
   
   const [campeonato, setCampeonato] = useState<campeonatoType>()
@@ -51,7 +53,7 @@ export default function CampeonatoFormato_2() {
           payload:{status:!atualizarDados}
         })
         window.location.reload()
-      }, 7000);
+      }, 9000);
     }else{
       alert("Não é possível criar um torneio com menos de 3 participantes!")
     }
@@ -78,7 +80,7 @@ export default function CampeonatoFormato_2() {
   },[atualizarDados, idTorneio])
 
   const encerrarTorneio = async()=>{
-    setCarregando(true)
+    setcarregandoPagamento(true)
     const tabela:tabelaCampeonatoType[] = await listarTabelaApi(idTorneio)
     const premiados = await calculoDasPremiacoesDaTabela(tabela)
     pagarPremiacoesApi(premiados)
@@ -92,7 +94,7 @@ export default function CampeonatoFormato_2() {
       })
       setCarregando(false)
       window.location.reload()
-    }, 6000);
+    }, 9000);
   }
   const cancelarCompetição = ()=>{
     setCarregando(true)
@@ -128,6 +130,14 @@ export default function CampeonatoFormato_2() {
           <div 
           >
               { 
+                carregandoPagaento?
+                <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:""}}>
+                  <CarregandoBtnLento 
+                    mensagem='Fazendo calculo das premiações!'
+                    mensagem3='Aguarde o término!'
+                    mensagem2='Se os valores não entrarem, favor atualizar a tela'
+                  />
+                </div>:
                 carregandoTorneio?
                 <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:""}}>
                   <CarregandoBtnLento 
