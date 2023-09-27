@@ -10,9 +10,11 @@ import Carregando from '../../carregando'
 import { calculoDasPremiacoesDaTabela } from './funcoesDoComponentes'
 import { pagarPremiacoesApi } from '../../api/pagamentosApi'
 import ModalConfirmacoes from './modais/modalConfirmacao'
+import CarregandoBtnLento from '../../carregandoBtnLento'
 
 export default function CampeonatoFormato_2() {
   let [carregando, setCarregando] =React.useState<boolean>(false)
+  const [carregandoTorneio, setcarregandoTorneio] = React.useState<boolean>(false)
   let participantes:participanteeducerType[] = useSelector((state:any)=>state.participantesReducer.participantes)
   
   const [campeonato, setCampeonato] = useState<campeonatoType>()
@@ -40,7 +42,7 @@ export default function CampeonatoFormato_2() {
 
   const iniciarCompeticao =()=>{
     if (times.length > 2) {      
-      setCarregando(true)
+      setcarregandoTorneio(true)
       criarCampeonatoApi(times, voltas, idTorneio)
       
       setTimeout(() => {
@@ -49,7 +51,7 @@ export default function CampeonatoFormato_2() {
           payload:{status:!atualizarDados}
         })
         window.location.reload()
-      }, 6000);
+      }, 7000);
     }else{
       alert("Não é possível criar um torneio com menos de 3 participantes!")
     }
@@ -110,6 +112,7 @@ export default function CampeonatoFormato_2() {
 
   return (
     <div className='campeonato2Container'>
+      
         <div >
           {
             (camp.length === 0) && <Button variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
@@ -125,6 +128,15 @@ export default function CampeonatoFormato_2() {
           <div 
           >
               { 
+                carregandoTorneio?
+                <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:""}}>
+                  <CarregandoBtnLento 
+                     mensagem='Montando torneio!'
+                     mensagem3='Aguarde!'
+                     mensagem2='Caso não carregue, favor atualizar a tela'
+                  />
+                </div>
+                :
                 carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
                   <Carregando size='120px'/>
                 </div>
@@ -143,7 +155,9 @@ export default function CampeonatoFormato_2() {
         <div className='btnActionsTipo2'>
           <div>
             {torneioEncerrado && 
-              <ModalConfirmacoes 
+              <ModalConfirmacoes
+                setCarregando={setCarregando}
+                carregando={carregando} 
                 action={cancelarCompetição}
                 titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
                 textoBtn='cancelar'   
@@ -153,7 +167,9 @@ export default function CampeonatoFormato_2() {
           <div style={{display:"flex"}}>
             <div>            
               {(campeonato?.id && torneioEncerrado === false) && 
-                <ModalConfirmacoes 
+                <ModalConfirmacoes
+                  setCarregando={setCarregando}
+                  carregando={carregando} 
                   action={cancelarCompetição}
                   titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
                   textoBtn='cancelar'   
@@ -162,7 +178,9 @@ export default function CampeonatoFormato_2() {
             <div style={{marginLeft:"10px"}}>
               {(campeonato?.id && torneioEncerrado ) && 
                 
-                <ModalConfirmacoes 
+                <ModalConfirmacoes
+                  setCarregando={setCarregando}
+                  carregando={carregando} 
                 action={encerrarTorneio}
                 titulo='Deseja finalizar o torneio?' mensagem='Ao confirmar, voçê fará o pagamento das premiações, tem certeza que deseja finalizar?'
                 textoBtn='finalizar competição'   

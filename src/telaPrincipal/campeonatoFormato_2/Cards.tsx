@@ -13,6 +13,8 @@ import { atualizarRodadaApi, atualizarStatusDaRodadaApi, atualizarTabelaApi, lis
 import { useDispatch, useSelector } from 'react-redux';
 import CarregandoBtn from '../../carregandoBtn';
 import { calculaDadosDaTabela } from './funcoesDoComponentes';
+import ModalIconeCorrecao from './modais/modalIconeConfirmacao';
+import ModalConfirmacoes from './modais/modalConfirmacao';
 
 
 const bull = (
@@ -86,13 +88,21 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       {
         rodada.statusDaRodada === "fechado" ?
       <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
-        <IconButton onClick={corrigirResultado}>
+        {/* <IconButton onClick={corrigirResultado}>
           {
             carregando ?
             <CarregandoBtn/>:
             <UpdateIcon/>
           }
-        </IconButton>
+        </IconButton> */}
+        <ModalIconeCorrecao
+           action={corrigirResultado}
+           titulo='Deseja corrigir resultado?'
+           mensagem='Ao confirmar você estará apagando este resultado!'
+           Icone={UpdateIcon}
+           setCarregando={setCarregando}
+           carregando={carregando}
+        />
       </Typography>
       :
       <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
@@ -158,12 +168,22 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       <CardActions>
         {
           (rodada.statusDaRodada === "aberto") ?
-          <Button variant='contained' sx={{width:"100%"}} onClick={atualizarRodada}>
-            {
-              carregando? <CarregandoBtn/>:
-              <span>Registrar</span>
-            }
-          </Button>:
+          // <Button variant='contained' sx={{width:"100%"}} onClick={atualizarRodada}>
+          //   {
+          //     carregando? <CarregandoBtn/>:
+          //     <span>Registrar</span>
+          //   }
+          // </Button>
+          <ModalConfirmacoes
+              action={atualizarRodada}
+              textoBtn='Registrar'
+              mensagem='Ao confirmar, você estará registrando o resultado da partida'
+              titulo='Registrar resultado!'
+              variant={"contained"}
+              setCarregando={setCarregando}
+              carregando={carregando}
+          />
+          :
           <Button disabled variant='contained' sx={{width:"100%"}}>Registrado</Button>
         }
       </CardActions>
