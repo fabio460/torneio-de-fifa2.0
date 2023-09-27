@@ -115,10 +115,10 @@ export default function CampeonatoFormato_2() {
       
         <div >
           {
-            (camp.length === 0) && <Button variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
+            (camp.length === 0 && !carregandoTorneio) && <Button variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
           }
           {
-            (camp.length === 0) &&
+            (camp.length === 0 && !carregandoTorneio) &&
             <div style={{display:"flex", alignItems:"center"}}>
               <Checkbox onChange={handleRodadas}/>
               <span>Ida e volta</span>

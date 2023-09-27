@@ -61,7 +61,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
         payload:{status:!atualizarDados}
       })
       setCarregando(false)
-    }, 2000);
+    }, 3000);
   }
   
   const corrigirResultado = async()=>{
@@ -70,9 +70,6 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
      setCarregando(true)
      const res = await calculaDadosDaTabela(golCasa ? golCasa : {gol:rodada.golsMandante, time:rodada.mandante}, golFora ? golFora : {gol:rodada.golsVisitante, time:rodada.visitante})
      await atualizarStatusDaRodadaApi(rodada.id, "aberto", res)
-     setTimeout(() => {
-       //atualizarRodadaApi(rodada.id, 0, 0)      
-     }, 1000);
      setTimeout(() => {
       dispatch({
         type:"atualizarDados",  
@@ -88,13 +85,6 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       {
         rodada.statusDaRodada === "fechado" ?
       <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
-        {/* <IconButton onClick={corrigirResultado}>
-          {
-            carregando ?
-            <CarregandoBtn/>:
-            <UpdateIcon/>
-          }
-        </IconButton> */}
         <ModalIconeCorrecao
            action={corrigirResultado}
            titulo='Deseja corrigir resultado?'
@@ -168,12 +158,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       <CardActions>
         {
           (rodada.statusDaRodada === "aberto") ?
-          // <Button variant='contained' sx={{width:"100%"}} onClick={atualizarRodada}>
-          //   {
-          //     carregando? <CarregandoBtn/>:
-          //     <span>Registrar</span>
-          //   }
-          // </Button>
+
           <ModalConfirmacoes
               action={atualizarRodada}
               textoBtn='Registrar'
