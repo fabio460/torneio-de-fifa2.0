@@ -9,6 +9,7 @@ import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTa
 import Carregando from '../../carregando'
 import { calculoDasPremiacoesDaTabela } from './funcoesDoComponentes'
 import { pagarPremiacoesApi } from '../../api/pagamentosApi'
+import ModalConfCancelTorneio from './modais/modalConfCancelamentoDoTorneio'
 
 export default function CampeonatoFormato_2() {
   let [carregando, setCarregando] =React.useState<boolean>(false)
@@ -102,62 +103,74 @@ export default function CampeonatoFormato_2() {
   }
   let torneioEncerrado = campeonato?.rodada?.every(r=>r.statusDaRodada==="fechado")
   let camp:any = campeonato || []
-return (
-  <div style={{textAlign:"center"}}>
-      
-      {
-        (camp.length === 0) && <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
-      }
-      
-      {
-        torneioEncerrado &&
-        <div style={{display:"flex", alignItems:"center"}}>
-          <Checkbox onChange={handleRodadas}/>
-          <span>Ida e volta</span>
-        </div>
+  console.log(campeonato?.id)
+  return (
+    <div style={{textAlign:"center"}}>
+        {
+          (camp.length === 0) && <Button variant='contained' onClick={comecar}>Iniciar torneio</Button>
+        }
+        
+        {
+          (camp.length === 0) &&
+          <div style={{display:"flex", alignItems:"center"}}>
+            <Checkbox onChange={handleRodadas}/>
+            <span>Ida e volta</span>
+          </div>
 
-      }
-      <div 
-      >
-          { 
-            carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
-              <Carregando size='120px'/>
-            </div>
-            :
-            <div className='cardList'>
-              {  
-                campeonato && campeonato?.rodada?.map((rodada, key)=>{
-                  return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
-                })
-              }
+        }
+        <div 
+        >
+            { 
+              carregando ? <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:"center"}}>
+                <Carregando size='120px'/>
+              </div>
+              :
+              <div className='cardList'>
+                {  
+                  campeonato && campeonato?.rodada?.map((rodada, key)=>{
+                    return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
+                  })
+                }
+              </div>
+            }
+        </div>
+      
+        <div>
+          {torneioEncerrado && <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/> }
+        </div>
+        <div>
+          {(campeonato?.id && torneioEncerrado === false) && 
+            <div>
+              <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
             </div>
           }
-      </div>
-     
-      {
-         campeonato &&
+        </div>
+        <div>
+          {
+            (campeonato?.id && torneioEncerrado ) && 
             <div>
-              {
-                torneioEncerrado ?
-                <div>
-                  <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>
-                  <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
-                </div>:
-                <div>
-                  <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
-                </div>
-              }
+               <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
+               <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>s
             </div>
-    
-        
-        // <div>
-
-        // </div>:
-        // <div>
-        //   <Button onClick={cancelarCompetição}>Cancelar torneio</Button>
-        // </div>
-
-      }
-  </div>
-)
+          }
+        </div>
+        {
+              // <div>
+              //   {
+              //     torneioEncerrado ?
+              //     <div>
+              //       <Button onClick={encerrarTorneio}>Finalizar e pagar</Button>
+              //       <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
+              //     </div>:
+              //     <div>
+              //       <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>ss
+              //     </div>
+              //   }
+              // </div>:
+              // <div>
+              //   <ModalConfCancelTorneio cancelarCompetição={cancelarCompetição}/>
+              // </div>
+        }
+    </div>
+  )
 }

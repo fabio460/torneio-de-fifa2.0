@@ -28,6 +28,8 @@ const cardStyle = {
    margin:1,
   "@media (max-width:1050px)":{
     minWidth: "100%",
+    margin:0,
+    marginBottom:4
   }
 }
 type cardType = {
@@ -58,7 +60,6 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       })
       setCarregando(false)
     }, 2000);
-    console.log(golCasa ? golCasa : {gol:rodada.golsMandante, time:rodada.mandante}, golFora ? golFora : {gol:rodada.golsVisitante, time:rodada.visitante})
   }
   
   const corrigirResultado = async()=>{
@@ -67,6 +68,9 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
      setCarregando(true)
      const res = await calculaDadosDaTabela(golCasa ? golCasa : {gol:rodada.golsMandante, time:rodada.mandante}, golFora ? golFora : {gol:rodada.golsVisitante, time:rodada.visitante})
      await atualizarStatusDaRodadaApi(rodada.id, "aberto", res)
+     setTimeout(() => {
+       //atualizarRodadaApi(rodada.id, 0, 0)      
+     }, 1000);
      setTimeout(() => {
       dispatch({
         type:"atualizarDados",  
@@ -82,7 +86,13 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       {
         rodada.statusDaRodada === "fechado" ?
       <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
-        <IconButton onClick={corrigirResultado}><UpdateIcon/></IconButton>
+        <IconButton onClick={corrigirResultado}>
+          {
+            carregando ?
+            <CarregandoBtn/>:
+            <UpdateIcon/>
+          }
+        </IconButton>
       </Typography>
       :
       <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
@@ -114,7 +124,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
                   <div className='placar'>{rodada.golsMandante}</div>:
                   <Paper
                       component="form"
-                      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "80px" }}
+                      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "50px" }}
                       >
                       <InputBase
                           onChange={e=>setGolCasa({gol:parseInt(e.target.value), time:rodada.mandante})}
@@ -131,7 +141,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
                       <div className='placar'>{rodada.golsVisitante}</div>:
                       <Paper
                           component="form"
-                          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "80px" }}
+                          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "50px" }}
                           >
                           <InputBase
                               onChange={e=>setGolFora({gol:parseInt(e.target.value), time:rodada.visitante})}
