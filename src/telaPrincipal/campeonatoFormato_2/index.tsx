@@ -11,6 +11,7 @@ import { calculoDasPremiacoesDaTabela } from './funcoesDoComponentes'
 import { pagarPremiacoesApi } from '../../api/pagamentosApi'
 import ModalConfirmacoes from './modais/modalConfirmacao'
 import CarregandoBtnLento from '../../carregandoBtnLento'
+import { getDataTorneio, getHoraTorneio } from '../../metodosUteis'
 
 export default function CampeonatoFormato_2() {
   let [carregando, setCarregando] =React.useState<boolean>(false)
@@ -41,7 +42,7 @@ export default function CampeonatoFormato_2() {
   let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
   let idTorneio = usuarioReducer.torneio[torneioAtual].id
 
-
+  
   const iniciarCompeticao =()=>{
     if (times.length > 2) {      
       setcarregandoTorneio(true)
@@ -72,6 +73,10 @@ export default function CampeonatoFormato_2() {
     setCarregando(true)
     const camp = await listarCampeonatoApi(idTorneio) || []
     setCampeonato(camp)
+    dispatch({
+      type:"dataDoCampeonato",
+      payload:{data:camp.data ? camp.data : null}
+    })
     setCarregando(false)
     return camp
   }
@@ -112,9 +117,15 @@ export default function CampeonatoFormato_2() {
   }
   let torneioEncerrado = campeonato?.rodada?.every(r=>r.statusDaRodada==="fechado")
   let camp:any = campeonato || []
-
+  
   return (
     <div className='campeonato2Container'>
+        {
+          campeonato?.id &&
+          <div> 
+            Torneio iniciado em {getDataTorneio(campeonato?.data as string)} as {getHoraTorneio(campeonato?.data as string)} horas       
+          </div>
+        }
         {
           (camp.length === 0 && !carregandoTorneio) && 
           <h5>Atenção: atualize a tela se os valores não entrarem a cada interação!</h5>

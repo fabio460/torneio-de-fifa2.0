@@ -19,8 +19,12 @@ import arrayPremiadosReducer from './arrayPremiadosReducer'
 import darkReducer from './darkReducer'
 import selectFormatoDaCompeticaoReducer from './selectFormatoDaCompeticaoReducer'
 import atualizarDadosReducer from './atualizarDadosReducer'
+import dataDoCampeonatoReducer from './dataDoCampeonatoReducer'
+import btnDisableCompraJogReducer from './btnDisableCompraJogReducer'
 export const store = configureStore({
   reducer: {
+    btnDisableCompraJogReducer,
+    dataDoCampeonatoReducer,
     atualizarDadosReducer,
     selectFormatoDaCompeticaoReducer,
     darkReducer,

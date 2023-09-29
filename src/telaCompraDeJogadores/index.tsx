@@ -3,7 +3,7 @@ import "./compraDeJogadores.css"
 import Jogadores from './Jogadores'
 import { useNavigate } from 'react-router-dom'
 import { listarJogadoresApi } from '../api/jogadoresApi'
-import { jogadoresType, participantesType } from '../types'
+import { jogadoresType, participantesType, torneioTypeApi } from '../types'
 import { getParticipantesPorIdApi } from '../api/participantesApi'
 import Header from './header'
 import "./telaCompraDeJogadores.css"
@@ -16,9 +16,10 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ThemeProvider, createTheme } from '@mui/material'
 import { colorDark, dark, darkBackgroundContainer } from '../temaDark'
+import { getCampeonatoPorIdApi } from '../api/campeonatoApi'
 
 interface Props {
   /**
@@ -65,26 +66,41 @@ export default function TelaCompraDeJogadores() {
     useEffect(()=>{
        getElenco()
     },[])
-    const boxStyle={ 
-      // mt:4,
-      // padding:focus?"0px":"50px 0px",
-      // "@media (max-width:900px)":{
-      //   mt:focus ? 1 :14,
-      // }
-    }
+
+    const dispatch = useDispatch()
     const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
+    const [campeonato, setCampeonato] = React.useState<torneioTypeApi>()
+    async function getCampeonato(id:string) {      
+      const c = await getCampeonatoPorIdApi(id)
+      setCampeonato(c)
+    }
+    
+    getCampeonato(elenco?.idTorneio || "")
+
+    if (!campeonato?.idTorneio) {        
+      dispatch({
+        type:"btnDisableCompraJogReducer",
+        payload:{disable:false}
+      })
+    }else{
+      dispatch({
+        type:"btnDisableCompraJogReducer",
+        payload:{disable:true}
+      })
+    }
+    
   return (
     <div className='container' style={{background:darkMode ? darkBackgroundContainer:''}}>
             <React.Fragment>
               <CssBaseline />
               <HideOnScroll >
                 <AppBar>
-                  <Header elenco={elenco}/>
+                  <Header elenco={elenco} campeonato={campeonato}/>
                 </AppBar>
               </HideOnScroll>
               <Toolbar />
-                <Box sx={boxStyle}>
+                <Box>
                   <Jogadores/>
                 </Box>
             </React.Fragment>

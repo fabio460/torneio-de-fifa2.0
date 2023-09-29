@@ -10,6 +10,7 @@ import { comprarJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
 import ModalCompraFinalizada from './modalCompraFinalizada';
 import ModalCompraNegada from './modalCompraNegada';
+import { useSelector } from 'react-redux';
 export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
   const [open, setOpen] = React.useState(false);
   const [openFinalized, setOpenFinalized] = React.useState(false);
@@ -33,11 +34,11 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
       }
       setCarregando(false)
     }
-
-
+  
+  const disable = useSelector((state:any)=>state.btnDisableCompraJogReducer.disable) 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} sx={{marginBottom:0.5}}>
+      <Button disabled={disable} variant="outlined"  onClick={handleClickOpen} sx={{marginBottom:0.5}}>
         Comprar
       </Button>
       <Dialog

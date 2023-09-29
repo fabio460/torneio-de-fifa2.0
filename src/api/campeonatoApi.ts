@@ -32,6 +32,15 @@ export const deletarCampeonatoApi = (id:string | undefined)=>{
   }).then(r=>r.json())
 }
 
+export const getCampeonatoPorIdApi = async(id: string)=>{
+  return fetch(local+"torneioTipoDois/getCampeonatoPorParticipant/",{
+    headers:{
+      "Content-Type":"application/json"
+    },
+    method:"post",
+    body:JSON.stringify({id})
+  }).then(r=>r.json())
+}
 export const atualizarRodadaApi = (id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, statusDaRodada?:string)=>{
   return fetch(local+"torneioTipoDois/atualizarRodada/",{
     headers:{

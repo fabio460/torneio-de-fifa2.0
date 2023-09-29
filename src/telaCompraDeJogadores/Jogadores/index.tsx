@@ -11,6 +11,7 @@ import { getTorneioPorIdApi } from '../../api/torneioApi'
 import { listaJogadoresPorTorneioApi } from '../../api/jogadoresApi'
 import { createTheme } from '@mui/material'
 import { colorDark, dark, darkBackgroundContainer } from '../../temaDark'
+
 export default function Jogadores() {
   const [pagina, setPagina] = useState(1)
   const [itensPorPagina] = useState(16)

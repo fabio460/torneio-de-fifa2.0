@@ -100,7 +100,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       </Typography>
       }
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" component="div" sx={{textAlign:"center"}}>
           Partida {partida}
         </Typography>
         <Typography sx={{ m: 1, display:"flex", justifyContent:"space-between", alignContent:"center" }} color="text.secondary">

@@ -15,6 +15,7 @@ import CarregandoBtn from '../../carregandoBtn';
 import { calculaFolha, calculaFolhaSemFormato, formatoMonetario, numberIsValid, semVirgula } from '../../metodosUteis';
 import { Checkbox, TextField } from '@mui/material';
 import ModalTransferenciaConfirmada from './modalTransferenciaConfirmada';
+import { useSelector } from 'react-redux';
 
 export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}:{
     torneio:torneioType|undefined,
@@ -96,10 +97,12 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
     const valorElenco = calculaFolhaSemFormato(elenco?.jogadores as jogadoresType[])
     const valorDosSelecionados = calculaFolhaSemFormato(listaDeSelecionados?.map(e=>e.jogador) as jogadoresType[]) 
     return valorElenco - valorDosSelecionados
-}
+  }
+  const disable = useSelector((state:any)=>state.btnDisableCompraJogReducer.disable) 
+
   return (
     <div>
-      <Button style={{marginLeft:'5px'}} onClick={handleClickOpen}>
+      <Button disabled={disable} style={{marginLeft:'5px'}} onClick={handleClickOpen}>
         Transferir
       </Button>
       <Dialog

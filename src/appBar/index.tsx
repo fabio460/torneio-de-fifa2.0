@@ -12,6 +12,7 @@ import icone from '../icone_fifa.png';
 import { useNavigate } from 'react-router-dom';
 import { usuarioLogado } from '../metodosUteis';
 import SelectDarkMode from './selectDarkMode';
+import { useSelector } from 'react-redux';
 
 const deslogar = ()=>{
   localStorage.removeItem('jwt')
@@ -27,6 +28,8 @@ const pages = [
 
 function ResponsiveAppBar() {
   const h = useNavigate()
+  const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
+
   const settings = [<div>{usuarioLogado.nome}</div>,<div onClick={()=>h("/valores")}>Regras gerais</div>, <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -100,11 +103,16 @@ function ResponsiveAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page, key) => (
-                  <MenuItem  onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+                {
+                  tipoDeTorneio === "1" ?
+                  pages.map((page, key) => (
+                    <MenuItem  onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  ))
+                  :
+                  <div></div>
+                }
               </Menu>
             </Box>
             <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
@@ -129,15 +137,20 @@ function ResponsiveAppBar() {
               
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <Button
-                  
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
-              ))}
+              {
+                tipoDeTorneio === "1" ?
+                pages.map((page) => (
+                  <Button
+                    
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {page}
+                  </Button>
+                )) 
+                :
+                <div></div>
+              }
             </Box>
             <SelectDarkMode/>
             <Box sx={{ flexGrow: 0 }}>

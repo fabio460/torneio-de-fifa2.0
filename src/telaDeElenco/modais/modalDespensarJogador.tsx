@@ -10,6 +10,7 @@ import { removerJogadoresApi } from '../../api/jogadoresApi';
 import CarregandoBtn from '../../carregandoBtn';
 import { calculaFolha, calculaFolhaSemFormato, formatoMonetario } from '../../metodosUteis';
 import ModalDispensaConfirmada from './modalDispensaConfirmada';
+import { useSelector } from 'react-redux';
 
 export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
     listaDeSelecionados:checkedType[] | undefined,
@@ -59,10 +60,11 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
       return valorElenco - valorDosSelecionados
   }
  
-  
+  const disable = useSelector((state:any)=>state.btnDisableCompraJogReducer.disable) 
+
   return (
     <div>
-      <Button style={{background:"red"}} onClick={handleClickOpen}>
+      <Button disabled={disable} style={{background:"red"}} onClick={handleClickOpen}>
         Despensar
       </Button>
 

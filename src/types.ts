@@ -265,3 +265,9 @@ export type tabelaCampeonatoType ={
   idDoParticipante:string,
   idDoTorneio:string
 }
+export type torneioTypeApi = {
+  id: string,
+  status: string,
+  data: string,
+  idTorneio: string
+}

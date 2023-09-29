@@ -341,3 +341,13 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
 export function valorInteiro(v:any) {
   return parseInt(v?.split('.')[0])
 }
+
+export const getDataTorneio = (data:string)=>{
+  const dia = new Date(data)
+  return dia.toLocaleDateString()
+}
+
+export const getHoraTorneio = (data:string)=>{
+  const hora =new Date(data)
+  return hora.toLocaleTimeString().split(":")[0] + ":"+ hora.toLocaleTimeString().split(":")[1] 
+}
