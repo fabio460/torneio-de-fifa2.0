@@ -164,7 +164,12 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                     </TableCell>
                     <TableCell align='center'>{jog.overall}</TableCell>
                     <TableCell align='center'>{formatoMonetario(parseFloat(jog?.valorDoJogador || ''))}</TableCell>
-                    <TableCell >{traduzirPosicao(jog.posicao.split(',')[0])}</TableCell>
+                    <TableCell >
+                        <span style={{marginLeft:"5px"}}>{traduzirPosicao(jog.posicao.split(',')[0])}</span>
+                        <span style={{marginLeft:"5px"}}>{traduzirPosicao(jog.posicao.split(',')[1])}</span>
+                        <span style={{marginLeft:"5px"}}>{traduzirPosicao(jog.posicao.split(',')[2])}</span>
+                        <span>{traduzirPosicao(jog.posicao.split(',')[3])}</span>
+                    </TableCell>
                     <TableCell>
                         <div style={{display:"flex", alignItems:"center", minWidth:"170px"}}>
                           <Avatar src={jog.escudoDoTime} sx={{width:"20px",height:"20px", marginRight:1}}/>{jog.time}

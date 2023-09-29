@@ -106,7 +106,7 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
               }
             </ul>
             <div>
-              Total a receber <span style={{color:"#4caf50"}}>{formatoMonetario(getTotal())}</span> 
+              Total a receber <span style={{color:"#4caf50"}}>{formatoMonetario(getTotal())}</span> , seu novo saldo será de <span style={{color:"#ec407a"}}>{formatoMonetario(getTotal() + (elenco?.saldo as number))}</span> 
             </div>
             <div>
               sua folha ira reduzir de <span style={{color:""}}> {calculaFolha(elenco?.jogadores as jogadoresType[])}</span> para <span style={{color:"#1976d2"}}> {formatoMonetario(folhaApois())}</span>
