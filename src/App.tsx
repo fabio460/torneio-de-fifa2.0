@@ -7,13 +7,13 @@ import Cadastro from './appBar/cadastro'
 import TelaDeElenco from './telaDeElenco'
 import TelaCompraDeJogadores from './telaCompraDeJogadores'
 import Valores from './valores'
-import { colorDark, dark, darkBackgroundContainer } from './temaDark'
+import { colorDark, darkBackgroundContainer } from './temaDark'
 import { useSelector } from 'react-redux'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export default function App() {
   const l ={"nome":"Carlos Cesar Dos Santos","imagemDoJogador":"https://cdn.sofifa.net/players/163/015/07_120.png","nacionalidade":"Brasileiro","imagemDaNacionalidade":"https://cdn.sofifa.net/flags/br.png","escudoDoTime":"https://cdn.sofifa.net/meta/team/884/60.png","posicao":"ST, RM","overall":"62","valorDoJogador":"1","time":"SPORTING BRAGA","liga":"","linkSoFifa":"https://sofifa.com/player/229153/levi-garcia/230040/"}
-  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+  const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
  
   const darkTheme = createTheme({
     palette: {
