@@ -17,9 +17,10 @@ type propType = {
     textoBtnCancelar?:string,
     variant?:any,
     carregando?:boolean,
-    setCarregando?:any
+    setCarregando?:any,
+    cor?:any
 }
-export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando}:propType) {
+export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, cor="",textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando}:propType) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,7 +37,7 @@ export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, te
 
   return (
     <div style={{width:"100%"}}>
-      <Button variant={variant} sx={{width:"100%"}} onClick={handleClickOpen}>
+      <Button variant={variant} color={cor} sx={{width:"100%"}} onClick={handleClickOpen}>
          {
            carregando?
            <CarregandoBtn/>:

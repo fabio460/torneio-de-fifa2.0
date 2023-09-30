@@ -29,7 +29,7 @@ export default function SelectTorneio() {
     type:"torneio",
     payload:{torneio:age}
   })
-  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+  const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
 
   return (
     <div style={{background:dark ? 'inherit':"", color: darkMode ? colorDark:"" }}>

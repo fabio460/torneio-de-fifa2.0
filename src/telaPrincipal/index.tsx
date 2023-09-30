@@ -59,7 +59,7 @@ export default function TelaPrincipal() {
   useEffect(()=>{    
     getEstatistica()
   },[torneio,id])
-  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+  const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
   const mensagemReducer = useSelector((state:any)=>state.checkedDeletarPart.status)
   const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
 

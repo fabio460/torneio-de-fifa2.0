@@ -15,7 +15,7 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
     listaDeParticipantes:participantesType[] | undefined,
     handleChange:any
 }) {
-  const darkMode = useSelector((state:any)=>state.darkReducer.dark)
+  const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
   
   return (
     <List sx={{ width: '100%', background: darkMode ? 'inherit': '', color: darkMode ? colorDark:""  }}>
