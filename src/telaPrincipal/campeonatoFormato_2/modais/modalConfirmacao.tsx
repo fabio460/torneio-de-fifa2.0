@@ -15,11 +15,17 @@ type propType = {
     textoBtn:string,
     textoBtnConfirmar?:string,
     textoBtnCancelar?:string,
-    variant?:any,
+    variant?:'contained' | 'outlined' | 'text',
+    variantConfirmar?:'contained' | 'outlined' | 'text',
+    varianteCancelar?:'contained' | 'outlined' | 'text',
     carregando?:boolean,
-    setCarregando?:any
+    setCarregando?:any,
+    corBtnPrincipal?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
+    corBtnConfirmar?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
+    corBtnCancelar?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning' ,
+
 }
-export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando}:propType) {
+export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, corBtnPrincipal, corBtnConfirmar, corBtnCancelar, variantConfirmar, varianteCancelar,textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando}:propType) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,7 +42,7 @@ export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, te
 
   return (
     <div style={{width:"100%"}}>
-      <Button variant={variant} sx={{width:"100%"}} onClick={handleClickOpen}>
+      <Button variant={variant} color={corBtnPrincipal} sx={{width:"100%"}} onClick={handleClickOpen}>
          {
            carregando?
            <CarregandoBtn/>:
@@ -60,12 +66,12 @@ export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, te
         <DialogActions>
           {
             carregando ?
-            <Button color='success' onClick={handleAction}><CarregandoBtn/></Button>
+            <Button variant={variantConfirmar} color={corBtnConfirmar} onClick={handleAction}><CarregandoBtn/></Button>
             :
-            <Button color='success' onClick={handleAction}>{textoBtnConfirmar}</Button>
+            <Button color={corBtnConfirmar} variant={variantConfirmar} onClick={handleAction}>{textoBtnConfirmar}</Button>
 
           }
-          <Button onClick={handleClose} color='error' autoFocus>
+          <Button onClick={handleClose} variant={varianteCancelar} color={corBtnCancelar} autoFocus>
             {textoBtnCancelar}
           </Button>
         </DialogActions>

@@ -12,6 +12,7 @@ import { pagarPremiacoesApi } from '../../api/pagamentosApi'
 import ModalConfirmacoes from './modais/modalConfirmacao'
 import CarregandoBtnLento from '../../carregandoBtnLento'
 import { getDataTorneio, getHoraTorneio } from '../../metodosUteis'
+import ModalConfirmaPagamentoFolha from '../modais/modalConfirPagFolha'
 
 export default function CampeonatoFormato_2() {
   let [carregando, setCarregando] =React.useState<boolean>(false)
@@ -131,8 +132,13 @@ export default function CampeonatoFormato_2() {
           <h5>Atenção: atualize a tela se os valores não entrarem a cada interação!</h5>
         }
         <div >
+          
           {
-            (camp.length === 0 && !carregandoTorneio) && <Button variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
+            (camp.length === 0 && !carregandoTorneio) && 
+            <div style={{display:"flex"}}>
+              <ModalConfirmaPagamentoFolha icone={false}/>
+              <Button sx={{marginLeft:5}} variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
+            </div>
           }
           {
             (camp.length === 0 && !carregandoTorneio) &&
@@ -186,6 +192,12 @@ export default function CampeonatoFormato_2() {
                 action={cancelarCompetição}
                 titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
                 textoBtn='cancelar'   
+                corBtnPrincipal='warning'
+                variant='outlined'  
+                corBtnConfirmar='warning'
+                variantConfirmar='contained'
+                varianteCancelar='outlined'
+                corBtnCancelar='error'
               />
             }
           </div>
@@ -197,8 +209,15 @@ export default function CampeonatoFormato_2() {
                   carregando={carregando} 
                   action={cancelarCompetição}
                   titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
-                  textoBtn='cancelar'   
-                />              }
+                  textoBtn='cancelar'
+                  corBtnPrincipal='warning'
+                  variant='outlined'  
+                  corBtnConfirmar='warning'
+                  variantConfirmar='contained'
+                  varianteCancelar='outlined'
+                  corBtnCancelar='error'
+                />              
+              }
             </div>
             <div style={{marginLeft:"10px"}}>
               {(campeonato?.id && torneioEncerrado ) && 
@@ -206,10 +225,16 @@ export default function CampeonatoFormato_2() {
                 <ModalConfirmacoes
                   setCarregando={setCarregando}
                   carregando={carregando} 
-                action={encerrarTorneio}
-                titulo='Deseja finalizar o torneio?' mensagem='Ao confirmar, voçê fará o pagamento das premiações, tem certeza que deseja finalizar?'
-                textoBtn='finalizar competição'   
-              />
+                  action={encerrarTorneio}
+                  titulo='Deseja finalizar o torneio?' mensagem='Ao confirmar, voçê fará o pagamento das premiações, tem certeza que deseja finalizar?'
+                  textoBtn='finalizar competição'
+                  variant='outlined'
+                  corBtnConfirmar='error'
+                  corBtnPrincipal='error'   
+                  corBtnCancelar='success'
+                  variantConfirmar='contained'
+                  varianteCancelar='outlined'
+                />
               }
             </div>
           </div>
