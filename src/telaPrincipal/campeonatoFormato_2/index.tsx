@@ -9,18 +9,16 @@ import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTa
 import Carregando from '../../carregando'
 import { calculoDasPremiacoesDaTabela } from './funcoesDoComponentes'
 import { pagarPremiacoesApi } from '../../api/pagamentosApi'
-import ModalConfirmacoes from './modais/modalConfirmacao'
+import ModalConfirmacoes from '../../modalConfirmacao'
 import CarregandoBtnLento from '../../carregandoBtnLento'
 import { getDataTorneio, getHoraTorneio } from '../../metodosUteis'
 import ModalConfirmaPagamentoFolha from '../modais/modalConfirPagFolha'
 
 export default function CampeonatoFormato_2() {
   let [carregando, setCarregando] =React.useState<boolean>(false)
-  const [carregandoTorneio, setcarregandoTorneio] = React.useState<boolean>(false)
+  const carregandoTorneio = useSelector((state:any)=>state.carregandoTorneioReducer)
   const [carregandoPagaento, setcarregandoPagamento] = React.useState<boolean>(false)
-
   let participantes:participanteeducerType[] = useSelector((state:any)=>state.participantesReducer.participantes)
-  
   const [campeonato, setCampeonato] = useState<campeonatoType>()
   const atualizarDados = useSelector((state:any)=>state.atualizarDadosReducer.status)
   const dispatch = useDispatch()
@@ -46,7 +44,10 @@ export default function CampeonatoFormato_2() {
   
   const iniciarCompeticao =()=>{
     if (times.length > 2) {      
-      setcarregandoTorneio(true)
+      dispatch({
+        type:"carregandoTorneio",
+        payload:{carregando:true}
+      })
       criarCampeonatoApi(times, voltas, idTorneio)
       
       setTimeout(() => {
@@ -79,7 +80,6 @@ export default function CampeonatoFormato_2() {
       payload:{data:camp.data ? camp.data : null}
     })
     setCarregando(false)
-    return camp
   }
     
   React.useEffect(()=>{
@@ -124,34 +124,18 @@ export default function CampeonatoFormato_2() {
         {
           campeonato?.id &&
           <div> 
-            Torneio iniciado em {getDataTorneio(campeonato?.data as string)} as {getHoraTorneio(campeonato?.data as string)} horas       
+            Torneio iniciado em {getDataTorneio(campeonato?.data as string)} as {getHoraTorneio(campeonato?.data as string)}       
           </div>
         }
         {
-          (camp.length === 0 && !carregandoTorneio) && 
+          (camp.length === 0 && !carregandoTorneio.carregando) && 
           <h5>Atenção: atualize a tela se os valores não entrarem a cada interação!</h5>
         }
-        <div >
-          
-          {
-            (camp.length === 0 && !carregandoTorneio) && 
-            <div style={{display:"flex"}}>
-              <ModalConfirmaPagamentoFolha icone={false}/>
-              <Button sx={{marginLeft:5}} variant='contained' onClick={iniciarCompeticao}>Iniciar torneio</Button>
-            </div>
-          }
-          {
-            (camp.length === 0 && !carregandoTorneio) &&
-            <div style={{display:"flex", alignItems:"center"}}>
-              <Checkbox onChange={handleRodadas}/>
-              <span>Ida e volta</span>
-            </div>
-
-          }
+        <div>       
           <div 
           >
               { 
-                carregandoPagaento?
+                ( carregandoTorneio.nome === "pagarPremio") ?
                 <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:""}}>
                   <CarregandoBtnLento 
                     mensagem='Fazendo calculo das premiações!'
@@ -159,7 +143,7 @@ export default function CampeonatoFormato_2() {
                     mensagem2='Se os valores não entrarem, favor atualizar a tela'
                   />
                 </div>:
-                carregandoTorneio?
+                (carregandoTorneio.nome === "criarTorneio")?
                 <div style={{display:'flex', width:"100%", justifyContent:"center", alignItems:""}}>
                   <CarregandoBtnLento 
                      mensagem='Montando torneio!'
@@ -180,63 +164,6 @@ export default function CampeonatoFormato_2() {
                   }
                 </div>
               }
-          </div>
-
-        </div>
-        <div className='btnActionsTipo2'>
-          <div>
-            {torneioEncerrado && 
-              <ModalConfirmacoes
-                setCarregando={setCarregando}
-                carregando={carregando} 
-                action={cancelarCompetição}
-                titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
-                textoBtn='cancelar'   
-                corBtnPrincipal='warning'
-                variant='outlined'  
-                corBtnConfirmar='warning'
-                variantConfirmar='contained'
-                varianteCancelar='outlined'
-                corBtnCancelar='error'
-              />
-            }
-          </div>
-          <div style={{display:"flex"}}>
-            <div>            
-              {(campeonato?.id && torneioEncerrado === false) && 
-                <ModalConfirmacoes
-                  setCarregando={setCarregando}
-                  carregando={carregando} 
-                  action={cancelarCompetição}
-                  titulo='Cuidado!' mensagem='Ao confirmar voçê estará apagando todos os resultados das partidas, esta ação não poderá ser desfeita!'
-                  textoBtn='cancelar'
-                  corBtnPrincipal='warning'
-                  variant='outlined'  
-                  corBtnConfirmar='warning'
-                  variantConfirmar='contained'
-                  varianteCancelar='outlined'
-                  corBtnCancelar='error'
-                />              
-              }
-            </div>
-            <div style={{marginLeft:"10px"}}>
-              {(campeonato?.id && torneioEncerrado ) && 
-                
-                <ModalConfirmacoes
-                  setCarregando={setCarregando}
-                  carregando={carregando} 
-                  action={encerrarTorneio}
-                  titulo='Deseja finalizar o torneio?' mensagem='Ao confirmar, voçê fará o pagamento das premiações, tem certeza que deseja finalizar?'
-                  textoBtn='finalizar competição'
-                  variant='outlined'
-                  corBtnConfirmar='error'
-                  corBtnPrincipal='error'   
-                  corBtnCancelar='success'
-                  variantConfirmar='contained'
-                  varianteCancelar='outlined'
-                />
-              }
-            </div>
           </div>
         </div>
     </div>

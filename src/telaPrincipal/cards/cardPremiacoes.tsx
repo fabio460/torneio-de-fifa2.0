@@ -10,18 +10,18 @@ import PremiacoesBody from './cardPremiacoesComponents/premiacoesBody';
 import { darkBackgroundBox, colorDark, dark } from '../../temaDark';
 import SwitchSelecioarTipoDeTorneio from './cardPremiacoesComponents/switchtSelecionarTipoDeTorneio';
 import CampeonatoFormato_2 from '../campeonatoFormato_2';
+import BtnActions from '../campeonatoFormato_2/btnActions';
 
 export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | undefined}) {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
   const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
   
   return (
-    <Card sx={{background:darkMode ? darkBackgroundBox:"", color: darkMode ? colorDark:"", minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
+    <Card sx={{ minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between", border:"solid 1px black" }} >
       <div style={{display:"flex", justifyContent:"flex-end", marginTop:"10px"}}>
           <SwitchSelecioarTipoDeTorneio/>
       </div>
       <div>
-
         <CardContent  className='cardPremiacoesContainer'>
           {
             tipoDeTorneio && tipoDeTorneio === "1"?
@@ -30,18 +30,19 @@ export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | un
             <CampeonatoFormato_2/>
           }
         </CardContent>
-        <CardActions sx={{}}>
-          {
-            tipoDeTorneio && tipoDeTorneio === "2"?
-            <div></div>:
-          <div className='btnPagamentos'>
-              <ModalConfirmarPagamentoPremiacao
-                usuario={usuario}
-                icone={false}
-              />
-              <ModalConfirmaPagamentoFolha icone={false}/>
+        <CardActions  sx={{display:"flex"}}>
+          <div className='BtnsCardCampeonato2'>
+            {
+              tipoDeTorneio && tipoDeTorneio === "2"?
+              <div>
+                <BtnActions  usuario={usuario}/>
+              </div>:
+            <div className='btnPagamentos'>
+                <ModalConfirmarPagamentoPremiacao usuario={usuario} icone={false}/>
+                <ModalConfirmaPagamentoFolha icone={false}/>
+            </div>
+            }
           </div>
-          }
         </CardActions>
       </div>
     </Card>

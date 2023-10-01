@@ -47,10 +47,11 @@ export default function CardParticipantes({participantes, torneio}:
     getSelecionados(checked)
   },[checked])
   
-
-  dispatch({
-    type:'participantes',
-    payload:{participantes:listaDeParticipantes}
+  useEffect(()=>{
+    dispatch({
+      type:'participantes',
+      payload:{participantes:listaDeParticipantes}
+    })
   })
 
   return (

@@ -57,11 +57,11 @@ export default function CarregandoBtnLento({mensagem, mensagem2, mensagem3}:prop
 
     </div>
     {
-        progress < 50 ?
+        progress < 40 ?
 
         <h4>{mensagem}</h4>
         :
-        progress < 70 ?
+        progress < 80 ?
         <h4>{mensagem2}</h4>
         :
         <h4>{mensagem3}</h4>

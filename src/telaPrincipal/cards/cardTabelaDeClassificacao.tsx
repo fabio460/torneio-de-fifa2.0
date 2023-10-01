@@ -22,7 +22,7 @@ export default function CardTabelaDeClassificacao() {
         const list = await listarCampeonatoApi()
         const tabela = await listarTabelaApi(idTorneio) || []
         setrows(tabela)
-        const ultimoCampeonato = list[list.length -1]
+        const ultimoCampeonato =list && list[list?.length -1]
         setCampeonato(ultimoCampeonato)
     }
     const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)

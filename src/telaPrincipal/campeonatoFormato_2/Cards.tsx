@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CarregandoBtn from '../../carregandoBtn';
 import { calculaDadosDaTabela } from './funcoesDoComponentes';
 import ModalIconeCorrecao from './modais/modalIconeConfirmacao';
-import ModalConfirmacoes from './modais/modalConfirmacao';
+import ModalConfirmacoes from '../../modalConfirmacao';
 
 
 const bull = (
@@ -84,7 +84,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
     <Card sx={cardStyle} className='cardContainer' >
       {
         rodada.statusDaRodada === "fechado" ?
-      <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
+      <div style={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
         <ModalIconeCorrecao
            action={corrigirResultado}
            titulo='Deseja corrigir resultado?'
@@ -93,17 +93,17 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
            setCarregando={setCarregando}
            carregando={carregando}
         />
-      </Typography>
+      </div>
       :
-      <Typography sx={{display:"flex", justifyContent:"flex-end", width:"100%"}}>
+      <div style={{display:"flex", justifyContent:"flex-end", width:"100%"}} >
         <IconButton disabled><UpdateIcon/></IconButton>
-      </Typography>
+      </div>
       }
       <CardContent>
         <Typography variant="h5" component="div" sx={{textAlign:"center"}}>
           Partida {partida}
         </Typography>
-        <Typography sx={{ m: 1, display:"flex", justifyContent:"space-between", alignContent:"center" }} color="text.secondary">
+        <Typography component='div' sx={{ m: 1, display:"flex", justifyContent:"space-between", alignContent:"center" }} color="text.secondary">
           <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <Avatar src={rodada.mandante[0]?.emblemaDoTime}/>
             <Typography>{rodada.mandante[0]?.nome}</Typography>
@@ -113,11 +113,11 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
           </div>
           <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <Avatar src={rodada.visitante[0]?.emblemaDoTime}/>
-            <Typography>{rodada.visitante[0]?.nome}</Typography>
+            <Typography component='div'>{rodada.visitante[0]?.nome}</Typography>
           </div>
         </Typography>
-        <Typography variant="body2">
-            <Typography style={{textAlign:"center"}}>Resultado</Typography>
+        <Typography variant="body2" component='div'>
+            <Typography component='div' style={{textAlign:"center"}}>Resultado</Typography>
             <div style={{display:"flex", justifyContent:"space-between"}}>
                 {
                   rodada.statusDaRodada === 'fechado' ?
@@ -165,6 +165,10 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
               mensagem='Ao confirmar, você estará registrando o resultado da partida'
               titulo='Registrar resultado!'
               variant={"contained"}
+              corBtnConfirmar='secondary'
+              corBtnCancelar='error'
+              variantConfirmar='contained'
+              varianteCancelar='outlined'
               setCarregando={setCarregando}
               carregando={carregando}
           />

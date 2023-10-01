@@ -21,8 +21,10 @@ import selectFormatoDaCompeticaoReducer from './selectFormatoDaCompeticaoReducer
 import atualizarDadosReducer from './atualizarDadosReducer'
 import dataDoCampeonatoReducer from './dataDoCampeonatoReducer'
 import btnDisableCompraJogReducer from './btnDisableCompraJogReducer'
+import carregandoTorneioReducer from './carregandoTorneioReducer'
 export const store = configureStore({
   reducer: {
+    carregandoTorneioReducer,
     btnDisableCompraJogReducer,
     dataDoCampeonatoReducer,
     atualizarDadosReducer,

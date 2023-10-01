@@ -25,10 +25,13 @@ export default function SelectTorneio() {
     }
   },[])
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
-  dispatch({
-    type:"torneio",
-    payload:{torneio:age}
+  React.useEffect(() => {
+    dispatch({
+      type:"torneio",
+      payload:{torneio:age}
+    })
   })
+  
   const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
 
   return (

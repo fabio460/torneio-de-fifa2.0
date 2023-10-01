@@ -9,7 +9,11 @@ import { useSelector } from 'react-redux';
 import { pagarFolhasApi } from '../../api/pagamentosApi';
 import CarregandoBtn from '../../carregandoBtn';
 
-export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
+type propType ={
+  icone?:boolean,
+  tipo?:'1' | '2'
+}
+export default function ModalConfirmaPagamentoFolha({icone, tipo}:propType) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -48,11 +52,20 @@ export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
       }
     }
   }
-  const btnPagamentosStyle ={
-     width:"100%", ml:"20px",
-    "@media (max-width:800px)":{
-        width:"100%", ml:"0px",
-        marginTop:"20px"
+  let btnPagamentosStyle ={}
+  if (tipo !== '2') {
+    btnPagamentosStyle = {
+      width:"100%",
+      ml:"20px",
+      "@media (max-width:800px)":{
+          width:"100%", ml:"0px",
+          marginTop:"20px"
+      }
+    }
+  }else{
+    btnPagamentosStyle ={
+      ml:"20px",
+      with:"100%"
     }
   }
   return (
@@ -62,9 +75,9 @@ export default function ModalConfirmaPagamentoFolha({icone}:{icone:boolean}) {
         PF
       </div>: 
        <Button color='secondary' 
-            variant='contained' 
+           variant='contained' 
            onClick={handleClickOpen}
-           sx={btnPagamentosStyle}
+           sx={ btnPagamentosStyle}
            disabled={participantes.length === 0 ? true : false}
         >Pagar folha</Button> 
       }   

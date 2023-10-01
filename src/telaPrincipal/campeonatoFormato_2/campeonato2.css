@@ -12,8 +12,22 @@
 .placar{
     margin: 8px 27px;
 }
-.campeonato2Container{
+.campeonato2Container{  
 
+}
+.BtnsCardCampeonato2{
+    display: flex;
+    width: 100%;
+}
+.BtnIniciarTorneio{
+    margin-right: 25px;
+    width: 100%;
+}
+.BtnFinalizarTorneio{
+    width: 100%;
+}
+.BtnPagarFolha{
+    width: 100%;
 }
 @media (max-width:1300px) {
     .cardList{
@@ -24,5 +38,18 @@
 @media (max-width:1050px) {
     .cardList{
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:850px) {
+    .BtnsCardCampeonato2{
+        flex-direction: column;
+    }
+    .BtnIniciarTorneio{
+        margin-right: 0;
+        
+    }
+    .BtnFinalizarTorneio{
+        margin-top: 20px;
     }
 }

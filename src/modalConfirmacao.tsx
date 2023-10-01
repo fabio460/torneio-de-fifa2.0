@@ -5,8 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { ExtendButtonBase, IconButtonTypeMap } from '@mui/material';
-import CarregandoBtn from '../../../carregandoBtn';
+import { Checkbox, ExtendButtonBase, IconButtonTypeMap } from '@mui/material';
+import CarregandoBtn from './carregandoBtn';
 
 type propType = {
     action:any,
@@ -20,13 +20,18 @@ type propType = {
     varianteCancelar?:'contained' | 'outlined' | 'text',
     carregando?:boolean,
     setCarregando?:any,
+    checked?:any,
+    setCheked?:any,
+    checkBox?:boolean,
+    textCheckBox?:string,
     corBtnPrincipal?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
     corBtnConfirmar?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
     corBtnCancelar?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning' ,
 
 }
-export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, corBtnPrincipal, corBtnConfirmar, corBtnCancelar, variantConfirmar, varianteCancelar,textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando}:propType) {
+export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, corBtnPrincipal, corBtnConfirmar, corBtnCancelar, variantConfirmar, varianteCancelar,textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando, checkBox=false, checked, textCheckBox, setCheked}:propType) {
   const [open, setOpen] = React.useState(false);
+  const [state, setState] = React.useState(false)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -35,11 +40,22 @@ export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, co
     setOpen(false);
   };
   const handleAction = ()=>{
-    setCarregando(true)
+    if (setCarregando) {   
+      setCarregando(true)
+    }
     action()
     handleClose()
   }
-
+  const handleChecked = ()=>{
+    setState(!state)
+  }
+  React.useEffect(()=>{
+     if (state) {
+      setCheked && setCheked(2)
+     }else{
+      setCheked && setCheked(1)
+     }
+  },[state])
   return (
     <div style={{width:"100%"}}>
       <Button variant={variant} color={corBtnPrincipal} sx={{width:"100%"}} onClick={handleClickOpen}>
@@ -61,6 +77,15 @@ export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, co
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {mensagem}
+            <div>
+              {
+                checkBox &&
+                <Checkbox 
+                   onChange={handleChecked}
+                />
+              }
+              {textCheckBox}
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -16,11 +16,14 @@ export const criarCampeonatoApi = (times:any, voltas:any, idTorneio:string)=>{
 }
 
 export const listarCampeonatoApi = (idTorneio?:string)=>{
-    return fetch(local+"torneioTipoDois/listarCampeonato/"+idTorneio,{
-      headers:{
-        "Content-Type":"application/json"
-      },
-    }).then(r=>r.json())
+    if (idTorneio) {
+      
+      return fetch(local+"torneioTipoDois/listarCampeonato/"+idTorneio,{
+        headers:{
+          "Content-Type":"application/json"
+        },
+      }).then(r=>r.json())
+    }
 }
 
 export const deletarCampeonatoApi = (id:string | undefined)=>{

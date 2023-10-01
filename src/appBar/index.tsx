@@ -106,7 +106,7 @@ function ResponsiveAppBar() {
                 {
                   tipoDeTorneio === "1" ?
                   pages.map((page, key) => (
-                    <MenuItem  onClick={handleCloseNavMenu}>
+                    <MenuItem key={key} onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
                   ))
@@ -139,9 +139,9 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {
                 tipoDeTorneio === "1" ?
-                pages.map((page) => (
+                pages.map((page, key) => (
                   <Button
-                    
+                    key={key}
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
@@ -175,9 +175,9 @@ function ResponsiveAppBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                {settings.map((setting, key) => (
+                  <MenuItem onClick={handleCloseUserMenu} key={key}>
+                    <Typography component='div' textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>

@@ -61,7 +61,7 @@ export default function ModalAtualizarTorneio({torneio}:{torneio:torneioType[] |
            {
             torneio?.map((t, key)=>{
                return(
-                <div style={{margin:10}}>
+                <div key={key} style={{margin:10}}>
                   <TextField 
                      size='small'
                      defaultValue={t.nome}

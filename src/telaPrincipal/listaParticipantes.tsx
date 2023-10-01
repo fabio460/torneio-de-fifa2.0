@@ -22,7 +22,7 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
        {
         listaDeParticipantes?.map((elem, key)=>{
             return(
-                <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+                <div key={key} style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                     <ListItem sx={{ }}>
                         <ListItemAvatar>
                         <Avatar src={elem.emblemaDoTime}>
