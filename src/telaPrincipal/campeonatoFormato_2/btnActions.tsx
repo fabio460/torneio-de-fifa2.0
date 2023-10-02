@@ -141,6 +141,7 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
         }
         {
             campeonatoArray.length === 0 ?
+            !carregando &&
             <div className='BtnPagarFolha'>
               <ModalConfirmaPagamentoFolha icone={false} tipo='1'/>
             </div>:

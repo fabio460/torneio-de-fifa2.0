@@ -171,6 +171,7 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
               varianteCancelar='outlined'
               setCarregando={setCarregando}
               carregando={carregando}
+              carregarNoBtnPrincipal={true}
           />
           :
           <Button disabled variant='contained' sx={{width:"100%"}}>Registrado</Button>

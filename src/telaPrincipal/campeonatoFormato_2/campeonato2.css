@@ -28,6 +28,7 @@
 }
 .BtnPagarFolha{
     width: 100%;
+    min-width: 170px;
 }
 @media (max-width:1300px) {
     .cardList{

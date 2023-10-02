@@ -24,12 +24,13 @@ type propType = {
     setCheked?:any,
     checkBox?:boolean,
     textCheckBox?:string,
+    carregarNoBtnPrincipal?:boolean,
     corBtnPrincipal?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
     corBtnConfirmar?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
     corBtnCancelar?:'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning' ,
 
 }
-export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, corBtnPrincipal, corBtnConfirmar, corBtnCancelar, variantConfirmar, varianteCancelar,textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando, checkBox=false, checked, textCheckBox, setCheked}:propType) {
+export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, corBtnPrincipal, corBtnConfirmar, corBtnCancelar, variantConfirmar, varianteCancelar,textoBtnConfirmar="confirmar", textoBtnCancelar="cancelar", variant, carregando, setCarregando, checkBox=false, checked, textCheckBox, setCheked, carregarNoBtnPrincipal=false}:propType) {
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(false)
   const handleClickOpen = () => {
@@ -58,13 +59,22 @@ export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, co
   },[state])
   return (
     <div style={{width:"100%"}}>
-      <Button variant={variant} color={corBtnPrincipal} sx={{width:"100%"}} onClick={handleClickOpen}>
-         {
-           carregando?
-           <CarregandoBtn/>:
-           textoBtn
-         }
-      </Button>
+      {
+        carregarNoBtnPrincipal ?
+        carregando?
+          <Button variant={variant} color={corBtnPrincipal} sx={{width:"100%"}} >
+            <CarregandoBtn/>
+          </Button> 
+          :
+          <Button variant={variant} color={corBtnPrincipal} sx={{width:"100%"}} onClick={handleClickOpen}>
+              {textoBtn}
+          </Button>
+        :
+        !carregando &&
+        <Button variant={variant} color={corBtnPrincipal} sx={{width:"100%"}} onClick={handleClickOpen}>
+            {textoBtn}
+        </Button>
+      }
       <Dialog
         open={open}
         onClose={handleClose}
