@@ -88,12 +88,7 @@ export default function TelaPrincipal() {
                   <CardTabelaDeClassificacao/>
                 </div>
               }
-              <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
-              <div className='telaPrincipalMeio'>
-                <EstatisticaCampeao estatistica={estatisticas}/>
-                <EstatisticaAssistencia estatistica={estatisticas}/>
-                <EstatisticaArtilheiros estatistica={estatisticas}/>
-              </div>
+
               <h2 style={{textAlign:"center",marginTop:"20px"}}>Elencos do torneio</h2>
               <div className='telaPrincipalInferior'>
                 {
@@ -101,6 +96,12 @@ export default function TelaPrincipal() {
                     return <CardElenco key={key} elenco = {elem}/>
                   })
                 }
+              </div>
+              <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
+              <div className='telaPrincipalMeio'>
+                <EstatisticaCampeao estatistica={estatisticas}/>
+                <EstatisticaAssistencia estatistica={estatisticas}/>
+                <EstatisticaArtilheiros estatistica={estatisticas}/>
               </div>
             </div>
           </div>
