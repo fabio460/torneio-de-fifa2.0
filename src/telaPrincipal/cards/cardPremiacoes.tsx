@@ -17,7 +17,7 @@ export default function CradPremiacoes({usuario}:{usuario:usuarioLogadoType | un
   const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
   
   return (
-    <Card sx={{ minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between", border:"solid 1px black" }} >
+    <Card sx={{ minWidth: 275, display:"flex", flexDirection:"column", justifyContent:"space-between" }} >
       <div style={{display:"flex", justifyContent:"flex-end", marginTop:"10px"}}>
           <SwitchSelecioarTipoDeTorneio/>
       </div>

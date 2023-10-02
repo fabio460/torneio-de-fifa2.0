@@ -15,6 +15,7 @@ import CarregandoBtn from '../../carregandoBtn';
 import { calculaDadosDaTabela } from './funcoesDoComponentes';
 import ModalIconeCorrecao from './modais/modalIconeConfirmacao';
 import ModalConfirmacoes from '../../modalConfirmacao';
+import { darkBackgroundBox } from '../../temaDark';
 
 
 const bull = (
@@ -25,21 +26,23 @@ const bull = (
     •
   </Box>
 );
-
-const cardStyle = {
-   margin:1,
-  "@media (max-width:1050px)":{
-    minWidth: "100%",
-    margin:0,
-    marginBottom:4
-  }
-}
 type cardType = {
   rodada:rodadasType,
   partida:number,
   idDoCampeonato:string
 }
 export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
+  
+  const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
+  const cardStyle = {
+     margin:1,
+     background: darkMode?darkBackgroundBox:"#e0f7fa",
+    "@media (max-width:1050px)":{
+      minWidth: "100%",
+      margin:0,
+      marginBottom:4
+    }
+  }
   const dispatch = useDispatch()
   const [golCasa, setGolCasa] = React.useState<{gol:number, time:any}>()
   const [golFora, setGolFora] = React.useState<{gol:number, time:any}>()
