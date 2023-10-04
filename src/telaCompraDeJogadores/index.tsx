@@ -101,6 +101,9 @@ export default function TelaCompraDeJogadores() {
               </HideOnScroll>
               <Toolbar />
                 <Box>
+                  {
+                    campeonato?.id &&   <div style={{height:"50px"}}></div>
+                  }
                   <Jogadores/>
                 </Box>
             </React.Fragment>
