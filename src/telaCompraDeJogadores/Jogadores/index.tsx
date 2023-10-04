@@ -67,6 +67,7 @@ export default function Jogadores() {
   });
   return (
     <div className='jogadoresContainer' style={{background:dark ? 'inherit':'', color:dark?colorDark:""}}>
+      <div style={{height:"50px"}}></div>
       <Lista intervalo={intervalo}/>
       <Paginacao 
         setPagina={setPagina} 
