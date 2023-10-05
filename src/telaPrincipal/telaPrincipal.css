@@ -66,6 +66,18 @@
 .cardEstatistica{
     width: 200px;
 }
+.toolTipJogadores{
+    max-height: 300px;
+    width: 200px;
+    overflow-y: scroll;    
+}
+.toolTipJogadores::-webkit-scrollbar{
+    width: 7px;
+    border-radius: 21%;
+}
+.toolTipJogadores::-webkit-scrollbar-thumb{
+    background-color: rgb(141, 150, 150);
+}
 @media (max-width:1586px) {
     .cardEstatistica{
         width: 45vw;

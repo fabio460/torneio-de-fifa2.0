@@ -13,6 +13,7 @@ import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { calculaValoresDosJogadores } from '../../metodosUteis';
 import { darkBackgroundBox, colorDark, dark } from '../../temaDark';
+import ToolTipJogadores from '../tooltipJogadores';
 export default function CardElenco({elenco}:{elenco:participantesType}) {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
@@ -60,13 +61,11 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
         </Typography>
         <Divider sx={{marginBottom:1}}/>
         <Typography component={"div"} sx={{ fontSize: 14, color: darkMode ? colorDark:""}} color="text.secondary" gutterBottom>
-         
           {
             elenco.saldo < 0 ? 
               <div style={{color:"red"}}>Saldo {formatoMonetario(elenco.saldo)}</div>:
               <div>Saldo {formatoMonetario(elenco.saldo)}</div>
           }
-      
         </Typography>
         <Typography component={'div'} color="text.secondary" sx={{ fontSize: 14, color: darkMode ? colorDark:"" }}>
           Folha {calculaFolha(elenco.jogadores)}
@@ -74,8 +73,8 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
         <Typography component={'div'} color="text.secondary" sx={{ fontSize: 14, color: darkMode ? colorDark:"" }}>
           Valor do elenco: {calculaValoresDosJogadores(elenco.jogadores)}
         </Typography>
-        <Typography  component={'div'} color="text.secondary" sx={{ fontSize: 14, color: darkMode ? colorDark:"" }}>
-          Elenco com {calculaQuantDeJogadores(elenco.jogadores)} jogadores
+        <Typography  component={'div'} color="text.secondary" sx={{ fontSize: 14, color: darkMode ? colorDark:"", display:"flex" }}>
+          Elenco com  <ToolTipJogadores jogadores={elenco.jogadores}/>
         </Typography>
         <Typography  component={'div'} sx={{ mb: 1.5, color: darkMode ? colorDark:"" }} variant="body2">
    
