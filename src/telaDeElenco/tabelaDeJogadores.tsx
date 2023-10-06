@@ -21,6 +21,7 @@ import ScrollComponents from '../ScrollComponent';
 import ListItemButton from '@mui/material/ListItemButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import BuscaDeJogadoresDaLista from './buscaDeJogadoresDaLista';
 
 export default function TabelaDeJogadores({jogadores, elenco}:{
      jogadores:jogadoresType[] | undefined,
@@ -86,7 +87,14 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
     useEffect(() => {
         handleSelected()
     }, [checked])
-
+    const [listaFiltradaDeJogadores,setListaFiltradaDeJogadores] = React.useState("")
+    const nomeAlvo = "rafa"
+    const jogadoresFilter = jogadores?.filter(jog=>{
+        if (jog.nome.toLowerCase().includes(listaFiltradaDeJogadores.toLowerCase())) {
+            return jog
+        }
+    })
+    
   return (
     <div>
         {
@@ -106,6 +114,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
                 </div>
             }
         </div>
+        <BuscaDeJogadoresDaLista setListaFiltradaDeJogadores={setListaFiltradaDeJogadores}/>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -143,7 +152,7 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
             </TableRow>
             </TableHead>
             <TableBody>
-            {Jogadores?.map((jog) => (
+            {jogadoresFilter?.map((jog) => (
                 <TableRow
                 key={jog.nome}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
