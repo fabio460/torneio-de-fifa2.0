@@ -136,13 +136,18 @@
 .campinhoBody{
     display: flex;
 }
-
+.focus{
+    display: block;
+}
 @media (max-width:1500px) {
     .containerDeEscalacao{
         width: 45%;
     }
 }
 @media (max-width:1100px) {
+    .focus{
+        display: none;
+    }
     .imgEmblema{
         width: 150px;
     }

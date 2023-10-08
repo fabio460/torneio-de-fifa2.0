@@ -88,7 +88,6 @@ export default function TabelaDeJogadores({jogadores, elenco}:{
         handleSelected()
     }, [checked])
     const [listaFiltradaDeJogadores,setListaFiltradaDeJogadores] = React.useState("")
-    const nomeAlvo = "rafa"
     const jogadoresFilter = jogadores?.filter(jog=>{
         if (jog.nome.toLowerCase().includes(listaFiltradaDeJogadores.toLowerCase())) {
             return jog

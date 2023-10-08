@@ -78,13 +78,22 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
       margin:"10px auto"
     }
   }
+  const styleFocus = {
+    display:"flex",
+    background:"blue",
+    "@media (max-width:800px)":{
+      display:"none",
+      background:"red"
+    }
+  }
+  
   let jogadores = refinaPosicao(elenco?.jogadores)
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
-
+  const focus = useSelector((state:any)=>state.focusTelaDeElenco.focus)
   return (
     <Box sx={{ bgcolor:darkMode? 'black':"white", color:darkMode? "white":"black", width: "100%", minHeight:"100vh"}}>
       <div>
-        <div className='TabsDesctop'>
+        <div className={`TabsDesctop`}>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -98,7 +107,7 @@ export default function OptCampoLista({handlePosition, elenco}:{handlePosition:a
             <Tab label="Time" {...a11yProps(2)} />
           </Tabs>
         </div>
-        <div className='TabsMobile'>
+        <div className={`TabsMobile`} >
           <Tabs
             value={value}
             onChange={handleChange}
