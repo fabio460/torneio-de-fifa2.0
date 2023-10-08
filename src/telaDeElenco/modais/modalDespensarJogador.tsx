@@ -64,7 +64,7 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
 
   return (
     <div>
-      <Button disabled={disable} style={{background:"red"}} onClick={handleClickOpen}>
+      <Button style={{background:"red"}} onClick={handleClickOpen}>
         Despensar
       </Button>
 
@@ -119,7 +119,7 @@ export default function ModalDespensarJogador({listaDeSelecionados, elenco}:{
             <Button  style={{paddingBottom:"0px",background:"green",width:"90px"}}>
             <CarregandoBtn/>
           </Button>:
-            <Button onClick={despensar} style={{background:"green", color:"white"}}>Confirmar</Button>
+            <Button disabled={disable} onClick={despensar} style={{background:"green", color:"white"}}>Confirmar</Button>
           }
           <Button onClick={handleClose} autoFocus>
             Cancelar

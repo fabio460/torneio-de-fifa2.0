@@ -102,7 +102,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
 
   return (
     <div>
-      <Button disabled={disable} style={{marginLeft:'5px'}} onClick={handleClickOpen}>
+      <Button style={{marginLeft:'5px'}} onClick={handleClickOpen}>
         Transferir
       </Button>
       <Dialog
@@ -181,7 +181,7 @@ export default function ModalTransferencia({torneio,listaDeSelecionados, elenco}
             <Button onClick={transferir} style={{paddingBottom:"0px",background:"#4caf50",width:"90px"}}>
               <CarregandoBtn/>
             </Button>:
-            <Button onClick={transferir} style={{background:"#4caf50", color:"white"}}>
+            <Button disabled={disable} onClick={transferir} style={{background:"#4caf50", color:"white"}}>
                Transferir    
             </Button>
           }
