@@ -1,6 +1,6 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTabelaApi } from '../../api/campeonatoApi';
-import { campeonatoType, participanteeducerType, tabelaCampeonatoType, usuarioLogadoType } from '../../types';
+import { campeonatoType, participanteeducerType, resultadoType, tabelaCampeonatoType, usuarioLogadoType } from '../../types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Checkbox } from '@mui/material'
 import ModalConfirmaPagamentoFolha from '../modais/modalConfirPagFolha';
@@ -9,6 +9,17 @@ import CarregandoBtn from '../../carregandoBtn';
 import ModalConfirmarPagamentoPremiacao from '../modais/modalConfirmarPagPrem';
 import { calculoDasPremiacoesDaTabela } from './funcoesDoComponentes';
 import { pagarPremiacoesApi } from '../../api/pagamentosApi';
+import { formatoMonetario } from '../../metodosUteis';
+import { artilheiro, campeao, empates, vitoria } from '../../valoresDosPremios';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import TabelaPremios from './tabelaPremios';
+import { criarTabela } from '../../api/tabelaResultadosApi';
 
 export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefined}) {
     const dispatch = useDispatch()
@@ -22,6 +33,26 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
     const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
     let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
     const [carregandoPagaento, setcarregandoPagamento] = React.useState<boolean>(false)
+    const [resultados, setResultados] = useState<resultadoType[]>([]);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = (premiados:any) => {
+      criarTabela(premiados)
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+      window.location.reload()
+    };
+
+    const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
 
     let idTorneio = usuarioReducer.torneio[torneioAtual].id
     let listaDeParticipantes = participantes
@@ -75,8 +106,9 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
           alert("Não é possível criar um torneio com menos de 3 participantes!")
         }
       }  
-
+      
       const encerrarTorneio = async()=>{
+        
         setcarregandoPagamento(true)
         dispatch({
             type:"carregandoTorneio",
@@ -84,18 +116,13 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
         })
         const tabela:tabelaCampeonatoType[] = await listarTabelaApi(idTorneio)
         const premiados = await calculoDasPremiacoesDaTabela(tabela)
-        pagarPremiacoesApi(premiados)
-    
-        const idDoCampeonato = campeonato && campeonato.id
-        deletarCampeonatoApi(idDoCampeonato)
-        setTimeout(() => {
-          dispatch({
-            type:"atualizarDados",
-            payload:{status:!atualizarDados}
-          })
-          setCarregando(false)
-          window.location.reload()
-        }, 9000);
+        
+        handleClickOpen(premiados)
+         setResultados(premiados)
+         pagarPremiacoesApi(premiados)
+         const idDoCampeonato = campeonato && campeonato.id
+         deletarCampeonatoApi(idDoCampeonato)
+        setCarregando(false)
       }
 
       const cancelarCompetição = ()=>{
@@ -181,6 +208,37 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
                 </div>
             </div>
         }
+        <BootstrapDialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+            <TabelaPremios resultados={resultados}/>
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogContent dividers>
+              {
+                
+              }
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose}>
+              Confirmar
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
     </div>
   )
 }

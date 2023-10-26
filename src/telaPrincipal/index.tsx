@@ -22,6 +22,7 @@ import ScrollComponents from '../ScrollComponent';
 import { dark, darkBackgroundContainer } from '../temaDark';
 import Mensagens from '../componentesGlobais/mensagens';
 import CardTabelaDeClassificacao from './cards/cardTabelaDeClassificacao';
+import CardTabelaResultados from './cards/cardTabelaResultados';
 
 
 export default function TelaPrincipal() {
@@ -96,6 +97,9 @@ export default function TelaPrincipal() {
                     return <CardElenco key={key} elenco = {elem}/>
                   })
                 }
+              </div>
+              <div className='telaPrincipalTabelaDeClassificacao '>
+                <CardTabelaResultados />
               </div>
               <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>

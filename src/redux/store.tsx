@@ -23,8 +23,10 @@ import dataDoCampeonatoReducer from './dataDoCampeonatoReducer'
 import btnDisableCompraJogReducer from './btnDisableCompraJogReducer'
 import carregandoTorneioReducer from './carregandoTorneioReducer'
 import focusTelaDeElenco from './focusTelaDeElenco'
+import resultadosReducer from './resultadosReducer'
 export const store = configureStore({
   reducer: {
+    resultadosReducer,
     focusTelaDeElenco,
     carregandoTorneioReducer,
     btnDisableCompraJogReducer,

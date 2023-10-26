@@ -64,7 +64,7 @@ export function calculaFolhaSemFormato(arrayDeJogadore:jogadoresType[]) {
 
    export const traduzirParaInglesArrayDePosicoes = (array:string[])=>{
       let arrAux = []
-      arrAux = array.map((p, key)=>{
+      arrAux = array?.map((p, key)=>{
         switch (p) {
           case 'GOL':
               return 'GK'

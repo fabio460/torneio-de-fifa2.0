@@ -271,3 +271,34 @@ export type torneioTypeApi = {
   data: string,
   idTorneio: string
 }
+
+export type resultadoType = {  
+  Artilharia:number,
+  PremioColocacao:number,
+  Empates:number,
+  Gols:number,
+  Vitorias:number,
+  Campeoes:string,
+  PosArtilharia:string,
+  quantVitorias:number,
+  quantGols:number,
+  quantEmpates:number
+  beneficiado: {
+    id: string,
+    idDoTorneio: string, 
+    idDoCampeonato:string, 
+    idDoParticipante: string, 
+    avatar: string,
+    equipe:string,
+    derrota:number,
+    empates:number,
+    golsContra:number,
+    golsPro:number,
+    jogos:number,
+    pontos:number,
+    saldoDeGol:number 
+    vitorias:number
+  }
+  idParticipante:string
+  premio:number
+}
