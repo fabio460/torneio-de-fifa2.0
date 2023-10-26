@@ -12,6 +12,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { deletarTorneioApi } from '../../api/torneioApi';
 import { DialogContentText, TextField, Typography } from '@mui/material';
+import { codigoDeSeguranca } from '../../codigoDeSeguranca';
 
 export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | undefined}) {
   const [open, setOpen] = React.useState(false);
@@ -32,7 +33,7 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
   };
 
   const deletarTorneio = async()=>{
-    if(chaveAutenticacao !== "recanto"){
+    if(chaveAutenticacao !== codigoDeSeguranca){
       seterroDeCodigo(true)
       return null
     }
