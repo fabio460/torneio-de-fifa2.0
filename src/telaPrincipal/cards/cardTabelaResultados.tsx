@@ -30,6 +30,7 @@ export default function CardTabelaResultados() {
       return e
     }
   })
+  console.log(resultadoFilter)
   return (
     <div>
         <h2 style={{textAlign:"center"}}>Torneios anteriores</h2>
@@ -44,17 +45,18 @@ export default function CardTabelaResultados() {
                   <Table sx={{ minWidth: 1050 }} aria-label="simple table">
                       <TableHead>
                       <TableRow>
-                          <TableCell  sx={{minWidth:"160px"}}>Usuário</TableCell>
+                          <TableCell  sx={{minWidth:"60px"}}>Usuário</TableCell>
+                          <TableCell align="left" sx={{minWidth:"20px"}}>Pontos</TableCell>
                           <TableCell align="left" sx={{minWidth:"160px"}}>Colocação</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio de campeão</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Artilharia</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio da artilharia</TableCell>
+                          <TableCell align="left">Gols</TableCell>
+                          <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio dos gols</TableCell>
                           <TableCell align="left">Vitórias</TableCell>
                           <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio das vitórias</TableCell>
                           <TableCell align="left">Empates</TableCell>
                           <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio dos empates</TableCell>
-                          <TableCell align="left">Gols</TableCell>
-                          <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio dos gols</TableCell>
                           <TableCell align="left">Total</TableCell>
                       </TableRow>
                       </TableHead>
@@ -67,16 +69,17 @@ export default function CardTabelaResultados() {
                             <TableCell component="th" scope="row">
                               {row.usuario}
                             </TableCell>
+                            <TableCell align="center" sx={{minWidth:"60px"}}>{row.vitorias*3 + row.empates}</TableCell>
                             <TableCell align="left">{row.colocacao}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioColocacao)}</TableCell>
                             <TableCell align="left">{row.artilharia}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioArtilharia)}</TableCell>
+                            <TableCell align="center">{row.gols}</TableCell>
+                            <TableCell align="left">{formatoMonetario(row.premioGols)}</TableCell>
                             <TableCell align="center">{row.vitorias}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioVitorias)}</TableCell>
                             <TableCell align="center">{row.empates}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioEmpates)}</TableCell>
-                            <TableCell align="center">{row.gols}</TableCell>
-                            <TableCell align="left">{formatoMonetario(row.premioGols)}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.total)}</TableCell>
                             </TableRow>
                         ))}
