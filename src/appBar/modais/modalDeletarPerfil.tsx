@@ -1,10 +1,13 @@
-import * as React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import  React,{useState} from 'react';
+import { Button, Dialog, DialogActions, DialogContent, TextField, Typography, DialogTitle, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { deletarUsuarioApi } from '../../api/usuarioApi';
+import { codigoDeSeguranca } from '../../codigoDeSeguranca';
 
 
 export default function ModalDeletarPerfil() {
   const [open, setOpen] = React.useState(false);
+  const [chaveAutenticacao, setChaveAutenticacao] = useState('')
+  const [erroDeCodigo, seterroDeCodigo] = useState(false)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -13,20 +16,18 @@ export default function ModalDeletarPerfil() {
     setOpen(false);    
   };
 
-  const dialogStyle = {
-    width:"400px",
-    "@media (max-width:800px)":{
-      width:"100%"
-    }
-  }
-  const deslogar = ()=>{
-}
+ 
 const deletar = async()=>{
-    const id = localStorage.getItem("idDoUsuarioLogado") || ""
-    const res = await deletarUsuarioApi(id)
-    localStorage.removeItem('jwt')
-    alert(res.toString())
-    window.location.reload()
+  if(chaveAutenticacao !== codigoDeSeguranca){
+    seterroDeCodigo(true)
+    return null
+  }
+  seterroDeCodigo(false)
+  const id = localStorage.getItem("idDoUsuarioLogado") || ""
+  const res = await deletarUsuarioApi(id)
+  localStorage.removeItem('jwt')
+  alert(res.toString())
+  window.location.reload()
   }
   return (
     <div>
@@ -46,6 +47,15 @@ const deletar = async()=>{
         <DialogContent>
             Voçê esta prestes a remover sua conta, ao confirmar, todos os dados, times, torneios e jogadores do seu perfil serão excluidos.
             Deseja realmente remover sua conta? esta ação não poderar ser revertida!
+            <TextField
+             label={"Código"}
+             size='small'
+             onChange={(e:any)=> setChaveAutenticacao(e.target.value)}
+             error={erroDeCodigo}
+            />
+            {
+            erroDeCodigo && <Typography color={"red"}>Código inválido</Typography>
+            }
         </DialogContent>
         <DialogActions>
           <Button variant='contained' color='warning' onClick={deletar}>Confirmar</Button>
