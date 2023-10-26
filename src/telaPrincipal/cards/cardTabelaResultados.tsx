@@ -26,7 +26,7 @@ export default function CardTabelaResultados() {
     getTabela()
   },[])
   let resultadoFilter = resultadosApi?.filter((e:any)=>{
-    if (e.idDoTorneio === torneio.id) {
+    if (e?.idDoTorneio === torneio?.id) {
       return e
     }
   })

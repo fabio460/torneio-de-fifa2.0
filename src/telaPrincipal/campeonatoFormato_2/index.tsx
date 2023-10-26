@@ -26,7 +26,7 @@ export default function CampeonatoFormato_2() {
   let listaDeParticipantes = participantes
   let times = listaDeParticipantes.map(elem=>{
     return {
-      id: elem.participante.id,
+      id: elem.participante?.id,
       nome: elem.participante.nome,
       emblemaDoTime: elem.participante.emblemaDoTime,
       idTorneio: elem.participante.idTorneio,
@@ -39,7 +39,7 @@ export default function CampeonatoFormato_2() {
   })
   const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
   let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
-  let idTorneio = usuarioReducer.torneio[torneioAtual].id
+  let idTorneio = usuarioReducer.torneio[torneioAtual]?.id
 
   
   const iniciarCompeticao =()=>{
@@ -92,7 +92,7 @@ export default function CampeonatoFormato_2() {
     const premiados = await calculoDasPremiacoesDaTabela(tabela)
     pagarPremiacoesApi(premiados)
 
-    const idDoCampeonato = campeonato && campeonato.id
+    const idDoCampeonato = campeonato && campeonato?.id
     deletarCampeonatoApi(idDoCampeonato)
     setTimeout(() => {
       dispatch({
@@ -105,7 +105,7 @@ export default function CampeonatoFormato_2() {
   }
   const cancelarCompetição = ()=>{
     setCarregando(true)
-    const idDoCampeonato = campeonato && campeonato.id
+    const idDoCampeonato = campeonato && campeonato?.id
     deletarCampeonatoApi(idDoCampeonato)
     setTimeout(() => {
       dispatch({
@@ -159,7 +159,7 @@ export default function CampeonatoFormato_2() {
                 <div className='cardList'>
                   {  
                     campeonato && campeonato?.rodada?.map((rodada, key)=>{
-                      return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato.id}/>
+                      return <Cards key={key} rodada={rodada} partida={key+1} idDoCampeonato={campeonato?.id}/>
                     })
                   }
                 </div>

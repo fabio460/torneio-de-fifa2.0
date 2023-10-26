@@ -27,7 +27,7 @@ export default function CardTabelaDeClassificacao() {
     }
     const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
     let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
-    let idTorneio = usuarioReducer.torneio[torneioAtual].id
+    let idTorneio = usuarioReducer.torneio[torneioAtual]?.id
     React.useEffect(()=>{
         getList(idTorneio)
     },[atualizarDados, torneioAtual])

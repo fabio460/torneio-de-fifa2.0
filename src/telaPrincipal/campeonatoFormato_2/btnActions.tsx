@@ -54,14 +54,14 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
   },
 }));
 
-    let idTorneio = usuarioReducer.torneio[torneioAtual].id
+    let idTorneio = usuarioReducer.torneio[torneioAtual]?.id
     let listaDeParticipantes = participantes
     let times = listaDeParticipantes.map(elem=>{
       return {
-        id: elem.participante.id,
+        id: elem.participante?.id,
         nome: elem.participante.nome,
         emblemaDoTime: elem.participante.emblemaDoTime,
-        idTorneio: elem.participante.idTorneio,
+        idTorneio: elem.participante?.idTorneio,
         jogadores: elem.participante.jogadores,
         saldo: elem.participante.saldo,
         time: elem.participante.time,
@@ -120,14 +120,14 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
         handleClickOpen(premiados)
          setResultados(premiados)
          pagarPremiacoesApi(premiados)
-         const idDoCampeonato = campeonato && campeonato.id
+         const idDoCampeonato = campeonato && campeonato?.id
          deletarCampeonatoApi(idDoCampeonato)
         setCarregando(false)
       }
 
       const cancelarCompetição = ()=>{
         setCarregando(true)
-        const idDoCampeonato = campeonato && campeonato.id
+        const idDoCampeonato = campeonato && campeonato?.id
         deletarCampeonatoApi(idDoCampeonato)
         setTimeout(() => {
           dispatch({

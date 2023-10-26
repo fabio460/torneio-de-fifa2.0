@@ -11,12 +11,13 @@ import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { deletarTorneioApi } from '../../api/torneioApi';
-import { DialogContentText } from '@mui/material';
+import { DialogContentText, TextField, Typography } from '@mui/material';
 
 export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | undefined}) {
   const [open, setOpen] = React.useState(false);
   const [age, setAge] = React.useState('');
-  const [nomeDoParticipante, setNomeDoParticipante] = useState('')
+  const [chaveAutenticacao, setChaveAutenticacao] = useState('')
+  const [erroDeCodigo, seterroDeCodigo] = useState(false)
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
   };
@@ -31,6 +32,11 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
   };
 
   const deletarTorneio = async()=>{
+    if(chaveAutenticacao !== "recanto"){
+      seterroDeCodigo(true)
+      return null
+    }
+    seterroDeCodigo(false)
     if (age === "") {
       alert("Selecione um torneio")
       return null
@@ -76,6 +82,15 @@ export default function ModalDeletarTorneio({torneio}:{torneio:torneioType[] | u
               }
           </Select>
           </FormControl>
+          <TextField
+             label={"Código"}
+             size='small'
+             onChange={e=> setChaveAutenticacao(e.target.value)}
+             error={erroDeCodigo}
+          />
+          {
+           erroDeCodigo && <Typography color={"red"}>Código inválido</Typography>
+          }
           <DialogContentText>Tem certeza que deseja deletar? se sim, clique em remover torneio!</DialogContentText>
         </DialogContent>
         
