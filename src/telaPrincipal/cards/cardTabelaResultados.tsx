@@ -38,7 +38,7 @@ export default function CardTabelaResultados() {
           resultadoFilter?.reverse().map((res:any, key:number)=>{
             return <div key={key} style={{padding:"30px opx"}}>
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                  <div style={{marginTop:"30px"}}>{getDataTorneio(res.data)} as {getHoraTorneio(res.data)}</div>
+                  <div style={{marginTop:"30px"}}>Torneio encerrado em {getDataTorneio(res.data)} as {getHoraTorneio(res.data)}</div>
                   <BtnDeleteTabelaResultados tabela={res}/>
               </div>
               <TableContainer component={Paper} sx={{margin:"30px opx"}}>

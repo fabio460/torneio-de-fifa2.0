@@ -56,15 +56,9 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
     setCarregando(true)
     const id = rodada.id
     atualizarRodadaApi(id, golCasa?.gol, golFora?.gol)
-     const res =await calculaDadosDaTabela(golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})
-     await atualizarTabelaApi(res)
-    setTimeout(() => {
-      dispatch({
-        type:"atualizarDados",  
-        payload:{status:!atualizarDados}
-      })
-      setCarregando(false)
-    }, 3000);
+     const res = calculaDadosDaTabela(golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})
+     atualizarTabelaApi(res, dispatch, atualizarDados, setCarregando)
+
   }
   
   const corrigirResultado = async()=>{

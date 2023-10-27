@@ -3,7 +3,7 @@ import { atualizarTabelaApi } from "../../api/campeonatoApi";
 import { golsType, tabelaCampeonatoType } from "../../types";
 import { artilheiro, campeao, empates, gols, quartoAtilheiro, quartoColocado, terceiroArtilheiro, terceiroColocado, viceArtilheiro, viceCampeao, vitoria } from "../../valoresDosPremios";
 
-export async function calculaDadosDaTabela(golCasa:any , golFora:any) {
+export function calculaDadosDaTabela(golCasa:any , golFora:any) {
    
     const resultado = [
         {

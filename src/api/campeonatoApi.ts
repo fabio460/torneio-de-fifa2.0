@@ -63,14 +63,26 @@ export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, c
   }).then(r=>r.json())
 }
 
-export const atualizarTabelaApi = (resultado:any)=>{
+export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any)=>{
   return fetch(local+"torneioTipoDois/atualizarTabela/",{
     headers:{
       "Content-Type":"application/json"
     },
     method:"put",
     body:JSON.stringify({resultado})
-  }).then(r=>r.json()).then(res=>console.log(res))
+  }).then(r=>r.json()).then(res=>{
+    dispatch({
+      type:"atualizarDados",  
+      payload:{status:!atualizarDados}
+    })
+    setTimeout(() => {      
+      dispatch({
+        type:"atualizarDados",  
+        payload:{status:!atualizarDados}
+      })
+      setCarregando(false)
+    }, 1000);
+  })
 }
 
 export const listarTabelaApi = (idTorneio:string)=>{
