@@ -75,7 +75,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:any)=>{
                 if (lista[i+2].includes(id)) {
                     return terceiroArtilheiro
                 }else{
-                    if (lista[i+1].includes(id)) {
+                    if (lista[i+3].includes(id)) {
                         return quartoAtilheiro
                     }else{
                         return 0

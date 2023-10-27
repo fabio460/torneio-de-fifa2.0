@@ -98,9 +98,12 @@ export default function TelaPrincipal() {
                   })
                 }
               </div>
-              <div className='telaPrincipalTabelaDeClassificacao '>
-                <CardTabelaResultados />
-              </div>
+              {
+                tipoDeTorneio === "2" &&
+                <div className='telaPrincipalTabelaDeClassificacao '>
+                  <CardTabelaResultados />
+                </div>
+              }
               <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>
                 <EstatisticaCampeao estatistica={estatisticas}/>

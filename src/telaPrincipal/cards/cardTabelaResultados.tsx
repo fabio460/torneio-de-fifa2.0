@@ -30,7 +30,7 @@ export default function CardTabelaResultados() {
       return e
     }
   })
-  console.log(resultadoFilter)  
+   
   return (
     <div>
         <h2 style={{textAlign:"center"}}>Torneios anteriores</h2>
@@ -45,7 +45,7 @@ export default function CardTabelaResultados() {
                   <Table sx={{ minWidth: 1050 }} aria-label="simple table">
                       <TableHead>
                       <TableRow>
-                          <TableCell  sx={{minWidth:"60px"}}>Usuário</TableCell>
+                          <TableCell align='center' sx={{minWidth:"60px"}}>Usuário</TableCell>
                           <TableCell align="left" sx={{minWidth:"20px"}}>Pontos</TableCell>
                           <TableCell align="left" sx={{minWidth:"160px"}}>Colocação</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio de campeão</TableCell>
@@ -67,7 +67,7 @@ export default function CardTabelaResultados() {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                             <TableCell component="th" scope="row"  sx={{display:"flex"}}>
-                               {/* <Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/> */}
+                               <Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/>
                                 {row.usuario}
                             </TableCell>
                             <TableCell align="center" sx={{minWidth:"60px"}}>{row.vitorias*3 + row.empates}</TableCell>

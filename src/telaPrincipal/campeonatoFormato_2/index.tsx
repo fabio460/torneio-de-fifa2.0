@@ -3,7 +3,7 @@ import Cards from './Cards'
 import "./campeonato2.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { campeonatoType, jogosType, participanteeducerType, participantesType, resultadoDaPartidaType, tabelaCampeonatoType } from '../../types'
-import { Button, Checkbox } from '@mui/material'
+import { Button, ButtonBase, Checkbox } from '@mui/material'
 import { campeao, gols, quartoColocado, terceiroColocado, viceCampeao } from '../../valoresDosPremios'
 import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTabelaApi } from '../../api/campeonatoApi'
 import Carregando from '../../carregando'
@@ -63,13 +63,19 @@ export default function CampeonatoFormato_2() {
 
   let torneioEncerrado = campeonato?.rodada?.every(r=>r.statusDaRodada==="fechado")
   let camp:any = campeonato || []
-  
+  const atualizar = ()=>{
+    dispatch({
+        type:"atualizarDados",  
+        payload:{status:!atualizarDados}
+      })
+}
   return (
     <div className='campeonato2Container'>
         {
           campeonato?.id &&
-          <div> 
+          <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}> 
             Torneio iniciado em {getDataTorneio(campeonato?.data as string)} as {getHoraTorneio(campeonato?.data as string)}       
+            <Button onClick={atualizar}>atualizar</Button>
           </div>
         }
         {
