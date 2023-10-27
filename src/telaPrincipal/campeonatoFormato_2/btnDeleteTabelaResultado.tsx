@@ -9,10 +9,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IconButton } from '@mui/material';
 import { deletarTabelaResultado } from '../../api/tabelaResultadosApi';
 import { getDataTorneio, getHoraTorneio } from '../../metodosUteis';
+import CarregandoBtn from '../../carregandoBtn';
 
 export default function BtnDeleteTabelaResultados({tabela}:any) {
   const [open, setOpen] = React.useState(false);
-
+  const [loading, setLoading] = React.useState(false)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -22,10 +23,9 @@ export default function BtnDeleteTabelaResultados({tabela}:any) {
   };
   const deletarTabela = ()=>{
     deletarTabelaResultado(tabela.id)
-    window.location.reload()
+    setLoading(true)
+    //window.location.reload()
   }
-  const d1 = "2023-10-26T14:19:47.797Z"
-  const d2 = "2023-10-26T11:41:57.053Z"
 
   return (
     <div>
@@ -46,11 +46,12 @@ export default function BtnDeleteTabelaResultados({tabela}:any) {
             <div>
               Torneio encerrado no dia {getDataTorneio(tabela.data)} as {getHoraTorneio(tabela.data)}
             </div>
-            <div></div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant='outlined' color='warning' onClick={deletarTabela}>confirmar deleção</Button>
+          <Button variant='outlined' color='warning' onClick={deletarTabela}>
+            {loading ? <CarregandoBtn/> : " confirmar deleção"} 
+          </Button>
           <Button variant='outlined' onClick={handleClose} autoFocus>
             cancelar
           </Button>

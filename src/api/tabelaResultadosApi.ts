@@ -47,5 +47,5 @@ export const deletarTabelaResultado = (id:string)=>{
         body:JSON.stringify({id})
       })
       .then(r=>r.json())
-      .then(r=>console.log(r))
+      .then(r=>window.location.reload())
 }
