@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { resultadoType } from '../../types';
 import { formatoMonetario, getDataTorneio, getHoraTorneio } from '../../metodosUteis';
-import { IconButton } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import BtnDeleteTabelaResultados from '../campeonatoFormato_2/btnDeleteTabelaResultado';
 import { useSelector } from 'react-redux';
 export default function CardTabelaResultados() {
@@ -30,7 +30,7 @@ export default function CardTabelaResultados() {
       return e
     }
   })
-  console.log(resultadoFilter)
+  console.log(resultadoFilter)  
   return (
     <div>
         <h2 style={{textAlign:"center"}}>Torneios anteriores</h2>
@@ -66,8 +66,9 @@ export default function CardTabelaResultados() {
                             key={key}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                            <TableCell component="th" scope="row">
-                              {row.usuario}
+                            <TableCell component="th" scope="row"  sx={{display:"flex"}}>
+                               {/* <Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/> */}
+                                {row.usuario}
                             </TableCell>
                             <TableCell align="center" sx={{minWidth:"60px"}}>{row.vitorias*3 + row.empates}</TableCell>
                             <TableCell align="left">{row.colocacao}</TableCell>

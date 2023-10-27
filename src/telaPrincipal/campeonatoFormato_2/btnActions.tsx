@@ -91,17 +91,17 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
                 type:"carregandoTorneio",
                 payload:{carregando:true, nome:"criarTorneio"}
             })
-          criarCampeonatoApi(times, voltas, idTorneio)
+          criarCampeonatoApi(times, voltas, idTorneio, dispatch, atualizarDados, setCarregando)
 
           
-          setTimeout(() => {
-            dispatch({
-              type:"atualizarDados",
-              payload:{status:!atualizarDados}
-            })
-            window.location.reload()
+          // setTimeout(() => {
+          //   dispatch({
+          //     type:"atualizarDados",
+          //     payload:{status:!atualizarDados}
+          //   })
+          //   window.location.reload()
           
-          }, 9000);
+          // }, 9000);
         }else{
           alert("Não é possível criar um torneio com menos de 3 participantes!")
         }

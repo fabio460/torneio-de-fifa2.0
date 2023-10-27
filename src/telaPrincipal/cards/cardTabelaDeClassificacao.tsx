@@ -7,23 +7,30 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { listarCampeonatoApi, listarTabelaApi } from '../../api/campeonatoApi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { campeonatoType, tabelaCampeonatoType } from '../../types';
+import { Avatar, Button } from '@mui/material';
+import CarregandoBtn from '../../carregandoBtn';
+import Carregando from '../../carregando';
 
 
 
 
 
 export default function CardTabelaDeClassificacao() {
+    const [loading, setloading] = React.useState(false)
     const [campeonato, setCampeonato] = React.useState<campeonatoType>()
     const atualizarDados = useSelector((state:any)=>state.atualizarDadosReducer.status)
     const [rows, setrows] = React.useState<tabelaCampeonatoType[]>([])
+    const dispatch = useDispatch()
     async function getList(idTorneio:string) {
+        setloading(true)
         const list = await listarCampeonatoApi()
         const tabela = await listarTabelaApi(idTorneio) || []
         setrows(tabela)
         const ultimoCampeonato =list && list[list?.length -1]
         setCampeonato(ultimoCampeonato)
+        setloading(false)
     }
     const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
     let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
@@ -31,44 +38,56 @@ export default function CardTabelaDeClassificacao() {
     React.useEffect(()=>{
         getList(idTorneio)
     },[atualizarDados, torneioAtual])
-    
+    const atualizar = ()=>{
+        dispatch({
+            type:"atualizarDados",  
+            payload:{status:!atualizarDados}
+          })
+    }
     return (
         <div>
-            <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
-                <TableHead>
-                <TableRow>
-                    <TableCell align="left">Equipe</TableCell>
-                    <TableCell align="left">P</TableCell>
-                    <TableCell align="left">J</TableCell>
-                    <TableCell align="left">V</TableCell>
-                    <TableCell align="left">E</TableCell>
-                    <TableCell align="left">D</TableCell>
-                    <TableCell align="left">GP</TableCell>
-                    <TableCell align="left">GC</TableCell>
-                    <TableCell align="left">SG</TableCell>
-                </TableRow>
-                </TableHead>
-                <TableBody>
-                {rows?.map((row) => (
-                    <TableRow
-                    key={row.equipe}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                    <TableCell align="left">{row.equipe}</TableCell>
-                    <TableCell align="left">{row.pontos}</TableCell>
-                    <TableCell align="left">{row.jogos}</TableCell>
-                    <TableCell align="left">{row.vitorias}</TableCell>
-                    <TableCell align="left">{row.empates}</TableCell>
-                    <TableCell align="left">{row.derrota}</TableCell>
-                    <TableCell align="left">{row.golsPro}</TableCell>
-                    <TableCell align="left">{row.golsContra}</TableCell>
-                    <TableCell align="left">{row.saldoDeGol}</TableCell>
+            <div style={{display:"flex",justifyContent:"flex-end"}}>
+              <Button onClick={atualizar}>atualizar</Button>
+            </div>
+            {
+                loading ?
+                <div style={{display:"flex",justifyContent:"center", alignItems:"center", height:"10px"}}><Carregando/></div>:
+                <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell align="left">Equipe</TableCell>
+                        <TableCell align="left">P</TableCell>
+                        <TableCell align="left">J</TableCell>
+                        <TableCell align="left">V</TableCell>
+                        <TableCell align="left">E</TableCell>
+                        <TableCell align="left">D</TableCell>
+                        <TableCell align="left">GP</TableCell>
+                        <TableCell align="left">GC</TableCell>
+                        <TableCell align="left">SG</TableCell>
                     </TableRow>
-                ))}
-                </TableBody>
-            </Table>
-            </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                    {rows?.map((row) => (
+                        <TableRow
+                        key={row.equipe}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell align="left" sx={{display:"flex"}}><Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/> {row.equipe}</TableCell>
+                        <TableCell align="left">{row.pontos}</TableCell>
+                        <TableCell align="left">{row.jogos}</TableCell>
+                        <TableCell align="left">{row.vitorias}</TableCell>
+                        <TableCell align="left">{row.empates}</TableCell>
+                        <TableCell align="left">{row.derrota}</TableCell>
+                        <TableCell align="left">{row.golsPro}</TableCell>
+                        <TableCell align="left">{row.golsContra}</TableCell>
+                        <TableCell align="left">{row.saldoDeGol}</TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+                </TableContainer>
+            }
         </div>
     );
 }

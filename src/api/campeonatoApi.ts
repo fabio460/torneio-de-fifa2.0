@@ -3,7 +3,7 @@ import { linkLocal } from "./link"
 //const local = "http://localhost:4000/"
 const local = linkLocal
 
-export const criarCampeonatoApi = (times:any, voltas:any, idTorneio:string)=>{
+export const criarCampeonatoApi = (times:any, voltas:any, idTorneio:string, dispatch:any, atualizarDados:any, setCarregando:any)=>{
     return fetch(local+"torneioTipoDois/gerarTorneio",{
       headers:{
         "Content-Type":"application/json"
@@ -12,7 +12,22 @@ export const criarCampeonatoApi = (times:any, voltas:any, idTorneio:string)=>{
       body:JSON.stringify({times, voltas, idTorneio})
     })
     .then(r=>r.json())
-    .then(r=>console.log(r))
+    .then(r=>{
+ 
+      dispatch({
+        type:"atualizarDados",  
+        payload:{status:!atualizarDados}
+      })
+      
+      setTimeout(() => {  
+        dispatch({
+          type:"atualizarDados",  
+          payload:{status:!atualizarDados}
+        })
+        setCarregando(false)
+        window.location.reload()
+      }, 4000);
+    })
 }
 
 export const listarCampeonatoApi = (idTorneio?:string)=>{
@@ -53,14 +68,28 @@ export const atualizarRodadaApi = (id:string | undefined, golsMandante:number | 
     body:JSON.stringify({id, golsMandante, golsVisitante, statusDaRodada})
   }).then(r=>r.json())
 }
-export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, correcao?:any)=>{
+export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, correcao?:any, dispatch?:any, atualizarDados?:any, setCarregando?:any)=>{
   fetch(local+"torneioTipoDois/alterarStatusDaRodada",{
     headers:{
       "Content-Type":"application/json"
     },
     method:"put",
     body:JSON.stringify({id, statusDaRodada, correcao})
-  }).then(r=>r.json())
+  })
+  .then(r=>r.json())
+  .then(()=>{
+    dispatch({
+      type:"atualizarDados",  
+      payload:{status:!atualizarDados}
+    })
+    setTimeout(() => {      
+      dispatch({
+        type:"atualizarDados",  
+        payload:{status:!atualizarDados}
+      })
+      setCarregando(false)
+    }, 1000);
+  })
 }
 
 export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any)=>{

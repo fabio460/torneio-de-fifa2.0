@@ -42,34 +42,7 @@ export default function CampeonatoFormato_2() {
   let idTorneio = usuarioReducer.torneio[torneioAtual]?.id
 
   
-  const iniciarCompeticao =()=>{
-    if (times.length > 2) {      
-      dispatch({
-        type:"carregandoTorneio",
-        payload:{carregando:true}
-      })
-      criarCampeonatoApi(times, voltas, idTorneio)
-      
-      setTimeout(() => {
-        dispatch({
-          type:"atualizarDados",
-          payload:{status:!atualizarDados}
-        })
-        window.location.reload()
-      
-      }, 9000);
-    }else{
-      alert("Não é possível criar um torneio com menos de 3 participantes!")
-    }
-  }
 
-  const handleRodadas = (e:any)=>{
-    if (e.target.checked) {
-      setVoltas(2)
-    }else{
-      setVoltas(1)
-    }
-  }
 
   async function listarCampeonato() {
     setCarregando(true)
@@ -86,36 +59,8 @@ export default function CampeonatoFormato_2() {
     listarCampeonato()
   },[atualizarDados, idTorneio])
 
-  const encerrarTorneio = async()=>{
-    setcarregandoPagamento(true)
-    const tabela:tabelaCampeonatoType[] = await listarTabelaApi(idTorneio)
-    const premiados = await calculoDasPremiacoesDaTabela(tabela)
-    pagarPremiacoesApi(premiados)
+  
 
-    const idDoCampeonato = campeonato && campeonato?.id
-    deletarCampeonatoApi(idDoCampeonato)
-    setTimeout(() => {
-      dispatch({
-        type:"atualizarDados",
-        payload:{status:!atualizarDados}
-      })
-      setCarregando(false)
-      window.location.reload()
-    }, 9000);
-  }
-  const cancelarCompetição = ()=>{
-    setCarregando(true)
-    const idDoCampeonato = campeonato && campeonato?.id
-    deletarCampeonatoApi(idDoCampeonato)
-    setTimeout(() => {
-      dispatch({
-        type:"atualizarDados",
-        payload:{status:!atualizarDados}
-      })
-      setCarregando(false)
-      window.location.reload()
-    }, 1000);
-  }
   let torneioEncerrado = campeonato?.rodada?.every(r=>r.statusDaRodada==="fechado")
   let camp:any = campeonato || []
   
