@@ -302,3 +302,28 @@ export type resultadoType = {
   idParticipante:string
   premio:number
 }
+
+export type tabelaDeResultadosType = {
+  data:string,
+  id:string,
+  idDoCampeonato:string,
+  idDoTorneio:string,
+  resultados:{
+    artilharia:string,
+    avatar:string, 
+    colocacao:string,
+    empates:number,
+    gols:number,
+    id:string,
+    idDoParticipante:string,
+    idTabelaResultados:string,
+    premioArtilharia:number,
+    premioColocacao:number,
+    premioEmpates:number,
+    premioGols:number,
+    premioVitorias:number,
+    total:number,
+    usuario:string,
+    vitorias:number,
+  }[]
+}

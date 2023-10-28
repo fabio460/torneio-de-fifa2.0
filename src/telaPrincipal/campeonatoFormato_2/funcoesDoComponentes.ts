@@ -64,7 +64,10 @@ export const calculoDasPremiacoesDaTabela = (tabela:any)=>{
   })
   const lista = listaPremios.reverse()
 
-  function getArtilheiro(id:string) {   
+  function getArtilheiro(id:string, gols:number) {
+      if (gols === 0) {
+        return 0
+      }   
       for (let i = 0; i < lista.length; i++) {
         if (lista[i].includes(id)) {
             return artilheiro
@@ -92,7 +95,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:any)=>{
         const Gols = j.golsPro * gols
         const Vitorias = j.vitorias * vitoria
         const Empates = j.empates * empates
-        const Artilharia = getArtilheiro(j.idDoParticipante) || 0
+        const Artilharia = getArtilheiro(j.idDoParticipante, gols) || 0
         const Campeoes = key === 0 ? "Campeão": key === 1 ? "Vice-Campeão": key === 2 ? "Terceiro colocado": "Quarto lugar"
         const PosArtilharia = getPostArtilheiro(j.golsPro)
         const quantVitorias = j.vitorias

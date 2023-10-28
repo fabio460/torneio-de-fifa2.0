@@ -1,52 +1,45 @@
 import React, { useEffect,useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { statisticasTypes } from '../types';
+import { resultadoType, statisticasTypes, tabelaDeResultadosType } from '../types';
 import { removerDuplicataArrayDeObjetos } from '../metodosUteis';
 import { useSelector } from 'react-redux';
 
+type dadosType = {
+  name:string,
+  Campeao:string
+}
+export default function EstatisticaCampeao({estatistica, lista, idDoTorneioSelecionado}:{estatistica:statisticasTypes[] | undefined, lista:tabelaDeResultadosType[], idDoTorneioSelecionado:string}) {
 
-export default function EstatisticaCampeao({estatistica}:{estatistica:statisticasTypes[] | undefined}) {
-  const torneioReducer = useSelector((state:any)=>state.torneioReducer.torneio)
-  const [dados, setDados] = useState([])
-  const [limiteDeItens, setLimiteDeItens] = useState(5)
-  async function getEstatistica() {
-      const e = estatistica
-      
-      const nomesComRepeticoes = e?.map(item=>{
-          return item.vencedor
-      }) 
-      const u = removerDuplicataArrayDeObjetos(nomesComRepeticoes)
-      const usuarios = u?.filter((e:any)=>{
-          if (e !== "") {
-              return e
-          }
-      })
-
-     
-      let aux:any = []
-      usuarios?.filter((usuario:any, key:any)=>{
-          let cont = 0          
-            nomesComRepeticoes?.filter((item)=>{ 
-              if (item === usuario) {
-                cont+=1;
-              }
-            })
-            aux.push({name:usuario, Campeao:cont})
-      })
-      const ordenada = aux.sort((a:any,b:any)=>{
-          return a.Campeao > b.Campeao ? -1 : a.Campeao < b.Campeao ? 1 : 0
-      })
-      const primeiros = ordenada?.filter((elem:any, key:any)=>{
-          if (key < limiteDeItens) {    
-              return elem
-          }
-      })
-      setDados(primeiros.reverse())
-  }
+  const [dados, setDados] = useState<dadosType[]>([])  
+  let aux = []
   useEffect(()=>{
-    getEstatistica()
-  },[torneioReducer,estatistica])  
+    aux = []
+    const cam = lista.map((e, key)=>{
+      let res = e.resultados.filter(s=>{
+        if (s.colocacao==="Campeão") {
+          return s?.usuario
+        }
+      })
+      return res[0]?.usuario
+    }) 
+    const inputArray = cam.reverse()
+    const countObject:any = {};
+    inputArray.forEach(element => {
+      if (countObject[element] === undefined) {
+        countObject[element] = 1;
+      } else {
+        countObject[element]++;
+      }
+    });
+    for (const element in countObject) {
+      aux.push({ name: element, Campeao: countObject[element] });
+    }
+    setDados(aux)
+  },[lista, idDoTorneioSelecionado])
    
+  const dadosOrdenados = dados.sort((a,b)=>{
+    return a.Campeao > b.Campeao ? 1 : a.Campeao < b.Campeao ? -1 :0
+  })
     
     return (
       <div className='cardEstatistica'>
@@ -55,7 +48,7 @@ export default function EstatisticaCampeao({estatistica}:{estatistica:statistica
           <AreaChart
             width={500}
             height={400}
-            data={dados}
+            data={dadosOrdenados}
             margin={{
               top: 10,
               right: 30,

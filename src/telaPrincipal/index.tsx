@@ -8,7 +8,7 @@ import CradPremiacoes from './cards/cardPremiacoes'
 import CardElenco from './cards/cardElenco'
 import ResponsiveAppBar from '../appBar'
 import { idDoUsuarioLogado } from '../metodosUteis'
-import { usuarioLogadoType } from '../types'
+import { tabelaDeResultadosType, usuarioLogadoType } from '../types'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import Carregando from '../carregando'
@@ -23,6 +23,7 @@ import { dark, darkBackgroundContainer } from '../temaDark';
 import Mensagens from '../componentesGlobais/mensagens';
 import CardTabelaDeClassificacao from './cards/cardTabelaDeClassificacao';
 import CardTabelaResultados from './cards/cardTabelaResultados';
+import { listarTabelaApi } from '../api/tabelaResultadosApi';
 
 
 export default function TelaPrincipal() {
@@ -35,6 +36,15 @@ export default function TelaPrincipal() {
   const participantes = useSelector((state:any)=>state.participantesReducer.participantes)
   var id = localStorage.getItem("idDoTorneio") || ""
   
+  const [resultadosApi, setresultadosApi] = useState<tabelaDeResultadosType[]>([])
+  async function getTabela() {
+    const r = await listarTabelaApi() || []
+    setresultadosApi(r)
+  }  
+  useEffect(()=>{
+    getTabela()
+  },[])
+
   async function getUsuario() {
     var u = await getUsuarioPorIdApi(idDoUsuarioLogado)
     setCarregando(false)
@@ -63,7 +73,13 @@ export default function TelaPrincipal() {
   const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
   const mensagemReducer = useSelector((state:any)=>state.checkedDeletarPart.status)
   const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
-
+  
+  let idDoTorneioSelecionado = usuario?.torneio[torneio]?.id as string
+  const listaFiltrada = resultadosApi.filter(e=>{
+    if (e.idDoTorneio === idDoTorneioSelecionado) {
+      return e
+    }
+  })
   return (
     <React.Fragment >
       <Toolbar id="back-to-top-anchor" />
@@ -101,14 +117,14 @@ export default function TelaPrincipal() {
               {
                 tipoDeTorneio === "2" &&
                 <div className='telaPrincipalTabelaDeClassificacao '>
-                  <CardTabelaResultados />
+                  <CardTabelaResultados resultadosApi={resultadosApi}/>
                 </div>
               }
               <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>
-                <EstatisticaCampeao estatistica={estatisticas}/>
+                <EstatisticaCampeao estatistica={estatisticas} lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>
                 <EstatisticaAssistencia estatistica={estatisticas}/>
-                <EstatisticaArtilheiros estatistica={estatisticas}/>
+                <EstatisticaArtilheiros lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>
               </div>
             </div>
           </div>

@@ -13,23 +13,22 @@ import { formatoMonetario, getDataTorneio, getHoraTorneio } from '../../metodosU
 import { Avatar, IconButton } from '@mui/material';
 import BtnDeleteTabelaResultados from '../campeonatoFormato_2/btnDeleteTabelaResultado';
 import { useSelector } from 'react-redux';
-export default function CardTabelaResultados() {
+export default function CardTabelaResultados({resultadosApi}:any) {
   
   const tor = useSelector((state:any)=>state.torneioReducer.torneio)
   const torneio = useSelector((state:any)=>state.usuarioReducer.usuario.torneio[tor])
-  const [resultadosApi, setresultadosApi] = useState<any>()
-  async function getTabela() {
-    const r = await listarTabelaApi()
-    setresultadosApi(r)
-  }  
-  useEffect(()=>{
-    getTabela()
-  },[])
+
   let resultadoFilter = resultadosApi?.filter((e:any)=>{
     if (e?.idDoTorneio === torneio?.id) {
       return e
     }
   })
+  const resultadoOrdenadoPorColocacao = (array:[])=>{
+     const res = array.sort((a:any,b:any)=>{
+      return a.premioColocacao > b.premioColocacao ? -1 : a.premioColocacao < b.premioColocacao ? 1 : 0
+     })
+     return res
+  }
    
   return (
     <div>
@@ -49,7 +48,7 @@ export default function CardTabelaResultados() {
                           <TableCell align="left" sx={{minWidth:"20px"}}>Pontos</TableCell>
                           <TableCell align="left" sx={{minWidth:"160px"}}>Colocação</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio de campeão</TableCell>
-                          <TableCell align="left"  sx={{minWidth:"160px"}}>Artilharia</TableCell>
+                          {/* <TableCell align="left"  sx={{minWidth:"160px"}}>Artilharia</TableCell> */}
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio da artilharia</TableCell>
                           <TableCell align="left">Gols</TableCell>
                           <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio dos gols</TableCell>
@@ -61,7 +60,7 @@ export default function CardTabelaResultados() {
                       </TableRow>
                       </TableHead>
                       <TableBody>
-                        {res.resultados?.map((row:any, key:any) => (
+                        { resultadoOrdenadoPorColocacao(res.resultados)?.map((row:any, key:any) => (
                             <TableRow
                             key={key}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -73,7 +72,7 @@ export default function CardTabelaResultados() {
                             <TableCell align="center" sx={{minWidth:"60px"}}>{row.vitorias*3 + row.empates}</TableCell>
                             <TableCell align="left">{row.colocacao}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioColocacao)}</TableCell>
-                            <TableCell align="left">{row.artilharia}</TableCell>
+                            {/* <TableCell align="left">{row.artilharia}</TableCell> */}
                             <TableCell align="left">{formatoMonetario(row.premioArtilharia)}</TableCell>
                             <TableCell align="center">{row.gols}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioGols)}</TableCell>
