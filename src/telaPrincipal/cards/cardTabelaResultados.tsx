@@ -8,11 +8,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { resultadoType } from '../../types';
+import Tooltip from '@mui/material/Tooltip';
 import { formatoMonetario, getDataTorneio, getHoraTorneio } from '../../metodosUteis';
 import { Avatar, IconButton } from '@mui/material';
 import BtnDeleteTabelaResultados from '../campeonatoFormato_2/btnDeleteTabelaResultado';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export default function CardTabelaResultados({resultadosApi}:any) {
   
   const tor = useSelector((state:any)=>state.torneioReducer.torneio)
@@ -44,7 +45,12 @@ export default function CardTabelaResultados({resultadosApi}:any) {
    })
   const tamanhoDoArray = resultadoFilter?.reverse().length
   const quantPagina = Math.round(Math.ceil(tamanhoDoArray/qtdPorPagina))
-   
+  const navigate = useNavigate()
+  const getParticipante = (e:any)=>{
+    localStorage.setItem('idDoElenco', e.idDoParticipante as string)
+    navigate('/elenco')
+    console.log(e)
+  } 
   return (
     <div>
         <h2 style={{textAlign:"center"}}>Torneios anteriores</h2>
@@ -88,9 +94,13 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                             key={key}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                            <TableCell component="th" scope="row"  sx={{display:"flex"}}>
-                               <Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/>
-                                {row.usuario}
+                            <TableCell component="th" scope="row"  >
+                                <Tooltip title={"Vá para o "+row.usuario}>
+                                  <div style={{display:"flex", cursor:"pointer"}} onClick={()=> getParticipante(row)}>
+                                    <Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/>
+                                    {row.usuario}
+                                  </div>
+                                </Tooltip>
                             </TableCell>
                             <TableCell align="center" sx={{minWidth:"60px"}}>{row.vitorias*3 + row.empates}</TableCell>
                             <TableCell align="left">{row.colocacao}</TableCell>
