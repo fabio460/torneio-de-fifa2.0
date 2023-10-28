@@ -11,38 +11,12 @@ export default function EstatisticaArtilheiros({lista, idDoTorneioSelecionado}:{
      
   const [dados, setDados] = useState<dadosType[]>([])  
   let aux:any = []
-// Suponhamos que este é o seu array de objetos
-const objetos = [
-  { nome: "A", valor: 10 },
-  { nome: "B", valor: 20 },
-  { nome: "C", valor: 5 },
-  { nome: "D", valor: 30 },
-];
-
-// Use a função reduce para encontrar o objeto com o maior valor
-const objetoMaiorValor = objetos.reduce((maior, objeto) => {
-  return objeto.valor > maior.valor ? objeto : maior;
-}, objetos[0]); 
-
-console.log(objetoMaiorValor);
-const cam = lista.map((e, key)=>{
-  let res = e.resultados.filter(s=>{
-    if (s.colocacao==="Campeão") {
-      return s?.usuario
-    }
-  })
-  return {name: res[0]?.usuario, Artilharia:res[0]?.gols}
-}) 
-
-const inputArray = cam.reverse()
-
-console.log(inputArray)
 
   useEffect(()=>{
     aux = []
     const cam = lista.map((e, key)=>{
       let res = e.resultados.filter(s=>{
-        if (s.colocacao==="Campeão") {
+        if (s.artilharia==="Artilheiro") {
           return s?.usuario
         }
       })
@@ -58,7 +32,7 @@ console.log(inputArray)
       }
     });
     for (const element in countObject) {
-      aux.push({ name: element, Campeao: countObject[element] });
+      aux.push({ name: element, Artilharias: countObject[element] });
     }
     setDados(aux)
   },[lista, idDoTorneioSelecionado])

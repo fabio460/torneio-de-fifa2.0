@@ -48,7 +48,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                           <TableCell align="left" sx={{minWidth:"20px"}}>Pontos</TableCell>
                           <TableCell align="left" sx={{minWidth:"160px"}}>Colocação</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio de campeão</TableCell>
-                          {/* <TableCell align="left"  sx={{minWidth:"160px"}}>Artilharia</TableCell> */}
+                          <TableCell align="left"  sx={{minWidth:"160px"}}>Artilharia</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio da artilharia</TableCell>
                           <TableCell align="left">Gols</TableCell>
                           <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio dos gols</TableCell>
@@ -72,7 +72,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                             <TableCell align="center" sx={{minWidth:"60px"}}>{row.vitorias*3 + row.empates}</TableCell>
                             <TableCell align="left">{row.colocacao}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioColocacao)}</TableCell>
-                            {/* <TableCell align="left">{row.artilharia}</TableCell> */}
+                            <TableCell align="left">{row.artilharia}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioArtilharia)}</TableCell>
                             <TableCell align="center">{row.gols}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioGols)}</TableCell>
