@@ -78,6 +78,10 @@
 .toolTipJogadores::-webkit-scrollbar-thumb{
     background-color: rgb(141, 150, 150);
 }
+.paginacao{
+    display: flex;
+    justify-content: flex-end;
+}
 @media (max-width:1586px) {
     .cardEstatistica{
         width: 45vw;
@@ -136,5 +140,9 @@
     }
     .cardEstatistica{
         width: 90vw;
+    }
+    .paginacao{
+        display: flex;
+        justify-content: center;
     }
 }

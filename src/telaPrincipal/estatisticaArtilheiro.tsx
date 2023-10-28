@@ -42,7 +42,7 @@ export default function EstatisticaArtilheiros({lista, idDoTorneioSelecionado}:{
   })
     return (
       <div className='cardEstatistica'>
-        <h5 style={{textAlign:"center"}}>Maiores Artilheiros</h5>
+        <h5 style={{textAlign:"center"}}>Melhor ataque</h5>
         <ResponsiveContainer width="100%" maxHeight={300}>
           <AreaChart
             width={500}

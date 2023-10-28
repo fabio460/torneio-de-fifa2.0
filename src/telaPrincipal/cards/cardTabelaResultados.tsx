@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
-import TabelaPremios from '../campeonatoFormato_2/tabelaPremios'
-import {listarTabelaApi } from '../../api/tabelaResultadosApi'
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,24 +17,47 @@ export default function CardTabelaResultados({resultadosApi}:any) {
   
   const tor = useSelector((state:any)=>state.torneioReducer.torneio)
   const torneio = useSelector((state:any)=>state.usuarioReducer.usuario.torneio[tor])
-
+  const [pagina, setPagina] = React.useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPagina(value);
+  };
   let resultadoFilter = resultadosApi?.filter((e:any)=>{
     if (e?.idDoTorneio === torneio?.id) {
       return e
     }
   })
+
+  const qtdPorPagina = 4
+  let inicioDaPagina = qtdPorPagina*pagina - qtdPorPagina
+  let finalDaPagina = qtdPorPagina*pagina - 1
   const resultadoOrdenadoPorColocacao = (array:[])=>{
      const res = array.sort((a:any,b:any)=>{
       return a.premioColocacao > b.premioColocacao ? -1 : a.premioColocacao < b.premioColocacao ? 1 : 0
      })
      return res
   }
+
+  const paginado = resultadoFilter?.reverse().filter((elem:any, key:any)=>{
+    if (key >= inicioDaPagina  && key < finalDaPagina) {
+      return elem
+    }
+   })
+  const tamanhoDoArray = resultadoFilter?.reverse().length
+  const quantPagina = Math.round(Math.ceil(tamanhoDoArray/qtdPorPagina))
    
   return (
     <div>
         <h2 style={{textAlign:"center"}}>Torneios anteriores</h2>
         {
-          resultadoFilter?.reverse().map((res:any, key:number)=>{
+          tamanhoDoArray > 4 &&
+          <div className='paginacao'>
+            <Stack spacing={2}>
+              <Pagination count={quantPagina} color="primary" page={pagina} onChange={handleChange}/>
+            </Stack>
+          </div>
+        }
+        {
+          paginado.map((res:any, key:number)=>{
             return <div key={key} style={{padding:"30px opx"}}>
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                   <div style={{marginTop:"30px"}}>Torneio encerrado em {getDataTorneio(res.data)} as {getHoraTorneio(res.data)}</div>
