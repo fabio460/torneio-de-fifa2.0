@@ -41,7 +41,8 @@ export const calculoDasPremiacoesDaTabela = (tabela:any)=>{
     const arrGols = tabela.map((e:any)=>{
       return e.golsPro
     })
-    const arrSemDupl = [... new Set(arrGols.sort().reverse())]
+    console.log(arrGols.sort((a:any, b:any) => b - a))
+    const arrSemDupl = [... new Set(arrGols.sort((a:any, b:any) => b - a))]
     const posicao = arrSemDupl.indexOf(gols);
     return posicao === 0 ? "Artilheiro" : posicao === 1 ? "Vice-Artilheiro": posicao === 2 ? "Terceiro artilheiro": "Quarto artilheiro"
   }
