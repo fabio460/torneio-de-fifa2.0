@@ -308,6 +308,7 @@ export type tabelaDeResultadosType = {
   id:string,
   idDoCampeonato:string,
   idDoTorneio:string,
+  dataDeInicio:string,
   resultados:{
     artilharia:string,
     avatar:string, 
@@ -315,6 +316,7 @@ export type tabelaDeResultadosType = {
     empates:number,
     gols:number,
     id:string,
+    golsTomados:number,
     idDoParticipante:string,
     idTabelaResultados:string,
     premioArtilharia:number,

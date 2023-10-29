@@ -37,7 +37,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
      })
      return res
   }
-
+  console.log(resultadoFilter)
   const paginado = resultadoFilter?.reverse().filter((elem:any, key:any)=>{
     if (key >= inicioDaPagina  && key < finalDaPagina) {
       return elem
@@ -49,7 +49,6 @@ export default function CardTabelaResultados({resultadosApi}:any) {
   const getParticipante = (e:any)=>{
     localStorage.setItem('idDoElenco', e.idDoParticipante as string)
     navigate('/elenco')
-    console.log(e)
   } 
   return (
     <div>
@@ -66,7 +65,8 @@ export default function CardTabelaResultados({resultadosApi}:any) {
           paginado.map((res:any, key:number)=>{
             return <div key={key} style={{padding:"30px opx"}}>
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                  <div style={{marginTop:"30px"}}>Torneio encerrado em {getDataTorneio(res.data)} as {getHoraTorneio(res.data)}</div>
+                  
+                  <div style={{marginTop:"30px"}}>Torneio começado as {getHoraTorneio(res?.dataDeInicio)} do dia {getDataTorneio(res?.dataDeInicio)} e encerrado as {getHoraTorneio(res.data)} do dia {getDataTorneio(res.data)} </div>
                   <BtnDeleteTabelaResultados tabela={res}/>
               </div>
               <TableContainer component={Paper} sx={{margin:"30px opx"}}>

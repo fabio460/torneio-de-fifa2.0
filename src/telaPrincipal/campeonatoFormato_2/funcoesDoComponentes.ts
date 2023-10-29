@@ -35,13 +35,12 @@ export function calculaDadosDaTabela(golCasa:any , golFora:any) {
     return resultado
 }
 
-export const calculoDasPremiacoesDaTabela = (tabela:any)=>{
+export const calculoDasPremiacoesDaTabela = (tabela:any, dataDeInicio:string | undefined)=>{
 
   function getPostArtilheiro(gols:number) {
     const arrGols = tabela.map((e:any)=>{
       return e.golsPro
     })
-    console.log(arrGols.sort((a:any, b:any) => b - a))
     const arrSemDupl = [... new Set(arrGols.sort((a:any, b:any) => b - a))]
     const posicao = arrSemDupl.indexOf(gols);
     return posicao === 0 ? "Artilheiro" : posicao === 1 ? "Vice-Artilheiro": posicao === 2 ? "Terceiro artilheiro": "Quarto artilheiro"
@@ -104,6 +103,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:any)=>{
         return {
           idParticipante:j.idDoParticipante,
           premio: Artilharia + Colocacao + Gols + Vitorias + Empates,
+          dataDeInicio,
           beneficiado:j,
           Artilharia,
           PremioColocacao:Colocacao,

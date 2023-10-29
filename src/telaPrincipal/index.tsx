@@ -122,8 +122,8 @@ export default function TelaPrincipal() {
               }
               <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
               <div className='telaPrincipalMeio'>
-                <EstatisticaCampeao estatistica={estatisticas} lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>
-                <EstatisticaAssistencia estatistica={estatisticas}/>
+                <EstatisticaCampeao lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>
+                <EstatisticaAssistencia lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>
                 <EstatisticaArtilheiros lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>
               </div>
             </div>

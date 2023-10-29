@@ -8,7 +8,7 @@ type dadosType = {
   name:string,
   Campeao:string
 }
-export default function EstatisticaCampeao({estatistica, lista, idDoTorneioSelecionado}:{estatistica:statisticasTypes[] | undefined, lista:tabelaDeResultadosType[], idDoTorneioSelecionado:string}) {
+export default function EstatisticaCampeao({lista, idDoTorneioSelecionado}:{ lista:tabelaDeResultadosType[], idDoTorneioSelecionado:string}) {
 
   const [dados, setDados] = useState<dadosType[]>([])  
   let aux = []
