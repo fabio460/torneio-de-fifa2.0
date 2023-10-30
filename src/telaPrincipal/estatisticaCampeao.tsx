@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 type dadosType = {
   name:string,
-  Campeao:string
+  Venceu:string
 }
 export default function EstatisticaCampeao({lista, idDoTorneioSelecionado}:{ lista:tabelaDeResultadosType[], idDoTorneioSelecionado:string}) {
 
@@ -32,13 +32,13 @@ export default function EstatisticaCampeao({lista, idDoTorneioSelecionado}:{ lis
       }
     });
     for (const element in countObject) {
-      aux.push({ name: element, Campeao: countObject[element] });
+      aux.push({ name: element, Venceu: countObject[element] });
     }
     setDados(aux)
   },[lista, idDoTorneioSelecionado])
    
   const dadosOrdenados = dados.sort((a,b)=>{
-    return a.Campeao > b.Campeao ? 1 : a.Campeao < b.Campeao ? -1 :0
+    return a.Venceu > b.Venceu ? 1 : a.Venceu < b.Venceu ? -1 :0
   })
     
     return (
@@ -62,7 +62,7 @@ export default function EstatisticaCampeao({lista, idDoTorneioSelecionado}:{ lis
             <Tooltip />
             <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
             <Area type="monotone" dataKey="" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-            <Area type="monotone" dataKey="Campeao" stackId="1" stroke="#ffc658" fill="#ffc658" />
+            <Area type="monotone" dataKey="Venceu" stackId="1" stroke="#ffc658" fill="#ffc658" />
           </AreaChart>
         </ResponsiveContainer>
       </div>

@@ -85,7 +85,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                           <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio das vitórias</TableCell>
                           <TableCell align="left">Empates</TableCell>
                           <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio dos empates</TableCell>
-                          <TableCell align="left" sx={{minWidth:"130px"}}>Gols tomados</TableCell>
+                          <TableCell align="left" sx={{minWidth:"130px"}}>Gols sofridos</TableCell>
                           <TableCell align="left">Total</TableCell>
                       </TableRow>
                       </TableHead>

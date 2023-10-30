@@ -1,20 +1,16 @@
-import React, { useEffect,useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { statisticasTypes, tabelaDeResultadosType } from '../types';
-import { removerDuplicataArrayDeObjetos } from '../metodosUteis';
+import { tabelaDeResultadosType } from '../types';
 
 type dataType = {
   name:string,
-  Defesa:number
+  Sofreu:number
 }
-export default function EstatisticaAssistencia({lista, idDoTorneioSelecionado}:{lista:tabelaDeResultadosType[] | undefined, idDoTorneioSelecionado:string}) {
-    const [dados, setDados] = useState<dataType[]>([])
-    const data:dataType[] = [{name:"fabio", Defesa:3}]
+export default function EstatisticaAssistencia({lista}:{lista:tabelaDeResultadosType[] | undefined, idDoTorneioSelecionado:string}) {
    
     let aux:dataType[] = []
     let res = lista?.map(e=>{
      return e.resultados.map(r=>{
-       return aux.push({name:r.usuario, Defesa:r.golsTomados})
+       return aux.push({name:r.usuario, Sofreu:r.golsTomados})
         
       })
     })
@@ -22,31 +18,30 @@ export default function EstatisticaAssistencia({lista, idDoTorneioSelecionado}:{
     const somaPorNome:any = {};
 
     aux.forEach((produto) => {
-        const { name, Defesa } = produto;
+        const { name, Sofreu } = produto;
         if (somaPorNome[name] === undefined) {
-            somaPorNome[name] = Defesa;
+            somaPorNome[name] = Sofreu;
         } else {
-            somaPorNome[name] += Defesa;
+            somaPorNome[name] += Sofreu;
         }
     });
 
-    let arr1 = JSON.stringify(somaPorNome).split('{')[1].split("}")[0].split(",");
-    console.log(arr1)
+    let arr1 = JSON.stringify(somaPorNome)?.split('{')[1]?.split("}")[0]?.split(",");
     let dadoFinal = arr1.map(e=>{
       return {
-        name:e.split('"')[1].split('"')[0],
-        Defesa:parseInt(e.split(":")[1])
+        name:e?.split('"')[1]?.split('"')[0],
+        Sofreu:parseInt(e?.split(":")[1])
       }
     })
    
     
     let dadosOrdenados = dadoFinal.sort((a,b)=>{
-      return a.Defesa > b.Defesa ? 1 : a.Defesa < b.Defesa ? -1 :0
+      return a.Sofreu > b.Sofreu ? 1 : a.Sofreu < b.Sofreu ? -1 :0
     })
-    console.log(dadosOrdenados)
+    
     return (
       <div className='cardEstatistica'>
-        <h5 style={{textAlign:"center"}}>Defesa mais vazada</h5>
+        <h5 style={{textAlign:"center"}}>Defeza mais vazada</h5>
         <ResponsiveContainer width="100%" maxHeight={300}>
           <AreaChart
             width={500}
@@ -64,7 +59,7 @@ export default function EstatisticaAssistencia({lista, idDoTorneioSelecionado}:{
             <YAxis />
             <Tooltip />
             <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-            <Area type="monotone" dataKey="Defesa" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+            <Area type="monotone" dataKey="Sofreu" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
             <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
           </AreaChart>
         </ResponsiveContainer>
