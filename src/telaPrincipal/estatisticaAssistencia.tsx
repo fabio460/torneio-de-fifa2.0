@@ -8,18 +8,50 @@ type dataType = {
   Defesa:number
 }
 export default function EstatisticaAssistencia({lista, idDoTorneioSelecionado}:{lista:tabelaDeResultadosType[] | undefined, idDoTorneioSelecionado:string}) {
-    const [dados, setDados] = useState([])
+    const [dados, setDados] = useState<dataType[]>([])
     const data:dataType[] = [{name:"fabio", Defesa:3}]
    
+    let aux:dataType[] = []
+    let res = lista?.map(e=>{
+     return e.resultados.map(r=>{
+       return aux.push({name:r.usuario, Defesa:r.golsTomados})
+        
+      })
+    })
   
+    const somaPorNome:any = {};
+
+    aux.forEach((produto) => {
+        const { name, Defesa } = produto;
+        if (somaPorNome[name] === undefined) {
+            somaPorNome[name] = Defesa;
+        } else {
+            somaPorNome[name] += Defesa;
+        }
+    });
+
+    let arr1 = JSON.stringify(somaPorNome).split('{')[1].split("}")[0].split(",");
+    console.log(arr1)
+    let dadoFinal = arr1.map(e=>{
+      return {
+        name:e.split('"')[1].split('"')[0],
+        Defesa:parseInt(e.split(":")[1])
+      }
+    })
+   
+    
+    let dadosOrdenados = dadoFinal.sort((a,b)=>{
+      return a.Defesa > b.Defesa ? 1 : a.Defesa < b.Defesa ? -1 :0
+    })
+    console.log(dadosOrdenados)
     return (
       <div className='cardEstatistica'>
-        <h5 style={{textAlign:"center"}}>Melhores Assistentes</h5>
+        <h5 style={{textAlign:"center"}}>Defesa mais vazada</h5>
         <ResponsiveContainer width="100%" maxHeight={300}>
           <AreaChart
             width={500}
             height={400}
-            data={data}
+            data={dadosOrdenados}
             margin={{
               top: 10,
               right: 30,

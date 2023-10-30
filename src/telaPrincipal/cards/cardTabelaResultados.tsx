@@ -37,7 +37,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
      })
      return res
   }
-  console.log(resultadoFilter)
+  
   const paginado = resultadoFilter?.reverse().filter((elem:any, key:any)=>{
     if (key >= inicioDaPagina  && key < finalDaPagina) {
       return elem
@@ -85,6 +85,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                           <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio das vitórias</TableCell>
                           <TableCell align="left">Empates</TableCell>
                           <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio dos empates</TableCell>
+                          <TableCell align="left" sx={{minWidth:"130px"}}>Gols tomados</TableCell>
                           <TableCell align="left">Total</TableCell>
                       </TableRow>
                       </TableHead>
@@ -113,6 +114,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                             <TableCell align="left">{formatoMonetario(row.premioVitorias)}</TableCell>
                             <TableCell align="center">{row.empates}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioEmpates)}</TableCell>
+                            <TableCell align="center">{row.golsTomados}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.total)}</TableCell>
                             </TableRow>
                         ))}
