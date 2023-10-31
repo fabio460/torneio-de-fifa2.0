@@ -27,8 +27,8 @@ export default function ToolTipJogadores({jogadores}:{jogadores:jogadoresType[]}
     <React.Fragment>
         <div className='toolTipJogadores'>
             {
-              jogadores.map(e=>{
-                return  <div style={{display:"flex", alignItems:"center", }}>
+              jogadores.map((e, key)=>{
+                return  <div key={key} style={{display:"flex", alignItems:"center", }}>
                     <Avatar src={e.imagemDoJogador} sx={{width:"30px", height:"30px"}}/> <span style={{fontSize:"12px"}}>{e.nome}</span>
                   </div>
               })

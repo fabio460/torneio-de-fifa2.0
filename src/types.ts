@@ -296,8 +296,10 @@ export type resultadoType = {
     golsPro:number,
     jogos:number,
     pontos:number,
-    saldoDeGol:number 
-    vitorias:number
+    saldoDeGol:number, 
+    vitorias:number,
+    posicaoDefezaMenosVazada?:string,
+    premioDefezaMenosVazada?:number
   }
   idParticipante:string
   premio:number
@@ -328,4 +330,21 @@ export type tabelaDeResultadosType = {
     usuario:string,
     vitorias:number,
   }[]
+}
+
+export type tabelaType = {
+  avatar:string,
+  derrota:number,
+  empates:number,
+  equipe:string,
+  golsContra:number,
+  golsPro:number,
+  id:string,
+  idDoCampeonato:string,
+  idDoParticipante:string,
+  idDoTorneio:string,
+  jogos:number,
+  pontos:number,
+  saldoDeGol:number,
+  vitorias:number
 }

@@ -14,6 +14,7 @@ import { Avatar, IconButton } from '@mui/material';
 import BtnDeleteTabelaResultados from '../campeonatoFormato_2/btnDeleteTabelaResultado';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { tabelaType } from '../../types';
 export default function CardTabelaResultados({resultadosApi}:any) {
   
   const tor = useSelector((state:any)=>state.torneioReducer.torneio)
@@ -50,6 +51,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
     localStorage.setItem('idDoElenco', e.idDoParticipante as string)
     navigate('/elenco')
   } 
+  console.log(paginado)
   return (
     <div>
         <h2 style={{textAlign:"center"}}>Torneios anteriores</h2>
@@ -86,6 +88,8 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                           <TableCell align="left">Empates</TableCell>
                           <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio dos empates</TableCell>
                           <TableCell align="left" sx={{minWidth:"130px"}}>Gols sofridos</TableCell>
+                          <TableCell align="left" sx={{minWidth:"180px"}}>Defeza menos vazada</TableCell>
+                          <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio menos vazada</TableCell>
                           <TableCell align="left">Total</TableCell>
                       </TableRow>
                       </TableHead>
@@ -115,6 +119,8 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                             <TableCell align="center">{row.empates}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.premioEmpates)}</TableCell>
                             <TableCell align="center">{row.golsTomados}</TableCell>
+                            <TableCell align="center">{row?.posicaoDefezaMenosVazada}</TableCell>
+                            <TableCell align="center">{formatoMonetario(row?.premioDefezaMenosVazada)}</TableCell>
                             <TableCell align="left">{formatoMonetario(row.total)}</TableCell>
                             </TableRow>
                         ))}

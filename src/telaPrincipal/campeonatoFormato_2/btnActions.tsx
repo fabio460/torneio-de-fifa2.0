@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTabelaApi } from '../../api/campeonatoApi';
-import { campeonatoType, participanteeducerType, resultadoType, tabelaCampeonatoType, usuarioLogadoType } from '../../types';
+import { campeonatoType, participanteeducerType, resultadoType, tabelaCampeonatoType, tabelaType, usuarioLogadoType } from '../../types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material'
 import ModalConfirmaPagamentoFolha from '../modais/modalConfirPagFolha';
@@ -98,8 +98,8 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
           type:"carregandoTorneio",
           payload:{carregando:true, nome:"pagarPremio"}
       })
-      const tabela:tabelaCampeonatoType[] = await listarTabelaApi(idTorneio)
-      const premiados = await calculoDasPremiacoesDaTabela(tabela,campeonato?.data)
+      const tabela:any = await listarTabelaApi(idTorneio)
+      const premiados:any = await calculoDasPremiacoesDaTabela(tabela,campeonato?.data)
       handleClickOpen(premiados)
       setResultados(premiados)
       pagarPremiacoesApi(premiados)
@@ -212,9 +212,7 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
               <CloseIcon />
             </IconButton>
             <DialogContent dividers>
-                {
-                  
-                }
+    
             </DialogContent>
             <DialogActions>
               <Button autoFocus onClick={handleClose}>

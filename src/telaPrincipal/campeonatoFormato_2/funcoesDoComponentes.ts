@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
 import { atualizarTabelaApi } from "../../api/campeonatoApi";
-import { golsType, tabelaCampeonatoType } from "../../types";
-import { artilheiro, campeao, empates, gols, quartoAtilheiro, quartoColocado, terceiroArtilheiro, terceiroColocado, viceArtilheiro, viceCampeao, vitoria } from "../../valoresDosPremios";
+import { golsType, resultadoType, tabelaCampeonatoType, tabelaType } from "../../types";
+import { artilheiro, campeao, defezaMenosVazada, defezaQuartaMenosVazada, defezaSegundaMenosVazada, defezaTerceiraMenosVazada, empates, gols, quartoAtilheiro, quartoColocado, terceiroArtilheiro, terceiroColocado, viceArtilheiro, viceCampeao, vitoria } from "../../valoresDosPremios";
+import { type } from "os";
+
 
 export function calculaDadosDaTabela(golCasa:any , golFora:any) {
    
@@ -35,16 +37,26 @@ export function calculaDadosDaTabela(golCasa:any , golFora:any) {
     return resultado
 }
 
-export const calculoDasPremiacoesDaTabela = (tabela:any, dataDeInicio?:string | undefined)=>{
+export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:string | undefined)=>{
 
+  function MenosVazada(golsSofridos:number) {
+    const arrGols = tabela.map((e)=>{
+      return e.golsContra
+    })
+    const arrSemDupl = [... new Set(arrGols.sort((a, b) => b - a))]
+    const posicao = arrSemDupl.indexOf(golsSofridos);
+    return posicao === (arrSemDupl.length -1) ? "Menos-Vazada" : posicao === (arrSemDupl.length -2) ? "Segundo-Menos-Vazada": posicao === (arrSemDupl.length -3) ? "Terceiro-Menos-Vazada": "Quarto-Menos-Vazada"
+
+  }
   function getPostArtilheiro(gols:number) {
-    const arrGols = tabela.map((e:any)=>{
+    const arrGols = tabela.map((e)=>{
       return e.golsPro
     })
-    const arrSemDupl = [... new Set(arrGols.sort((a:any, b:any) => b - a))]
+    const arrSemDupl = [... new Set(arrGols.sort((a, b) => b - a))]
     const posicao = arrSemDupl.indexOf(gols);
     return posicao === 0 ? "Artilheiro" : posicao === 1 ? "Vice-Artilheiro": posicao === 2 ? "Terceiro artilheiro": "Quarto artilheiro"
   }
+
   function unirObjetosIguais(array:any) {
     const resultado:any = {};
     for (const objeto of array) {
@@ -88,7 +100,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:any, dataDeInicio?:string | 
       }
   }
     
-    return tabela.map((j:any, key:number)=>{
+    return tabela.map((j, key:number)=>{
         const Colocacao = key === 0 ? campeao : key === 1 ? viceCampeao : key === 2 ? terceiroColocado : quartoColocado
         const Gols = j.golsPro * gols
         const Vitorias = j.vitorias * vitoria
@@ -99,10 +111,12 @@ export const calculoDasPremiacoesDaTabela = (tabela:any, dataDeInicio?:string | 
         const quantVitorias = j.vitorias
         const quantGols = j.golsPro
         const quantEmpates = j.empates
+        const posicaoDefezaMenosVazada = MenosVazada(j.golsContra)
+        const premioDefezaMenosVazada = MenosVazada(j.golsContra) === "Menos-Vazada"? defezaMenosVazada: MenosVazada(j.golsContra) === "Segundo-Menos-Vazada"? defezaSegundaMenosVazada : MenosVazada(j.golsContra) === "Terceiro-Menos-Vazada" ? defezaTerceiraMenosVazada : defezaQuartaMenosVazada
         
         return {
           idParticipante:j.idDoParticipante,
-          premio: Artilharia + Colocacao + Gols + Vitorias + Empates,
+          premio: Artilharia + Colocacao + Gols + Vitorias + Empates + premioDefezaMenosVazada,
           dataDeInicio,
           beneficiado:j,
           Artilharia,
@@ -114,7 +128,9 @@ export const calculoDasPremiacoesDaTabela = (tabela:any, dataDeInicio?:string | 
           PosArtilharia,
           quantVitorias,
           quantGols,
-          quantEmpates
+          quantEmpates,
+          posicaoDefezaMenosVazada,
+          premioDefezaMenosVazada
         }
       })
 }
