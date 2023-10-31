@@ -1,46 +1,12 @@
-import React, { PureComponent, useEffect, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { statisticasTypes, tabelaDeResultadosType } from '../types';
-import { artilheiro } from '../valoresDosPremios';
-import { removerDuplicataArrayDeObjetos } from '../metodosUteis';
+import { tabelaDeResultadosType } from '../types';
+
 type dadosType = {
   name:string,
   Fez:number
 }
-export default function EstatisticaArtilheiros({lista, idDoTorneioSelecionado}:{lista:tabelaDeResultadosType[], idDoTorneioSelecionado:string}) {
-     
-  // const [dados, setDados] = useState<dadosType[]>([])  
-  // let aux:any = []
+export default function EstatisticaArtilheiros({lista}:{lista:tabelaDeResultadosType[], idDoTorneioSelecionado:string}) {
 
-  // useEffect(()=>{
-  //   aux = []
-  //   const cam = lista.map((e, key)=>{
-  //     let res = e.resultados.filter(s=>{
-  //       if (s.artilharia==="Artilheiro") {
-  //         return s?.usuario
-  //       }
-  //     })
-  //     return res[0]?.usuario
-  //   }) 
-  //   const inputArray = cam.reverse()
-  //   const countObject:any = {};
-  //   inputArray.forEach(element => {
-  //     if (countObject[element] === undefined) {
-  //       countObject[element] = 1;
-  //     } else {
-  //       countObject[element]++;
-  //     }
-  //   });
-  //   for (const element in countObject) {
-  //     aux.push({ name: element, Fez: countObject[element] });
-  //   }
-  //   setDados(aux)
-  // },[lista, idDoTorneioSelecionado])
-   
-  // const dadosOrdenados = dados.sort((a,b)=>{
-  //   return a.Fez > b.Fez ? 1 : a.Fez < b.Fez ? -1 :0
-  // })
-  console.log(lista)
   let aux:dadosType[] = []
   let res = lista?.map(e=>{
    return e.resultados.map(r=>{

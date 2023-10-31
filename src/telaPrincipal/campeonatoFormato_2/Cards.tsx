@@ -52,13 +52,11 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
   let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
   let idTorneio = usuarioReducer.torneio[torneioAtual].id
 
-  const atualizarRodada =async ()=>{
+  const atualizarRodada =()=>{
     setCarregando(true)
     const id = rodada.id
-    atualizarRodadaApi(id, golCasa?.gol, golFora?.gol)
-     const res = calculaDadosDaTabela(golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})
-     atualizarTabelaApi(res, dispatch, atualizarDados, setCarregando)
-
+    const res = calculaDadosDaTabela(golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})  
+    atualizarTabelaApi(res, dispatch, atualizarDados, setCarregando, id, golCasa?.gol, golFora?.gol)
   }
   
   const corrigirResultado = async()=>{

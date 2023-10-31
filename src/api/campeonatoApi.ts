@@ -59,13 +59,13 @@ export const getCampeonatoPorIdApi = async(id: string)=>{
     body:JSON.stringify({id})
   }).then(r=>r.json())
 }
-export const atualizarRodadaApi = (id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, statusDaRodada?:string)=>{
+export const atualizarRodadaApi = (id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, statusDaRodada?:string, golCasa?:any, golFora?:any)=>{
   return fetch(local+"torneioTipoDois/atualizarRodada/",{
     headers:{
       "Content-Type":"application/json"
     },
     method:"put",
-    body:JSON.stringify({id, golsMandante, golsVisitante, statusDaRodada})
+    body:JSON.stringify({id, golsMandante, golsVisitante, statusDaRodada, golCasa, golFora})
   }).then(r=>r.json())
 }
 export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, correcao?:any, dispatch?:any, atualizarDados?:any, setCarregando?:any)=>{
@@ -92,25 +92,26 @@ export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, c
   })
 }
 
-export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any)=>{
+export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any, id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, statusDaRodada?:string, golCasa?:any, golFora?:any)=>{
   return fetch(local+"torneioTipoDois/atualizarTabela/",{
     headers:{
       "Content-Type":"application/json"
     },
     method:"put",
-    body:JSON.stringify({resultado})
+    body:JSON.stringify(
+      {
+        resultado,
+        id,
+        golsMandante,
+        golsVisitante
+      }
+    )
   }).then(r=>r.json()).then(res=>{
     dispatch({
       type:"atualizarDados",  
       payload:{status:!atualizarDados}
     })
-    setTimeout(() => {      
-      dispatch({
-        type:"atualizarDados",  
-        payload:{status:!atualizarDados}
-      })
-      setCarregando(false)
-    }, 1000);
+    setCarregando(false)
   })
 }
 

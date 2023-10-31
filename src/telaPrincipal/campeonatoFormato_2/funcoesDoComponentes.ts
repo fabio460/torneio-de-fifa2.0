@@ -35,7 +35,7 @@ export function calculaDadosDaTabela(golCasa:any , golFora:any) {
     return resultado
 }
 
-export const calculoDasPremiacoesDaTabela = (tabela:any, dataDeInicio:string | undefined)=>{
+export const calculoDasPremiacoesDaTabela = (tabela:any, dataDeInicio?:string | undefined)=>{
 
   function getPostArtilheiro(gols:number) {
     const arrGols = tabela.map((e:any)=>{

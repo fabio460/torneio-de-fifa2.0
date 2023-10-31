@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { criarCampeonatoApi, deletarCampeonatoApi, listarCampeonatoApi, listarTabelaApi } from '../../api/campeonatoApi';
 import { campeonatoType, participanteeducerType, resultadoType, tabelaCampeonatoType, usuarioLogadoType } from '../../types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -91,7 +91,7 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
           alert("Não é possível criar um torneio com menos de 3 participantes!")
         }
       }  
-    
+      
     const encerrarTorneio = async()=>{
       setcarregandoPagamento(true)
       dispatch({
