@@ -51,7 +51,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
     localStorage.setItem('idDoElenco', e.idDoParticipante as string)
     navigate('/elenco')
   } 
-  console.log(paginado)
+
   return (
     <div>
         <h2 style={{textAlign:"center"}}>Torneios anteriores</h2>
