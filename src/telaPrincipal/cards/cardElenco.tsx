@@ -6,13 +6,13 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { participantesType } from '../../types';
-import { calculaFolha, calculaQuantDeJogadores, formatoMonetario } from '../../metodosUteis';
+import { calculaFolha, formatoMonetario, getMediaOveral } from '../../metodosUteis';
 import ModalDeletarParticipantes from '../modais/modalDeletarParticipantes';
 import { useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { calculaValoresDosJogadores } from '../../metodosUteis';
-import { darkBackgroundBox, colorDark, dark } from '../../temaDark';
+import { darkBackgroundBox, colorDark } from '../../temaDark';
 import ToolTipJogadores from '../tooltipJogadores';
 export default function CardElenco({elenco}:{elenco:participantesType}) {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
@@ -60,6 +60,9 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
           }
         </Typography>
         <Divider sx={{marginBottom:1}}/>
+        <h3 style={{display:"flex",justifyContent:"flex-end"}}>
+          {getMediaOveral(elenco.jogadores)}
+        </h3>
         <Typography component={"div"} sx={{ fontSize: 14, color: darkMode ? colorDark:""}} color="text.secondary" gutterBottom>
           {
             elenco.saldo < 0 ? 

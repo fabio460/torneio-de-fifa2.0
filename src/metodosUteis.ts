@@ -351,3 +351,10 @@ export const getHoraTorneio = (data:string)=>{
   const hora =new Date(data)
   return hora.toLocaleTimeString().split(":")[0] + ":"+ hora.toLocaleTimeString().split(":")[1] 
 }
+
+export const getMediaOveral = (over:jogadoresType[])=>{
+  const soma = over.reduce((acc, elem)=>{
+    return acc +=parseInt(elem.overall)
+  },0)
+   return Math.ceil(soma/over.length)
+}

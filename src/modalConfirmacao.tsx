@@ -80,36 +80,39 @@ export default function ModalConfirmacoes({action, titulo, mensagem,textoBtn, co
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+      
       >
-        <DialogTitle id="alert-dialog-title">
-          {titulo}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {mensagem}
-            <div>
-              {
-                checkBox &&
-                <Checkbox 
-                   onChange={handleChecked}
-                />
-              }
-              {textCheckBox}
-            </div>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          {
-            carregando ?
-            <Button variant={variantConfirmar} color={corBtnConfirmar} onClick={handleAction}><CarregandoBtn/></Button>
-            :
-            <Button color={corBtnConfirmar} variant={variantConfirmar} onClick={handleAction}>{textoBtnConfirmar}</Button>
+        <div>
+          <DialogTitle id="alert-dialog-title">
+            {titulo}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              {mensagem}
+              <div>
+                {
+                  checkBox &&
+                  <Checkbox 
+                    onChange={handleChecked}
+                  />
+                }
+                {textCheckBox}
+              </div>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            {
+              carregando ?
+              <Button variant={variantConfirmar} color={corBtnConfirmar} onClick={handleAction}><CarregandoBtn/></Button>
+              :
+              <Button color={corBtnConfirmar} variant={variantConfirmar} onClick={handleAction}>{textoBtnConfirmar}</Button>
 
-          }
-          <Button onClick={handleClose} variant={varianteCancelar} color={corBtnCancelar} autoFocus>
-            {textoBtnCancelar}
-          </Button>
-        </DialogActions>
+            }
+            <Button onClick={handleClose} variant={varianteCancelar} color={corBtnCancelar} autoFocus>
+              {textoBtnCancelar}
+            </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </div>
   );

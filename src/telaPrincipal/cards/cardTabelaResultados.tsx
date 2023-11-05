@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -10,11 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import { formatoMonetario, getDataTorneio, getHoraTorneio } from '../../metodosUteis';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar } from '@mui/material';
 import BtnDeleteTabelaResultados from '../campeonatoFormato_2/btnDeleteTabelaResultado';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { tabelaType } from '../../types';
 export default function CardTabelaResultados({resultadosApi}:any) {
   
   const tor = useSelector((state:any)=>state.torneioReducer.torneio)

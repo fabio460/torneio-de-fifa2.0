@@ -48,6 +48,7 @@ export default function CampeonatoFormato_2() {
     setCarregando(true)
     const camp = await listarCampeonatoApi(idTorneio) || []
     setCampeonato(camp)
+    console.log(camp)
     dispatch({
       type:"dataDoCampeonato",
       payload:{data:camp.data ? camp.data : null}

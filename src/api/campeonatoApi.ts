@@ -92,7 +92,8 @@ export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, c
   })
 }
 
-export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any, id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, statusDaRodada?:string, golCasa?:any, golFora?:any)=>{
+export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any, id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, rodada?:any)=>{
+  console.log(rodada)
   return fetch(local+"torneioTipoDois/atualizarTabela/",{
     headers:{
       "Content-Type":"application/json"
@@ -103,7 +104,8 @@ export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:an
         resultado,
         id,
         golsMandante,
-        golsVisitante
+        golsVisitante,
+        rodada
       }
     )
   }).then(r=>r.json()).then(res=>{
