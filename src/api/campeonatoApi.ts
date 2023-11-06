@@ -26,7 +26,7 @@ export const criarCampeonatoApi = (times:any, voltas:any, idTorneio:string, disp
         })
         setCarregando(false)
         window.location.reload()
-      }, 4000);
+      }, 5000);
     })
 }
 
@@ -77,11 +77,10 @@ export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, c
     body:JSON.stringify({id, statusDaRodada, correcao})
   })
   .then(r=>r.json())
-  .then(()=>{
-    dispatch({
-      type:"atualizarDados",  
-      payload:{status:!atualizarDados}
-    })
+  .then((res)=>{
+    if (res === "Esta rodada já foi desfeita!") {   
+      alert(res)
+    }
     setTimeout(() => {      
       dispatch({
         type:"atualizarDados",  
@@ -109,6 +108,9 @@ export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:an
       }
     )
   }).then(r=>r.json()).then(res=>{
+    if (res === "Esta rodada já foi atualizada") {
+      alert(res)
+    }
     dispatch({
       type:"atualizarDados",  
       payload:{status:!atualizarDados}

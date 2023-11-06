@@ -234,6 +234,7 @@ export type rodadasType ={
     time: string,
     emblemaDoTime: string,
     idTorneio: string
+    idParticipante: string
   }[],
   visitante: {
     id: string,
@@ -242,6 +243,7 @@ export type rodadasType ={
     time: string,
     emblemaDoTime: string,
     idTorneio: string
+    idParticipante: string
   }[]
 } 
 export type campeonatoType = {

@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar, IconButton, InputBase, Paper } from '@mui/material';
 import { golsType, rodadasType } from '../../types';
+import Tooltip from '@mui/material/Tooltip';
 import  "./campeonato2.css";
 import UpdateIcon from '@mui/icons-material/Update';
 import { atualizarRodadaApi, atualizarStatusDaRodadaApi, atualizarTabelaApi, listarTabelaApi } from '../../api/campeonatoApi';
@@ -16,6 +17,7 @@ import { calculaDadosDaTabela } from './funcoesDoComponentes';
 import ModalIconeCorrecao from './modais/modalIconeConfirmacao';
 import ModalConfirmacoes from '../../modalConfirmacao';
 import { darkBackgroundBox } from '../../temaDark';
+import { useNavigate } from 'react-router-dom';
 
 
 const bull = (
@@ -74,7 +76,11 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       setCarregando(false)
     }, 2000);
   }
-  
+  const navigate = useNavigate()
+  const getParticipante = (e:any)=>{
+      localStorage.setItem('idDoElenco', e as string)
+      navigate('/elenco')
+  } 
   return (
     <Card sx={cardStyle} className='cardContainer' >
       {
@@ -100,14 +106,23 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
         </Typography>
         <Typography component='div' sx={{ m: 1, display:"flex", justifyContent:"space-between", alignContent:"center" }} color="text.secondary">
           <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-            <Avatar src={rodada.mandante[0]?.emblemaDoTime}/>
+            <Tooltip title={"Vá para o elenco do "+rodada.mandante[0].nome}>
+               <div>
+                 <Avatar  onClick={()=> getParticipante(rodada.mandante[0].idParticipante)} sx={{cursor:"pointer", padding:"5px", width:"50px", height:"50px"}} src={rodada.mandante[0]?.emblemaDoTime} />
+               </div>
+            </Tooltip>
             <Typography>{rodada.mandante[0]?.nome}</Typography>
           </div>
           <div style={{ display:"flex", alignItems:"center", margin:"20px"}}> 
             <img style={{width:"30px"}} src='https://cdn-icons-png.flaticon.com/512/753/753228.png' alt=''/>
           </div>
           <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-            <Avatar src={rodada.visitante[0]?.emblemaDoTime}/>
+          <Tooltip title={"Vá para o elenco do "+rodada.visitante[0].nome}>
+             <div>
+                <Avatar onClick={()=> getParticipante(rodada.visitante[0].idParticipante)} sx={{cursor:"pointer", padding:"5px", width:"50px", height:"50px"}} src={rodada.visitante[0]?.emblemaDoTime}/>
+             </div>
+          </Tooltip>
+
             <Typography component='div'>{rodada.visitante[0]?.nome}</Typography>
           </div>
         </Typography>

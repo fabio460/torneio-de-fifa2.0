@@ -358,3 +358,4 @@ export const getMediaOveral = (over:jogadoresType[])=>{
   },0)
    return Math.ceil(soma/over.length)
 }
+

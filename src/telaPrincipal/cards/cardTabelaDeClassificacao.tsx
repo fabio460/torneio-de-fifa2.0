@@ -12,6 +12,7 @@ import { campeonatoType, tabelaCampeonatoType } from '../../types';
 import { Avatar, Button } from '@mui/material';
 import CarregandoBtn from '../../carregandoBtn';
 import Carregando from '../../carregando';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -50,7 +51,11 @@ export default function CardTabelaDeClassificacao() {
           })
     }
     //console.log(rows)
-    
+    const navigate = useNavigate()
+    const getParticipante = (e:any)=>{
+        localStorage.setItem('idDoElenco', e.idDoParticipante as string)
+        navigate('/elenco')
+    } 
     return (
         <div>
             <div style={{display:"flex",justifyContent:"flex-end"}}>
@@ -77,10 +82,11 @@ export default function CardTabelaDeClassificacao() {
                     <TableBody>
                     {rows?.map((row) => (
                         <TableRow
-                        key={row.equipe}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            key={row.equipe}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                        <TableCell align="left" sx={{display:"flex"}}><Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/> {row.equipe}</TableCell>
+                        <TableCell align="left" sx={{display:"flex"}}>
+                            <Avatar onClick={()=> getParticipante(row)} sx={{cursor:"pointer",marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/> {row.equipe}</TableCell>
                         <TableCell align="left">{row.pontos}</TableCell>
                         <TableCell align="left">{row.jogos}</TableCell>
                         <TableCell align="left">{row.vitorias}</TableCell>

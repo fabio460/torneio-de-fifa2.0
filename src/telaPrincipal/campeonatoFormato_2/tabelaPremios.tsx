@@ -26,7 +26,7 @@ export default function TabelaPremios({resultados}:{resultados:resultadoType[]})
       <div style={{display:"flex", justifyContent:"center"}}>
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
           <h1>Vencedor</h1>
-          <Avatar src={resultados[0].beneficiado.avatar} sx={{width:"90px", height:"90px"}}/>
+          <Avatar src={resultados[0].beneficiado.avatar} sx={{width:"110px", height:"110px", padding:"12px"}}/>
           {resultados[0].beneficiado.equipe}
         </div>
       </div>

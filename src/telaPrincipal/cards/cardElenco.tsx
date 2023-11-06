@@ -2,6 +2,7 @@ import * as React from 'react';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Card from '@mui/material/Card';
 import { Divider, IconButton } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -36,12 +37,24 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
       paddingBottom:0,
     } 
   }
+  
+  const getParticipante = (e:any)=>{
+      localStorage.setItem('idDoElenco', e as string)
+      navigate('/elenco')
+  } 
   return (
     <Card sx={cardStyle}>
       <CardContent>
         <Typography variant="h5" component="div" sx={{display:'flex', justifyContent:'space-between', marginBottom:2}}>
           <div style={{display:"flex", alignItems:"center"}}>
-            {elenco?.emblemaDoTime && <Avatar src={elenco?.emblemaDoTime} sx={{marginRight:1}}/> }
+            {elenco?.emblemaDoTime && 
+              <Tooltip title={"Vá para o elenco "+elenco.nome}>
+                <div>
+                   <Avatar onClick={()=> linkGerenciaDeElenco()} src={elenco?.emblemaDoTime} sx={{marginRight:1 ,cursor:"pointer", padding:"5px", width:"50px", height:"50px"}}/> 
+                </div>
+              </Tooltip>
+            }
+
             <div style={{display:"flex", flexDirection:"column"}}>
               <div>
                 {elenco.nome}
