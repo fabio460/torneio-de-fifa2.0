@@ -100,9 +100,9 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                             >
                             <TableCell component="th" scope="row"  >
                                 <Tooltip title={"Vá para o "+row.usuario}>
-                                  <div style={{display:"flex", cursor:"pointer"}} onClick={()=> getParticipante(row)}>
-                                    <Avatar sx={{marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/>
-                                    {row.usuario}
+                                  <div style={{display:"flex", cursor:"pointer", alignItems:"center"}} onClick={()=> getParticipante(row)}>
+                                    <Avatar sx={{marginRight:1,width:"25px", height:"25px", padding:"3px"}} src={row.avatar}/>
+                                    <div>{row.usuario}</div>
                                   </div>
                                 </Tooltip>
                             </TableCell>

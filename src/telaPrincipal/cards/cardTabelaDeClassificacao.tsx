@@ -85,8 +85,8 @@ export default function CardTabelaDeClassificacao() {
                             key={row.equipe}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                        <TableCell align="left" sx={{display:"flex"}}>
-                            <Avatar onClick={()=> getParticipante(row)} sx={{cursor:"pointer",marginRight:1,width:"20px", height:"20px"}} src={row.avatar}/> {row.equipe}</TableCell>
+                        <TableCell align="left" sx={{display:"flex", alignItems:"center"}}>
+                            <Avatar onClick={()=> getParticipante(row)} sx={{marginRight:1,width:"25px", height:"25px", padding:"3px"}} src={row.avatar}/> {row.equipe}</TableCell>
                         <TableCell align="left">{row.pontos}</TableCell>
                         <TableCell align="left">{row.jogos}</TableCell>
                         <TableCell align="left">{row.vitorias}</TableCell>
