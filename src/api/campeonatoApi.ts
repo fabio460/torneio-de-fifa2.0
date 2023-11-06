@@ -78,7 +78,7 @@ export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, c
   })
   .then(r=>r.json())
   .then((res)=>{
-    if (res === "Esta rodada já foi desfeita!") {   
+    if (res === "Esta rodada já foi desfeita por outro usuário!") {   
       alert(res)
     }
     setTimeout(() => {      
