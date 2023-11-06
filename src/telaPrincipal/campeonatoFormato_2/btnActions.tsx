@@ -92,13 +92,17 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
         }
       }  
       
-    const encerrarTorneio = async()=>{
+    const finalizarTorneio = async()=>{
       setcarregandoPagamento(true)
       dispatch({
           type:"carregandoTorneio",
           payload:{carregando:true, nome:"pagarPremio"}
       })
       const tabela:any = await listarTabelaApi(idTorneio)
+      if (tabela.length === 0) {
+        alert("Não há um torneio aberto para finalizar")
+        window.location.reload()
+      }
       const premiados:any = await calculoDasPremiacoesDaTabela(tabela,campeonato?.data)
       handleClickOpen(premiados)
       setResultados(premiados)
@@ -177,7 +181,7 @@ export default function BtnActions({usuario}:{usuario:usuarioLogadoType | undefi
                           <ModalConfirmacoes
                               setCarregando={setCarregando}
                               carregando={carregando} 
-                              action={encerrarTorneio}
+                              action={finalizarTorneio}
                               titulo='Deseja finalizar o torneio?' mensagem='Ao confirmar, voçê fará o pagamento das premiações, tem certeza que deseja finalizar?'
                               textoBtn='finalizar'
                               variant='outlined'
