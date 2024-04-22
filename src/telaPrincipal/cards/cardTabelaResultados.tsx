@@ -76,16 +76,16 @@ export default function CardTabelaResultados({resultadosApi}:any) {
                       <TableRow>
                           <TableCell align='center' sx={{minWidth:"60px"}}>Usuário</TableCell>
                           <TableCell align="left" sx={{minWidth:"20px"}}>Pontos</TableCell>
-                          <TableCell align="left" sx={{minWidth:"160px"}}>Colocação</TableCell>
-                          <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio de campeão</TableCell>
+                          <TableCell align="left" sx={{minWidth:"180px"}}>Colocação</TableCell>
+                          <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio colocação</TableCell>
                           <TableCell align="left"  sx={{minWidth:"160px"}}>Artilharia</TableCell>
-                          <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio da artilharia</TableCell>
+                          <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio artilharia</TableCell>
                           <TableCell align="left">Gols</TableCell>
-                          <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio dos gols</TableCell>
+                          <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio por gols</TableCell>
                           <TableCell align="left">Vitórias</TableCell>
-                          <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio das vitórias</TableCell>
+                          <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio por vitórias</TableCell>
                           <TableCell align="left">Empates</TableCell>
-                          <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio dos empates</TableCell>
+                          <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio por empates</TableCell>
                           <TableCell align="left" sx={{minWidth:"130px"}}>Gols sofridos</TableCell>
                           <TableCell align="left" sx={{minWidth:"180px"}}>Defeza menos vazada</TableCell>
                           <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio menos vazada</TableCell>

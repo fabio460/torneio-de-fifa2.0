@@ -101,12 +101,12 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
   }
     
     return tabela.map((j, key:number)=>{
-        const Colocacao = key === 0 ? campeao : key === 1 ? viceCampeao : key === 2 ? terceiroColocado : quartoColocado
+        const Colocacao = key === 0 ? campeao : key === 1 ? viceCampeao : key === 2 ? terceiroColocado : key === 3 ?quartoColocado : 0
         const Gols = j.golsPro * gols
         const Vitorias = j.vitorias * vitoria
         const Empates = j.empates * empates
         const Artilharia = getArtilheiro(j.idDoParticipante) || 0
-        const Campeoes = key === 0 ? "Campeão": key === 1 ? "Vice-Campeão": key === 2 ? "Terceiro colocado": "Quarto lugar"
+        const Campeoes = key === 0 ? "Campeão": key === 1 ? "Vice-Campeão": key === 2 ? "Terceiro colocado": key === 3 ? "Quarto lugar" : "Fora do G4"
         const PosArtilharia = getPostArtilheiro(j.golsPro)
         const quantVitorias = j.vitorias
         const quantGols = j.golsPro

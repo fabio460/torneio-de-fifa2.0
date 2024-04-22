@@ -27,15 +27,15 @@ export default function TabelaPremios({resultados}:{resultados:resultadoType[]})
             <TableRow>
               <TableCell  sx={{minWidth:"160px"}}>Usuário</TableCell>
               <TableCell align="left" sx={{minWidth:"160px"}}>Colocação</TableCell>
-              <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio de campeão</TableCell>
+              <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio por colocação</TableCell>
               <TableCell align="left"  sx={{minWidth:"160px"}}>Artilharia</TableCell>
-              <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio da artilharia</TableCell>
+              <TableCell align="left"  sx={{minWidth:"160px"}}>Prêmio por artilharia</TableCell>
               <TableCell align="left">Vitórias</TableCell>
-              <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio das vitórias</TableCell>
+              <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio por vitórias</TableCell>
               <TableCell align="left">Empates</TableCell>
-              <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio dos empates</TableCell>
+              <TableCell align="left" sx={{minWidth:"180px"}}>Prêmio por empates</TableCell>
               <TableCell align="left">Gols</TableCell>
-              <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio dos gols</TableCell>
+              <TableCell align="left" sx={{minWidth:"160px"}}>Prêmio por gols</TableCell>
               <TableCell align="left">Total</TableCell>
             </TableRow>
           </TableHead>
