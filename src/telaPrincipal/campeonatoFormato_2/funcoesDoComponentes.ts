@@ -45,7 +45,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
     })
     const arrSemDupl = [... new Set(arrGols.sort((a, b) => b - a))]
     const posicao = arrSemDupl.indexOf(golsSofridos);
-    return posicao === (arrSemDupl.length -1) ? "Menos-Vazada" : posicao === (arrSemDupl.length -2) ? "Segundo-Menos-Vazada": posicao === (arrSemDupl.length -3) ? "Terceiro-Menos-Vazada": posicao === (arrSemDupl.length -4) ? "Quarto-Menos-Vazada" : ""
+    return posicao === (arrSemDupl.length -1) ? "Menos-Vazada" : posicao === (arrSemDupl.length -2) ? "Segundo-Menos-Vazada": posicao === (arrSemDupl.length -3) ? "Terceiro-Menos-Vazada": posicao === (arrSemDupl.length -4) ? "Quarto-Menos-Vazada" : "Sem premiação"
 
   }
   function getPostArtilheiro(gols:number) {
