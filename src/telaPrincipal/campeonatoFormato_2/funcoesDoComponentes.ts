@@ -54,7 +54,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
     })
     const arrSemDupl = [... new Set(arrGols.sort((a, b) => b - a))]
     const posicao = arrSemDupl.indexOf(gols);
-    return posicao === 0 ? "Artilheiro" : posicao === 1 ? "Vice-Artilheiro": posicao === 2 ? "Terceiro artilheiro": "Quarto artilheiro"
+    return posicao === 0 ? "Artilheiro" : posicao === 1 ? "Vice-Artilheiro": posicao === 2 ? "Terceiro artilheiro": posicao === 3 ? "Quarto artilheiro" : "Sem premiação"
   }
 
   function unirObjetosIguais(array:any) {
