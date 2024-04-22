@@ -45,7 +45,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
     })
     const arrSemDupl = [... new Set(arrGols.sort((a, b) => b - a))]
     const posicao = arrSemDupl.indexOf(golsSofridos);
-    return posicao === (arrSemDupl.length -1) ? "Menos-Vazada" : posicao === (arrSemDupl.length -2) ? "Segundo-Menos-Vazada": posicao === (arrSemDupl.length -3) ? "Terceiro-Menos-Vazada": "Quarto-Menos-Vazada"
+    return posicao === (arrSemDupl.length -1) ? "Menos-Vazada" : posicao === (arrSemDupl.length -2) ? "Segundo-Menos-Vazada": posicao === (arrSemDupl.length -3) ? "Terceiro-Menos-Vazada": posicao === (arrSemDupl.length -4) ? "Quarto-Menos-Vazada" : ""
 
   }
   function getPostArtilheiro(gols:number) {
@@ -112,7 +112,7 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
         const quantGols = j.golsPro
         const quantEmpates = j.empates
         const posicaoDefezaMenosVazada = MenosVazada(j.golsContra)
-        const premioDefezaMenosVazada = MenosVazada(j.golsContra) === "Menos-Vazada"? defezaMenosVazada: MenosVazada(j.golsContra) === "Segundo-Menos-Vazada"? defezaSegundaMenosVazada : MenosVazada(j.golsContra) === "Terceiro-Menos-Vazada" ? defezaTerceiraMenosVazada : defezaQuartaMenosVazada
+        const premioDefezaMenosVazada = MenosVazada(j.golsContra) === "Menos-Vazada"? defezaMenosVazada: MenosVazada(j.golsContra) === "Segundo-Menos-Vazada"? defezaSegundaMenosVazada : MenosVazada(j.golsContra) === "Terceiro-Menos-Vazada" ? defezaTerceiraMenosVazada  : MenosVazada(j.golsContra) === "Quarto-Menos-Vazada" ? defezaQuartaMenosVazada : 0
         
         return {
           idParticipante:j.idDoParticipante,
