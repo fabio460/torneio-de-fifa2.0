@@ -9,7 +9,6 @@ type dadosType = {
   Venceu:string
 }
 export default function EstatisticaCampeao({lista, idDoTorneioSelecionado}:{ lista:tabelaDeResultadosType[], idDoTorneioSelecionado:string}) {
-
   const [dados, setDados] = useState<dadosType[]>([])  
   let aux = []
   useEffect(()=>{
@@ -43,7 +42,7 @@ export default function EstatisticaCampeao({lista, idDoTorneioSelecionado}:{ lis
     
     return (
       <div className='cardEstatistica'>
-        <h5 style={{textAlign:"center"}}>Meiores Vencedores</h5>
+        <h5 style={{textAlign:"center"}}>Vencedores</h5>
         <ResponsiveContainer width="100%" maxHeight={300}>
           <AreaChart
             width={500}

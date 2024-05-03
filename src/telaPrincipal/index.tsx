@@ -7,7 +7,7 @@ import CardParticipantes from './cards/cardParticipantes'
 import CradPremiacoes from './cards/cardPremiacoes'
 import CardElenco from './cards/cardElenco'
 import ResponsiveAppBar from '../appBar'
-import { idDoUsuarioLogado } from '../metodosUteis'
+import { getDataTorneio, getHoraTorneio, idDoUsuarioLogado } from '../metodosUteis'
 import { tabelaDeResultadosType, usuarioLogadoType } from '../types'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
@@ -121,6 +121,13 @@ export default function TelaPrincipal() {
                 </div>
               }
               <h2 style={{textAlign:"center",marginTop:"30px"}}>Estatisticas</h2>
+              {/* <div>{listaFiltrada.map((elem, key)=>{
+                return <div>
+                  {getDataTorneio(elem.dataDeInicio)} encerrou {getHoraTorneio(elem.data)}
+                </div>
+              }).reverse()}</div> */}
+              <div>Torneios jogados {listaFiltrada.length}</div>
+              {/* <div>{resultadosApi.length}</div> */}
               <div className='telaPrincipalMeio'>
                 <EstatisticaCampeao lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>
                 <EstatisticaAssistencia lista={listaFiltrada} idDoTorneioSelecionado={idDoTorneioSelecionado}/>

@@ -28,7 +28,7 @@ export default function CardTabelaResultados({resultadosApi}:any) {
     }
   })
 
-  const qtdPorPagina = 4
+  const qtdPorPagina = 6
   let inicioDaPagina = qtdPorPagina*pagina - qtdPorPagina
   let finalDaPagina = qtdPorPagina*pagina - 1
   const resultadoOrdenadoPorColocacao = (array:[])=>{
