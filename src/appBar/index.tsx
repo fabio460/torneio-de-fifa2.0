@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { usuarioLogado } from '../metodosUteis';
 import SelectDarkMode from './selectDarkMode';
 import { useSelector } from 'react-redux';
+import ModalAtualizarPremiacoes from './modais/modalAtualizarPremiacoes';
 
 const deslogar = ()=>{
   localStorage.removeItem('jwt')
@@ -30,7 +31,14 @@ function ResponsiveAppBar() {
   const h = useNavigate()
   const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
 
-  const settings = [<div>{usuarioLogado.nome}</div>,<div onClick={()=>h("/valores")}>Regras gerais</div>, <div><SwitchesDeletarParticipantes/></div> , <div><ModalDeletarPerfil/></div>, <div onClick={deslogar}>Deslogar</div>];
+  const settings = [
+    <div>{usuarioLogado.nome}</div>,
+    <div onClick={()=>h("/valores")}>Regras gerais</div>,
+    <div><ModalAtualizarPremiacoes /></div>,
+    <div><SwitchesDeletarParticipantes/></div> , 
+    <div><ModalDeletarPerfil/></div>, 
+    <div onClick={deslogar}>Deslogar</div>,
+  ];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
