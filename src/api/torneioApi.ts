@@ -60,3 +60,20 @@ export const atualizaTorneioApi = async(id:string ,nome:string)=>{
     .then(res=>res.json())
     return f
 }
+
+export const trocaDeTorneioApi = async(idTorneio:string ,idDoParticipante:string)=>{
+    const f = await fetch(linkLocal+"trocaDeTorneio/trocar",{
+        headers:{
+            "Content-Type":"application/json",
+        },
+        method:"put",
+        body:JSON.stringify({
+            idTorneio,
+            idDoParticipante
+        })
+    })
+    .then(res=>{
+        window.location.reload()
+    })
+    return f
+}

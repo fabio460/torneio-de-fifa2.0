@@ -5,7 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { Checkbox } from '@mui/material';
-
+import ModalTrocaDeTorneio from "./modais/modalTrocaDeTorneio";
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import { participantesType } from '../types';
 import { darkBackgroundBox, colorDark, dark, darkBackgroundContainer } from '../temaDark';
@@ -40,8 +40,10 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
                         </Tooltip>
                         <ListItemText primary={elem.nome} secondary={elem.time} sx={{color: darkMode ? colorDark:"" }}/>
                     </ListItem>
-                    <Checkbox sx={{color: darkMode ? colorDark:""}} id={JSON.stringify(elem)} onChange={handleChange} disabled={elem.saldo < 0 && true}/>
-
+                    <div style={{display:"flex"}}>
+                      <ModalTrocaDeTorneio participante={elem}/>
+                      <Checkbox sx={{color: darkMode ? colorDark:""}} id={JSON.stringify(elem)} onChange={handleChange} disabled={elem.saldo < 0 && true}/>
+                    </div>
                 </div>
             )
         })

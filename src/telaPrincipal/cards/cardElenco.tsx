@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { calculaValoresDosJogadores } from '../../metodosUteis';
 import { darkBackgroundBox, colorDark } from '../../temaDark';
 import ToolTipJogadores from '../tooltipJogadores';
+import ModalTrocaDeTorneio from '../modais/modalTrocaDeTorneio';
 export default function CardElenco({elenco}:{elenco:participantesType}) {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
 
@@ -64,13 +65,16 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
               </div>
             </div>
           </div>
-          {deleteChecked ? 
-              <ModalDeletarParticipantes elenco={elenco}/>
-                :
-              <IconButton  size='small' disabled>
-                  <DeleteOutlineIcon />
-              </IconButton>
-          }
+          <div style={{display:"flex", alignItems:"center"}}>
+            {deleteChecked ? 
+                <ModalDeletarParticipantes elenco={elenco}/>
+                  :
+                <IconButton  size='small' disabled>
+                    <DeleteOutlineIcon />
+                </IconButton>
+            }
+            <ModalTrocaDeTorneio participante={elenco} />
+          </div>
         </Typography>
         <Divider sx={{marginBottom:1}}/>
         <h3 style={{display:"flex",justifyContent:"flex-end"}}>

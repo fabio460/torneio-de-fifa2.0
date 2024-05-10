@@ -80,7 +80,6 @@ export default function TelaPrincipal() {
       return e
     }
   })
-  
   return (
     <React.Fragment >
       <Toolbar id="back-to-top-anchor" />
