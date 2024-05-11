@@ -68,13 +68,13 @@ export const atualizarRodadaApi = (id:string | undefined, golsMandante:number | 
     body:JSON.stringify({id, golsMandante, golsVisitante, statusDaRodada, golCasa, golFora})
   }).then(r=>r.json())
 }
-export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, correcao?:any, dispatch?:any, atualizarDados?:any, setCarregando?:any)=>{
+export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, correcao?:any, dispatch?:any, atualizarDados?:any, setCarregando?:any, idTorneio?:string)=>{
   fetch(local+"torneioTipoDois/alterarStatusDaRodada",{
     headers:{
       "Content-Type":"application/json"
     },
     method:"put",
-    body:JSON.stringify({id, statusDaRodada, correcao})
+    body:JSON.stringify({id, statusDaRodada, correcao, idTorneio})
   })
   .then(r=>r.json())
   .then((res)=>{
@@ -91,7 +91,7 @@ export const atualizarStatusDaRodadaApi = (id: string, statusDaRodada: string, c
   })
 }
 
-export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any, id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, rodada?:any)=>{
+export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:any, setCarregando:any, id:string | undefined, golsMandante:number | undefined, golsVisitante:number | undefined, rodada?:any, idTorneio?:string)=>{
   console.log(rodada)
   return fetch(local+"torneioTipoDois/atualizarTabela/",{
     headers:{
@@ -104,7 +104,8 @@ export const atualizarTabelaApi = (resultado:any, dispatch:any,atualizarDados:an
         id,
         golsMandante,
         golsVisitante,
-        rodada
+        rodada,
+        idTorneio
       }
     )
   }).then(r=>r.json()).then(res=>{

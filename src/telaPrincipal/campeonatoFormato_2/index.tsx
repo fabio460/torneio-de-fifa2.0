@@ -40,15 +40,11 @@ export default function CampeonatoFormato_2() {
   const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
   let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
   let idTorneio = usuarioReducer.torneio[torneioAtual]?.id
-
-  
-
-
+  const torneioSelecionado = usuarioReducer.torneio[torneioAtual]
   async function listarCampeonato() {
     setCarregando(true)
     const camp = await listarCampeonatoApi(idTorneio) || []
     setCampeonato(camp)
-    console.log(camp)
     dispatch({
       type:"dataDoCampeonato",
       payload:{data:camp.data ? camp.data : null}
@@ -75,7 +71,8 @@ export default function CampeonatoFormato_2() {
         {
           campeonato?.id &&
           <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}> 
-            Torneio iniciado em {getDataTorneio(campeonato?.data as string)} as {getHoraTorneio(campeonato?.data as string)}       
+            
+            Torneio {torneioSelecionado?.nome} iniciado em {getDataTorneio(campeonato?.data as string)} as {getHoraTorneio(campeonato?.data as string)}       
             <Button onClick={atualizar}>atualizar</Button>
           </div>
         }

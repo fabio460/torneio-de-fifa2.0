@@ -55,18 +55,20 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
   let idTorneio = usuarioReducer.torneio[torneioAtual].id
 
   const atualizarRodada =()=>{
-    setCarregando(true)
-    const id = rodada.id
-    const Rodada:any = rodada
-    const res = calculaDadosDaTabela(golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})  
-    atualizarTabelaApi(res, dispatch, atualizarDados, setCarregando, id, golCasa?.gol, golFora?.gol, Rodada)
+     setCarregando(true)
+     const id = rodada.id
+     const Rodada:any = rodada
+     const res = calculaDadosDaTabela(golCasa ? golCasa : {gol:0, time:rodada.mandante}, golFora ? golFora : {gol:0, time:rodada.visitante})  
+     atualizarTabelaApi(res, dispatch, atualizarDados, setCarregando, id, golCasa?.gol, golFora?.gol, Rodada, idTorneio)
+     console.log({Rodada,res,id})
+    console.log(idTorneio)
   }
   
   const corrigirResultado = async()=>{ 
     setGolFora({gol:rodada.golsVisitante, time:rodada.visitante})
      setCarregando(true)
      const res = calculaDadosDaTabela(golCasa ? golCasa : {gol:rodada.golsMandante, time:rodada.mandante}, golFora ? golFora : {gol:rodada.golsVisitante, time:rodada.visitante})
-     atualizarStatusDaRodadaApi(rodada.id, "aberto", res, dispatch, atualizarDados, setCarregando)
+     atualizarStatusDaRodadaApi(rodada.id, "aberto", res, dispatch, atualizarDados, setCarregando, idTorneio)
      setTimeout(() => {
       dispatch({
         type:"atualizarDados",  
