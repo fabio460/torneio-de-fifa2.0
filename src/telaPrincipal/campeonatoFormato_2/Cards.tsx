@@ -83,6 +83,10 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
       localStorage.setItem('idDoElenco', e as string)
       navigate('/elenco')
   } 
+  const handleActionCasa = ()=>{
+    //setGolFora({gol:0, time:rodada.visitante})
+    
+  }
   return (
     <Card sx={cardStyle} className='cardContainer' >
       {
@@ -141,8 +145,9 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
                       <InputBase
                           onChange={e=>setGolCasa({gol:parseInt(e.target.value), time:rodada.mandante})}
                           sx={{ ml: "35%"}}
-                          defaultValue={rodada.golsMandante}
+                          defaultValue={""}
                           inputProps={{ 'aria-label': 'search google maps' }}
+                          placeholder='0'
                       />
                   </Paper>
 
@@ -158,8 +163,9 @@ export default function Cards({rodada, partida, idDoCampeonato}:cardType) {
                           <InputBase
                               onChange={e=>setGolFora({gol:parseInt(e.target.value), time:rodada.visitante})}
                               sx={{ ml: "45%"}}
-                              defaultValue={rodada.golsVisitante}
+                              defaultValue={""}
                               inputProps={{ 'aria-label': 'search google maps' }}
+                              placeholder='0'
                           />
                       </Paper>
 
