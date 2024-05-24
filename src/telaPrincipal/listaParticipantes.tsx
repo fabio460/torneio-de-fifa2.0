@@ -38,7 +38,7 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
                                 </Avatar>
                             </ListItemAvatar>
                         </Tooltip>
-                        <ListItemText primary={elem.nome} secondary={elem.time} sx={{color: darkMode ? colorDark:"" }}/>
+                        <ListItemText  onClick={()=> getParticipante(elem)} primary={elem.nome} secondary={elem.time} sx={{color: darkMode ? colorDark:"" }}/>
                     </ListItem>
                     <div style={{display:"flex"}}>
                       <ModalTrocaDeTorneio participante={elem}/>

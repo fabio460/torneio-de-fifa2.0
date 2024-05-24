@@ -18,19 +18,21 @@ export const atualizarPremiacoesApi = async(
     viceCampeao?:number, 
     terceiroColocado?:number,
     quartoColocado?:number,
+    quintoColocado?:number,
     artilheiro?:number, 
     viceArtilheiro?:number,
     terceiroArtilheiro?:number,
     quartoAtilheiro?:number,
+    quintoArtilheiro?:number,
     defezaMenosVazada?:number,
     defezaSegundaMenosVazada?:number,
     defezaTerceiraMenosVazada?:number,
     defezaQuartaMenosVazada?:number,
+    defezaQuintaMenosVazada?:number,
     empates?:number,
     vitoria?:number,
     gols?:number,
 )=>{
-    console.log({viceArtilheiro, terceiroColocado})
     const f = await fetch(linkLocal+"premiacoes/alterar",{
         headers:{
             "Content-Type":"application/json",
@@ -42,16 +44,19 @@ export const atualizarPremiacoesApi = async(
             viceCampeao,
             terceiroColocado,
             quartoColocado, 
+            quintoColocado,
             artilheiro, 
+            viceArtilheiro,
+            terceiroArtilheiro,
+            quartoAtilheiro,
+            quintoArtilheiro,
             defezaMenosVazada,
-            defezaQuartaMenosVazada,
             defezaSegundaMenosVazada,
             defezaTerceiraMenosVazada,
+            defezaQuartaMenosVazada,
+            defezaQuintaMenosVazada,
             empates,
             gols,
-            quartoAtilheiro,
-            terceiroArtilheiro,
-            viceArtilheiro,
             vitoria
         })
     })

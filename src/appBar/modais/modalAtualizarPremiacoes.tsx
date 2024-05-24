@@ -8,16 +8,19 @@ export default function ModalAtualizarPremiacoes() {
   const [ViceCampeao, setViceCampeao] = useState(0)
   const [TerceiroColocado, setTerceiroColocado] = useState(0)
   const [QuartoColocado, setQuartoColocado] = useState(0)
+  const [QuintoColocado, setQuintoColocado] = useState(0)
   const [Artileiro, setArtileiro] = useState(0)
   const [ViceArtilheiro, setViceArtilheiro] = useState(0)
   const [TerceiroArtilheiro, setTerceiroArtilheiro] = useState(0)
   const [QuartoArtilheiro, setQuartoArtilheiro] = useState(0)
-  const [Vitorias, setVitorias] = useState(0)
-  const [Empates, setEmpates] = useState(0)
+  const [QuintoArtilheiro, setQuintoArtilheiro] = useState(0)
   const [DefezaMenosVazada, setDefezaMenosVazada] = useState(0)
   const [DefezaSegundaMenosVazada, setDefezaSegundaMenosVazada] = useState(0)
   const [DefezaTerceiroMenosVazada, setDefezaTerceiroMenosVazada] = useState(0)
   const [DefezaQuartaMenosVazada, setDefezaQuartaMenosVazada] = useState(0)
+  const [DefezaQuintaMenosVazada, setDefezaQuintaMenosVazada] = useState(0)
+  const [Vitorias, setVitorias] = useState(0)
+  const [Empates, setEmpates] = useState(0)
   const [Gols, setGols] = useState(0)
  
   const handleClickOpen = () => {
@@ -34,14 +37,17 @@ export default function ModalAtualizarPremiacoes() {
       setViceCampeao(res[0].viceCampeao)
       setTerceiroColocado(res[0].terceiroColocado)
       setQuartoColocado(res[0].quartoColocado)
+      setQuintoColocado(res[0].quintoColocado)
       setArtileiro(res[0].artilheiro)
       setViceArtilheiro(res[0].viceArtilheiro)
       setTerceiroArtilheiro(res[0].terceiroArtilheiro)
       setQuartoArtilheiro(res[0].quartoAtilheiro)
+      setQuintoArtilheiro(res[0].quintoArtilheiro)
       setDefezaMenosVazada(res[0].defezaMenosVazada)
       setDefezaSegundaMenosVazada(res[0].defezaSegundaMenosVazada)
       setDefezaTerceiroMenosVazada(res[0].defezaTerceiraMenosVazada)
       setDefezaQuartaMenosVazada(res[0].defezaQuartaMenosVazada)
+      setDefezaQuintaMenosVazada(res[0].defezaQuintaMenosVazada)
       setGols(res[0].gols)
       setEmpates(res[0].empates)
       setVitorias(res[0].vitoria)
@@ -54,14 +60,17 @@ export default function ModalAtualizarPremiacoes() {
       ViceCampeao,
       TerceiroColocado,
       QuartoColocado,
+      QuintoColocado,
       Artileiro,
       ViceArtilheiro,
       TerceiroArtilheiro,
       QuartoArtilheiro,
+      QuintoArtilheiro,
       DefezaMenosVazada,
       DefezaSegundaMenosVazada,
       DefezaTerceiroMenosVazada,
       DefezaQuartaMenosVazada,
+      DefezaQuintaMenosVazada,
       Empates,
       Vitorias,
       Gols
@@ -95,6 +104,9 @@ export default function ModalAtualizarPremiacoes() {
   const handleQuartoColocado = (e:any)=>{
     setQuartoColocado(parseFloat(e.target.value))
   }
+  const handleQuintoColocado = (e:any)=>{
+    setQuintoColocado(parseFloat(e.target.value))
+  }
   const handleArtilheiro = (e:any)=>{
     setArtileiro(parseFloat(e.target.value))
   }
@@ -107,6 +119,9 @@ export default function ModalAtualizarPremiacoes() {
   const handleQuartoArtilheiro = (e:any)=>{
     setQuartoArtilheiro(parseFloat(e.target.value))
   }
+  const handleQuintoArtilheiro = (e:any)=>{
+    setQuintoArtilheiro(parseFloat(e.target.value))
+  }
   const handleDefezaMenosVazada = (e:any)=>{
     setDefezaMenosVazada(parseFloat(e.target.value))
   }
@@ -118,6 +133,9 @@ export default function ModalAtualizarPremiacoes() {
   }
   const handleDefezaQuartaMenosVazada = (e:any)=>{
     setDefezaQuartaMenosVazada(parseFloat(e.target.value))
+  }
+  const handleDefezaQuintaMenosVazada = (e:any)=>{
+    setDefezaQuintaMenosVazada(parseFloat(e.target.value))
   }
   const handleVitorias = (e:any)=>{
     setVitorias(parseFloat(e.target.value))
@@ -181,6 +199,14 @@ export default function ModalAtualizarPremiacoes() {
                  onChange={(e)=> handleQuartoColocado(e)}
                  defaultValue={QuartoColocado}
               />
+             <TextField 
+                 fullWidth
+                 size='small'
+                 label="Quinto-colocado"
+                 sx={{marginTop:1}}
+                 onChange={(e)=> handleQuintoColocado(e)}
+                 defaultValue={QuintoColocado}
+              />
               <TextField 
                  fullWidth
                  size='small'
@@ -216,6 +242,14 @@ export default function ModalAtualizarPremiacoes() {
               <TextField 
                  fullWidth
                  size='small'
+                 label="Quinto Artilheiro"
+                 sx={{marginTop:1}}
+                 onChange={(e)=> handleQuintoArtilheiro(e)}
+                 defaultValue={QuintoArtilheiro}
+              />
+              <TextField 
+                 fullWidth
+                 size='small'
                  label="Defeza menos vazada"
                  sx={{marginTop:1}}
                  onChange={(e)=> handleDefezaMenosVazada(e)}
@@ -244,6 +278,14 @@ export default function ModalAtualizarPremiacoes() {
                  sx={{marginTop:1}}
                  onChange={(e)=> handleDefezaQuartaMenosVazada(e)}
                  defaultValue={DefezaQuartaMenosVazada}
+              />
+              <TextField 
+                 fullWidth
+                 size='small'
+                 label="Defeza quinta menos vazada"
+                 sx={{marginTop:1}}
+                 onChange={(e)=> handleDefezaQuintaMenosVazada(e)}
+                 defaultValue={DefezaQuintaMenosVazada}
               />
               <TextField 
                  fullWidth

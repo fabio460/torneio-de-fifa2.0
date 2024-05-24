@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigation, useNavigate } from 'react-router-dom'
 import "./Regras.css"
-import { artilheiro, assistencia, campeao, empates, gols, quartoColocado, terceiroArtilheiro, terceiroAssistencia, terceiroColocado, viceArtilheiro, viceAssistencia, viceCampeao, vitoria } from '../valoresDosPremios'
+import { artilheiro, assistencia, quintoArtilheiro,campeao, empates, gols, quartoAtilheiro, quartoColocado, quintoColocado, terceiroArtilheiro, terceiroAssistencia, terceiroColocado, viceArtilheiro, viceAssistencia, viceCampeao, vitoria, defezaMenosVazada, defezaQuintaMenosVazada, defezaSegundaMenosVazada, defezaTerceiraMenosVazada, defezaQuartaMenosVazada } from '../valoresDosPremios'
 import { formatoMonetario } from '../metodosUteis'
-
+import ModalAtualizarPremiacoes from '../appBar/modais/modalAtualizarPremiacoes'
+import { IconButton, MenuItem } from '@mui/material'
+import ReplyIcon from '@mui/icons-material/Reply';
 export default function Regras() {
   const [carregando, setCarregando] = useState(true)
   const regrasImportantes = [
@@ -20,12 +22,17 @@ export default function Regras() {
           "Vice Campeão - " + formatoMonetario(viceCampeao),
           "Terceiro colocado - " + formatoMonetario(terceiroColocado),
           "Quarto lugar - " + formatoMonetario(quartoColocado),
+          "Quinto lugar - " + formatoMonetario(quintoColocado),
           "Artilheiro - " + formatoMonetario(artilheiro),
-          "Assistência - " + formatoMonetario(assistencia),
           "Vice-Artilheiro - " + formatoMonetario(viceArtilheiro),
-          "Vice-Assistente - " + formatoMonetario(viceAssistencia),
           "3º Artilheiro - " + formatoMonetario(terceiroArtilheiro),
-          "3° Assistente" + formatoMonetario(terceiroAssistencia),
+          "4º Artilheiro - " + formatoMonetario(quartoAtilheiro),
+          "5º Artilheiro - " + formatoMonetario(quintoArtilheiro),
+          "Defeza menos vazada - " + formatoMonetario(defezaMenosVazada),
+          "Defeza segunda menos vazada - " + formatoMonetario(defezaSegundaMenosVazada),
+          "Defeza terceira menos vazada - " + formatoMonetario(defezaTerceiraMenosVazada),
+          "Defeza quarta menos vazada - " + formatoMonetario(defezaQuartaMenosVazada),
+          "Defeza quinta menos vazada" + formatoMonetario(defezaQuintaMenosVazada),
           "GOL - " + formatoMonetario(gols),
           "Vitória - " + formatoMonetario(vitoria),
           "Empate - " + formatoMonetario(empates),
@@ -42,10 +49,23 @@ export default function Regras() {
       setCarregando(false)
     }, 1500);
   },[])
-  
+  const h = useNavigate()
+  const voltarAoMenuPrincial = ()=>{
+     h("/")
+  }
   return (
     <div className='RegrasContainer'>
-      <h1>Regras</h1>
+      <h1 style={{display:"flex", justifyContent:"space-between"}}>
+        Regras
+        <div style={{display:"flex"}}>
+          <MenuItem>
+            <ModalAtualizarPremiacoes />
+          </MenuItem>
+          <IconButton onClick={voltarAoMenuPrincial}>
+            <ReplyIcon/>
+          </IconButton>
+        </div>
+      </h1>
       <h5>Gerais</h5>
       <ol>
         {

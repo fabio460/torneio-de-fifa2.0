@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { atualizarTabelaApi } from "../../api/campeonatoApi";
 import { golsType, resultadoType, tabelaCampeonatoType, tabelaType } from "../../types";
-import { artilheiro, campeao, defezaMenosVazada, defezaQuartaMenosVazada, defezaSegundaMenosVazada, defezaTerceiraMenosVazada, empates, gols, quartoAtilheiro, quartoColocado, terceiroArtilheiro, terceiroColocado, viceArtilheiro, viceCampeao, vitoria } from "../../valoresDosPremios";
+import { artilheiro, campeao, defezaMenosVazada, defezaQuartaMenosVazada, defezaQuintaMenosVazada, defezaSegundaMenosVazada, defezaTerceiraMenosVazada, empates, gols, quartoAtilheiro, quartoColocado, quintoArtilheiro, quintoColocado, terceiroArtilheiro, terceiroColocado, viceArtilheiro, viceCampeao, vitoria } from "../../valoresDosPremios";
 import { type } from "os";
 
 
@@ -45,7 +45,13 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
     })
     const arrSemDupl = [... new Set(arrGols.sort((a, b) => b - a))]
     const posicao = arrSemDupl.indexOf(golsSofridos);
-    return posicao === (arrSemDupl.length -1) ? "Menos-Vazada" : posicao === (arrSemDupl.length -2) ? "Segundo-Menos-Vazada": posicao === (arrSemDupl.length -3) ? "Terceiro-Menos-Vazada": posicao === (arrSemDupl.length -4) ? "Quarto-Menos-Vazada" : "Sem premiação"
+    return (
+      posicao === (arrSemDupl.length -1) ? "Menos-Vazada" : 
+      posicao === (arrSemDupl.length -2) ?"Segundo-Menos-Vazada": 
+      posicao === (arrSemDupl.length -3) ?"Terceiro-Menos-Vazada": 
+      posicao === (arrSemDupl.length -4) ? "Quarto-Menos-Vazada" : 
+      posicao === (arrSemDupl.length -5) ? "Quinto-Menos-Vazada":"Sem premiação"
+    )
 
   }
   function getPostArtilheiro(gols:number) {
@@ -54,7 +60,15 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
     })
     const arrSemDupl = [... new Set(arrGols.sort((a, b) => b - a))]
     const posicao = arrSemDupl.indexOf(gols);
-    return posicao === 0 ? "Artilheiro" : posicao === 1 ? "Vice-Artilheiro": posicao === 2 ? "Terceiro artilheiro": posicao === 3 ? "Quarto artilheiro" : "Sem premiação"
+    return(
+      posicao === 0 ? "Artilheiro" : 
+      posicao === 1 ? "Vice-Artilheiro": 
+      posicao === 2 ? "Terceiro Artilheiro": 
+      posicao === 3 ? "Quarto Artilheiro" :
+      posicao === 4 ? "Quinto Artilheiro":
+      "Sem premiação"
+    ) 
+    
   }
 
   function unirObjetosIguais(array:any) {
@@ -76,43 +90,74 @@ export const calculoDasPremiacoesDaTabela = (tabela:tabelaType[], dataDeInicio?:
   })
   const lista = listaPremios.reverse()
 
-  function getArtilheiro(id:string) {
+  function getPremioArtilheiro(id:string) {
 
       for (let i = 0; i < lista.length; i++) {
-        if (lista[i].includes(id)) {
+        const cond = true;
+        switch (cond) {
+          case lista[i].includes(id):
             return artilheiro
-        }else{
-            if (lista[i+1].includes(id)) {
-                return viceArtilheiro
-            }else{
-                if (lista[i+2].includes(id)) {
-                    return terceiroArtilheiro
-                }else{
-                    if (lista[i+3].includes(id)) {
-                        return quartoAtilheiro
-                    }else{
-                        return 0
-                    }
-                }
-            }
+            break;
+          case lista[i+1].includes(id):
+            return viceArtilheiro
+            break;
+          case lista[i+2].includes(id):
+            return terceiroArtilheiro
+            break;
+          case lista[i+3].includes(id):
+            return quartoAtilheiro
+            break;  
+          case lista[i+4].includes(id):
+            return quintoArtilheiro
+            break;             
+          default:
+            return 0
+            break;
         }
+        // if (lista[i].includes(id)) {
+        //     return artilheiro
+        // }else{
+        //     if (lista[i+1].includes(id)) {
+        //         return viceArtilheiro
+        //     }else{
+        //         if (lista[i+2].includes(id)) {
+        //             return terceiroArtilheiro
+        //         }else{
+        //             if (lista[i+3].includes(id)) {
+        //                 return quartoAtilheiro
+        //             }else{
+        //                 return 0
+        //             }
+        //         }
+        //     }
+        // }
         
       }
   }
     
     return tabela.map((j, key:number)=>{
-        const Colocacao = key === 0 ? campeao : key === 1 ? viceCampeao : key === 2 ? terceiroColocado : key === 3 ?quartoColocado : 0
+        const Colocacao = key === 0 ? campeao : key === 1 ? viceCampeao : key === 2 ? terceiroColocado : key === 3 ? quartoColocado : key === 4 ? quintoColocado : 0
         const Gols = j.golsPro * gols
         const Vitorias = j.vitorias * vitoria
         const Empates = j.empates * empates
-        const Artilharia = getArtilheiro(j.idDoParticipante) || 0
-        const Campeoes = key === 0 ? "Campeão": key === 1 ? "Vice-Campeão": key === 2 ? "Terceiro colocado": key === 3 ? "Quarto lugar" : "Fora do G4"
+        const Artilharia = getPremioArtilheiro(j.idDoParticipante) || 0
         const PosArtilharia = getPostArtilheiro(j.golsPro)
         const quantVitorias = j.vitorias
         const quantGols = j.golsPro
         const quantEmpates = j.empates
         const posicaoDefezaMenosVazada = MenosVazada(j.golsContra)
-        const premioDefezaMenosVazada = MenosVazada(j.golsContra) === "Menos-Vazada"? defezaMenosVazada: MenosVazada(j.golsContra) === "Segundo-Menos-Vazada"? defezaSegundaMenosVazada : MenosVazada(j.golsContra) === "Terceiro-Menos-Vazada" ? defezaTerceiraMenosVazada  : MenosVazada(j.golsContra) === "Quarto-Menos-Vazada" ? defezaQuartaMenosVazada : 0
+        const Campeoes = 
+           key === 0 ? "Campeão": 
+           key === 1 ? "Vice-Campeão": 
+           key === 2 ? "Terceiro colocado": 
+           key === 3 ? "Quarto lugar" :
+           key === 4 ? "Quinto lugar":"Demais colocações"
+        const premioDefezaMenosVazada = 
+          MenosVazada(j.golsContra) === "Menos-Vazada"? defezaMenosVazada:
+          MenosVazada(j.golsContra) === "Segundo-Menos-Vazada"? defezaSegundaMenosVazada :
+          MenosVazada(j.golsContra) === "Terceiro-Menos-Vazada" ? defezaTerceiraMenosVazada : 
+          MenosVazada(j.golsContra) === "Quarto-Menos-Vazada" ?  defezaQuartaMenosVazada : 
+          MenosVazada(j.golsContra) === "Quinto-Menos-Vazada" ? defezaQuintaMenosVazada: 0
         
         return {
           idParticipante:j.idDoParticipante,
