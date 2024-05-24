@@ -61,8 +61,9 @@ export default function Regras() {
   }
   return (
     <div className='RegrasContainer'>
-      <h1 style={{display:"flex", justifyContent:"space-between"}}>
-        Regras
+      <h1 className='header'>
+        
+        <div style={{textAlign:"center"}}>Regras</div>
         <div style={{display:"flex"}}>
           <SelectDarkMode/>
           <MenuItem>
@@ -97,7 +98,7 @@ export default function Regras() {
 
 function CarregandoContainer() {
   return(
-    <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+    <Stack sx={{ width: '98%', color: 'grey.500' }} spacing={2}>
       <h2>Buscando dados ...</h2>
       <LinearProgress color="primary" />
       <LinearProgress color="inherit" />

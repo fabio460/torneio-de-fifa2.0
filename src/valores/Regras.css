@@ -2,3 +2,12 @@
     padding: 1% 5%;
     min-height: 800px;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+@media (max-width:600px) {
+    .header{
+        display: block;
+    }
+}
