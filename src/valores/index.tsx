@@ -74,7 +74,7 @@ export default function Regras() {
           </IconButton>
         </div>
       </h1>
-      <h5>Gerais</h5>
+      <h5>Valores das premiações</h5>
       <ol>
         {
           carregando ? 
