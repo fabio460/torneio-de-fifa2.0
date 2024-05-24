@@ -6,6 +6,12 @@ import { formatoMonetario } from '../metodosUteis'
 import ModalAtualizarPremiacoes from '../appBar/modais/modalAtualizarPremiacoes'
 import { IconButton, MenuItem } from '@mui/material'
 import ReplyIcon from '@mui/icons-material/Reply';
+import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
+import LinearProgress from '@mui/material/LinearProgress';
+import Stack from '@mui/material/Stack';
+import SelectDarkMode from '../appBar/selectDarkMode'
+
 export default function Regras() {
   const [carregando, setCarregando] = useState(true)
   const regrasImportantes = [
@@ -58,6 +64,7 @@ export default function Regras() {
       <h1 style={{display:"flex", justifyContent:"space-between"}}>
         Regras
         <div style={{display:"flex"}}>
+          <SelectDarkMode/>
           <MenuItem>
             <ModalAtualizarPremiacoes />
           </MenuItem>
@@ -69,7 +76,9 @@ export default function Regras() {
       <h5>Gerais</h5>
       <ol>
         {
-          carregando ? <div>Carregando dados...</div>: 
+          carregando ? 
+          <CarregandoContainer/>
+          : 
           dados.map(item=>{
             return <li>{item}</li>
           })
@@ -83,5 +92,19 @@ export default function Regras() {
       </ol>
       <Link to={"/"}>Voltar ao menu principal</Link>
     </div>
+  )
+}
+
+function CarregandoContainer() {
+  return(
+    <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+      <h2>Buscando dados ...</h2>
+      <LinearProgress color="primary" />
+      <LinearProgress color="inherit" />
+      <LinearProgress color="inherit" />
+      <LinearProgress color="inherit" />
+      <LinearProgress color="inherit" />
+      <LinearProgress color="inherit" />
+  </Stack>
   )
 }
