@@ -4,7 +4,7 @@ import "./Regras.css"
 import { artilheiro, assistencia, quintoArtilheiro,campeao, empates, gols, quartoAtilheiro, quartoColocado, quintoColocado, terceiroArtilheiro, terceiroAssistencia, terceiroColocado, viceArtilheiro, viceAssistencia, viceCampeao, vitoria, defezaMenosVazada, defezaQuintaMenosVazada, defezaSegundaMenosVazada, defezaTerceiraMenosVazada, defezaQuartaMenosVazada } from '../valoresDosPremios'
 import { formatoMonetario } from '../metodosUteis'
 import ModalAtualizarPremiacoes from '../appBar/modais/modalAtualizarPremiacoes'
-import { IconButton, MenuItem } from '@mui/material'
+import { IconButton, MenuItem, Tooltip } from '@mui/material'
 import ReplyIcon from '@mui/icons-material/Reply';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
@@ -38,7 +38,7 @@ export default function Regras() {
           "Defeza segunda menos vazada - " + formatoMonetario(defezaSegundaMenosVazada),
           "Defeza terceira menos vazada - " + formatoMonetario(defezaTerceiraMenosVazada),
           "Defeza quarta menos vazada - " + formatoMonetario(defezaQuartaMenosVazada),
-          "Defeza quinta menos vazada" + formatoMonetario(defezaQuintaMenosVazada),
+          "Defeza quinta menos vazada - " + formatoMonetario(defezaQuintaMenosVazada),
           "GOL - " + formatoMonetario(gols),
           "Vitória - " + formatoMonetario(vitoria),
           "Empate - " + formatoMonetario(empates),
@@ -69,9 +69,11 @@ export default function Regras() {
           <MenuItem>
             <ModalAtualizarPremiacoes />
           </MenuItem>
-          <IconButton onClick={voltarAoMenuPrincial}>
-            <ReplyIcon/>
-          </IconButton>
+          <Tooltip title="Voltar ao menu principal">
+            <IconButton onClick={voltarAoMenuPrincial}>
+              <ReplyIcon/>
+            </IconButton>
+          </Tooltip>
         </div>
       </h1>
       <h5>Valores das premiações</h5>
