@@ -69,7 +69,7 @@ export default function Regras() {
           <MenuItem>
             <ModalAtualizarPremiacoes />
           </MenuItem>
-          <Tooltip title="Voltar ao menu principal">
+          <Tooltip title="Voltar ao menu principal!">
             <IconButton onClick={voltarAoMenuPrincial}>
               <ReplyIcon/>
             </IconButton>
