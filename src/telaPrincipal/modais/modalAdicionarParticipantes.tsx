@@ -59,7 +59,7 @@ export default function ModalAdicionarParticipantes() {
   },[open])
   const adicionarParticipantes = async()=>{
     const jogadores = getJogadoresPorTime(value.label)
-    var jogadoresdTime = jogadores.filter(j=>{
+    var jogadoresdTime = jogadores.filter((j:any)=>{
       if (!jogadoresDoTorneioSelecionado.includes(j.nome)) {
         return j
       }

@@ -199,7 +199,7 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
     })
     const timesName = [... new Set(arrayTimes)]
 
-    return timesName.map((t, key)=>{
+    return timesName.map((t:any, key)=>{
         return {
           label: t?.split("-")[0],
           escudo: t?.split("-")[1],
@@ -218,7 +218,7 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
   }
   export function getJogadoresPorTime(time:string) {
     if(time){
-      let jogadores = listaDeJogadores.filter((j:jogadoresType, key)=>{
+      let jogadores = listaDeJogadores.filter((j:jogadoresType)=>{
          if (j.time === time) {
             return j
          }
@@ -230,7 +230,7 @@ export function refinaPosicao(jogadores:jogadoresType[] | undefined) {
   }
   export function getEmblemaDoTime(time:string) {
     if(time){
-      let emblema = listaDeJogadores.find((j:jogadoresType, key)=>{
+      let emblema = listaDeJogadores.find((j:jogadoresType)=>{
          if (j.time === time) {
             return j
          }

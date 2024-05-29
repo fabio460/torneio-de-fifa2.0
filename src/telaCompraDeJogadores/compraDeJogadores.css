@@ -4,4 +4,13 @@
 .itemMenu:hover{
     color: red;
 }
-
+.subItensHeader{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+@media (max-width:600px) {
+    .subItensHeader{
+        display: block;
+    }
+}

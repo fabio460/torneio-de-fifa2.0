@@ -35,7 +35,7 @@ export default function Jogadores() {
      const nomeDosJog =await torneio?.map((e:jogadoresType)=>{
        return e.nome
      })
-     let listaFiltrada = listaDeJogadores?.filter((l:jogadoresType, key)=>{
+     let listaFiltrada = listaDeJogadores?.filter((l:jogadoresType)=>{
        if (!nomeDosJog.includes(l.nome)) {
           return l
        }

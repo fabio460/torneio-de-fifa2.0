@@ -6,6 +6,7 @@ import { formatoMonetario, getDataTorneio, getHoraTorneio } from '../metodosUtei
 import SelectPosicao from './selectPosicao'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCampeonatoPorIdApi } from '../api/campeonatoApi'
+import AlterarDataDaLista from './alterarDataDaLista'
 
 export default function Header({elenco, campeonato}:{elenco:participantesType | undefined, campeonato:torneioTypeApi | undefined}) {
     const n = useNavigate()
@@ -49,8 +50,9 @@ export default function Header({elenco, campeonato}:{elenco:participantesType | 
             <div onClick={pataTelaDeElenco} className='compraDeJogadoresItens'>Elenco</div> 
             <div style={{marginLeft:"auto"}} className=''>Saldo {formatoMonetario(elenco?.saldo)}</div> 
           </div>
-          <div>  
+          <div className='subItensHeader'>  
              <SelectPosicao/>
+             <AlterarDataDaLista/>
           </div>
         </div>
         <div className='compraDeJogadoresBodyRigth'>

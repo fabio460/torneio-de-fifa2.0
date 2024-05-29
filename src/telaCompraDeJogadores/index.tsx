@@ -78,17 +78,20 @@ export default function TelaCompraDeJogadores() {
     
     getCampeonato(elenco?.idTorneio || "")
 
-    if (!campeonato?.idTorneio) {        
-      dispatch({
-        type:"btnDisableCompraJogReducer",
-        payload:{disable:false}
-      })
-    }else{
-      dispatch({
-        type:"btnDisableCompraJogReducer",
-        payload:{disable:true}
-      })
-    }
+    useEffect(()=>{
+      if (campeonato?.idTorneio) {        
+        dispatch({
+          type:"btnDisableCompraJogReducer",
+          payload:{disable:true}
+        })
+      }else{
+        dispatch({
+          type:"btnDisableCompraJogReducer",
+          payload:{disable:false}
+        })
+      }
+
+    },[])
     
   return (
     <div className='container' style={{background:darkMode ? darkBackgroundContainer:''}}>

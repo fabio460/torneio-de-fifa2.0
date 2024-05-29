@@ -23,12 +23,12 @@ export default function CampoDeBusca() {
     const nomeDosJog =await torneio.map((e:jogadoresType)=>{
       return e.nome
     })
-    let listaFiltrada = listaDeJogadores.filter((l:jogadoresType, key)=>{
+    let listaFiltrada = listaDeJogadores.filter((l:jogadoresType)=>{
       if (!nomeDosJog.includes(l.nome)) {
          return l
       }
     })
-    let l:jogadoresType[] = listaFiltrada.filter((item:jogadoresType, key:number)=>{
+    let l:jogadoresType[] = listaFiltrada.filter((item:jogadoresType)=>{
         if (item.nome.toLowerCase().includes(event.target.value.toLowerCase().trim())) {
           return item
         }
