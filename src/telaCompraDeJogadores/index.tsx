@@ -2,23 +2,19 @@ import React, { useEffect, useState } from 'react'
 import "./compraDeJogadores.css"
 import Jogadores from './Jogadores'
 import { useNavigate } from 'react-router-dom'
-import { listarJogadoresApi } from '../api/jogadoresApi'
-import { jogadoresType, participantesType, torneioTypeApi } from '../types'
+import { participantesType, torneioTypeApi } from '../types'
 import { getParticipantesPorIdApi } from '../api/participantesApi'
 import Header from './header'
 import "./telaCompraDeJogadores.css"
-
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Slide from '@mui/material/Slide';
 import { useDispatch, useSelector } from 'react-redux'
-import { ThemeProvider, createTheme } from '@mui/material'
-import { colorDark, dark, darkBackgroundContainer } from '../temaDark'
+import { createTheme } from '@mui/material'
+import {darkBackgroundContainer } from '../temaDark'
 import { getCampeonatoPorIdApi } from '../api/campeonatoApi'
 
 interface Props {
@@ -78,18 +74,18 @@ export default function TelaCompraDeJogadores() {
     
     getCampeonato(elenco?.idTorneio || "")
 
+    if (campeonato?.idTorneio) {        
+      dispatch({
+        type:"btnDisableCompraJogReducer",
+        payload:{disable:true}
+      })
+    }else{
+      dispatch({
+        type:"btnDisableCompraJogReducer",
+        payload:{disable:false}
+      })
+    }
     useEffect(()=>{
-      if (campeonato?.idTorneio) {        
-        dispatch({
-          type:"btnDisableCompraJogReducer",
-          payload:{disable:true}
-        })
-      }else{
-        dispatch({
-          type:"btnDisableCompraJogReducer",
-          payload:{disable:false}
-        })
-      }
 
     },[])
     
