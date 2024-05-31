@@ -1,6 +1,7 @@
+import { useSelector } from "react-redux";
 import { getUsuarioPorIdApi } from "./api/usuarioApi"
 import { listaDeJogadores } from "./listaDeJogadoresCompleta"
-import { jogadoresType, participantesType } from "./types"
+import { jogadoresType, participantesType, torneioType } from "./types"
 import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from './valoresDosPremios';
 
 export const idDoUsuarioLogado = localStorage.getItem('idDoUsuarioLogado') || ''
@@ -359,3 +360,9 @@ export const getMediaOveral = (over:jogadoresType[])=>{
    return Math.ceil(soma/over.length)
 }
 
+export const GetTorneioSelecionado = ()=>{
+  let usuarioReducer = useSelector((state:any)=>state.usuarioReducer.usuario)
+  const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
+  const torneioSelecionado:torneioType = usuarioReducer.torneio[torneioAtual]
+  return torneioSelecionado
+}

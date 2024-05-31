@@ -10,7 +10,7 @@ import ModalDeletarPerfil from './modais/modalDeletarPerfil';
 import SwitchesDeletarParticipantes from './switchDeletarParticipantes';
 import icone from '../icone_fifa.png';
 import { useNavigate } from 'react-router-dom';
-import { usuarioLogado } from '../metodosUteis';
+import { GetTorneioSelecionado, usuarioLogado } from '../metodosUteis';
 import SelectDarkMode from './selectDarkMode';
 import { useSelector } from 'react-redux';
 import ModalAtualizarPremiacoes from './modais/modalAtualizarPremiacoes';
@@ -81,7 +81,7 @@ function ResponsiveAppBar() {
             >
               Recanto
             </Typography>
-
+            <Typography>{GetTorneioSelecionado().nome}</Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"

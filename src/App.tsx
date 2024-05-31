@@ -20,6 +20,7 @@ export default function App() {
       mode: 'dark',
     },
   });
+  
   return (
     <ThemeProvider theme={darkMode ? darkTheme: {}}>
       <div style={{background:darkMode ? darkBackgroundContainer:"",color: darkMode ? colorDark:"" }}>

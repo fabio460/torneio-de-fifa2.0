@@ -24,9 +24,7 @@ export default function AlterarDataDaLista() {
 
   return (
     <div>
-      {/* <Button sx={{ display: 'block', mt: 2 }} onClick={handleOpen}>
-        Open the select
-      </Button> */}
+
       <FormControl sx={{ ml: 1, mt:0.5, minWidth: 120 }}>
         <Select
           size='small'

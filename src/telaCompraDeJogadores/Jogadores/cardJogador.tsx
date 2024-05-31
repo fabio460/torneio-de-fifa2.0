@@ -1,7 +1,7 @@
 import React from 'react'
 import {jogadoresType} from "../../types"
 import "./jogadores.css"
-import { Button } from '@mui/material'
+import { Button, Tooltip } from '@mui/material'
 import { getPosicaoPrincipal } from './metodosUteis'
 import ModalComprarJogador from '../modais/modalComprarJog'
 import { formatoMonetario } from '../../metodosUteis'
@@ -12,7 +12,6 @@ type JogadorType = {
 }
 export default function CardJogador({jogador}:JogadorType) {
   const darkMode = useSelector((state:any)=>state.darkReducer.dark)
-
   return (
      <div className='jogadorCard' style={{background:darkMode ? darkBackgroundBox:'', color:darkMode?colorDark:"black"}}>
         <div className='jogadorCardEsquerdo'>
@@ -20,8 +19,15 @@ export default function CardJogador({jogador}:JogadorType) {
             <div className='jogadorCardOverall'>{jogador.overall}</div>
             <div className='jogadorCardPosicao'>{getPosicaoPrincipal(jogador.posicao)}</div>
             <div className='emblemas'>
-              <div><img className='imgEmblemaDoTime' src={jogador.escudoDoTime} alt="sem imagem" /></div>
-              <div><img className='imgNascionaldade' src={jogador.imagemDaNacionalidade} alt="sem imagem" /></div>
+              <Tooltip title={<div>
+                <div style={{fontSize:"16px"}}>{jogador.time}</div>
+                <div>{jogador.liga}</div>
+              </div>}>
+                <img className='imgEmblemaDoTime' src={jogador.escudoDoTime} alt="?" />
+              </Tooltip>
+              <Tooltip title={jogador.nacionalidade}>
+                <img className='imgNascionaldade' src={jogador.imagemDaNacionalidade} alt="sem imagem" />
+              </Tooltip>
             </div>
           </div>
         </div>
