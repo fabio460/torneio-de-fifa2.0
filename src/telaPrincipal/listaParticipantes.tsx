@@ -33,7 +33,11 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
                     <ListItem >
                         <Tooltip title={"Vá para o elenco do "+elem.nome}>
                             <ListItemAvatar sx={{ cursor:"pointer"}} onClick={()=> getParticipante(elem)}>
-                                <Avatar sx={{marginRight:1 ,cursor:"pointer", padding:"5px", width:"50px", height:"50px"}} src={elem.emblemaDoTime} >
+                                <Avatar 
+                                  sx={{marginRight:1 ,cursor:"pointer", padding:"5px", width:"50px", height:"50px"}} 
+                                  src={elem.emblemaDoTime}
+                                  alt={elem.nome}  
+                                >
                                     <BeachAccessIcon />
                                 </Avatar>
                             </ListItemAvatar>

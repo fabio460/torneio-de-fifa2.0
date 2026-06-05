@@ -43,6 +43,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
       localStorage.setItem('idDoElenco', e as string)
       navigate('/elenco')
   } 
+  console.log(elenco.emblemaDoTime)
   return (
     <Card sx={cardStyle}>
       <CardContent>
@@ -55,7 +56,6 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
                 </div>
               </Tooltip>
             }
-
             <div style={{display:"flex", flexDirection:"column"}}>
               <div>
                 {elenco.nome}
