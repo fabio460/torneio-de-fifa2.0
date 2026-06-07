@@ -32,7 +32,7 @@ function ResponsiveAppBar() {
   const tipoDeTorneio = useSelector((state:any)=>state.selectFormatoDaCompeticaoReducer.tipo);
 
   const settings = [
-    <div>{usuarioLogado.nome}</div>,
+    <div>{usuarioLogado?.nome}</div>,
     <div onClick={()=>h("/valores")}>Regras gerais</div>,
     <div><ModalAtualizarPremiacoes /></div>,
     <div><SwitchesDeletarParticipantes/></div> , 
@@ -81,7 +81,7 @@ function ResponsiveAppBar() {
             >
               Recanto
             </Typography>
-            <Typography>{GetTorneioSelecionado().nome}</Typography>
+            <Typography>{GetTorneioSelecionado()?.nome}</Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
@@ -164,7 +164,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Opções">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg">{usuarioLogado.nome[0].toUpperCase()}</Avatar>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg">{usuarioLogado?.nome[0].toUpperCase()}</Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
