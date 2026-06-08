@@ -36,6 +36,7 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
     }
   
   const disable = useSelector((state:any)=>state.btnDisableCompraJogReducer.disable) 
+ 
   return (
     <div>
       <Button disabled={disable} variant="outlined"  onClick={handleClickOpen} sx={{marginBottom:0.5}}>

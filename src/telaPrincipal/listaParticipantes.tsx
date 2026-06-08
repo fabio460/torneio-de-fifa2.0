@@ -12,6 +12,11 @@ import { darkBackgroundBox, colorDark, dark, darkBackgroundContainer } from '../
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
+import BtnOpcoesDeParticipantes from './btnOpcoesDeParticipantes';
+import { listarTorneiosApi } from '../api/torneioApi';
+import usuarioReducer from '../redux/usuarioReducer';
+import { getCampeonatoPorIdApi, listarCampeonatoApi } from '../api/campeonatoApi';
+import { GetTorneioSelecionado } from '../metodosUteis';
 export default function ListaDeParticipantes({listaDeParticipantes, handleChange}:{
     listaDeParticipantes:participantesType[] | undefined,
     handleChange:any
@@ -23,7 +28,19 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
 
   const darkMode = useSelector((state:any)=>state.darkReducer?.dark)
   const navigate = useNavigate()
+  const [age, setAge] = React.useState(null);
+  const disable = age !== null ? true : false
 
+  const sel = GetTorneioSelecionado()
+
+  async function getTorneios(id:string){
+    const t = await listarCampeonatoApi(id)
+    console.log(t)
+    setAge(t)
+  }
+  React.useEffect(()=>{
+    getTorneios(sel.id)
+  },[sel])
   return (
     <List sx={{ width: '100%', background: darkMode ? 'inherit': '', color: darkMode ? colorDark:""  }}>
        {
@@ -51,8 +68,8 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
                         {/* <ListItemText  onClick={()=> getParticipante(elem)} primary={elem.nome} secondary={elem.time} sx={{color: darkMode ? colorDark:"", background:"blue", minWidth:"80px" }}/> */}
                     </ListItem>
                     <div style={{display:"flex"}}>
-                      <ModalTrocaDeTorneio participante={elem}/>
-                      <Checkbox sx={{color: darkMode ? colorDark:""}} id={JSON.stringify(elem)} onChange={handleChange} disabled={elem.saldo < 0 && true}/>
+                      <Checkbox disabled={disable} sx={{color: darkMode ? colorDark:""}} id={JSON.stringify(elem)} onChange={handleChange} />
+                      <BtnOpcoesDeParticipantes participante={elem} disabled={disable}/>
                     </div>
                 </div>
             )

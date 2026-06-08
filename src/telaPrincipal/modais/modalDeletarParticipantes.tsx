@@ -38,9 +38,8 @@ export default function ModalDeletarParticipantes({elenco}:{elenco:participantes
   
   return (
     <div>
-      <IconButton   onClick={handleClickOpen}>
-        <DeleteOutlineIcon />
-      </IconButton>
+    
+       <div onClick={handleClickOpen}>Deletar</div>
       <Dialog
         open={open}
         onClose={handleClose}

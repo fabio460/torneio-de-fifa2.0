@@ -59,7 +59,14 @@ export const deletarParticipantesApi = async(id:string)=>{
     return f
 }
 
-export const atualizarParticipantesApi = async(id:string ,nome:string,saldo:number, time:string)=>{
+export const atualizarParticipantesApi = async(
+    id:string ,
+    nome:string,
+    saldo:number,
+    time:string,
+    nomeDoTime?:string,
+    emblemaDoTime?:string
+)=>{
     const f = await fetch(linkLocal+"participantes/"+id,{
         headers:{
             "Content-Type":"application/json",
@@ -68,7 +75,8 @@ export const atualizarParticipantesApi = async(id:string ,nome:string,saldo:numb
         body:JSON.stringify({
             nome,
             saldo,
-            time,  
+            time:nomeDoTime,
+            emblemaDoTime
         })
     })
     .then(res=>res.json())

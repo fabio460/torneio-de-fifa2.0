@@ -1,22 +1,23 @@
 
-import React,{useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { jogadoresType, timesType, usuarioLogadoType } from '../../types';
-import { useSelector } from 'react-redux';
-import { adicionarParticipantesoApi } from '../../api/participantesApi';
+import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import React,{useState, useEffect} from 'react';
+import { jogadoresType, timesType, usuarioLogadoType } from '../../types';
+import { useSelector } from 'react-redux';
+import { adicionarParticipantesoApi } from '../../api/participantesApi';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { getEmblemaDoTime, getJogadoresPorTime, getTimeName, getTimes } from '../../metodosUteis';
-import Autocomplete from '@mui/material/Autocomplete';
 import { listaJogadoresPorTorneioApi } from '../../api/jogadoresApi';
 import { Checkbox } from '@mui/material';
+
 export default function ModalAdicionarParticipantes() {
   const [open, setOpen] = React.useState(false);
   const [nomeDoParticipante, setNomeDoParticipante] = useState('')
@@ -34,6 +35,7 @@ export default function ModalAdicionarParticipantes() {
     setChecked(event.target.checked);
   };
   const handleChangeTime = (event:any, newValue:any) => {
+    console.log(newValue)
     setValue(newValue);
   }
   const usuario:usuarioLogadoType = useSelector((state:any)=>state.usuarioReducer.usuario)
@@ -104,6 +106,7 @@ export default function ModalAdicionarParticipantes() {
   useEffect(()=>{
     setListaDeTimes(getTimeName())
   },[])
+
   
   return (
     <div>

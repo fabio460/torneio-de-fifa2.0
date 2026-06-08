@@ -79,7 +79,7 @@ function ResponsiveAppBar() {
                 textDecoration: 'none',
               }}
             >
-              Recanto 2.0
+              Recanto
             </Typography>
             <Typography>{GetTorneioSelecionado()?.nome}</Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

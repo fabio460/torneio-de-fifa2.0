@@ -55,10 +55,10 @@ export default function ModalTrocaDeTorneio({participante}:{participante:partici
     },[])
     return (
     <Dialog onClose={handleClose} open={open}>
-        <DialogTitle sx={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+        <DialogTitle key={0} sx={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <h4>Mudança de torneio</h4>
             <Avatar src={participante.emblemaDoTime}/>
-            {participante.nome} - {participante.torneio.nome}
+              {participante.nome} - {participante.torneio.nome}
         </DialogTitle>
         <List sx={{ pt: 0 }}>
             {
@@ -105,11 +105,12 @@ export default function ModalTrocaDeTorneio({participante}:{participante:partici
 
   return (
     <div>
-      <Tooltip title="Mudança de torneio">
+      {/* <Tooltip title="Mudança de torneio">
         <IconButton onClick={handleClickOpen}>
-            <CachedIcon/>
+            <CachedIcon/>s
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
+      <div onClick={handleClickOpen}>Trocar de torneio</div>
       <SimpleDialog
         selectedValue={selectedValue}
         open={open}
