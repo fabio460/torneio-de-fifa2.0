@@ -22,7 +22,7 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
     handleChange:any
 }) {
   const getParticipante = (e:participantesType)=>{
-    localStorage.setItem('idDoElenco', e.id as string)
+    localStorage.setItem('idDoElenco', e?.id as string)
     navigate('/elenco')
   }
 
@@ -35,11 +35,10 @@ export default function ListaDeParticipantes({listaDeParticipantes, handleChange
 
   async function getTorneios(id:string){
     const t = await listarCampeonatoApi(id)
-    console.log(t)
     setAge(t)
   }
   React.useEffect(()=>{
-    getTorneios(sel.id)
+    getTorneios(sel?.id)
   },[sel])
   return (
     <List sx={{ width: '100%', background: darkMode ? 'inherit': '', color: darkMode ? colorDark:""  }}>
