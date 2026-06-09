@@ -62,7 +62,7 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
   return (
     <div>
       <div  onClick={handleClickOpen}>
-        Atualizar time
+        Atualizar
       </div>
       <Dialog
         open={open}

@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import CachedIcon from '@mui/icons-material/Cached';
 import { blue } from '@mui/material/colors';
-import { IconButton, Tooltip } from '@mui/material';
+import { DialogContentText, IconButton, Tooltip } from '@mui/material';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { participantesType, torneioType } from '../../types';
 import torneioReducer from '../../redux/torneioReducer';
@@ -56,38 +56,40 @@ export default function ModalTrocaDeTorneio({participante}:{participante:partici
     return (
     <Dialog onClose={handleClose} open={open}>
         <DialogTitle key={0} sx={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-            <h4>Mudança de torneio</h4>
+            <h4>Selecione abaixo o torneio que deseja enviar o time do {participante.nome}</h4>
             <Avatar src={participante.emblemaDoTime}/>
-              {participante.nome} - {participante.torneio.nome}
         </DialogTitle>
-        <List sx={{ pt: 0 }}>
-            {
-                carregandoLista ? <Carregando/>:
-                carregando ?
-                <div>
-                    <h5 style={{textAlign:"center"}}>Trocando torneio</h5>
-                    <h5 style={{textAlign:"center"}}>Aguarde...</h5>
-                    <Box sx={{ width: '100%' }}>
-                      <LinearProgress />
-                    </Box>
-                </div> 
-                :
-                listaDeTorneios.map((torneio,key) => (
-                    torneio.nome !== participante.torneio.nome && <div>       
-                        <ListItem disableGutters key={key}>
-                        <ListItemButton onClick={() => handleListItemClick(torneio.id)}>
-                            <ListItemAvatar>
-                            <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                                {torneio.nome[0]}
-                            </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={torneio.nome} />
-                        </ListItemButton>
-                        </ListItem>
-                    </div>
-                )
-            )}
-        </List>
+        <DialogTitle >Torneio atual: {participante.torneio.nome}</DialogTitle>
+        <DialogTitle>
+          <List sx={{ }}>
+              {
+                  carregandoLista ? <Carregando/>:
+                  carregando ?
+                  <div>
+                      <h5 style={{textAlign:"center"}}>Trocar de torneio</h5>
+                      <h5 style={{textAlign:"center"}}>Aguarde...</h5>
+                      <Box sx={{ width: '100%' }}>
+                        <LinearProgress />
+                      </Box>
+                  </div> 
+                  :
+                  listaDeTorneios.map((torneio,key) => (
+                      torneio.nome !== participante.torneio.nome && <div>       
+                          <ListItem disableGutters key={key}>
+                          <ListItemButton onClick={() => handleListItemClick(torneio.id)}>
+                              <ListItemAvatar>
+                              <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                                  {torneio.nome[0]}
+                              </Avatar>
+                              </ListItemAvatar>
+                              <ListItemText primary={torneio.nome} />
+                          </ListItemButton>
+                          </ListItem>
+                      </div>
+                  )
+              )}
+          </List>
+        </DialogTitle>
     </Dialog>
     );
     }
