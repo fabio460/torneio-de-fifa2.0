@@ -15,7 +15,11 @@ export default function Paginacao({setPagina, pagina, itensPorPagina}:any) {
   
   return (
     <Stack spacing={2} >
-      <Pagination color='primary' sx={{display:"flex", justifyContent:"center", marginBottom:"20px"}} count={Math.ceil(tamanhoDaLista/itensPorPagina)} page={pagina} onChange={handleChange} />
+      <Pagination color='primary' 
+        sx={{display:"flex", justifyContent:"center", paddingBottom:"20px"}} 
+        count={Math.ceil(tamanhoDaLista/itensPorPagina)} 
+        page={pagina} 
+        onChange={handleChange} />
     </Stack>
   );
 }
