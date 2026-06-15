@@ -67,7 +67,7 @@ export default function CardParticipantes({participantes, torneio}:
         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:10, marginBottom:10}}>
           <ModalCriarTorneio/>
           <ModalDeletarTorneio torneio={torneio}/>
-          <ModalAtualizarTorneio torneio={torneio}/>
+          <ModalAtualizarTorneio  torneio={torneio}/>
         </div>
         <ModalAdicionarParticipantes/>
       </div>

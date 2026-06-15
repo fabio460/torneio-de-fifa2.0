@@ -73,7 +73,7 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
                     <DeleteOutlineIcon />
                 </IconButton>
             }
-            <ModalTrocaDeTorneio participante={elenco} />
+            <ModalTrocaDeTorneio option='botton' participante={elenco} />
           </div>
         </Typography>
         <Divider sx={{marginBottom:1}}/>

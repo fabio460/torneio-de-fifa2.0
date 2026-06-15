@@ -11,19 +11,26 @@ import { participantesType } from '../../types';
 import { atualizarParticipantesApi } from '../../api/participantesApi';
 import { getEmblemaDoTime, getJogadoresPorTime, getTimeName } from '../../metodosUteis';
 import { SelectChangeEvent } from '@mui/material';
+import BtnLoading from '../../componentesGlobais/BtnLoading';
 
-export default function ModalAtualizar({elenco}:{elenco:participantesType | undefined}) {
+export default function ModalAtualizar({elenco: participante}:{elenco:participantesType | undefined}) {
   const [open, setOpen] = React.useState(false);
   const [nome, setNome] = useState('')
   const [time, setTime] = useState('')
   const [saldo, setSaldo] = useState('')
   const [value, setValue] = useState<any>(null)
   const [listaDeTimes, setListaDeTimes] = useState<any>([])
+  const [erroTime, setErroTime] = useState(false);
   const [age, setAge] = React.useState('');
   const [checked, setChecked] = React.useState(true);
 
   const handleChangeTime = (event:any, newValue:any) => {
     setValue(newValue);
+    if (newValue) {
+      setErroTime(false)
+    }else{
+      setErroTime(true)
+    }
   }
   const handleClickOpen = () => {
     setOpen(true);
@@ -39,13 +46,20 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
     setChecked(event.target.checked);
   };
   const atualizarParticipantes = async () => {
+    if (erroTime) {
+      alert("Selecione um clube")
+      return null
+    }
+  
+    
     const nomeDoTime = value.label;
     const emblemaDoTime = getEmblemaDoTime(value.label);
+
     const res = await atualizarParticipantesApi(
-        elenco?.id || '',
-        nome.trim() === '' ? elenco?.nome || '' : nome,
-        saldo === '' ? elenco?.saldo || 0 : parseFloat(saldo),
-        time.trim() === '' ? elenco?.time || '' : time,
+        participante?.id || '',
+        nome.trim() === '' ? participante?.nome || '' : nome,
+        saldo === '' ? participante?.saldo || 0 : parseFloat(saldo),
+        time.trim() === '' ? participante?.time || '' : time,
         nomeDoTime,
         emblemaDoTime
     )
@@ -53,12 +67,22 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
     window.location.reload()
   }
   
+  
   useEffect(()=>{
-    setValue({label:elenco?.time, id:elenco?.id})
+    setValue({label:participante?.time, id:participante?.id})
   },[])
   useEffect(()=>{
     setListaDeTimes(getTimeName())
   },[])
+  
+  const handleAtualizar = () => {
+    if (!value) { 
+      setErroTime(true);
+      return;
+    }
+    setErroTime(false);
+    atualizarParticipantes();
+  };
   return (
     <div>
       <div  onClick={handleClickOpen}>
@@ -71,7 +95,7 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Atualizar conta do elenco"}
+          {"Atualizar conta do participante"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description" className='modalAtualizarBody'>
@@ -80,7 +104,7 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
                 id="outlined-basic" 
                 label="Nome" 
                 variant="outlined"
-                defaultValue={elenco?.nome} 
+                defaultValue={participante?.nome} 
                 onChange={e=> setNome(e.target.value)}
                 sx={{marginBottom:1, width:"100%"}}
             />
@@ -89,11 +113,12 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
                 id="outlined-basic" 
                 label="Saldo" 
                 variant="outlined"
-                defaultValue={elenco?.saldo} 
+                defaultValue={participante?.saldo} 
                 onChange={e=> setSaldo(e.target.value)}
                 sx={{marginBottom:1, width:"100%"}}
                 
             />
+          
             <Autocomplete
                 value={value}
                 onChange={handleChangeTime}
@@ -105,7 +130,7 @@ export default function ModalAtualizar({elenco}:{elenco:participantesType | unde
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={atualizarParticipantes}>Atualizar</Button>
+          <BtnLoading aoClicar={atualizarParticipantes} fallBack={(erroTime)?true:false} texto='atualizar'/>
           <Button onClick={handleClose} autoFocus>
             cancelar
           </Button>

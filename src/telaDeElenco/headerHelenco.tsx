@@ -18,7 +18,7 @@ import ModalRemoverParticipante from './modais/modalRemoverParticipante';
 import ModalTransferenciaMonetaria from './modais/modalTransferenciaMonetaria';
 import { useSelector } from 'react-redux';
 
-function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
+function HeaderHparticipante({participante}:{participante:participantesType | undefined}) {
   const n = useNavigate()
   const deslogar = ()=>{
     localStorage.removeItem('jwt')
@@ -30,7 +30,7 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
     <div onClick={()=>n('/compraDeJogadores')}>Comprar jogador</div>,
     <ModalTransferenciaMonetaria/>
   ];
-  const settings = [<ModalAtualizarParticipante elenco={elenco}/>];
+  const settings = [<ModalAtualizarParticipante elenco={participante}/>];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -68,7 +68,7 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
               textDecoration: 'none',
             }}
           >
-            {elenco?.nome}
+            {participante?.nome}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -123,7 +123,7 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
               textDecoration: 'none',
             }}
           >
-            {elenco?.nome}
+            {participante?.nome}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent:'flex-end' }}>
             {pages.map((page) => (
@@ -138,10 +138,10 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title={elenco?.nome}>
+            <Tooltip title={participante?.nome}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg">
-                  {elenco?.nome[0].toUpperCase()}
+                  {participante?.nome[0].toUpperCase()}
                 </Avatar>
               </IconButton>
             </Tooltip>
@@ -173,4 +173,4 @@ function HeaderHelenco({elenco}:{elenco:participantesType | undefined}) {
     </AppBar>
   );
 }
-export default HeaderHelenco;
+export default HeaderHparticipante;

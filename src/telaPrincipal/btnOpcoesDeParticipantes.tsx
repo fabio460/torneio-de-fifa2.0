@@ -98,7 +98,7 @@ export default function BtnOpcoesDeParticipantes({participante, disabled}:{parti
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={()=>{}} disableRipple>
           <ThreeSixtyIcon />
-         <ModalTrocaDeTorneio participante={participante}/>
+         <ModalTrocaDeTorneio participante={participante} option='name' textItem='Trocar de torneio'/>
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <CloseIcon />

@@ -15,6 +15,8 @@ import Tooltip from '@mui/material/Tooltip';
 import BtnOpcoesDeParticipantes from './btnOpcoesDeParticipantes';
 import { listarTorneiosApi } from '../api/torneioApi';
 import usuarioReducer from '../redux/usuarioReducer';
+import ModalAtualizarParticipante from '../telaDeElenco/modais/modalAtualizarParticipante';
+
 import { getCampeonatoPorIdApi, listarCampeonatoApi } from '../api/campeonatoApi';
 import { GetTorneioSelecionado } from '../metodosUteis';
 export default function ListaDeParticipantes({listaDeParticipantes, handleChange}:{

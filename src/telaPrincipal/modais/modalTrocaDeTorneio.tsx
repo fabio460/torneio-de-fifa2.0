@@ -27,7 +27,9 @@ export interface SimpleDialogProps {
 }
 
 
-export default function ModalTrocaDeTorneio({participante}:{participante:participantesType}) {
+export default function ModalTrocaDeTorneio({participante, option, textItem}:
+      {participante:participantesType, option?:'botton'|'name',textItem?:string})
+   {
     function SimpleDialog(props: SimpleDialogProps) {
     const { onClose, selectedValue, open } = props;
     const [carregando, setCarregando] = React.useState(false)
@@ -107,12 +109,16 @@ export default function ModalTrocaDeTorneio({participante}:{participante:partici
 
   return (
     <div>
-      {/* <Tooltip title="Mudança de torneio">
-        <IconButton onClick={handleClickOpen}>
-            <CachedIcon/>s
-        </IconButton>
-      </Tooltip> */}
-      <div onClick={handleClickOpen}>Trocar de torneio</div>
+      {
+        option==='botton'?
+         <Tooltip title="Mudança de torneio">
+          <IconButton onClick={handleClickOpen}>
+              <CachedIcon/>
+          </IconButton>
+        </Tooltip> 
+        :
+         <div onClick={handleClickOpen}>{textItem}</div>
+      }
       <SimpleDialog
         selectedValue={selectedValue}
         open={open}

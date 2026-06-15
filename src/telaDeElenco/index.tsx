@@ -71,7 +71,7 @@ export default function TelaDeElenco() {
         carregando?
         <div style={{minHeight:"100vh"}}><Carregando/></div>:
         <div>
-          <HeaderHelenco elenco={elenco}/>
+          <HeaderHelenco participante={elenco}/>
           <div className='campinho' style={{background:dark ?"black":""}}>
           <div style={{display:"flex", justifyContent:"flex-end", alignItems:"center"}}>
              <SelectDarkMode/>
