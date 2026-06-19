@@ -24,9 +24,24 @@ export default function ModalComprarJogador({jogador}:{jogador:jogadoresType}) {
   const handleClose = () => {
     setOpen(false);
   };
+  
   const comprar = async()=>{
-      setCarregando(true)
-      const res =await comprarJogadoresApi(idElenco, jogador)
+    const Jogador:jogadoresType = {  
+      id:jogador.id,
+      escudoDoTime:jogador.escudoDoTime,
+      imagemDaNacionalidade: jogador.imagemDaNacionalidade,
+      imagemDoJogador: jogador.imagemDoJogador,
+      liga: jogador.liga,
+      linkSoFifa: jogador.linkSoFifa,
+      nacionalidade: jogador.nacionalidade,
+      nome: jogador.nome,
+      overall: JSON.stringify(jogador.overall),
+      posicao:jogador.posicao,
+      time: jogador.time,
+      valorDoJogador:jogador.valorDoJogador
+    } 
+    setCarregando(true)
+    const res =await comprarJogadoresApi(idElenco, Jogador)
       if (res === "jogador comprado com sucesso") {   
         setOpenFinalized(true)
       }else{

@@ -37,9 +37,9 @@ export default function AlterarDataDaLista() {
           
           onChange={handleChange}
         >
-          <MenuItem value={"0"}>Fifa 23 abr/2023</MenuItem>
-          <MenuItem value={"1"}>Fifa 24 nov/2024</MenuItem>
-          <MenuItem value={"2"}>Fifa 26 abr/2026</MenuItem> 
+          <MenuItem value={"0"}>Fifa 23 Abr/2023</MenuItem>
+          <MenuItem value={"1"}>Fifa 24 Nov/2024</MenuItem>
+          <MenuItem value={"2"}>Fifa 26 Ago/2025</MenuItem> 
         </Select>
       </FormControl>
     </div>

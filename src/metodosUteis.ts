@@ -3,6 +3,7 @@ import { getUsuarioPorIdApi } from "./api/usuarioApi"
 import { listaDeJogadores } from "./listaDeJogadoresCompleta"
 import { jogadoresType, participantesType, torneioType } from "./types"
 import { assistencia, quartoAssistencia, terceiroAssistencia, viceAssistencia } from './valoresDosPremios';
+import translate from "translate";
 
 export const idDoUsuarioLogado = localStorage.getItem('idDoUsuarioLogado') || ''
 
@@ -365,4 +366,16 @@ export const GetTorneioSelecionado = ()=>{
   const torneioAtual = useSelector((state:any)=>state.torneioReducer.torneio)
   const torneioSelecionado:torneioType = usuarioReducer.torneio[torneioAtual]
   return torneioSelecionado
+}
+
+translate.engine = 'google';
+
+export async function traduzirParaPortugues(textoEmIngles: string): Promise<string> {
+  try {
+    const traducao = await translate(textoEmIngles, { from: 'en', to: 'pt' });
+    return traducao;
+  } catch (erro) {
+    console.error("Erro na tradução:", erro);
+    return textoEmIngles; // Retorna o original se falhar
+  }
 }
