@@ -66,19 +66,13 @@ export default function CardElenco({elenco}:{elenco:participantesType}) {
             </div>
           </div>
           <div style={{display:"flex", alignItems:"center"}}>
-            {deleteChecked ? 
-                <ModalDeletarParticipantes elenco={elenco}/>
-                  :
-                <IconButton  size='small' disabled>
-                    <DeleteOutlineIcon />
-                </IconButton>
-            }
+            <ModalDeletarParticipantes elenco={elenco} />
             <ModalTrocaDeTorneio option='botton' participante={elenco} />
           </div>
         </Typography>
         <Divider sx={{marginBottom:1}}/>
         <h3 style={{display:"flex",justifyContent:"flex-end"}}>
-          {getMediaOveral(elenco.jogadores)}
+          {!getMediaOveral(elenco.jogadores) ? '0': getMediaOveral(elenco.jogadores)}
         </h3>
         <Typography component={"div"} sx={{ fontSize: 14, color: darkMode ? colorDark:""}} color="text.secondary" gutterBottom>
           {

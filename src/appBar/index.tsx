@@ -35,7 +35,7 @@ function ResponsiveAppBar() {
     <div>{usuarioLogado?.nome}</div>,
     <div onClick={()=>h("/valores")}>Regras gerais</div>,
     <div><ModalAtualizarPremiacoes /></div>,
-    <div><SwitchesDeletarParticipantes/></div> , 
+    // <div><SwitchesDeletarParticipantes/></div> , 
     <div><ModalDeletarPerfil/></div>, 
     <div onClick={deslogar}>Deslogar</div>,
   ];

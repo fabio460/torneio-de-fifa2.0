@@ -93,7 +93,7 @@ export default function BtnOpcoesDeParticipantes({participante, disabled}:{parti
         </MenuItem>
         <MenuItem disableRipple>
           <DeleteOutlineIcon />
-          <ModalDeletarParticipantes elenco={participante}/>  
+          <ModalDeletarParticipantes texto='Deletar' elenco={participante}/>  
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={()=>{}} disableRipple>

@@ -12,7 +12,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { deletarParticipantesApi } from '../../api/participantesApi';
 
 
-export default function ModalDeletarParticipantes({elenco}:{elenco:participantesType}) {
+export default function ModalDeletarParticipantes({elenco,texto}:{
+    elenco:participantesType
+    texto?:string
+  }) {
   const [open, setOpen] = React.useState(false);
   const [age, setAge] = React.useState('');
   const [nomeDoParticipante, setNomeDoParticipante] = useState('')
@@ -38,8 +41,14 @@ export default function ModalDeletarParticipantes({elenco}:{elenco:participantes
   
   return (
     <div>
-    
-       <div onClick={handleClickOpen}>Deletar</div>
+      {
+       texto ?         
+        <div onClick={handleClickOpen}>{texto}</div>
+       : 
+        <IconButton  size='small' onClick={handleClickOpen}>
+            <DeleteOutlineIcon />
+        </IconButton>
+      }
       <Dialog
         open={open}
         onClose={handleClose}
